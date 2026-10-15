@@ -1,0 +1,65 @@
+/* design-systems/fivem-apple-glass/tokens.css
+ * Shared-schema bindings for FiveM Apple Glass (variant D): dark tinted glass,
+ * one restrained blue accent, Inter with optical sizing. Values are the 1920x1080
+ * reference in px (1rem = 10px in the NUI root rule). The full --fh-* FiveM token
+ * block and the NUI root scaling rule live in DESIGN.md.
+ */
+
+:root {
+  --bg: #0a0c10;
+  --surface: #13161d;
+  --surface-warm: #1e222b;
+  --fg: #f5f7fa;
+  --fg-2: #bcc3ce;
+  --muted: #9aa2ae;
+  --meta: var(--muted);
+  --border: rgba(255, 255, 255, 0.14);
+  --border-soft: rgba(255, 255, 255, 0.08);
+  --accent: #2b6fe6;
+  --accent-on: #ffffff;
+  --accent-hover: #407de8;
+  --accent-active: #2662ca;
+  --success: #3cd68a;
+  --warn: #ffc53d;
+  --danger: #ff5f57;
+  --font-display: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --text-xs: 12px;
+  --text-sm: 15px;
+  --text-base: 17px;
+  --text-lg: 20px;
+  --text-xl: 24px;
+  --text-2xl: 32px;
+  --text-3xl: 48px;
+  --text-4xl: 72px;
+  --leading-body: 1.45;
+  --leading-tight: 1.1;
+  --tracking-display: -0.022em;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+  --section-y-desktop: 64px;
+  --section-y-tablet: 48px;
+  --section-y-phone: 32px;
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 22px;
+  --radius-pill: 9999px;
+  --elev-flat: none;
+  --elev-ring: 0 0 0 1px var(--border);
+  --elev-raised: 0 8px 24px rgba(0, 0, 0, 0.36), inset 0 1px 0 rgba(255, 255, 255, 0.10);
+  --focus-ring: 0 0 0 2px #13161d, 0 0 0 4px #8cb9ff;
+  --motion-fast: 120ms;
+  --motion-base: 220ms;
+  --ease-standard: cubic-bezier(0.23, 1, 0.32, 1);
+  --container-max: 1680px;
+  --container-gutter-desktop: 48px;
+  --container-gutter-tablet: 32px;
+  --container-gutter-phone: 20px;
+}

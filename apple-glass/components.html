@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FiveM Apple Glass · Components</title>
+<style>
+:root {
+  --bg: #0a0c10;
+  --surface: #13161d;
+  --surface-warm: #1e222b;
+  --fg: #f5f7fa;
+  --fg-2: #bcc3ce;
+  --muted: #9aa2ae;
+  --meta: var(--muted);
+  --border: rgba(255, 255, 255, 0.14);
+  --border-soft: rgba(255, 255, 255, 0.08);
+  --accent: #2b6fe6;
+  --accent-on: #ffffff;
+  --accent-hover: #407de8;
+  --accent-active: #2662ca;
+  --success: #3cd68a;
+  --warn: #ffc53d;
+  --danger: #ff5f57;
+  --font-display: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --text-xs: 12px;
+  --text-sm: 15px;
+  --text-base: 17px;
+  --text-lg: 20px;
+  --text-xl: 24px;
+  --text-2xl: 32px;
+  --text-3xl: 48px;
+  --text-4xl: 72px;
+  --leading-body: 1.45;
+  --leading-tight: 1.1;
+  --tracking-display: -0.022em;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+  --section-y-desktop: 64px;
+  --section-y-tablet: 48px;
+  --section-y-phone: 32px;
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 22px;
+  --radius-pill: 9999px;
+  --elev-flat: none;
+  --elev-ring: 0 0 0 1px var(--border);
+  --elev-raised: 0 8px 24px rgba(0, 0, 0, 0.36), inset 0 1px 0 rgba(255, 255, 255, 0.10);
+  --focus-ring: 0 0 0 2px #13161d, 0 0 0 4px #8cb9ff;
+  --motion-fast: 120ms;
+  --motion-base: 220ms;
+  --ease-standard: cubic-bezier(0.23, 1, 0.32, 1);
+  --container-max: 1680px;
+  --container-gutter-desktop: 48px;
+  --container-gutter-tablet: 32px;
+  --container-gutter-phone: 20px;
+}
+</style>
+<style>
+@font-face { font-family: "Inter"; font-weight: 100 900; font-display: block; src: url("fonts/Inter-Variable-latin.woff2") format("woff2-variations"); }
+@font-face { font-family: "JetBrains Mono"; font-weight: 400; font-display: block; src: url("fonts/JetBrainsMono-Regular-latin.woff2") format("woff2"); }
+* { box-sizing: border-box; }
+body { margin: 0; min-height: 100vh; padding: var(--space-12); font-family: var(--font-body); font-size: var(--text-base); line-height: var(--leading-body); color: var(--fg);
+  background: radial-gradient(60% 50% at 20% 20%, #cfe3f6 0%, transparent 70%), radial-gradient(50% 60% at 80% 70%, #f2c48a 0%, transparent 70%), linear-gradient(160deg, #6f9fcc, #24384f); }
+h1 { font-family: var(--font-display); font-size: var(--text-xl); letter-spacing: var(--tracking-display); line-height: var(--leading-tight); margin: 0 0 var(--space-6); color: #0a0c10; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: var(--space-6); align-items: start; }
+.glass { background: rgba(19, 22, 29, 0.82);
+  border: 1px solid var(--border); border-radius: var(--radius-lg); box-shadow: var(--elev-raised); padding: var(--space-6);
+  background-image: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0) 40%); }
+.glass--hud { background-color: rgba(19, 22, 29, 0.88); border-radius: var(--radius-md); padding: var(--space-4); }
+.title { font-size: var(--text-lg); font-weight: 600; margin: 0 0 var(--space-2); }
+.sub { font-size: var(--text-sm); color: var(--fg-2); margin: 0 0 var(--space-4); }
+.meta { font-size: var(--text-xs); color: var(--muted); }
+.row-actions { display: flex; gap: var(--space-3); flex-wrap: wrap; }
+.btn { font: inherit; font-size: var(--text-base); font-weight: 600; height: 44px; padding: 0 var(--space-6); border-radius: var(--radius-pill); border: 1px solid transparent; cursor: pointer;
+  transition: background-color var(--motion-fast) var(--ease-standard), transform var(--motion-fast) var(--ease-standard); }
+.btn:focus-visible { outline: none; box-shadow: var(--focus-ring); }
+.btn:active { transform: scale(0.97); }
+.btn--primary { background: var(--accent); color: var(--accent-on); }
+.btn--primary:hover { background: var(--accent-hover); }
+.btn--secondary { background: var(--surface-warm); color: var(--fg); border-color: var(--border); }
+.btn--destructive { background: var(--surface-warm) linear-gradient(rgba(255, 95, 87, 0.18), rgba(255, 95, 87, 0.18)); color: var(--danger); border-color: rgba(255, 95, 87, 0.4); }
+.btn[disabled] { opacity: 0.4; cursor: not-allowed; }
+.field { display: grid; gap: var(--space-1); margin-bottom: var(--space-4); }
+.field label { font-size: var(--text-sm); font-weight: 500; color: var(--fg-2); }
+.input { font: inherit; height: 44px; padding: 0 var(--space-4); background: var(--surface-warm); color: var(--fg); border: 1px solid var(--border); border-radius: var(--radius-sm); }
+.input:focus-visible { outline: none; border: 2px solid #8cb9ff; }
+.input--error { border: 2px solid var(--danger); }
+.helper { font-size: var(--text-xs); color: var(--muted); }
+.helper--error { color: var(--danger); }
+.vitals { display: flex; gap: var(--space-2); }
+.vital { width: 64px; height: 64px; border-radius: 50%; display: grid; place-items: center; background: rgba(19, 22, 29, 0.88); border: 1px solid var(--border); position: relative; }
+.vital svg { width: 52px; height: 52px; transform: rotate(-90deg); position: absolute; }
+.vital .track { stroke: rgba(255,255,255,0.12); }
+.vital .glyph { width: 20px; height: 20px; }
+.notif { display: grid; grid-template-columns: 36px 1fr auto; gap: var(--space-3); align-items: start; }
+.notif__icon { width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; background: rgba(60, 214, 138, 0.18); color: var(--success); }
+.notif__title { font-weight: 600; margin: 0; }
+.notif__body { font-size: var(--text-sm); color: var(--fg-2); margin: 0; }
+.hint { display: inline-flex; align-items: center; gap: var(--space-3); padding: var(--space-2) var(--space-5) var(--space-2) var(--space-2); border-radius: var(--radius-pill); font-weight: 500; }
+.kbd { min-width: 28px; height: 28px; padding: 0 var(--space-2); display: inline-grid; place-items: center; font-size: var(--text-xs); font-weight: 600; background: var(--surface-warm); border: 1px solid var(--border); border-radius: 6px; box-shadow: var(--elev-ring); }
+.list { list-style: none; margin: 0; padding: 0; }
+.list li { display: flex; justify-content: space-between; align-items: center; min-height: 52px; padding: var(--space-3) var(--space-4); border-radius: var(--radius-sm); font-size: var(--text-sm); }
+.list li[aria-selected="true"] { background: var(--surface-warm); box-shadow: inset 3px 0 0 #8cb9ff; }
+.badge { font-size: var(--text-xs); font-weight: 600; padding: 2px var(--space-2); border-radius: var(--radius-pill); }
+.badge--success { background: rgba(60, 214, 138, 0.18); color: var(--success); }
+.badge--warn { background: rgba(255, 197, 61, 0.18); color: var(--warn); }
+.badge--danger { background: var(--danger); color: var(--bg); }
+.plate { font-family: var(--font-mono); font-size: var(--text-xs); background: var(--surface-warm); padding: 2px var(--space-2); border-radius: 6px; color: var(--fg); }
+.progress { height: 6px; border-radius: var(--radius-pill); background: rgba(255,255,255,0.12); overflow: hidden; margin-top: var(--space-2); }
+.progress > span { display: block; height: 100%; width: 62%; background: #8cb9ff; border-radius: inherit; }
+.num { font-variant-numeric: tabular-nums; }
+@media (prefers-reduced-motion: reduce) { .btn { transition: none; } }
+</style>
+</head>
+<body>
+<h1>FiveM Apple Glass · Kernkomponenten</h1>
+<div class="grid">
+  <section class="glass" aria-labelledby="c-btn">
+    <h2 class="title" id="c-btn">Schaltflächen</h2>
+    <p class="sub">Eine Primäraktion pro Ansicht.</p>
+    <div class="row-actions">
+      <button class="btn btn--primary" type="button">Bezahlen · 46 €</button>
+      <button class="btn btn--secondary" type="button">Abbrechen</button>
+      <button class="btn btn--destructive" type="button">Entlassen</button>
+      <button class="btn btn--primary" type="button" disabled>Herstellen</button>
+    </div>
+  </section>
+  <section class="glass" aria-labelledby="c-input">
+    <h2 class="title" id="c-input">Eingabe</h2>
+    <div class="field"><label for="amt">Betrag</label><input class="input num" id="amt" value="250 €"><span class="helper">Verfügbar: 128.940 €</span></div>
+    <div class="field"><label for="acc">Empfänger</label><input class="input input--error" id="acc" value="DE00 1234"><span class="helper helper--error">Konto nicht gefunden.</span></div>
+  </section>
+  <section class="glass glass--hud" aria-label="Vitalwerte">
+    <div class="vitals">
+      <div class="vital" style="color:#ff4f6d"><svg viewBox="0 0 52 52"><circle class="track" cx="26" cy="26" r="23" fill="none" stroke-width="4"/><circle cx="26" cy="26" r="23" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-dasharray="144.5" stroke-dashoffset="28"/></svg><svg class="glyph" viewBox="0 0 24 24" style="position:static;transform:none" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg></div>
+      <div class="vital" style="color:#aebfd4"><svg viewBox="0 0 52 52"><circle class="track" cx="26" cy="26" r="23" fill="none" stroke-width="4"/><circle cx="26" cy="26" r="23" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-dasharray="144.5" stroke-dashoffset="72"/></svg><svg class="glyph" viewBox="0 0 24 24" style="position:static;transform:none" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6z"/></svg></div>
+    </div>
+  </section>
+  <section class="glass glass--hud" aria-label="Benachrichtigung">
+    <div class="notif">
+      <div class="notif__icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+      <div><p class="notif__title">Zahlung erfolgreich</p><p class="notif__body">Rechnung #2041 über 380 € bezahlt.</p></div>
+      <span class="meta">jetzt</span>
+    </div>
+  </section>
+  <section class="glass glass--hud" aria-label="Interaktionshinweis">
+    <span class="hint"><span class="kbd">E</span>Kofferraum öffnen</span>
+    <div class="progress" role="progressbar" aria-valuenow="62" aria-valuemin="0" aria-valuemax="100"><span></span></div>
+  </section>
+  <section class="glass" aria-labelledby="c-list">
+    <h2 class="title" id="c-list">Garage</h2>
+    <ul class="list" role="listbox" aria-labelledby="c-list">
+      <li role="option" aria-selected="true"><span>Karin Futo <span class="plate">HH-RP 4821</span></span><span class="badge badge--success">Eingeparkt</span></li>
+      <li role="option" aria-selected="false"><span>Bravado Bison <span class="plate">HH-KI 207</span></span><span class="badge badge--warn">Abgeschleppt</span></li>
+      <li role="option" aria-selected="false"><span>Vapid Burrito <span class="plate">HH-HF 33</span></span><span class="badge badge--danger">Gestohlen</span></li>
+    </ul>
+  </section>
+</div>
+</body>
+</html>
