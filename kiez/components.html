@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>FiveM Harbour — Kiez - reference components</title>
+    <meta name="description" content="Reference fixture for design-systems/fivem-harbour-kiez: upscale harbour nightclub game UI with brass detailing and a sparing rose-red neon accent." />
+    <style>
+      :root {
+        --bg: #0b090c;
+        --surface: #151116;
+        --surface-warm: #201a21;
+        --fg: #f4ecdd;
+        --fg-2: #cdbfa9;
+        --muted: #a69886;
+        --meta: #d6b36e;
+        --border: #76634c;
+        --border-soft: #3a3029;
+        --accent: #d6b36e;
+        --accent-on: #1a1307;
+        --accent-hover: color-mix(in oklab, var(--accent), white 12%);
+        --accent-active: color-mix(in oklab, var(--accent), black 12%);
+        --success: #5fcb95;
+        --warn: #f2bc4b;
+        --danger: #ff6b57;
+        --font-display: "Marcellus", "Jost", Georgia, serif;
+        --font-body: "Jost", "Segoe UI", system-ui, sans-serif;
+        --font-mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+        --text-xs: 13px;
+        --text-sm: 14px;
+        --text-base: 16px;
+        --text-lg: 19px;
+        --text-xl: 24px;
+        --text-2xl: 32px;
+        --text-3xl: 44px;
+        --text-4xl: 64px;
+        --leading-body: 1.5;
+        --leading-tight: 1.1;
+        --tracking-display: 0.06em;
+        --space-1: 4px;
+        --space-2: 8px;
+        --space-3: 12px;
+        --space-4: 16px;
+        --space-5: 20px;
+        --space-6: 24px;
+        --space-8: 32px;
+        --space-12: 48px;
+        --section-y-desktop: 96px;
+        --section-y-tablet: 72px;
+        --section-y-phone: 48px;
+        --radius-sm: 3px;
+        --radius-md: 6px;
+        --radius-lg: 12px;
+        --radius-pill: 9999px;
+        --elev-flat: none;
+        --elev-ring: 0 0 0 1px var(--border);
+        --elev-raised: 0 18px 48px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(214, 179, 110, 0.18);
+        --focus-ring: 0 0 0 2px var(--bg), 0 0 0 4px var(--accent);
+        --motion-fast: 140ms;
+        --motion-base: 200ms;
+        --ease-standard: cubic-bezier(0.23, 1, 0.32, 1);
+        --container-max: 1600px;
+        --container-gutter-desktop: 48px;
+        --container-gutter-tablet: 32px;
+        --container-gutter-phone: 24px;
+      }
+
+      @font-face { font-family: "Jost"; src: url("fonts/Jost-Variable-latin.woff2") format("woff2"); font-weight: 300 700; font-display: block; }
+      @font-face { font-family: "Marcellus"; src: url("fonts/Marcellus-Regular-latin.woff2") format("woff2"); font-weight: 400; font-display: block; }
+      @font-face { font-family: "IBM Plex Mono"; src: url("fonts/IBMPlexMono-Regular-latin.woff2") format("woff2"); font-weight: 400; font-display: block; }
+      @font-face { font-family: "IBM Plex Mono"; src: url("fonts/IBMPlexMono-Medium-latin.woff2") format("woff2"); font-weight: 500; font-display: block; }
+
+      *, *::before, *::after { box-sizing: border-box; }
+      html, body { margin: 0; padding: 0; }
+      body { min-height: 100vh; background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: var(--text-base); line-height: var(--leading-body); -webkit-font-smoothing: antialiased; }
+      .container { max-width: var(--container-max); margin-inline: auto; padding: var(--section-y-tablet) var(--container-gutter-desktop); display: grid; gap: var(--space-12); }
+      h1, h2 { margin: 0; font-family: var(--font-display); font-weight: 400; letter-spacing: var(--tracking-display); text-transform: uppercase; line-height: var(--leading-tight); }
+      h1 { font-size: var(--text-3xl); }
+      h2 { font-size: var(--text-lg); color: var(--meta); margin-bottom: var(--space-4); }
+      p { margin: 0; color: var(--fg-2); }
+      .row { display: flex; flex-wrap: wrap; gap: var(--space-4); align-items: center; }
+
+      .panel { background: var(--surface); border: 1px solid var(--border-soft); border-top: 1px solid var(--accent); border-radius: var(--radius-md); box-shadow: var(--elev-raised); padding: var(--space-6); max-width: 520px; }
+      .panel-title { font-family: var(--font-display); letter-spacing: var(--tracking-display); text-transform: uppercase; font-size: var(--text-xl); margin: 0 0 var(--space-2); }
+      .panel-sub { font-size: var(--text-sm); color: var(--muted); }
+
+      .btn { font: 500 var(--text-sm)/1 var(--font-body); letter-spacing: 0.08em; text-transform: uppercase; height: 40px; padding: 0 var(--space-5); border-radius: var(--radius-sm); border: 1px solid var(--border); background: transparent; color: var(--fg); cursor: pointer; transition: background var(--motion-fast) var(--ease-standard), border-color var(--motion-fast) var(--ease-standard); }
+      .btn:hover { border-color: var(--accent); }
+      .btn:focus-visible { outline: none; box-shadow: var(--focus-ring); }
+      .btn:disabled { opacity: 0.4; cursor: not-allowed; }
+      .btn-primary { background: var(--accent); border-color: var(--accent); color: var(--accent-on); }
+      .btn-primary:hover { background: var(--accent-hover); }
+      .btn-primary:active { background: var(--accent-active); }
+      .btn-danger { border-color: var(--danger); color: var(--danger); }
+
+      .field { display: grid; gap: var(--space-2); max-width: 360px; }
+      .field label { font-size: var(--text-xs); letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+      .input { height: 40px; padding: 0 var(--space-3); background: var(--bg); color: var(--fg); border: 1px solid var(--border); border-radius: var(--radius-sm); font: 400 var(--text-base) var(--font-body); }
+      .input:focus-visible { outline: none; border-color: var(--accent); box-shadow: var(--focus-ring); }
+      .input[aria-invalid="true"] { border-color: var(--danger); }
+      .field-error { font-size: var(--text-xs); color: var(--danger); }
+
+      .toast { display: grid; grid-template-columns: 3px 1fr; gap: var(--space-3); width: 360px; padding: var(--space-3) var(--space-4) var(--space-3) 0; background: rgba(11, 9, 12, 0.86); border-radius: var(--radius-sm); box-shadow: var(--elev-ring); }
+      .toast::before { content: ""; border-radius: var(--radius-pill); background: var(--toast-color, var(--accent)); }
+      .toast strong { display: block; font-size: var(--text-sm); letter-spacing: 0.08em; text-transform: uppercase; color: var(--toast-color, var(--accent)); }
+      .toast span { font-size: var(--text-sm); color: var(--fg-2); }
+      .toast-success { --toast-color: var(--success); }
+      .toast-warn { --toast-color: var(--warn); }
+      .toast-danger { --toast-color: var(--danger); }
+
+      .hint { display: inline-flex; align-items: center; gap: var(--space-3); padding: var(--space-2) var(--space-4) var(--space-2) var(--space-2); background: rgba(11, 9, 12, 0.86); border-radius: var(--radius-pill); box-shadow: var(--elev-ring); }
+      .key { display: grid; place-items: center; min-width: 28px; height: 28px; border-radius: var(--radius-sm); border: 1px solid var(--accent); color: var(--accent); font: 500 var(--text-sm) var(--font-mono); }
+
+      .stat { display: grid; grid-template-columns: 20px 160px; gap: var(--space-2); align-items: center; }
+      .bar { height: 6px; background: var(--border-soft); border-radius: var(--radius-pill); overflow: hidden; }
+      .bar > i { display: block; height: 100%; width: var(--value); background: var(--bar-color); border-radius: inherit; transition: width var(--motion-base) var(--ease-standard); }
+      .money { font: 500 var(--text-lg) var(--font-mono); font-variant-numeric: tabular-nums; }
+      .money small { font: 400 var(--text-xs) var(--font-body); letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-right: var(--space-2); }
+
+      .tabs { display: flex; gap: var(--space-6); border-bottom: 1px solid var(--border-soft); }
+      .tab { padding: var(--space-3) 0; background: none; border: 0; border-bottom: 2px solid transparent; color: var(--muted); font: 500 var(--text-sm) var(--font-body); letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; }
+      .tab[aria-selected="true"] { color: var(--fg); border-bottom-color: var(--accent); }
+      .tab:focus-visible { outline: none; box-shadow: var(--focus-ring); }
+
+      @media (prefers-reduced-motion: reduce) { .btn, .bar > i { transition: none; } }
+    </style>
+  </head>
+  <body>
+    <main class="container">
+      <header>
+        <h1>Kiez</h1>
+        <p>FiveM Harbour — design-system variant C. Brass, champagne and one sparing neon.</p>
+      </header>
+
+      <section aria-labelledby="g-buttons">
+        <h2 id="g-buttons">Buttons</h2>
+        <div class="row">
+          <button class="btn btn-primary" type="button">Bestätigen</button>
+          <button class="btn" type="button">Abbrechen</button>
+          <button class="btn btn-danger" type="button">Löschen</button>
+          <button class="btn" type="button" disabled>Gesperrt</button>
+        </div>
+      </section>
+
+      <section aria-labelledby="g-forms">
+        <h2 id="g-forms">Forms</h2>
+        <div class="row">
+          <div class="field"><label for="f-amount">Betrag</label><input id="f-amount" class="input" value="2.500" /></div>
+          <div class="field"><label for="f-iban">Empfänger</label><input id="f-iban" class="input" value="HB-00" aria-invalid="true" aria-describedby="f-iban-e" /><span id="f-iban-e" class="field-error">Kontonummer unvollständig</span></div>
+        </div>
+      </section>
+
+      <section aria-labelledby="g-feedback">
+        <h2 id="g-feedback">Feedback</h2>
+        <div class="row">
+          <div class="toast" role="status"><div><strong>Info</strong><span>Funk auf Kanal 3 gewechselt.</span></div></div>
+          <div class="toast toast-success" role="status"><div><strong>Erledigt</strong><span>Überweisung ausgeführt.</span></div></div>
+          <div class="toast toast-warn" role="status"><div><strong>Achtung</strong><span>Tank fast leer.</span></div></div>
+          <div class="toast toast-danger" role="alert"><div><strong>Fehler</strong><span>Zu wenig Bargeld.</span></div></div>
+        </div>
+        <div class="row" style="margin-top: var(--space-6)">
+          <div class="hint"><span class="key">E</span><span>Tür öffnen</span></div>
+        </div>
+      </section>
+
+      <section aria-labelledby="g-hud">
+        <h2 id="g-hud">HUD status</h2>
+        <div class="row">
+          <div class="stat"><span aria-hidden="true" style="color:#f36b7a">♥</span><div class="bar" role="meter" aria-label="Gesundheit" aria-valuenow="82" aria-valuemin="0" aria-valuemax="100"><i style="--value:82%; --bar-color:#f36b7a"></i></div></div>
+          <div class="money"><small>Bar</small>€ 1.250</div>
+          <div class="money"><small>Bank</small>€ 48.900</div>
+        </div>
+      </section>
+
+      <section aria-labelledby="g-cards">
+        <h2 id="g-cards">Panel and tabs</h2>
+        <article class="panel">
+          <h3 class="panel-title">Garage</h3>
+          <p class="panel-sub">Landungsbrücken · 4 Fahrzeuge</p>
+          <div class="tabs" role="tablist" style="margin-top: var(--space-4)">
+            <button class="tab" role="tab" aria-selected="true">Eingeparkt</button>
+            <button class="tab" role="tab" aria-selected="false">Abgeschleppt</button>
+          </div>
+        </article>
+      </section>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,1177 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>FiveM Street Neon — Variant E preview</title>
+<style>
+@font-face { font-family: "Inter Variable"; src: url("fonts/InterVariable.woff2") format("woff2"); font-weight: 100 900; font-style: normal; font-display: block; }
+@font-face { font-family: "IBM Plex Mono"; src: url("fonts/IBMPlexMono-Regular-latin.woff2") format("woff2"); font-weight: 400; font-display: block; }
+@font-face { font-family: "IBM Plex Mono"; src: url("fonts/IBMPlexMono-Medium-latin.woff2") format("woff2"); font-weight: 500; font-display: block; }
+
+html { font-size: clamp(8px, calc(100vh / 108), 16px); }
+
+:root {
+  --fh-bg-base: #07070B;
+  --fh-bg-surface: #111118;
+  --fh-bg-elevated: #1B1B24;
+  --fh-bg-overlay: rgba(4, 4, 8, 0.60);
+  --fh-border: rgba(255, 255, 255, 0.12);
+  --fh-text-primary: #F5F5F7;
+  --fh-text-secondary: #B8B8C4;
+  --fh-text-muted: #9A9AA8;
+  --fh-text-on-accent: #0A0A0F;
+  --fh-accent-primary: #FF4FA3;
+  --fh-accent-secondary: #5CE1FF;
+  --fh-success: #30D158;
+  --fh-warning: #FFB340;
+  --fh-danger: #FF5A52;
+  --fh-info: #5CE1FF;
+  --fh-job-police: #6492FF;
+  --fh-job-ems: #FF6B6B;
+  --fh-job-mechanic: #FF9F45;
+  --fh-job-civil: #A1A1AA;
+  --fh-hud-health: #3DDC84;
+  --fh-hud-armor: #7C8CFF;
+  --fh-hud-hunger: #FF9F45;
+  --fh-hud-thirst: #4FB0FF;
+  --fh-hud-stamina: #F5D64E;
+  --fh-hud-stress: #B48CFF;
+  --fh-hud-voice: #5CE1FF;
+  --fh-hud-radio: #FF4FA3;
+  --fh-hud-fuel: #FFC857;
+
+  --fh-font-sans: "Inter Variable", "Inter", system-ui, "Segoe UI", sans-serif;
+  --fh-font-display: "Inter Variable", "Inter", system-ui, "Segoe UI", sans-serif;
+  --fh-font-mono: "IBM Plex Mono", ui-monospace, Consolas, "Courier New", monospace;
+  --fh-text-2xs: 1.1rem;
+  --fh-text-xs: 1.2rem;
+  --fh-text-sm: 1.4rem;
+  --fh-text-md: 1.6rem;
+  --fh-text-lg: 2rem;
+  --fh-text-xl: 2.4rem;
+  --fh-text-2xl: 3.2rem;
+  --fh-text-3xl: 4.4rem;
+  --fh-text-4xl: 6.4rem;
+  --fh-weight-regular: 400;
+  --fh-weight-medium: 500;
+  --fh-weight-semibold: 600;
+  --fh-weight-bold: 700;
+
+  --fh-space-0_5: 0.2rem;
+  --fh-space-1: 0.4rem;
+  --fh-space-2: 0.8rem;
+  --fh-space-3: 1.2rem;
+  --fh-space-4: 1.6rem;
+  --fh-space-5: 2rem;
+  --fh-space-6: 2.4rem;
+  --fh-space-8: 3.2rem;
+  --fh-space-10: 4rem;
+  --fh-space-12: 4.8rem;
+  --fh-space-16: 6.4rem;
+
+  --fh-radius-xs: 0.6rem;
+  --fh-radius-sm: 1rem;
+  --fh-radius-md: 1.4rem;
+  --fh-radius-lg: 2rem;
+  --fh-radius-xl: 2.8rem;
+  --fh-radius-pill: 99.9rem;
+  --fh-border-width: max(1px, 0.1rem);
+  --fh-border-width-strong: 0.2rem;
+
+  --fh-shadow-1: 0 0.2rem 0.8rem rgba(0, 0, 0, 0.35);
+  --fh-shadow-2: 0 0.8rem 2.4rem rgba(0, 0, 0, 0.45), 0 0.2rem 0.6rem rgba(0, 0, 0, 0.30);
+  --fh-shadow-3: 0 2.4rem 6.4rem rgba(0, 0, 0, 0.55), 0 0.6rem 1.6rem rgba(0, 0, 0, 0.35);
+  --fh-glow-accent: 0 0 0 0.1rem rgba(255, 79, 163, 0.55), 0 0 2.4rem rgba(255, 79, 163, 0.40);
+  --fh-focus-ring: 0 0 0 0.2rem var(--fh-bg-base), 0 0 0 0.4rem var(--fh-accent-primary), 0 0 1.6rem rgba(255, 79, 163, 0.45);
+
+  --fh-blur-thin: 1.2rem;
+  --fh-blur-regular: 2.4rem;
+  --fh-blur-thick: 4rem;
+  --fh-material-thin: rgba(18, 18, 25, 0.70);
+  --fh-material-regular: rgba(14, 14, 20, 0.82);
+  --fh-material-thick: rgba(10, 10, 15, 0.90);
+
+  --fh-duration-fast: 120ms;
+  --fh-duration-enter: 200ms;
+  --fh-duration-exit: 140ms;
+  --fh-duration-slow: 420ms;
+  --fh-ease-standard: cubic-bezier(0.23, 1, 0.32, 1);
+  --fh-ease-spring: cubic-bezier(0.34, 1.4, 0.64, 1);
+}
+
+/* ── Base ─────────────────────────────────────────────────────────── */
+* { box-sizing: border-box; }
+html, body { margin: 0; background: #000; }
+body {
+  font-family: var(--fh-font-sans); color: var(--fh-text-primary); font-size: var(--fh-text-md);
+  line-height: 1.45; font-feature-settings: "tnum" 1, "cv11" 1; -webkit-font-smoothing: antialiased;
+  font-optical-sizing: auto;
+}
+button, input { font: inherit; color: inherit; }
+p { margin: 0; }
+.mono { font-family: var(--fh-font-mono); font-feature-settings: normal; }
+.t-2xs { font-size: var(--fh-text-2xs); } .t-xs { font-size: var(--fh-text-xs); } .t-sm { font-size: var(--fh-text-sm); }
+.t-md { font-size: var(--fh-text-md); } .t-lg { font-size: var(--fh-text-lg); line-height: 1.25; } .t-xl { font-size: var(--fh-text-xl); line-height: 1.2; }
+.t-2xl { font-size: var(--fh-text-2xl); line-height: 1.1; letter-spacing: -0.02em; } .t-3xl { font-size: var(--fh-text-3xl); line-height: 1.05; letter-spacing: -0.02em; }
+.t-4xl { font-size: var(--fh-text-4xl); line-height: 1; letter-spacing: -0.02em; }
+.w4 { font-weight: 400; } .w5 { font-weight: 500; } .w6 { font-weight: 600; } .w65 { font-weight: 650; } .w7 { font-weight: 700; }
+.sec { color: var(--fh-text-secondary); } .mut { color: var(--fh-text-muted); }
+.caps { font-size: var(--fh-text-2xs); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600; color: var(--fh-text-muted); }
+.row { display: flex; align-items: center; gap: var(--fh-space-3); }
+.col { display: flex; flex-direction: column; gap: var(--fh-space-3); }
+.grow { flex: 1; min-width: 0; } .between { justify-content: space-between; } .end { justify-content: flex-end; }
+.abs { position: absolute; }
+.nowrap { white-space: nowrap; }
+.ellipsis { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.tr { text-align: right; } .tc { text-align: center; }
+.divider { height: var(--fh-border-width); background: var(--fh-border); border: 0; margin: 0; }
+
+/* ── Icons ────────────────────────────────────────────────────────── */
+.ico { width: 2rem; height: 2rem; flex: none; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.ico.s16 { width: 1.6rem; height: 1.6rem; } .ico.s24 { width: 2.4rem; height: 2.4rem; } .ico.s28 { width: 2.8rem; height: 2.8rem; }
+.ico.s32 { width: 3.2rem; height: 3.2rem; } .ico.s48 { width: 4.8rem; height: 4.8rem; stroke-width: 1.5; }
+.ico.fill { --if: currentColor; }
+
+/* ── Boards & worlds ──────────────────────────────────────────────── */
+.board { position: relative; width: 100vw; height: 100vh; overflow: hidden; isolation: isolate; }
+.board.auto { height: auto; min-height: 100vh; }
+.board-label {
+  position: absolute; left: 50%; bottom: 0.8rem; transform: translateX(-50%); z-index: 90;
+  font: 500 var(--fh-text-2xs)/1 var(--fh-font-mono); letter-spacing: 0.06em; text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.7); background: rgba(0, 0, 0, 0.55); padding: 0.5rem 1rem; border-radius: var(--fh-radius-pill); white-space: nowrap;
+}
+.world-day {
+  background:
+    radial-gradient(60rem 36rem at 88% 4%, #ffffff 0%, rgba(255, 255, 255, 0.92) 30%, rgba(255, 255, 255, 0) 72%),
+    linear-gradient(180deg, #b9d4ee 0%, #dbe9f5 30%, #f4f1ea 50%, #e7e2d8 58%, #ddd8cd 100%);
+}
+.world-night {
+  background:
+    radial-gradient(40rem 24rem at 18% 48%, rgba(255, 140, 50, 0.32), transparent 70%),
+    radial-gradient(30rem 20rem at 72% 40%, rgba(255, 60, 150, 0.22), transparent 70%),
+    radial-gradient(36rem 22rem at 52% 62%, rgba(70, 200, 255, 0.14), transparent 70%),
+    linear-gradient(180deg, #05060d 0%, #0b0e22 34%, #1a1430 52%, #0b0a12 60%, #121018 100%);
+}
+.city { position: absolute; left: 0; right: 0; top: 22%; height: 38%; z-index: -1; }
+.city i { position: absolute; bottom: 0; display: block; }
+.world-day .city i { background: linear-gradient(180deg, #c9d2da, #aeb8c1); }
+.world-day .city i::after { content: ""; position: absolute; inset: 1rem 0.8rem 0; background: repeating-linear-gradient(180deg, rgba(255, 255, 255, 0.55) 0 0.5rem, transparent 0.5rem 1.6rem), repeating-linear-gradient(90deg, transparent 0 0.6rem, rgba(150, 165, 178, 0.6) 0.6rem 0.9rem); }
+.world-night .city i { background: linear-gradient(180deg, #151829, #0b0c16); }
+.world-night .city i::after { content: ""; position: absolute; inset: 1rem 0.8rem 0; background: repeating-linear-gradient(180deg, rgba(255, 196, 120, 0.5) 0 0.4rem, transparent 0.4rem 1.6rem); -webkit-mask: repeating-linear-gradient(90deg, #000 0 0.6rem, transparent 0.6rem 1.4rem); mask: repeating-linear-gradient(90deg, #000 0 0.6rem, transparent 0.6rem 1.4rem); opacity: 0.7; }
+.road { position: absolute; left: 0; right: 0; bottom: 0; height: 40%; z-index: -1; }
+.world-day .road {
+  background:
+    linear-gradient(100deg, transparent 0 46%, rgba(255, 255, 255, 0.9) 46% 47%, transparent 47% 100%),
+    linear-gradient(80deg, transparent 0 53%, rgba(255, 255, 255, 0.9) 53% 54%, transparent 54% 100%),
+    linear-gradient(180deg, #cfc9be 0%, #e9e5dd 60%, #f7f5f0 100%);
+}
+.world-night .road {
+  background:
+    repeating-linear-gradient(90deg, transparent 0 9rem, rgba(255, 150, 60, 0.06) 9rem 10rem, transparent 10rem 21rem),
+    linear-gradient(180deg, #14121c 0%, #0e0d14 100%);
+}
+.scrim { position: absolute; inset: 0; background: radial-gradient(120% 90% at 50% 50%, transparent 40%, rgba(0, 0, 0, 0.35)), var(--fh-bg-overlay); }
+.ped { position: absolute; width: 22rem; height: 62rem; bottom: 8rem; }
+.ped::before { content: ""; position: absolute; left: -14rem; right: -14rem; bottom: -4rem; height: 12rem; background: radial-gradient(50% 50% at 50% 50%, rgba(255, 255, 255, 0.14), transparent 70%); }
+.ped svg { width: 100%; height: 100%; fill: #262632; }
+
+/* ── Materials ────────────────────────────────────────────────────── */
+.m-thin { background: var(--fh-material-thin); } .m-reg { background: var(--fh-material-regular); } .m-thick { background: var(--fh-material-thick); }
+.glass { border: var(--fh-border-width) solid var(--fh-border); box-shadow: inset 0 0.1rem 0 rgba(255, 255, 255, 0.08), var(--fh-shadow-2); }
+.glass.sh1 { box-shadow: inset 0 0.1rem 0 rgba(255, 255, 255, 0.08), var(--fh-shadow-1); }
+.glass.sh3 { box-shadow: inset 0 0.1rem 0 rgba(255, 255, 255, 0.08), var(--fh-shadow-3); }
+.blur-thin { -webkit-backdrop-filter: blur(var(--fh-blur-thin)) saturate(160%); backdrop-filter: blur(var(--fh-blur-thin)) saturate(160%); }
+.blur-reg { -webkit-backdrop-filter: blur(var(--fh-blur-regular)) saturate(160%); backdrop-filter: blur(var(--fh-blur-regular)) saturate(160%); }
+.blur-thick { -webkit-backdrop-filter: blur(var(--fh-blur-thick)) saturate(160%); backdrop-filter: blur(var(--fh-blur-thick)) saturate(160%); }
+.capsule { border-radius: var(--fh-radius-pill); }
+.panel { border-radius: var(--fh-radius-xl); padding: var(--fh-space-8); background: var(--fh-material-thick); border: var(--fh-border-width) solid var(--fh-border); box-shadow: inset 0 0.1rem 0 rgba(255, 255, 255, 0.08), var(--fh-shadow-3); }
+.card { border-radius: var(--fh-radius-lg); background: rgba(255, 255, 255, 0.06); padding: var(--fh-space-6); }
+.well { border-radius: var(--fh-radius-lg); background: var(--fh-bg-surface); }
+.panel-head { display: flex; align-items: flex-start; gap: var(--fh-space-4); margin-bottom: var(--fh-space-6); }
+.panel-foot { display: flex; align-items: center; gap: var(--fh-space-3); margin-top: var(--fh-space-6); }
+.tint { position: relative; isolation: isolate; }
+.tint::before { content: ""; position: absolute; inset: 0; border-radius: inherit; background: currentColor; opacity: 0.16; z-index: -1; }
+
+/* ── Controls ─────────────────────────────────────────────────────── */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: var(--fh-space-2); height: 4.4rem; padding: 0 var(--fh-space-5);
+  border-radius: var(--fh-radius-pill); border: 0; background: rgba(255, 255, 255, 0.08); color: var(--fh-text-primary);
+  font-size: var(--fh-text-md); font-weight: var(--fh-weight-semibold); white-space: nowrap; cursor: pointer;
+  transition: background-color var(--fh-duration-fast) var(--fh-ease-standard), box-shadow var(--fh-duration-fast) var(--fh-ease-standard), transform var(--fh-duration-fast) var(--fh-ease-standard);
+}
+.btn:hover, .btn.is-hover { background: rgba(255, 255, 255, 0.14); }
+.btn:focus-visible, .btn.is-focus { outline: none; box-shadow: var(--fh-focus-ring); }
+.btn.is-pressed { background: rgba(255, 255, 255, 0.06); transform: scale(0.98); }
+.btn-primary { background: var(--fh-accent-primary); color: var(--fh-text-on-accent); }
+.btn-primary:hover, .btn-primary.is-hover { background: #FF6BB3; }
+.btn-primary.is-pressed { background: #E8408F; }
+.btn-primary.hero { box-shadow: var(--fh-glow-accent); }
+.btn-ghost { background: transparent; color: var(--fh-text-secondary); }
+.btn-danger { position: relative; isolation: isolate; background: transparent; color: var(--fh-danger); }
+.btn-danger::before { content: ""; position: absolute; inset: 0; border-radius: inherit; background: currentColor; opacity: 0.16; z-index: -1; }
+.btn-danger-solid { background: var(--fh-danger); color: var(--fh-text-on-accent); }
+.btn-success-solid { background: var(--fh-success); color: var(--fh-text-on-accent); }
+.btn[disabled], .btn.is-disabled { opacity: 0.38; cursor: not-allowed; }
+.btn-sm { height: 3.2rem; padding: 0 1.4rem; font-size: var(--fh-text-sm); }
+.btn-lg { height: 5.6rem; padding: 0 var(--fh-space-8); font-size: var(--fh-text-lg); }
+.btn-block { width: 100%; }
+.icon-btn { width: 3.2rem; height: 3.2rem; padding: 0; border-radius: 50%; }
+.icon-btn.lg { width: 4.4rem; height: 4.4rem; }
+.spinner { width: 1.6rem; height: 1.6rem; border-radius: 50%; border: 0.2rem solid rgba(255, 255, 255, 0.18); border-top-color: var(--fh-accent-secondary); animation: spin 0.9s linear infinite; flex: none; }
+.btn-primary .spinner { border-color: rgba(10, 10, 15, 0.25); border-top-color: var(--fh-text-on-accent); }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.kbd {
+  display: inline-grid; place-items: center; min-width: 2.4rem; height: 2.4rem; padding: 0 0.6rem; border-radius: var(--fh-radius-xs);
+  background: rgba(255, 255, 255, 0.14); border: var(--fh-border-width) solid var(--fh-border); box-shadow: 0 0.1rem 0 rgba(0, 0, 0, 0.4);
+  font-size: var(--fh-text-xs); font-weight: 700; line-height: 1; color: var(--fh-text-primary); white-space: nowrap;
+}
+.kbd.lg { min-width: 2.8rem; height: 2.8rem; font-size: var(--fh-text-md); }
+.kbd.accent { background: var(--fh-accent-primary); color: var(--fh-text-on-accent); border-color: transparent; }
+.keys { display: flex; align-items: center; gap: var(--fh-space-4); color: var(--fh-text-secondary); font-size: var(--fh-text-sm); }
+.keys span.k { display: inline-flex; align-items: center; gap: var(--fh-space-2); }
+
+.field { display: flex; flex-direction: column; gap: var(--fh-space-1); }
+.field > label { font-size: var(--fh-text-sm); color: var(--fh-text-secondary); font-weight: 500; }
+.input {
+  display: flex; align-items: center; gap: var(--fh-space-2); height: 4.4rem; padding: 0 var(--fh-space-4); border-radius: var(--fh-radius-sm);
+  background: rgba(255, 255, 255, 0.06); border: var(--fh-border-width) solid var(--fh-border); color: var(--fh-text-primary); font-size: var(--fh-text-md);
+}
+.input .ph { color: var(--fh-text-muted); }
+.input.is-focus { box-shadow: var(--fh-focus-ring); border-color: transparent; }
+.input.is-error { border: var(--fh-border-width-strong) solid var(--fh-danger); }
+.input.is-disabled { opacity: 0.38; }
+.input .unit { margin-left: auto; color: var(--fh-text-secondary); }
+.caret { width: 0.15rem; height: 2rem; background: var(--fh-accent-primary); margin-left: -0.6rem; }
+.help { font-size: var(--fh-text-xs); color: var(--fh-text-muted); display: flex; gap: var(--fh-space-1); align-items: center; }
+.help.err { color: var(--fh-danger); }
+
+.seg { display: inline-flex; padding: 0.4rem; gap: 0.2rem; border-radius: var(--fh-radius-pill); background: rgba(255, 255, 255, 0.08); }
+.seg > span { padding: 0 1.6rem; height: 3.2rem; display: inline-flex; align-items: center; gap: 0.6rem; border-radius: var(--fh-radius-pill); font-size: var(--fh-text-sm); font-weight: 600; color: var(--fh-text-secondary); white-space: nowrap; }
+.seg > span.on { background: rgba(255, 255, 255, 0.18); color: var(--fh-text-primary); box-shadow: var(--fh-shadow-1); }
+.seg > span.done { color: var(--fh-text-primary); }
+.tabs { display: flex; gap: var(--fh-space-6); border-bottom: var(--fh-border-width) solid var(--fh-border); }
+.tabs > span { position: relative; padding: 0 0 1.2rem; font-weight: 600; color: var(--fh-text-secondary); display: inline-flex; gap: 0.8rem; align-items: center; white-space: nowrap; }
+.tabs > span.on { color: var(--fh-text-primary); }
+.tabs > span.on::after { content: ""; position: absolute; left: 50%; bottom: -0.1rem; width: 2.4rem; height: 0.3rem; margin-left: -1.2rem; border-radius: 0.3rem; background: var(--fh-accent-primary); }
+.count { font-size: var(--fh-text-xs); font-weight: 600; padding: 0.1rem 0.7rem; border-radius: var(--fh-radius-pill); background: rgba(255, 255, 255, 0.1); color: var(--fh-text-secondary); }
+
+.slider { position: relative; height: 2.4rem; display: flex; align-items: center; }
+.slider .trk { position: absolute; left: 0; right: 0; height: 0.6rem; border-radius: 0.6rem; background: rgba(255, 255, 255, 0.12); }
+.slider .fil { position: absolute; left: 0; height: 0.6rem; border-radius: 0.6rem; background: var(--fh-text-secondary); }
+.slider .th { position: absolute; width: 2.4rem; height: 2.4rem; margin-left: -1.2rem; border-radius: 50%; background: #fff; box-shadow: var(--fh-shadow-1); }
+.slider.on .fil { background: var(--fh-accent-primary); }
+.slider.on .th { box-shadow: var(--fh-focus-ring); }
+.stepper { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.4rem; border-radius: var(--fh-radius-pill); background: rgba(255, 255, 255, 0.08); }
+.stepper b { min-width: 4rem; text-align: center; font-weight: 600; }
+.stepper .icon-btn { width: 3.2rem; height: 3.2rem; }
+.toggle { width: 5.2rem; height: 3.2rem; border-radius: var(--fh-radius-pill); background: rgba(255, 255, 255, 0.16); position: relative; flex: none; }
+.toggle::after { content: ""; position: absolute; top: 0.3rem; left: 0.3rem; width: 2.6rem; height: 2.6rem; border-radius: 50%; background: #fff; box-shadow: var(--fh-shadow-1); }
+.toggle.on { background: var(--fh-success); } .toggle.on::after { left: 2.3rem; }
+
+.lrow { display: flex; align-items: center; gap: var(--fh-space-3); min-height: 5.6rem; padding: 0.8rem 1.2rem; border-radius: var(--fh-radius-md); }
+.lrow.hover { background: rgba(255, 255, 255, 0.06); }
+.lrow.sel { background: var(--fh-bg-elevated); box-shadow: inset 0 0 0 var(--fh-border-width-strong) var(--fh-accent-primary); }
+.lrow.dis { opacity: 0.38; }
+.lrow .t { font-weight: 600; } .lrow .s { font-size: var(--fh-text-sm); color: var(--fh-text-secondary); }
+.tile { width: 3.6rem; height: 3.6rem; border-radius: var(--fh-radius-sm); display: grid; place-items: center; flex: none; background: rgba(255, 255, 255, 0.08); }
+.tile.tint { background: transparent; }
+.tile.round { border-radius: 50%; }
+.badge { display: inline-flex; align-items: center; gap: 0.4rem; height: 2.4rem; padding: 0 1rem; border-radius: var(--fh-radius-pill); font-size: var(--fh-text-xs); font-weight: 600; white-space: nowrap; flex: none; }
+.badge .ico { width: 1.4rem; height: 1.4rem; }
+.badge.neutral { background: rgba(255, 255, 255, 0.1); color: var(--fh-text-secondary); }
+.dot { width: 0.8rem; height: 0.8rem; border-radius: 50%; display: inline-block; flex: none; }
+.bar { height: 0.6rem; border-radius: var(--fh-radius-pill); background: rgba(255, 255, 255, 0.12); overflow: hidden; }
+.bar > i { display: block; height: 100%; border-radius: inherit; }
+.bar.lg { height: 0.8rem; }
+.plate { font-family: var(--fh-font-mono); font-weight: 500; font-size: var(--fh-text-xs); padding: 0.2rem 0.8rem; border-radius: 0.6rem; background: rgba(255, 255, 255, 0.1); border: var(--fh-border-width) solid var(--fh-border); white-space: nowrap; }
+.skel { background: rgba(255, 255, 255, 0.06); border-radius: var(--fh-radius-sm); position: relative; overflow: hidden; }
+.skel::after { content: ""; position: absolute; inset: 0; transform: translateX(-100%); background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.06), transparent); animation: shimmer 1.4s linear infinite; }
+@keyframes shimmer { to { transform: translateX(100%); } }
+.tooltip { background: var(--fh-bg-elevated); border-radius: var(--fh-radius-sm); padding: 0.6rem 1rem; font-size: var(--fh-text-xs); box-shadow: var(--fh-shadow-2); border: var(--fh-border-width) solid var(--fh-border); white-space: nowrap; }
+.popover { background: var(--fh-bg-elevated); border-radius: var(--fh-radius-md); padding: 0.6rem; box-shadow: var(--fh-shadow-2); border: var(--fh-border-width) solid var(--fh-border); }
+.popover .lrow { min-height: 4rem; padding: 0.6rem 1rem; border-radius: 0.8rem; }
+.state { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: var(--fh-space-2); padding: var(--fh-space-8); color: var(--fh-text-secondary); }
+.state .ico { color: var(--fh-text-secondary); margin-bottom: var(--fh-space-2); }
+.state .ttl { color: var(--fh-text-primary); font-weight: 600; font-size: var(--fh-text-lg); }
+.close { position: absolute; top: 2.4rem; right: 2.4rem; }
+
+/* ── HUD ──────────────────────────────────────────────────────────── */
+.hud { position: absolute; display: flex; align-items: center; gap: var(--fh-space-2); background: var(--fh-material-regular); border-radius: var(--fh-radius-pill); box-shadow: inset 0 0.1rem 0 rgba(255, 255, 255, 0.08), var(--fh-shadow-1); border: var(--fh-border-width) solid var(--fh-border); }
+.ring { position: relative; width: 4.8rem; height: 4.8rem; display: grid; place-items: center; flex: none; }
+.ring svg.r { position: absolute; inset: 0; width: 100%; height: 100%; transform: rotate(-90deg); }
+.ring circle { fill: none; stroke-width: 3.6; stroke-linecap: round; }
+.ring .trk { stroke: rgba(255, 255, 255, 0.12); }
+.ring .val { stroke: var(--c); stroke-dasharray: var(--v) 100; }
+.ring .ico { width: 2rem; height: 2rem; }
+.ring.low .val { stroke: var(--fh-danger); }
+.ring.low .ico { color: var(--fh-danger); --if: currentColor; animation: pulse 1s ease-in-out infinite; }
+@keyframes pulse { 50% { opacity: 0.45; } }
+.live { box-shadow: 0 0 1.6rem rgba(92, 225, 255, 0.45); }
+.money { position: absolute; right: 4rem; display: flex; align-items: center; gap: var(--fh-space-3); height: 4rem; padding: 0 1.6rem 0 1.2rem; }
+.delta { font-size: var(--fh-text-sm); font-weight: 600; padding: 0.2rem 0.8rem; border-radius: var(--fh-radius-pill); }
+.toast { width: 44rem; display: flex; align-items: center; gap: var(--fh-space-3); padding: 1.2rem 1.6rem 1.2rem 1.2rem; border-radius: var(--fh-radius-lg); background: var(--fh-material-regular); }
+.toast .tile { width: 3.6rem; height: 3.6rem; border-radius: 50%; }
+.toast .src { font-size: var(--fh-text-xs); color: var(--fh-text-muted); margin-left: auto; align-self: flex-start; white-space: nowrap; }
+.toasts { position: absolute; top: 4rem; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 0.8rem; }
+.minimap { position: absolute; left: 4rem; bottom: 4rem; width: 30rem; height: 19rem; border-radius: var(--fh-radius-lg); padding: 0.6rem; background: var(--fh-material-thin); border: var(--fh-border-width) solid var(--fh-border); box-shadow: inset 0 0.1rem 0 rgba(255, 255, 255, 0.08), var(--fh-shadow-1); }
+.minimap .map { width: 100%; height: 100%; border-radius: 1.4rem; overflow: hidden; position: relative;
+  background:
+    linear-gradient(32deg, transparent 0 47%, #6b6f7a 47% 49%, transparent 49%),
+    linear-gradient(-58deg, transparent 0 60%, #6b6f7a 60% 61.5%, transparent 61.5%),
+    linear-gradient(90deg, transparent 0 30%, #5a5e68 30% 31%, transparent 31%),
+    radial-gradient(30% 40% at 80% 80%, #2a4b3a, transparent 70%),
+    #3a3d46; }
+.minimap .me { position: absolute; left: 50%; top: 55%; width: 0; height: 0; border-left: 0.8rem solid transparent; border-right: 0.8rem solid transparent; border-bottom: 1.8rem solid #fff; transform: translate(-50%, -50%) rotate(20deg); }
+.route { position: absolute; left: 50%; top: 55%; width: 9rem; height: 0.5rem; background: var(--fh-accent-secondary); transform-origin: left center; transform: rotate(-60deg); border-radius: 0.3rem; }
+.hint { position: absolute; left: 50%; top: calc(50% + 8rem); transform: translateX(-50%); display: flex; flex-direction: column; gap: 0.6rem; align-items: center; }
+.hint .h { display: flex; align-items: center; gap: var(--fh-space-3); height: 4.4rem; padding: 0 1.8rem 0 0.8rem; border-radius: var(--fh-radius-pill); background: var(--fh-material-regular); border: var(--fh-border-width) solid var(--fh-border); box-shadow: inset 0 0.1rem 0 rgba(255, 255, 255, 0.08), var(--fh-shadow-1); font-weight: 600; white-space: nowrap; }
+.holdring { position: relative; width: 2.8rem; height: 2.8rem; display: grid; place-items: center; }
+.holdring svg { position: absolute; inset: -0.4rem; width: 3.6rem; height: 3.6rem; transform: rotate(-90deg); }
+.progress { position: absolute; left: 50%; bottom: 14rem; transform: translateX(-50%); width: 40rem; padding: 1.2rem 1.6rem; border-radius: var(--fh-radius-lg); }
+
+/* ── Radial ───────────────────────────────────────────────────────── */
+.radial { position: absolute; width: 44rem; height: 44rem; }
+.radial .track { position: absolute; inset: 0; border-radius: 50%; background: var(--fh-material-thin); border: var(--fh-border-width) solid var(--fh-border); box-shadow: inset 0 0.1rem 0 rgba(255, 255, 255, 0.08), var(--fh-shadow-2); }
+.radial svg.seg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.radial .center { position: absolute; left: 50%; top: 50%; width: 16rem; height: 16rem; margin: -8rem 0 0 -8rem; border-radius: 50%; background: var(--fh-material-regular); border: var(--fh-border-width) solid var(--fh-border); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 0.4rem; padding: 2rem; }
+.radial .it { position: absolute; width: 10rem; margin-left: -5rem; margin-top: -3.4rem; display: flex; flex-direction: column; align-items: center; gap: 0.4rem; font-size: var(--fh-text-sm); font-weight: 600; }
+.radial .it.on { color: var(--fh-accent-primary); }
+.radial .it.dis { opacity: 0.38; }
+
+/* ── Phone ────────────────────────────────────────────────────────── */
+.phone { position: absolute; bottom: 4rem; width: 34rem; height: 70rem; border-radius: 5.2rem; padding: 1rem; background: #0b0b10; border: var(--fh-border-width) solid rgba(255, 255, 255, 0.16); box-shadow: var(--fh-shadow-3), inset 0 0 0 0.2rem #1d1d26; }
+.phone .scr { position: relative; width: 100%; height: 100%; border-radius: 4.2rem; overflow: hidden; }
+.phone .sb { position: absolute; top: 0; left: 0; right: 0; height: 4.8rem; display: flex; align-items: center; justify-content: space-between; padding: 0 2.6rem; font-size: var(--fh-text-sm); font-weight: 600; z-index: 3; }
+.phone .cut { position: absolute; top: 1.2rem; left: 50%; width: 10rem; height: 2.8rem; margin-left: -5rem; border-radius: var(--fh-radius-pill); background: #000; z-index: 4; }
+.app { display: flex; flex-direction: column; align-items: center; gap: 0.6rem; font-size: var(--fh-text-xs); font-weight: 500; position: relative; }
+.app .ai { width: 6.4rem; height: 6.4rem; border-radius: 1.6rem; display: grid; place-items: center; background: rgba(255, 255, 255, 0.14); border: var(--fh-border-width) solid rgba(255, 255, 255, 0.1); }
+.app .ai .ico { width: 3rem; height: 3rem; }
+.app .nb { position: absolute; top: -0.6rem; right: 0.2rem; min-width: 2.2rem; height: 2.2rem; border-radius: 1.1rem; background: var(--fh-accent-primary); color: var(--fh-text-on-accent); font-size: var(--fh-text-xs); font-weight: 700; display: grid; place-items: center; padding: 0 0.5rem; }
+.bub { max-width: 78%; padding: 1rem 1.4rem; border-radius: 2rem; font-size: var(--fh-text-sm); line-height: 1.35; }
+.bub.in { background: rgba(255, 255, 255, 0.1); align-self: flex-start; border-bottom-left-radius: 0.6rem; }
+.bub.out { background: var(--fh-accent-primary); color: var(--fh-text-on-accent); align-self: flex-end; border-bottom-right-radius: 0.6rem; font-weight: 500; }
+
+/* ── Tables / tablets ─────────────────────────────────────────────── */
+.tablet { position: absolute; left: 50%; top: 50%; width: 148rem; height: 80rem; margin: -40rem 0 0 -74rem; display: flex; overflow: hidden; border-radius: var(--fh-radius-xl); background: var(--fh-material-thick); border: var(--fh-border-width) solid var(--fh-border); box-shadow: inset 0 0.1rem 0 rgba(255, 255, 255, 0.08), var(--fh-shadow-3); }
+.tablet .side { width: 22rem; flex: none; background: var(--fh-bg-surface); padding: 2.4rem 1.6rem; display: flex; flex-direction: column; gap: 0.4rem; position: relative; }
+.tablet .side::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 0.3rem; background: var(--job); }
+.tablet .side .lrow { min-height: 4.4rem; padding: 0.6rem 1.2rem; }
+.tablet .main { flex: 1; min-width: 0; padding: 3.2rem; display: flex; flex-direction: column; gap: 2.4rem; background: rgba(7, 7, 11, 0.6); }
+table.tb { width: 100%; border-collapse: collapse; font-size: var(--fh-text-sm); }
+table.tb th { text-align: left; font-size: var(--fh-text-2xs); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600; color: var(--fh-text-muted); padding: 1.2rem 1.6rem; border-bottom: var(--fh-border-width) solid var(--fh-border); white-space: nowrap; }
+table.tb td { padding: 0 1.6rem; height: 4.8rem; border-bottom: var(--fh-border-width) solid rgba(255, 255, 255, 0.06); white-space: nowrap; }
+table.tb tr:last-child td { border-bottom: 0; }
+table.tb tr.sel td { background: var(--fh-bg-elevated); }
+table.tb.dense td { height: 4rem; }
+.stat { border-radius: var(--fh-radius-lg); background: var(--fh-bg-surface); padding: 1.6rem 2rem; display: flex; flex-direction: column; gap: 0.4rem; }
+
+/* ── Inventory ────────────────────────────────────────────────────── */
+.slots { display: grid; grid-template-columns: repeat(6, 8.8rem); gap: 0.8rem; }
+.slot { position: relative; width: 8.8rem; height: 8.8rem; border-radius: var(--fh-radius-md); background: var(--fh-bg-surface); border: var(--fh-border-width) solid rgba(255, 255, 255, 0.06); display: grid; place-items: center; }
+.slot .ico { width: 3.6rem; height: 3.6rem; stroke-width: 1.6; color: var(--fh-text-primary); }
+.slot .n { position: absolute; top: 0.6rem; right: 0.8rem; font-size: var(--fh-text-xs); font-weight: 600; }
+.slot .wt { position: absolute; bottom: 0.6rem; left: 0.8rem; font-size: var(--fh-text-2xs); color: var(--fh-text-muted); }
+.slot .hk { position: absolute; top: 0.6rem; left: 0.6rem; min-width: 1.8rem; height: 1.8rem; font-size: var(--fh-text-2xs); padding: 0 0.4rem; }
+.slot .dur { position: absolute; left: 0.8rem; right: 0.8rem; bottom: 0.4rem; height: 0.4rem; border-radius: 0.2rem; background: rgba(255, 255, 255, 0.1); overflow: hidden; }
+.slot .dur i { display: block; height: 100%; }
+.slot.sel { box-shadow: inset 0 0 0 var(--fh-border-width-strong) var(--fh-accent-primary); }
+.slot.target { box-shadow: inset 0 0 0 var(--fh-border-width-strong) var(--fh-accent-primary), var(--fh-glow-accent); background: var(--fh-bg-elevated); }
+.slot.ghost { opacity: 0.4; }
+.slot.drag { position: absolute; transform: rotate(-4deg) scale(1.04); box-shadow: var(--fh-shadow-3); background: var(--fh-bg-elevated); z-index: 5; }
+
+/* ── Token board ──────────────────────────────────────────────────── */
+.tok { padding: 6.4rem 4rem; background: var(--fh-bg-base); }
+.sw-grid { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 1.6rem; }
+.sw { border-radius: var(--fh-radius-lg); background: var(--fh-bg-surface); overflow: hidden; border: var(--fh-border-width) solid var(--fh-border); }
+.sw .c { height: 6.4rem; }
+.sw .m { padding: 1rem 1.2rem 1.2rem; display: flex; flex-direction: column; gap: 0.2rem; }
+.sec-title { margin: 4.8rem 0 2rem; display: flex; align-items: baseline; gap: 1.6rem; }
+.matdemo { position: relative; height: 16rem; border-radius: var(--fh-radius-lg); overflow: hidden; background: linear-gradient(90deg, #ffffff 0 50%, #10131f 50% 100%); display: flex; align-items: center; justify-content: space-around; }
+
+@media (prefers-reduced-motion: reduce) { .spinner, .skel::after, .ring.low .ico, .pulse { animation: none; } }
+.reduce-motion .spinner, .reduce-motion .skel::after { animation: none; }
+.blink { animation: blink 1.5s steps(1) infinite; }
+@keyframes blink { 50% { opacity: 0.25; } }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-heart" viewBox="0 0 24 24"><path style="fill:var(--if,none)" d="M12 20s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.2a4.3 4.3 0 0 1 7.5 2.6C19.5 15.4 12 20 12 20z"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path style="fill:var(--if,none)" d="M12 3l7.5 3v5.2c0 4.4-3 8-7.5 9.8-4.5-1.8-7.5-5.4-7.5-9.8V6z"/></symbol>
+    <symbol id="i-food" viewBox="0 0 24 24"><path d="M6 3v7a2 2 0 0 0 4 0V3M8 10v11M16.5 21V3c2.5 1.2 3.5 4 3.5 7s-1.5 4.5-3.5 4.5"/></symbol>
+    <symbol id="i-drop" viewBox="0 0 24 24"><path style="fill:var(--if,none)" d="M12 3.5s6 6.4 6 10.7a6 6 0 0 1-12 0C6 9.9 12 3.5 12 3.5z"/></symbol>
+    <symbol id="i-run" viewBox="0 0 24 24"><circle cx="15" cy="4.5" r="1.8"/><path d="M8.5 21l3-6 3 2.5V21M6 11.5l3.5-3.5 4 1.2 2.5 3.3 3 .6M11.5 15l1.6-5.6"/></symbol>
+    <symbol id="i-brain" viewBox="0 0 24 24"><path d="M2.5 12.5h4l2.2-5.5 4.3 11 2.4-5.5h6.1"/></symbol>
+    <symbol id="i-mic" viewBox="0 0 24 24"><rect style="fill:var(--if,none)" x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21M9 21h6"/></symbol>
+    <symbol id="i-mic-off" viewBox="0 0 24 24"><path d="M9 9V6a3 3 0 0 1 6 0v5M15 13.5A3 3 0 0 1 9 11M5.5 11a6.5 6.5 0 0 0 10.8 4.9M18.5 11c0 .6-.1 1.2-.2 1.8M12 17.5V21M9 21h6M3.5 3.5l17 17"/></symbol>
+    <symbol id="i-radio" viewBox="0 0 24 24"><rect style="fill:var(--if,none)" x="7" y="7.5" width="10" height="13.5" rx="2.2"/><path d="M10 7.5V2.5M10 12h4M10 15.5h4"/></symbol>
+    <symbol id="i-wallet" viewBox="0 0 24 24"><path d="M3.5 7.5A2.5 2.5 0 0 1 6 5h11v3"/><rect x="3.5" y="8" width="17" height="11.5" rx="2.5"/><path d="M16 13.8h1.5"/></symbol>
+    <symbol id="i-bank" viewBox="0 0 24 24"><path d="M3 9.5L12 4l9 5.5M5 10v8M9.7 10v8M14.3 10v8M19 10v8M3 20.5h18"/></symbol>
+    <symbol id="i-briefcase" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2.5"/><path d="M9 7V5.2C9 4.5 9.5 4 10.2 4h3.6c.7 0 1.2.5 1.2 1.2V7M3 12.5h18"/></symbol>
+    <symbol id="i-bullet" viewBox="0 0 24 24"><path d="M9 21V10.5c0-3.3 1.4-6 3-7.5 1.6 1.5 3 4.2 3 7.5V21zM9 16.5h6"/></symbol>
+    <symbol id="i-gun" viewBox="0 0 24 24"><path d="M3 8.5h15.5l2 2v2.2h-7.2l-1 2.3H9.6l-1 5H5.2l1.1-5H3z"/></symbol>
+    <symbol id="i-seatbelt" viewBox="0 0 24 24"><circle cx="12" cy="5" r="2.2"/><path d="M6.5 21v-6.5a5.5 5.5 0 0 1 11 0V21"/><path style="fill:var(--if,none)" d="M8 9.8l9 9.4-1.6 1.5-9-9.4z"/></symbol>
+    <symbol id="i-engine" viewBox="0 0 24 24"><path style="fill:var(--if,none)" d="M4 10h3l2-3h5.5l1.5 2h3v3H21v-2h1v6h-1v-2h-2v3.5h-4L13 19.5H8.5L7 17.5H4z"/></symbol>
+    <symbol id="i-fuel" viewBox="0 0 24 24"><rect x="4" y="4" width="10" height="17" rx="1.8"/><path d="M4 10h10M14 8l3 3v7a1.5 1.5 0 0 0 3 0V9.5L17.2 6.8"/></symbol>
+    <symbol id="i-lights" viewBox="0 0 24 24"><path style="fill:var(--if,none)" d="M11 6.5c-3.5 0-5.5 2.4-5.5 5.5s2 5.5 5.5 5.5z"/><path d="M14.5 8h6M14.5 12h6M14.5 16h6"/></symbol>
+    <symbol id="i-arrow-left" viewBox="0 0 24 24"><path style="fill:var(--if,none)" d="M10.5 5L3.5 12l7 7v-4.2H20V9.2h-9.5z"/></symbol>
+    <symbol id="i-arrow-right" viewBox="0 0 24 24"><path style="fill:var(--if,none)" d="M13.5 5l7 7-7 7v-4.2H4V9.2h9.5z"/></symbol>
+    <symbol id="i-gauge" viewBox="0 0 24 24"><path d="M4 16.5a8 8 0 1 1 16 0M12 16.5l4-5"/></symbol>
+    <symbol id="i-map-pin" viewBox="0 0 24 24"><path style="fill:var(--if,none)" d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></symbol>
+    <symbol id="i-home" viewBox="0 0 24 24"><path d="M4 11l8-7 8 7v8.5c0 .6-.4 1-1 1h-4.5v-6h-5v6H5c-.6 0-1-.4-1-1z"/></symbol>
+    <symbol id="i-car" viewBox="0 0 24 24"><path d="M5 15.5l1.6-5a2 2 0 0 1 1.9-1.4h7a2 2 0 0 1 1.9 1.4l1.6 5"/><rect x="3" y="15.5" width="18" height="4" rx="1.5"/><path d="M6.5 19.5v1.5M17.5 19.5v1.5M6.5 17.5h1M16.5 17.5h1"/></symbol>
+    <symbol id="i-boat" viewBox="0 0 24 24"><path d="M3 15h18l-2.5 5h-13zM6 15l1.5-5h7L17 15M10 10V6.5h3"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><rect x="7" y="2.5" width="10" height="19" rx="2.6"/><path d="M11 18.5h2"/></symbol>
+    <symbol id="i-call" viewBox="0 0 24 24"><path style="fill:var(--if,none)" d="M6.6 3.5l2.6.3 1.3 4-1.9 1.5a11 11 0 0 0 6.1 6.1l1.5-1.9 4 1.3.3 2.6a2 2 0 0 1-2 2.1A16.5 16.5 0 0 1 4.5 5.5a2 2 0 0 1 2.1-2z"/></symbol>
+    <symbol id="i-bag" viewBox="0 0 24 24"><path d="M5 8h14l-1 12.5H6zM9 8V6.5a3 3 0 0 1 6 0V8"/></symbol>
+    <symbol id="i-cart" viewBox="0 0 24 24"><path d="M3 4h2.2l2.4 11h10.6l2-8H6.3"/><circle cx="9" cy="19.5" r="1.5"/><circle cx="17" cy="19.5" r="1.5"/></symbol>
+    <symbol id="i-wrench" viewBox="0 0 24 24"><path d="M15 3.5a5 5 0 0 0-4.6 6.9L3.8 17v3.2H7l6.6-6.6A5 5 0 0 0 20.5 9l-3.2 1-2.3-2.3 1-3.2z"/></symbol>
+    <symbol id="i-hammer" viewBox="0 0 24 24"><path d="M13 7l-9.5 9.5a2.1 2.1 0 0 0 3 3L16 10M11 5l3-2.5 7.5 7.5L19 12.5z"/></symbol>
+    <symbol id="i-file" viewBox="0 0 24 24"><path d="M6 3h8.5L19 7.5V21H6zM14.5 3v4.5H19M9 12h7M9 16h7"/></symbol>
+    <symbol id="i-id" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2.5"/><circle cx="9" cy="11" r="2"/><path d="M6 16.2a3 3 0 0 1 6 0M14.5 10h4M14.5 14h3"/></symbol>
+    <symbol id="i-police" viewBox="0 0 24 24"><path style="fill:var(--if,none)" d="M12 3l2.3 4.6 5.1.8-3.7 3.6.9 5L12 14.6 7.4 17l.9-5-3.7-3.6 5.1-.8z"/><path d="M8 21h8"/></symbol>
+    <symbol id="i-cross" viewBox="0 0 24 24"><path style="fill:var(--if,none)" d="M9.2 3.5h5.6v5.7h5.7v5.6h-5.7v5.7H9.2v-5.7H3.5V9.2h5.7z"/></symbol>
+    <symbol id="i-crown" viewBox="0 0 24 24"><path d="M3.5 8l4.5 4 4-6.5 4 6.5 4.5-4-1.8 10.5H5.3zM5.3 21h13.4"/></symbol>
+    <symbol id="i-terminal" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2.5"/><path d="M7 9.5l3 2.5-3 2.5M12.5 15h4.5"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4.5 20.5a7.5 7.5 0 0 1 15 0"/></symbol>
+    <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8.5" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0M16 5a3.5 3.5 0 0 1 0 7M18 14a6.5 6.5 0 0 1 3.5 6"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M20 20l-4.2-4.2"/></symbol>
+    <symbol id="i-filter" viewBox="0 0 24 24"><path d="M4 5h16l-6.2 7.6V19l-3.6-1.8v-4.6z"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M6.5 6.5l11 11M17.5 6.5l-11 11"/></symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24"><path d="M10.3 4.3a2 2 0 0 1 3.4 0l7.6 13.2a2 2 0 0 1-1.7 3H4.4a2 2 0 0 1-1.7-3zM12 9.5v4.5M12 17.3v.1"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5.5M12 7.8v.1"/></symbol>
+    <symbol id="i-chevron" viewBox="0 0 24 24"><path d="M9.5 6l6 6-6 6"/></symbol>
+    <symbol id="i-chevron-left" viewBox="0 0 24 24"><path d="M14.5 6l-6 6 6 6"/></symbol>
+    <symbol id="i-chevron-down" viewBox="0 0 24 24"><path d="M6 9.5l6 6 6-6"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-minus" viewBox="0 0 24 24"><path d="M5 12h14"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24"><rect style="fill:var(--if,none)" x="5" y="10.5" width="14" height="10" rx="2.5"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 2"/></symbol>
+    <symbol id="i-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.3 5.3l2.1 2.1M16.6 16.6l2.1 2.1M5.3 18.7l2.1-2.1M16.6 7.4l2.1-2.1"/></symbol>
+    <symbol id="i-logout" viewBox="0 0 24 24"><path d="M14.5 4H19v16h-4.5M10 8l-4 4 4 4M6 12h10"/></symbol>
+    <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/></symbol>
+    <symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 7h16M9.5 7V4.5h5V7M6 7l1 13.5h10L18 7"/></symbol>
+    <symbol id="i-send" viewBox="0 0 24 24"><path style="fill:var(--if,none)" d="M4 12L20.5 4 14 20.5l-2.6-6.6z"/></symbol>
+    <symbol id="i-music" viewBox="0 0 24 24"><path d="M9 18V5.5l11-2v12.5"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="17.5" cy="16" r="2.5"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path style="fill:var(--if,none)" d="M7.5 4.5l12 7.5-12 7.5z"/></symbol>
+    <symbol id="i-pause" viewBox="0 0 24 24"><path style="fill:var(--if,none)" d="M7 4.5h3.5v15H7zM13.5 4.5H17v15h-3.5z"/></symbol>
+    <symbol id="i-volume" viewBox="0 0 24 24"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4zM15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11"/></symbol>
+    <symbol id="i-message" viewBox="0 0 24 24"><path style="fill:var(--if,none)" d="M4 5.5h16v11H9.5L5 20v-3.5H4z"/></symbol>
+    <symbol id="i-camera" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2.5"/><path d="M8.5 7l1.8-3h3.4l1.8 3"/><circle cx="12" cy="13.5" r="3.5"/></symbol>
+    <symbol id="i-note" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h3"/></symbol>
+    <symbol id="i-shirt" viewBox="0 0 24 24"><path d="M8.5 3.5L3.5 6.5l2 4.5 2.5-1v10.5h8V10l2.5 1 2-4.5-5-3a3.5 3.5 0 0 1-7 0z"/></symbol>
+    <symbol id="i-box" viewBox="0 0 24 24"><path d="M3.5 7.5L12 3.5l8.5 4v9L12 20.5l-8.5-4zM3.5 7.5L12 11.5l8.5-4M12 11.5v9"/></symbol>
+    <symbol id="i-bottle" viewBox="0 0 24 24"><path d="M10 2.5h4v3.5l1.5 2.5v12.5h-7V8.5L10 6z M8.5 13h7"/></symbol>
+    <symbol id="i-key" viewBox="0 0 24 24"><circle cx="8" cy="15" r="4"/><path d="M11 12l8.5-8.5M16.5 6.5l2.5 2.5M14 9l2 2"/></symbol>
+    <symbol id="i-dice" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="3.5"/><circle style="fill:currentColor" cx="9" cy="9" r="1"/><circle style="fill:currentColor" cx="15" cy="15" r="1"/><circle style="fill:currentColor" cx="15" cy="9" r="1"/><circle style="fill:currentColor" cx="9" cy="15" r="1"/></symbol>
+    <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M19.5 12a7.5 7.5 0 1 1-2.2-5.3M19.5 4.5v4.5H15"/></symbol>
+    <symbol id="i-flag" viewBox="0 0 24 24"><path d="M5 21V4h11.5l-2 4 2 4H5"/></symbol>
+    <symbol id="i-rotate" viewBox="0 0 24 24"><path d="M4 12a8 8 0 0 1 14-5.3M20 4v4h-4M20 12a8 8 0 0 1-14 5.3M4 20v-4h4"/></symbol>
+    <symbol id="i-signal" viewBox="0 0 24 24"><path style="fill:currentColor;stroke:none" d="M3 17h3v4H3zM8 13h3v8H8zM13 9h3v12h-3zM18 5h3v16h-3z"/></symbol>
+    <symbol id="i-battery" viewBox="0 0 24 24"><rect x="2.5" y="7.5" width="17" height="9" rx="2.5"/><rect style="fill:currentColor;stroke:none" x="4.5" y="9.5" width="10" height="5" rx="1"/><path d="M21.5 10.5v3"/></symbol>
+    <symbol id="i-pulse" viewBox="0 0 24 24"><path d="M2.5 12.5h4l2.2-5.5 4.3 11 2.4-5.5h6.1"/></symbol>
+    <symbol id="i-tool" viewBox="0 0 24 24"><path d="M3.5 20.5l7-7M14 4l6 6-3 3-6-6zM10 13.5l.5.5"/></symbol>
+    <symbol id="i-chip" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 3v3M15 3v3M9 18v3M15 18v3M3 9h3M3 15h3M18 9h3M18 15h3"/></symbol>
+    <symbol id="i-bandage" viewBox="0 0 24 24"><rect x="2.5" y="8.5" width="19" height="7" rx="3.5" transform="rotate(-45 12 12)"/><path d="M10.5 10.5h.01M13.5 13.5h.01M10.5 13.5h.01M13.5 10.5h.01"/></symbol>
+  </defs>
+</svg>
+<main id="app"></main>
+<script>
+/* ── Helpers ─────────────────────────────────────────────────────── */
+const I = (n, c = '') => `<svg class="ico ${c}" aria-hidden="true"><use href="#i-${n}"/></svg>`;
+const V = n => `var(--fh-${n})`;
+const K = (k, c = '') => `<span class="kbd ${c}">${k}</span>`;
+const badge = (t, col, icon = '') => `<span class="badge tint" style="color:${col}">${icon ? I(icon) : ''}${t}</span>`;
+const nbadge = t => `<span class="badge neutral">${t}</span>`;
+const btn = (t, c = '', icon = '') => `<button class="btn ${c}" type="button">${icon ? I(icon) : ''}${t}</button>`;
+const ibtn = (icon, c = '', label = '') => `<button class="btn icon-btn ${c}" type="button" aria-label="${label || icon}">${I(icon, 's16')}</button>`;
+const ring = (col, v, icon, cls = '') => `<div class="ring ${cls}" style="--c:${col};--v:${v}"><svg class="r" viewBox="0 0 48 48"><circle class="trk" cx="24" cy="24" r="21"/><circle class="val" cx="24" cy="24" r="21" pathLength="100"/></svg>${I(icon)}</div>`;
+const tile = (icon, col = '', cls = '') => col ? `<span class="tile tint ${cls}" style="color:${col}">${I(icon)}</span>` : `<span class="tile ${cls}">${I(icon)}</span>`;
+const keys = arr => `<div class="keys">${arr.map(([k, l]) => `<span class="k">${k.split('+').map(x => K(x)).join('')}${l}</span>`).join('')}</div>`;
+const field = (label, val, o = {}) => {
+  const st = o.state || '';
+  const err = st.includes('is-error');
+  return `<div class="field" style="${o.style || ''}"><label>${label}</label><div class="input ${st}">${o.icon ? I(o.icon, 's16 sec') : ''}${o.ph ? `<span class="ph">${val}</span>` : `<span>${val}</span>`}${st.includes('is-focus') ? '<span class="caret" style="margin-left:0"></span>' : ''}${o.unit ? `<span class="unit">${o.unit}</span>` : ''}${o.select ? `<span class="unit">${I('chevron-down', 's16')}</span>` : ''}</div>${o.help ? `<span class="help ${err ? 'err' : ''}">${err ? I('alert', 's16') : ''}${o.help}</span>` : ''}</div>`;
+};
+const closeBtn = `<button class="btn icon-btn close" type="button" aria-label="Schließen">${I('x', 's16')}</button>`;
+const ped = style => `<div class="ped" style="${style}"><svg viewBox="0 0 22 62"><circle cx="11" cy="5" r="4.2"/><path d="M5 11.5c0-1.4 1.2-2.5 2.6-2.5h6.8c1.4 0 2.6 1.1 2.6 2.5L18.5 30h-2.2l-1-11-.6 15 .9 27h-3.4L11 36l-1.2 25H6.4l.9-27-.6-15-1 11H3.5z"/></svg></div>`;
+const bar = (pct, col, cls = '') => `<div class="bar ${cls}"><i style="width:${pct}%;background:${col}"></i></div>`;
+const toast = (col, icon, t, b, src) => `<div class="toast glass"><span class="tile tint round" style="color:${col}">${I(icon)}</span><div class="grow"><div class="w6">${t}</div><div class="t-sm sec">${b}</div></div><span class="src">${src}</span></div>`;
+const head = (icon, col, title, sub, extra = '') => `<div class="panel-head">${tile(icon, col)}<div class="grow"><div class="t-xl w65">${title}</div><div class="t-sm sec">${sub}</div></div>${extra}</div>`;
+const carArt = (w = '60%') => `<svg viewBox="0 0 200 80" style="width:${w}" fill="none" stroke="rgba(255,255,255,.55)" stroke-width="2" stroke-linejoin="round"><path d="M14 58c-4 0-6-3-6-7v-6c0-4 3-7 8-8l26-5 22-12c4-2 8-3 12-3h40c6 0 11 2 15 6l13 13 26 4c7 1 12 6 12 12v6c0 4-2 6-6 6"/><circle cx="50" cy="60" r="12"/><circle cx="152" cy="60" r="12"/><path d="M62 58h78M70 33l16-10h28v10zM120 23h12c4 0 7 2 9 4l6 6h-27z"/></svg>`;
+const boards = [];
+const board = (id, label, cls, inner) => {
+  const w = cls.includes('world-day') ? 'day' : cls.includes('world-night') ? 'night' : '';
+  boards.push(`<section class="board ${cls}" id="${id}">${w ? `<div class="city" data-seed="${boards.length}"></div><div class="road"></div>` : ''}${inner}<div class="board-label">${label}</div></section>`);
+};
+
+/* ── 00 Tokens ───────────────────────────────────────────────────── */
+const pal = [
+  ['Flächen', [['bg-base', '#07070B', 'text-primary 18.5:1'], ['bg-surface', '#111118', 'text-primary 17.3:1'], ['bg-elevated', '#1B1B24', 'text-primary 15.7:1'], ['bg-overlay', 'rgba(4,4,8,.60)', '5.1:1 über Weiß', 1], ['border', '#FFFFFF1F', '1.4:1 dekorativ', 1]]],
+  ['Text', [['text-primary', '#F5F5F7', '17.3:1 · 10.5:1 Welt'], ['text-secondary', '#B8B8C4', '9.6:1 · 5.8:1 Welt'], ['text-muted', '#9A9AA8', '6.8:1 · nur dicht'], ['text-on-accent', '#0A0A0F', '6.5:1 auf Magenta']]],
+  ['Akzent & Status', [['accent-primary', '#FF4FA3', '6.2:1 · 3.8:1 Welt'], ['accent-secondary', '#5CE1FF', '12.2:1 · 7.5:1 Welt'], ['success', '#30D158', '9.3:1 · 5.7:1 Welt'], ['warning', '#FFB340', '10.5:1 · 6.4:1 Welt'], ['danger', '#FF5A52', '6.1:1 · 3.7:1 Welt'], ['info', '#5CE1FF', '12.2:1 · 7.5:1 Welt']]],
+  ['Jobs', [['job-police', '#6492FF', '6.3:1 · 3.9:1 Welt'], ['job-ems', '#FF6B6B', '6.8:1 · 4.1:1 Welt'], ['job-mechanic', '#FF9F45', '9.2:1 · 5.6:1 Welt'], ['job-civil', '#A1A1AA', '7.3:1 · 4.5:1 Welt']]],
+  ['HUD', [['hud-health', '#3DDC84', '10.5:1 · 6.4:1 Welt'], ['hud-armor', '#7C8CFF', '6.3:1 · 3.9:1 Welt'], ['hud-hunger', '#FF9F45', '9.2:1 · 5.6:1 Welt'], ['hud-thirst', '#4FB0FF', '8.0:1 · 4.9:1 Welt'], ['hud-stamina', '#F5D64E', '13.1:1 · 8.0:1 Welt'], ['hud-stress', '#B48CFF', '7.3:1 · 4.4:1 Welt'], ['hud-voice', '#5CE1FF', '12.2:1 · 7.5:1 Welt'], ['hud-radio', '#FF4FA3', '6.2:1 · 3.8:1 Welt'], ['hud-fuel', '#FFC857', '12.2:1 · 7.5:1 Welt']]],
+];
+const sw = ([n, hex, cr, alpha]) => `<div class="sw"><div class="c" style="background:${alpha ? `linear-gradient(var(--fh-${n}),var(--fh-${n})),linear-gradient(90deg,#fff 50%,#10131f 50%)` : V(n)}"></div><div class="m"><span class="mono t-xs">--fh-${n}</span><span class="w6 t-sm">${hex}</span><span class="t-xs sec">${cr}</span></div></div>`;
+const typeRows = [['4xl', '6.4 · 650', '87 km/h'], ['3xl', '4.4 · 650', '48.920,00 €'], ['2xl', '3.2 · 650', 'Charakter wählen'], ['xl', '2.4 · 650', 'Garage · Pillbox Parkhaus'], ['lg', '2.0 · 600', 'Fahrzeug eingeparkt'], ['md', '1.6 · 400/600', 'Sultan RS steht auf Stellplatz 14 bereit.'], ['sm', '1.4 · 400/500', 'Zuletzt gespielt gestern, 23:14'], ['xs', '1.2 · 500', 'Bank · jetzt'], ['2xs', '1.1 · 600 caps', 'SCHNELLZUGRIFF']];
+const curve = (p, label) => `<div class="card col" style="width:28rem"><svg viewBox="0 0 100 100" style="width:100%;height:14rem"><path d="M0 100 L100 0" stroke="rgba(255,255,255,.1)" fill="none"/><path d="M0 100 C ${p[0] * 100} ${100 - p[1] * 100} ${p[2] * 100} ${100 - p[3] * 100} 100 0" stroke="#FF4FA3" stroke-width="2.5" fill="none"/></svg><span class="mono t-xs">${label}</span></div>`;
+const iconNames = ['heart', 'shield', 'food', 'drop', 'run', 'brain', 'mic', 'radio', 'wallet', 'bank', 'briefcase', 'bullet', 'gun', 'seatbelt', 'engine', 'fuel', 'lights', 'arrow-left', 'arrow-right', 'gauge', 'map-pin', 'home', 'car', 'boat', 'phone', 'call', 'bag', 'cart', 'wrench', 'hammer', 'file', 'id', 'police', 'cross', 'crown', 'terminal', 'user', 'users', 'search', 'filter', 'check', 'x', 'alert', 'info', 'chevron', 'plus', 'minus', 'lock', 'clock', 'gear', 'logout', 'eye', 'trash', 'send', 'music', 'play', 'pause', 'volume', 'message', 'camera', 'note', 'shirt', 'box', 'bottle', 'key', 'dice', 'refresh', 'flag', 'rotate', 'pulse', 'tool', 'chip', 'bandage'];
+
+board('tokens', '00 · Tokens — Farbe, Typo, Abstand, Form, Material, Bewegung, Icons', 'auto tok', `
+  <div class="row between" style="align-items:flex-end">
+    <div><div class="caps">FiveM Roleplay · Variante E</div><div class="t-4xl w65" style="margin-top:.8rem">Street Neon</div>
+    <p class="t-lg sec" style="margin-top:1.2rem;max-width:90rem">Glas auf Nachtschwarz. Magenta heißt <b style="color:${V('accent-primary')}">du / Fokus</b>, Cyan heißt <b style="color:${V('accent-secondary')}">live</b> — sonst ist alles neutral. 1rem = 10px bei 1080p.</p></div>
+    <div class="row">${btn('Primär', 'btn-primary')}${btn('Sekundär')}${btn('Ghost', 'btn-ghost')}</div>
+  </div>
+  ${pal.map(([g, list]) => `<div class="sec-title"><span class="t-xl w65">${g}</span><span class="t-sm sec">Kontrast gegen bg-surface · „Welt“ = material-regular über weißem Spielbild</span></div><div class="sw-grid">${list.map(sw).join('')}</div>`).join('')}
+  <div class="row" style="align-items:flex-start;gap:4rem;margin-top:4.8rem">
+    <div class="grow"><div class="t-xl w65" style="margin-bottom:2rem">Typografie · Inter Variable / IBM Plex Mono</div>
+      ${typeRows.map(([t, m, s]) => `<div class="row" style="padding:.8rem 0;border-bottom:var(--fh-border-width) solid var(--fh-border)"><span class="mono t-xs sec" style="width:14rem">--fh-text-${t}<br>${m}</span><span class="t-${t} ${t === '2xs' ? 'caps' : ''} ${['4xl', '3xl', '2xl', 'xl'].includes(t) ? 'w65' : t === 'lg' ? 'w6' : ''}" style="${t === '2xs' ? 'color:var(--fh-text-primary)' : ''}">${s}</span></div>`).join('')}
+      <div class="row" style="padding:1.2rem 0"><span class="mono t-xs sec" style="width:14rem">--fh-font-mono</span><span class="mono t-md">HH-SN 2047 · SA-4471-9920 · RE-2026-0412</span></div>
+    </div>
+    <div style="width:60rem"><div class="t-xl w65" style="margin-bottom:2rem">Abstand</div>
+      ${[['0_5', .2], ['1', .4], ['2', .8], ['3', 1.2], ['4', 1.6], ['5', 2], ['6', 2.4], ['8', 3.2], ['10', 4], ['12', 4.8], ['16', 6.4]].map(([n, r]) => `<div class="row" style="height:2.8rem"><span class="mono t-xs sec" style="width:14rem">--fh-space-${n}</span><span style="display:block;height:1.2rem;width:${r * 5}rem;border-radius:.3rem;background:${V('accent-secondary')}"></span><span class="t-xs mut">${r}rem</span></div>`).join('')}
+      <div class="t-xl w65" style="margin:3.2rem 0 2rem">Radien (konzentrisch)</div>
+      <div class="row" style="align-items:flex-end;gap:1.6rem">${[['xs', .6], ['sm', 1], ['md', 1.4], ['lg', 2], ['xl', 2.8], ['pill', 99.9]].map(([n, r]) => `<div class="col" style="gap:.6rem;align-items:center"><div style="width:${n === 'pill' ? 12 : 8}rem;height:8rem;border-radius:${r}rem;background:rgba(255,255,255,.08);border:var(--fh-border-width) solid var(--fh-border)"></div><span class="mono t-xs sec">${n}</span></div>`).join('')}</div>
+    </div>
+  </div>
+  <div class="sec-title"><span class="t-xl w65">Materialien über hellem und dunklem Spielbild</span><span class="t-sm sec">Kein Blur über der Welt (NUI/Chromium 103) — die Tönung trägt die Lesbarkeit</span></div>
+  <div class="matdemo">${[['thin', 'Nur Chrom / große Werte'], ['regular', 'HUD, Toasts, Hinweise'], ['thick', 'Panels mit dichtem Text']].map(([m, d]) => `<div style="width:44rem;padding:2rem 2.4rem;border-radius:2rem;background:var(--fh-material-${m});border:var(--fh-border-width) solid var(--fh-border);box-shadow:inset 0 .1rem 0 rgba(255,255,255,.08),var(--fh-shadow-2)"><div class="mono t-xs sec">--fh-material-${m}</div><div class="t-lg w6">${d}</div><div class="t-sm sec">Sekundärtext bleibt lesbar</div><div class="t-xs mut">Muted nur auf thick</div></div>`).join('')}</div>
+  <div class="row" style="gap:2.4rem;margin-top:3.2rem;align-items:stretch">
+    ${[['shadow-1', 'var(--fh-shadow-1)'], ['shadow-2', 'var(--fh-shadow-2)'], ['shadow-3', 'var(--fh-shadow-3)'], ['glow-accent', 'var(--fh-glow-accent)'], ['focus-ring', 'var(--fh-focus-ring)']].map(([n, s]) => `<div style="flex:1;height:12rem;border-radius:2rem;background:${V('bg-elevated')};box-shadow:${s};display:grid;place-items:center"><span class="mono t-xs">--fh-${n}</span></div>`).join('')}
+  </div>
+  <div class="sec-title"><span class="t-xl w65">Bewegung</span><span class="t-sm sec">fast 120 · enter 200 · exit 140 · slow 420 ms</span></div>
+  <div class="row" style="gap:2.4rem">${curve([0.23, 1, 0.32, 1], '--fh-ease-standard (0.23, 1, 0.32, 1)')}${curve([0.34, 1.4, 0.64, 1], '--fh-ease-spring (0.34, 1.4, 0.64, 1)')}
+    <div class="card grow col"><div class="w6">Regeln</div><div class="t-sm sec">Eintritt: Opacity + translateY(0.8rem) scale(0.98) · Austritt kürzer · nie scale(0) · Puls nur für Live-Zustände (Sprechen, Blinker, Gurt) · Fortschritt linear · reduce-motion: nur Fades</div></div>
+  </div>
+  <div class="sec-title"><span class="t-xl w65">Icons</span><span class="t-sm sec">24er Raster · 2px Strich · runde Enden · gefüllt = aktiv</span></div>
+  <div style="display:grid;grid-template-columns:repeat(13,1fr);gap:1.2rem">${iconNames.map(n => `<div class="col" style="align-items:center;gap:.6rem;padding:1.2rem .4rem;border-radius:1.4rem;background:rgba(255,255,255,.04)">${I(n, 's28')}<span class="mono t-2xs mut">${n}</span></div>`).join('')}</div>
+  <div style="height:4.8rem"></div>
+`);
+
+/* ── 01 Components ───────────────────────────────────────────────── */
+const states = ['Standard', 'Hover', 'Fokus', 'Gedrückt', 'Deaktiviert', 'Lädt'];
+const stCls = ['', 'is-hover', 'is-focus', 'is-pressed', 'is-disabled', ''];
+const variant = (label, cls, text) => `<tr><td class="sec t-sm" style="padding-right:2rem">${label}</td>${stCls.map((s, i) => `<td style="padding:1rem 1.2rem">${i === 5 ? `<button class="btn ${cls}" type="button"><span class="spinner"></span>${text}</button>` : btn(text, `${cls} ${s}`)}</td>`).join('')}</tr>`;
+board('components', '01 · Komponenten & Zustände', 'auto tok', `
+  <div class="t-2xl w65">Komponenten</div><p class="sec" style="margin-top:.8rem">Jedes interaktive Element mit Standard, Hover, Fokus, Gedrückt, Deaktiviert und Lädt.</p>
+  <div class="sec-title"><span class="t-xl w65">Buttons</span></div>
+  <table><tr><td></td>${states.map(s => `<td class="caps" style="padding:0 1.2rem">${s}</td>`).join('')}</tr>
+  ${variant('Primär', 'btn-primary', 'Ausparken')}${variant('Sekundär', '', 'Abbrechen')}${variant('Ghost', 'btn-ghost', 'Zurücksetzen')}${variant('Gefahr', 'btn-danger', 'Löschen')}</table>
+  <div class="row" style="margin-top:1.6rem;gap:1.6rem">${btn('Klein', 'btn-sm')}${btn('Standard')}${btn('Groß · Flow', 'btn-lg btn-primary hero', 'play')}${ibtn('x', '', 'Schließen')}${ibtn('gear', 'lg', 'Einstellungen')}${btn('Endgültig löschen', 'btn-danger-solid')}${btn('Annehmen', 'btn-success-solid', 'call')}</div>
+  <div class="row" style="gap:4rem;align-items:flex-start;margin-top:4.8rem">
+    <div class="col" style="width:44rem;gap:2rem"><div class="t-xl w65">Felder</div>
+      ${field('Empfänger', 'IBAN oder Telefonnummer', { ph: true, icon: 'search' })}
+      ${field('Betrag', '1.250', { state: 'is-focus', unit: '€', help: 'Verfügbar: 48.920 €' })}
+      ${field('Kennzeichen', 'HH-SN', { state: 'is-error', help: 'Kennzeichen unvollständig – Format HH-AB 1234' })}
+      ${field('Firmenkonto', 'Nur für Geschäftsführung', { state: 'is-disabled' })}
+    </div>
+    <div class="col" style="width:40rem;gap:2rem"><div class="t-xl w65">Auswahl</div>
+      ${field('Rang', 'Officer II', { select: true })}
+      <div class="popover" style="margin-top:-1.2rem">${['Cadet', 'Officer I', 'Officer II', 'Sergeant'].map((r, i) => `<div class="lrow ${i === 2 ? 'hover' : ''}"><span class="grow">${r}</span>${i === 2 ? `<span style="color:${V('accent-primary')}">${I('check', 's16')}</span>` : ''}</div>`).join('')}</div>
+      <div class="seg"><span class="on">Alle</span><span>Eingeparkt</span><span>Draußen</span></div>
+      <div class="tabs"><span class="on">Eigene <span class="count">6</span></span><span>Job</span><span>Abschlepphof <span class="count">1</span></span></div>
+    </div>
+    <div class="col" style="width:40rem;gap:2.4rem"><div class="t-xl w65">Regler</div>
+      <div class="col" style="gap:.6rem"><div class="row between t-sm"><span class="sec">Ruhe</span><span>42 %</span></div><div class="slider"><div class="trk"></div><div class="fil" style="width:42%"></div><div class="th" style="left:42%"></div></div></div>
+      <div class="col" style="gap:.6rem"><div class="row between t-sm"><span class="sec">Ziehen / Fokus</span><span>68 %</span></div><div class="slider on"><div class="trk"></div><div class="fil" style="width:68%"></div><div class="th" style="left:68%"></div></div></div>
+      <div class="row"><div class="stepper">${ibtn('minus')}<b>2</b>${ibtn('plus')}</div><span class="t-sm sec">Stepper</span></div>
+      <div class="row"><span class="toggle on"></span><span class="t-sm">An</span><span class="toggle"></span><span class="t-sm sec">Aus</span></div>
+      <div class="row">${K('E')}${K('Shift')}${K('Esc')}${K('E', 'lg accent')}<span class="tooltip">Nur im Dienst verfügbar</span></div>
+    </div>
+  </div>
+  <div class="row" style="gap:4rem;align-items:flex-start;margin-top:4.8rem">
+    <div class="col" style="width:52rem;gap:.6rem"><div class="t-xl w65" style="margin-bottom:1.4rem">Listenzeilen</div>
+      <div class="lrow">${tile('car')}<div class="grow"><div class="t">Sultan RS</div><div class="s">Standard</div></div><span class="plate">HH-SN 2047</span></div>
+      <div class="lrow hover">${tile('car')}<div class="grow"><div class="t">Bravado Buffalo</div><div class="s">Hover</div></div>${I('chevron', 's16 sec')}</div>
+      <div class="lrow sel">${tile('car')}<div class="grow"><div class="t">Karin Futo</div><div class="s">Ausgewählt</div></div>${badge('Eingeparkt', V('success'))}</div>
+      <div class="lrow dis">${tile('lock')}<div class="grow"><div class="t">Hafenbüro</div><div class="s">Deaktiviert – nur im Dienst</div></div></div>
+    </div>
+    <div class="col" style="width:48rem;gap:1.6rem"><div class="t-xl w65">Badges</div>
+      <div class="row" style="flex-wrap:wrap;gap:.8rem">${badge('Eingeparkt', V('success'), 'check')}${badge('Draußen', V('warning'))}${badge('Abgeschleppt', V('danger'))}${badge('Live', V('info'))}${badge('Ausgewählt', V('accent-primary'))}${nbadge('Neutral')}</div>
+      <div class="row" style="flex-wrap:wrap;gap:.8rem">${badge('LSPD', V('job-police'), 'police')}${badge('EMS', V('job-ems'), 'cross')}${badge('Werkstatt', V('job-mechanic'), 'wrench')}${badge('Zivil', V('job-civil'), 'user')}</div>
+      <div class="t-xl w65" style="margin-top:1.6rem">Laden</div>
+      <div class="row"><span class="spinner"></span><span class="t-sm sec">Spinner</span><div class="skel grow" style="height:1.6rem"></div></div>
+      <div class="skel" style="height:5.6rem;border-radius:1.4rem"></div>
+    </div>
+    <div class="col" style="width:40rem;gap:1.6rem"><div class="t-xl w65">HUD-Primitive</div>
+      <div class="hud" style="position:static;padding:.8rem;align-self:flex-start">${ring(V('hud-health'), 82, 'heart')}${ring(V('hud-armor'), 40, 'shield')}${ring(V('hud-health'), 18, 'heart', 'low')}</div>
+      ${bar(72, V('hud-fuel'), 'lg')}${bar(18, V('warning'), 'lg')}${bar(64, V('accent-secondary'), 'lg')}
+    </div>
+  </div>
+  <div style="height:4.8rem"></div>
+`);
+
+/* ── 02 Loading screen ───────────────────────────────────────────── */
+const stage = (s, l) => `<span class="row t-xs" style="gap:.6rem;color:${s === 'on' ? V('accent-secondary') : s === 'done' ? V('text-primary') : V('text-muted')}">${s === 'done' ? I('check', 's16') : `<span class="dot" style="background:${s === 'on' ? V('accent-secondary') : 'rgba(255,255,255,.25)'};${s === 'on' ? 'box-shadow:0 0 1rem rgba(92,225,255,.6)' : ''}"></span>`}${l}</span>`;
+board('loading', '02 · Ladebildschirm (NUI-eigener Hintergrund)', 'world-night', `
+  <div class="abs" style="inset:0;background:radial-gradient(70rem 50rem at 72% 28%, rgba(255,79,163,.30), transparent 70%),radial-gradient(60rem 40rem at 22% 72%, rgba(92,225,255,.16), transparent 70%)"></div>
+  <div class="abs" style="left:6.4rem;top:6.4rem"><div class="t-4xl w65">HARBOUR</div><div class="t-lg sec" style="margin-top:.8rem">Los Santos · Roleplay</div></div>
+  <div class="abs row" style="right:6.4rem;top:6.4rem;gap:2.4rem"><span class="row t-sm sec" style="gap:.6rem">${I('users', 's16')}128 / 200 online</span><span class="t-sm sec">discord.gg/harbour</span></div>
+  <div class="abs" style="left:50%;bottom:9.6rem;width:64rem;margin-left:-32rem">
+    <div class="row between"><span class="w6">Lade Spielwelt · 214 / 386</span><span class="w6">62 %</span></div>
+    <div class="bar lg" style="margin:1.2rem 0 1.6rem"><i style="width:62%;background:${V('accent-secondary')};box-shadow:0 0 1.6rem rgba(92,225,255,.5)"></i></div>
+    <div class="row between">${stage('done', 'Verbinden')}${stage('done', 'Ressourcen')}${stage('on', 'Spielwelt')}${stage('', 'Charaktere')}</div>
+  </div>
+  <div class="abs glass m-reg" style="left:6.4rem;bottom:6.4rem;width:40rem;border-radius:2rem;padding:2.4rem">
+    <div class="caps" style="color:${V('text-secondary')}">Tipp 3 / 12</div>
+    <p style="margin-top:.8rem">Mit ${K('F1')} öffnest du das Schnellmenü — Animationen, Fahrzeug und Dokumente an einem Ort.</p>
+    <div class="row between" style="margin-top:1.6rem"><div class="row" style="gap:.4rem">${[0, 0, 1, 0, 0].map(o => `<span class="dot" style="width:.6rem;height:.6rem;background:${o ? '#fff' : 'rgba(255,255,255,.3)'}"></span>`).join('')}</div><div class="row" style="gap:.6rem">${ibtn('chevron-left', '', 'Vorheriger Tipp')}${ibtn('chevron', '', 'Nächster Tipp')}</div></div>
+  </div>
+  <div class="abs glass m-reg capsule row" style="right:6.4rem;bottom:6.4rem;padding:.8rem 1.6rem .8rem .8rem;gap:1.2rem">
+    ${tile('music', '', 'round')}<div><div class="w6 t-sm">Nightdrive</div><div class="t-xs sec">Vinewood Tapes</div></div>
+    <button class="btn icon-btn lg" type="button" aria-label="Pause">${I('pause', 's16 fill')}</button>
+    <div class="row" style="gap:.6rem">${I('volume', 's16 sec')}<div class="slider" style="width:8rem"><div class="trk"></div><div class="fil" style="width:60%"></div><div class="th" style="left:60%;width:1.6rem;height:1.6rem;margin-left:-.8rem"></div></div></div>${K('Leertaste')}
+  </div>
+`);
+
+/* ── 03 Character select ─────────────────────────────────────────── */
+const charCard = (ini, name, job, meta, o = {}) => `<div class="glass m-thick row" style="border-radius:2rem;padding:1.6rem 2rem 1.6rem 1.6rem;gap:1.6rem;${o.sel ? 'box-shadow:inset 0 0 0 var(--fh-border-width-strong) var(--fh-accent-primary),var(--fh-glow-accent);' : ''}${o.dis ? 'opacity:.38;' : ''}${o.empty ? 'background:rgba(255,255,255,.05);' : ''}">
+  <span class="tile round" style="width:5.6rem;height:5.6rem;font-weight:650;font-size:var(--fh-text-lg);${o.sel ? `background:${V('accent-primary')};color:${V('text-on-accent')}` : ''}">${ini}</span>
+  <div class="grow col" style="gap:.4rem"><div class="t-lg w6">${name}</div>${job}<div class="t-sm sec">${meta}</div></div></div>`;
+board('charselect', '03 · Charakterauswahl — gefüllt (Lena ausgewählt)', 'world-night', `
+  ${ped('left:calc(50% + 4rem)')}
+  <div class="abs col" style="left:6.4rem;top:50%;transform:translateY(-50%);width:40rem;gap:1.2rem">
+    <div class="t-2xl w65">Charakter wählen</div><div class="sec" style="margin-bottom:1.2rem">2 von 4 Plätzen belegt</div>
+    ${charCard('LH', 'Lena Hartmann', `<div>${badge('LSPD · Officer II', V('job-police'), 'police')}</div>`, '2.450 € bar · zuletzt gestern', { sel: 1 })}
+    ${charCard('JP', 'Jonas Petersen', `<div>${badge('Hafenwerkstatt · Meister', V('job-mechanic'), 'wrench')}</div>`, '18.200 € bar · vor 6 Tagen')}
+    ${charCard(I('plus'), 'Neuer Charakter', '', 'Platz 3 ist frei', { empty: 1 })}
+    ${charCard(I('lock'), 'Platz 4 gesperrt', '', 'Weitere Plätze für Unterstützer', { dis: 1 })}
+  </div>
+  <div class="abs glass m-thick" style="right:6.4rem;top:50%;transform:translateY(-60%);width:36rem;border-radius:2rem;padding:2.4rem">
+    <div class="caps">Ausgewählt</div><div class="t-xl w65" style="margin:.4rem 0 1.6rem">Lena Hartmann</div>
+    ${[['Geburtsdatum', '14.03.1996'], ['Job', 'LSPD · Officer II'], ['Bank', '48.920 €'], ['Telefon', '555-0142'], ['Spielzeit', '212 h']].map(([k, v]) => `<div class="row between" style="padding:.8rem 0;border-top:var(--fh-border-width) solid var(--fh-border)"><span class="sec t-sm">${k}</span><span class="w5">${v}</span></div>`).join('')}
+  </div>
+  <div class="abs row" style="right:6.4rem;bottom:6.4rem;gap:1.6rem">${btn('Löschen', 'btn-danger', 'trash')}${btn('Spielen', 'btn-primary btn-lg hero', 'play')}</div>
+  <div class="abs" style="left:6.4rem;bottom:6.4rem">${keys([['↑+↓', 'Auswählen'], ['Enter', 'Spielen'], ['Entf', 'Löschen']])}</div>
+`);
+
+/* ── 04 Character creator ────────────────────────────────────────── */
+const sl = (l, v, on) => `<div class="col" style="gap:.4rem"><div class="row between t-sm"><span class="${on ? '' : 'sec'}">${l}</span><span class="w6">${v} %</span></div><div class="slider ${on ? 'on' : ''}"><div class="trk"></div><div class="fil" style="width:${v}%"></div><div class="th" style="left:${v}%"></div></div></div>`;
+const grp = (t, inner) => `<div class="card col" style="gap:1.6rem;padding:2rem"><div class="row between"><span class="w6">${t}</span>${btn('Zufällig', 'btn-ghost btn-sm', 'dice')}</div>${inner}</div>`;
+board('creator', '04 · Charaktererstellung — Schritt „Gesicht“, Modell lädt', 'world-night', `
+  ${ped('left:calc(50% + 18rem)')}
+  <div class="abs" style="left:calc(50% + 24rem);top:4rem;transform:translateX(-50%)"><div class="seg glass m-reg" style="padding:.6rem">${['Herkunft', 'Gesicht', 'Haare', 'Merkmale', 'Kleidung', 'Daten'].map((s, i) => `<span class="${i === 1 ? 'on' : i === 0 ? 'done' : ''}">${i === 0 ? I('check', 's16') : ''}${s}</span>`).join('')}</div></div>
+  <div class="abs panel col" style="left:4rem;top:4rem;bottom:4rem;width:44rem;gap:1.6rem;padding:2.8rem;overflow:hidden">
+    <div><div class="t-xl w65">Gesicht</div><div class="t-sm sec">Jede Änderung siehst du sofort am Modell.</div></div>
+    ${grp('Nase', sl('Breite', 42) + sl('Höhe', 60, 1) + sl('Länge', 35))}
+    ${grp('Augenbrauen', sl('Höhe', 50) + sl('Tiefe', 28))}
+    ${grp('Kiefer', sl('Breite', 64) + sl('Form', 40))}
+  </div>
+  <div class="abs glass m-reg col" style="right:4rem;top:50%;transform:translateY(-50%);border-radius:2.8rem;padding:.8rem;gap:.4rem">
+    ${['Kopf', 'Oberkörper', 'Ganzkörper'].map((c, i) => `<button class="btn btn-sm ${i ? 'btn-ghost' : ''}" type="button" style="${i ? '' : 'background:rgba(255,255,255,.18)'}">${c}</button>`).join('')}
+    <hr class="divider" style="margin:.4rem 1rem"><div class="row" style="justify-content:center;gap:.4rem">${ibtn('chevron-left', '', 'Links drehen')}${ibtn('chevron', '', 'Rechts drehen')}</div>
+  </div>
+  <div class="abs glass m-reg capsule row" style="left:calc(50% + 29rem);bottom:14rem;transform:translateX(-50%);padding:.8rem 1.6rem;gap:1rem"><span class="spinner"></span><span class="t-sm">Lade Modell …</span></div>
+  <div class="abs" style="left:52rem;bottom:5rem">${keys([['A+D', 'Drehen'], ['Mausrad', 'Zoomen'], ['Esc', 'Abbrechen']])}</div>
+  <div class="abs row" style="right:4rem;bottom:4rem;gap:1.2rem">${btn('Zurück', '', 'chevron-left')}${btn('Weiter', 'btn-primary btn-lg')}</div>
+`);
+
+/* ── 05 Spawn selector ───────────────────────────────────────────── */
+const pin = (x, y, icon, o = {}) => `<div class="abs" style="left:${x}%;top:${y}%;transform:translate(-50%,-50%)"><div style="width:4rem;height:4rem;border-radius:50%;display:grid;place-items:center;${o.sel ? `background:${V('accent-primary')};color:${V('text-on-accent')};box-shadow:var(--fh-glow-accent)` : 'background:var(--fh-material-regular);border:var(--fh-border-width) solid var(--fh-border)'};${o.job ? `color:${o.job}` : ''}">${I(icon, 's16')}</div>${o.label ? `<div class="glass m-reg capsule t-sm w6 nowrap" style="position:absolute;left:5rem;top:.2rem;padding:.6rem 1.4rem">${o.label}</div>` : ''}</div>`;
+const sp = (icon, t, s, o = {}) => `<div class="lrow ${o.sel ? 'sel' : ''} ${o.dis ? 'dis' : ''}">${tile(icon, o.col || '')}<div class="grow"><div class="t">${t}</div><div class="s">${s}</div></div>${o.trail || ''}</div>`;
+board('spawn', '05 · Spawn-Auswahl — Letzter Standort ausgewählt', '', `
+  <div class="abs" style="inset:0;background:
+    linear-gradient(28deg, transparent 0 49.6%, #2a2d38 49.6% 50.4%, transparent 50.4%),
+    linear-gradient(-62deg, transparent 0 39.6%, #2a2d38 39.6% 40.3%, transparent 40.3%),
+    linear-gradient(90deg, transparent 0 63.7%, #23262f 63.7% 64.2%, transparent 64.2%),
+    linear-gradient(0deg, transparent 0 41.7%, #23262f 41.7% 42.2%, transparent 42.2%),
+    radial-gradient(40% 60% at 6% 96%, #0b1a2a 0 60%, transparent 61%),
+    radial-gradient(14% 18% at 74% 26%, #10201a, transparent 70%),
+    repeating-linear-gradient(90deg, rgba(255,255,255,.025) 0 .1rem, transparent .1rem 6rem),
+    repeating-linear-gradient(0deg, rgba(255,255,255,.025) 0 .1rem, transparent .1rem 6rem),
+    #0d0e14"></div>
+  ${[['VINEWOOD', 64, 18], ['ALTA', 70, 42], ['PILLBOX HILL', 56, 60], ['MISSION ROW', 74, 70], ['HAFEN', 38, 86]].map(([n, x, y]) => `<span class="abs caps" style="left:${x}%;top:${y}%">${n}</span>`).join('')}
+  ${pin(66, 30, 'map-pin', { sel: 1, label: 'Letzter Standort · Vinewood Blvd' })}${pin(80, 46, 'home')}${pin(46, 56, 'bag')}${pin(60, 64, 'cross', { job: V('job-ems') })}${pin(76, 76, 'police', { job: V('job-police') })}${pin(36, 80, 'lock')}
+  <div class="abs panel col" style="left:4rem;top:4rem;bottom:4rem;width:44rem;gap:.6rem">
+    <div class="t-xl w65">Wo möchtest du aufwachen?</div><div class="t-sm sec" style="margin-bottom:1.6rem">Lena Hartmann · LSPD</div>
+    ${sp('map-pin', 'Letzter Standort', 'Vinewood Blvd · Alta', { sel: 1 })}
+    ${sp('home', 'Wohnung', 'Integrity Way 28 · Pillbox')}
+    ${sp('bag', 'Motel', 'Pink Cage · Vinewood')}
+    ${sp('cross', 'Krankenhaus', 'Pillbox Hill Medical', { col: V('job-ems') })}
+    ${sp('police', 'Revier', 'Mission Row', { col: V('job-police'), trail: badge('Dienst', V('job-police')) })}
+    ${sp('lock', 'Hafenbüro', 'Nur im Dienst der Hafenbehörde', { dis: 1 })}
+    <div class="grow"></div>${btn('Hier aufwachen', 'btn-primary btn-lg btn-block hero')}
+  </div>
+`);
+
+/* ── 06/07 HUD ───────────────────────────────────────────────────── */
+const street = (dir, st, zone, extra = '') => `<div class="hud" style="left:4rem;bottom:24.2rem;height:3.6rem;padding:0 1.6rem 0 .6rem;gap:1rem">${K(dir)}<span class="w6 t-sm">${st}</span><span class="t-sm sec">${zone}</span>${extra}</div>`;
+const minimap = (route) => `<div class="minimap"><div class="map">${route ? '<div class="route"></div>' : ''}<div class="me"></div></div></div>`;
+const money = (top, icon, val, delta) => `<div class="hud money" style="top:${top}rem">${delta || ''}${I(icon, 's24 sec')}<span class="t-lg w6">${val}</span></div>`;
+const job = (top, onDuty) => `<div class="hud money" style="top:${top}rem;gap:1rem"><span style="color:${V('job-police')}">${I('police', 's24 fill')}</span><span class="w6">LSPD · Officer II</span>${onDuty ? `<span class="row t-sm" style="gap:.6rem;color:${V('accent-secondary')}"><span class="dot" style="background:${V('accent-secondary')};box-shadow:0 0 .8rem rgba(92,225,255,.8)"></span>Im Dienst</span>` : '<span class="t-sm sec">Außer Dienst</span>'}</div>`;
+const chatLine = (tag, col, name, msg) => `<div class="t-sm" style="padding:.3rem 0"><span class="badge tint" style="color:${col};height:2rem;padding:0 .8rem;margin-right:.6rem">${tag}</span><b class="w6">${name}</b> <span class="sec">${msg}</span></div>`;
+board('hud-day', '06 · HUD über hellem Spielbild — zu Fuß, bewaffnet, Reparatur läuft', 'world-day', `
+  <div class="glass m-reg abs" style="left:4rem;top:4rem;width:52rem;border-radius:2rem;padding:1.2rem 1.6rem">
+    ${chatLine('OOC', V('job-civil'), 'Kai', 'wer hat Bock auf Hafenrennen später?')}
+    ${chatLine('/me', V('text-secondary'), 'Lena Hartmann', 'zieht die Handschuhe an.')}
+    ${chatLine('Polizei', V('job-police'), 'Dispatch', '10-31 Vinewood Blvd, Einheit 2-A-12 übernimmt.')}
+    ${chatLine('/do', V('text-secondary'), 'Jonas', 'Die Motorhaube qualmt leicht.')}
+  </div>
+  <div class="toasts">
+    ${toast(V('success'), 'check', 'Fahrzeug eingeparkt', 'Sultan RS · HH-SN 2047', 'Garage · jetzt')}
+    ${toast(V('info'), 'message', 'Neue Nachricht', 'Mara: Bin in 5 Minuten da.', 'Telefon · 1 Min')}
+    ${toast(V('warning'), 'alert', 'Rechnung fällig', 'Los Santos Customs · 1.480 € in 1 Tag', 'Bank · 2 Min')}
+  </div>
+  ${money(4, 'wallet', '2.450 €', `<span class="delta tint" style="color:${V('success')}">+ 250 €</span>`)}${money(8.8, 'bank', '48.920 €')}${job(13.6, 1)}
+  ${street('NO', 'Vinewood Blvd', 'Alta')}${minimap()}
+  <div class="hud" style="left:35.6rem;bottom:11.6rem;height:3.6rem;padding:0 1.6rem 0 1.2rem;gap:1rem;box-shadow:inset 0 .1rem 0 rgba(255,255,255,.08),var(--fh-shadow-1),0 0 1.6rem rgba(92,225,255,.45)"><span style="color:${V('hud-voice')}">${I('mic', 's24 fill')}</span><span class="row" style="gap:.4rem"><span class="dot" style="background:#fff;opacity:.3"></span><span class="dot" style="background:${V('hud-voice')}"></span><span class="dot" style="background:#fff;opacity:.3"></span></span><span class="t-sm w6">Normal</span></div>
+  <div class="hud" style="left:35.6rem;bottom:4rem;height:6.4rem;padding:0 .8rem">${ring(V('hud-health'), 82, 'heart')}${ring(V('hud-armor'), 40, 'shield')}${ring(V('hud-hunger'), 38, 'food')}${ring(V('hud-thirst'), 45, 'drop')}${ring(V('hud-stamina'), 70, 'run')}</div>
+  <div class="hud" style="right:4rem;bottom:4rem;height:6.4rem;padding:0 2.4rem 0 1.6rem;gap:1.2rem">${I('gun', 's24 sec')}<span class="t-sm sec">Pistole .50</span><span class="t-2xl w7">7</span><span class="t-lg sec">/ 48</span></div>
+  <div class="glass m-reg progress"><div class="row">${tile('wrench')}<div class="grow col" style="gap:.8rem"><div class="row between"><span class="w6">Fahrzeug wird repariert …</span><span class="w6">64 %</span></div><div class="bar lg"><i style="width:64%;background:${V('accent-secondary')};box-shadow:0 0 1.2rem rgba(92,225,255,.6)"></i></div></div></div><div class="row t-xs sec" style="margin-top:.8rem;justify-content:flex-end;gap:.6rem">${K('X')}Abbrechen</div></div>
+  <div class="hint"><div class="h">${K('E', 'lg accent')}Kofferraum öffnen</div><div class="h">${K('G', 'lg')}Fahrzeug durchsuchen</div></div>
+`);
+board('hud-night', '07 · HUD über dunklem Spielbild — im Fahrzeug, niedrige Werte, Funk sendet, Halten-Hinweis', 'world-night', `
+  <div class="toasts">
+    ${toast(V('danger'), 'x', 'Zahlung fehlgeschlagen', 'Nicht genug Guthaben auf dem Girokonto.', 'Bank · jetzt')}
+    ${toast(V('warning'), 'fuel', 'Tank fast leer', 'Noch 8 % – nächste Tankstelle 1,4 km', 'Fahrzeug · 1 Min')}
+    <div class="hud" style="position:static;height:3.2rem;padding:0 1.6rem"><span class="t-sm sec">+2 weitere</span></div>
+  </div>
+  ${money(4, 'wallet', '1.200 €', `<span class="delta tint" style="color:${V('danger')}">− 1.250 €</span>`)}${money(8.8, 'bank', '48.920 €')}${job(13.6, 0)}
+  ${street('W', 'Del Perro Fwy', 'Pillbox', `<span class="row t-sm w6" style="gap:.6rem;margin-left:.6rem"><span class="dot" style="background:${V('accent-secondary')}"></span>1,2 km</span>`)}${minimap(1)}
+  <div class="hud" style="left:35.6rem;bottom:11.6rem;height:3.6rem;padding:0 1.6rem 0 1.2rem;gap:1rem">${I('mic', 's24 sec')}<span class="row" style="gap:.4rem"><span class="dot" style="background:#fff"></span><span class="dot" style="background:#fff;opacity:.3"></span><span class="dot" style="background:#fff;opacity:.3"></span></span><span style="width:var(--fh-border-width);height:2rem;background:var(--fh-border)"></span><span style="color:${V('hud-radio')};filter:drop-shadow(0 0 .8rem rgba(255,79,163,.8))">${I('radio', 's24 fill')}</span><span class="t-sm w6">Funk 3 · 104.3</span></div>
+  <div class="hud" style="left:35.6rem;bottom:4rem;height:6.4rem;padding:0 .8rem">${ring(V('hud-health'), 18, 'heart', 'low')}${ring(V('hud-thirst'), 12, 'drop', 'low')}${ring(V('hud-stress'), 64, 'brain')}</div>
+  <div class="hud" style="right:4rem;bottom:19.6rem;height:4rem;padding:0 1.2rem;gap:1.6rem;background:var(--fh-material-thin)"><span class="blink" style="color:${V('success')}">${I('arrow-left', 's24 fill')}</span><span class="mono w5 t-sm">D3</span><span style="color:rgba(255,255,255,.3)">${I('arrow-right', 's24')}</span></div>
+  <div class="hud" style="right:4rem;bottom:4rem;height:13.6rem;padding:0 3.2rem 0 1.2rem;gap:2.4rem">
+    <div style="position:relative;width:11.2rem;height:11.2rem;display:grid;place-items:center">
+      <svg viewBox="0 0 112 112" style="position:absolute;inset:0;transform:rotate(135deg)"><circle cx="56" cy="56" r="51" fill="none" stroke="rgba(255,255,255,.12)" stroke-width="5" pathLength="100" stroke-dasharray="75 100" stroke-linecap="round"/><circle cx="56" cy="56" r="51" fill="none" stroke="#5CE1FF" stroke-width="5" pathLength="100" stroke-dasharray="51 100" stroke-linecap="round"/><circle cx="56" cy="56" r="51" fill="none" stroke="#fff" stroke-width="7" pathLength="100" stroke-dasharray="1 100" stroke-dashoffset="-66"/></svg>
+      <div class="tc"><div class="t-4xl w7">87</div><div class="caps" style="color:${V('text-secondary')}">km/h</div></div>
+    </div>
+    <div class="col" style="gap:1.4rem">
+      <div class="row" style="gap:1rem"><span style="color:${V('danger')}">${I('fuel', 's24')}</span><div style="width:12rem">${bar(8, V('danger'), 'lg')}</div><span class="w6 t-sm" style="color:${V('danger')}">8 %</span></div>
+      <div class="row" style="gap:1.6rem"><span class="blink" style="color:${V('danger')}" title="Gurt offen">${I('seatbelt', 's24')}</span><span style="color:${V('warning')}" title="Motor beschädigt">${I('engine', 's24 fill')}</span><span style="position:relative">${I('lights', 's24 fill')}<span class="dot abs" style="right:-.4rem;top:-.2rem;width:.6rem;height:.6rem;background:${V('accent-secondary')}"></span></span>${I('lock', 's24 fill')}</div>
+      <div class="t-xs sec">Gurt offen · Motor 38 %</div>
+    </div>
+  </div>
+  <div class="hint"><div class="h"><span class="holdring">${K('E', 'lg accent')}<svg viewBox="0 0 36 36"><circle cx="18" cy="18" r="16" fill="none" stroke="rgba(255,255,255,.15)" stroke-width="2.5"/><circle cx="18" cy="18" r="16" fill="none" stroke="#FF4FA3" stroke-width="2.5" pathLength="100" stroke-dasharray="64 100" stroke-linecap="round"/></svg></span>Halten – Tresor knacken</div><div class="h"><span class="kbd lg" style="opacity:.5;text-decoration:line-through">H</span><span class="sec">Fahrzeug abschleppen</span><span class="t-sm mut">· Werkzeug fehlt</span></div></div>
+`);
+
+/* ── 08 Death ────────────────────────────────────────────────────── */
+board('death', '08 · Bewusstlos — Rettungsdienst informiert, Respawn noch gesperrt', 'world-night', `
+  <div class="scrim"></div><div class="abs" style="inset:0;background:radial-gradient(90% 80% at 50% 50%, transparent 30%, rgba(60,0,10,.55))"></div>
+  <div class="abs col" style="left:50%;top:50%;transform:translate(-50%,-50%);align-items:center;text-align:center;gap:1.2rem;width:64rem">
+    <div class="t-3xl w65">Bewusstlos</div><div class="t-lg sec">Du wurdest schwer verletzt.</div>
+    <div class="glass m-reg capsule row" style="padding:1.2rem 2.8rem;margin-top:2rem;gap:1.2rem">${I('clock', 's24 sec')}<span class="t-lg sec">Respawn möglich in</span><span class="t-2xl w7">04:59</span></div>
+    <div class="glass m-reg capsule row t-sm w6" style="padding:.8rem 1.6rem;gap:.8rem;color:${V('accent-secondary')};margin-top:.8rem"><span class="dot" style="background:${V('accent-secondary')};box-shadow:0 0 .8rem rgba(92,225,255,.8)"></span>Rettungsdienst informiert · 2 Einheiten im Dienst · erneut in 0:42</div>
+    <div class="row" style="margin-top:2.4rem;gap:1.6rem"><button class="btn btn-lg is-disabled" type="button">${K('G')}Rettungsdienst rufen</button><button class="btn btn-lg is-disabled" type="button">${K('E')}Halten – Im Krankenhaus aufwachen</button></div>
+    <div class="t-sm mut">Aufwachen kostet 500 € Behandlungsgebühr.</div>
+  </div>
+`);
+
+/* ── 09 Radial + context ─────────────────────────────────────────── */
+const radialItems = [['Animationen', 'user'], ['Fahrzeug', 'car'], ['Gangart', 'run'], ['Dokumente', 'id'], ['Telefon', 'phone'], ['Rechnung', 'file'], ['Dienst', 'police'], ['Notruf', 'alert']];
+const segPath = (i) => {
+  const c = 220, R = 216, r = 84, a0 = (-90 + i * 45 - 22.5 + 0.8) * Math.PI / 180, a1 = (-90 + i * 45 + 22.5 - 0.8) * Math.PI / 180;
+  const p = (rad, a) => `${(c + rad * Math.cos(a)).toFixed(1)} ${(c + rad * Math.sin(a)).toFixed(1)}`;
+  return `M${p(R, a0)} A${R} ${R} 0 0 1 ${p(R, a1)} L${p(r, a1)} A${r} ${r} 0 0 0 ${p(r, a0)}Z`;
+};
+const radialHtml = (hov) => `<div class="radial" style="left:calc(36% - 22rem);top:calc(50% - 22rem)"><div class="track"></div>
+  <svg class="seg" viewBox="0 0 440 440">${radialItems.map((_, i) => `<path d="${segPath(i)}" fill="${i === hov ? 'rgba(255,79,163,.22)' : 'transparent'}" stroke="${i === hov ? 'rgba(255,79,163,.7)' : 'rgba(255,255,255,.06)'}" stroke-width="${i === hov ? 2 : 1}" ${i === hov ? 'style="filter:drop-shadow(0 0 12px rgba(255,79,163,.45))"' : ''}/>`).join('')}</svg>
+  ${radialItems.map(([l, ic], i) => { const a = (-90 + i * 45) * Math.PI / 180; return `<div class="it ${i === hov ? 'on' : ''} ${i === 7 ? 'dis' : ''}" style="left:${22 + 15 * Math.cos(a)}rem;top:${22 + 15 * Math.sin(a)}rem">${I(ic, 's28' + (i === hov ? ' fill' : ''))}<span>${l}</span></div>`; }).join('')}
+  <div class="center"><div class="t-lg w6">Fahrzeug</div><div class="t-xs sec">Türen, Motor, Sitzplatz</div><div class="t-xs mut" style="margin-top:.4rem">Klicken zum Öffnen</div></div></div>`;
+const cm = (icon, l, trail = '', cls = '') => `<div class="lrow ${cls}" style="min-height:4.4rem;padding:.6rem 1.2rem">${I(icon, 's16')}<span class="grow">${l}</span>${trail}</div>`;
+board('menus', '09 · Radialmenü (Segment „Fahrzeug“ im Hover) und Kontextmenü am Ziel', 'world-night', `
+  ${radialHtml(1)}
+  <div class="abs" style="left:47%;top:44%;width:24rem;opacity:.9">${carArt('100%')}</div>
+  <div class="abs" style="left:57.5%;top:49%;width:1.2rem;height:1.2rem;border-radius:50%;background:${V('accent-primary')};box-shadow:var(--fh-glow-accent)"></div>
+  <div class="abs glass m-reg" style="left:calc(57.5% + 2.4rem);top:calc(49% - 8rem);width:28rem;border-radius:2rem;padding:.8rem">
+    <div style="padding:1rem 1.2rem 1.2rem"><div class="w6">Sultan RS</div><div class="t-xs sec">Fahrzeug · <span class="mono">HH-SN 2047</span></div></div>
+    ${cm('box', 'Kofferraum öffnen', K('E'), 'hover')}${cm('engine', 'Motorhaube öffnen')}${cm('lock', 'Abschließen')}${cm('key', 'Schlüssel geben', I('chevron', 's16 sec'))}
+    <hr class="divider" style="margin:.6rem 1.2rem">${cm('wrench', 'Reparieren', '<span class="t-xs mut">Kein Werkzeugkasten</span>', 'dis')}<div style="color:${V('danger')}">${cm('tool', 'Fahrzeug aufbrechen')}</div>
+  </div>
+`);
+
+/* ── 10 Dialogs ──────────────────────────────────────────────────── */
+board('dialogs', '10 · Eingabedialog, Bestätigung, destruktive Bestätigung', 'world-day', `
+  <div class="scrim"></div>
+  <div class="abs row" style="left:50%;top:50%;transform:translate(-50%,-50%);gap:3.2rem;align-items:center">
+    <div class="panel col" style="width:48rem;gap:2rem;position:relative">${closeBtn}
+      <div><div class="t-xl w65">Überweisung</div><div class="t-sm sec">Vom Girokonto · verfügbar 48.920 €</div></div>
+      ${field('Empfänger', 'Mara Voss · 555-0199', { icon: 'user' })}
+      ${field('Betrag', '1.250', { state: 'is-focus', unit: '€', help: 'Ab 10.000 € folgt eine Bestätigung.' })}
+      ${field('Verwendungszweck', 'z. B. Miete Oktober', { ph: true })}
+      <div class="row end" style="margin-top:.8rem">${btn('Abbrechen')}${btn('Überweisen', 'btn-primary', 'send')}</div>
+    </div>
+    <div class="panel col" style="width:40rem;gap:1.6rem">
+      ${tile('wallet', V('warning'))}
+      <div class="t-xl w65">Abschleppgebühr zahlen?</div>
+      <div class="sec">Karin Futo wird danach in deiner Garage eingeparkt. 450 € werden vom Girokonto abgebucht.</div>
+      <div class="row end" style="margin-top:.8rem">${btn('Abbrechen')}${btn('450 € zahlen', 'btn-primary')}</div>
+    </div>
+    <div class="panel col" style="width:40rem;gap:1.6rem">
+      ${tile('trash', V('danger'))}
+      <div class="t-xl w65">Charakter löschen?</div>
+      <div class="sec">Lena Hartmann, ihr Geld, ihre Fahrzeuge und ihr Inventar werden endgültig gelöscht.</div>
+      ${field('Zum Bestätigen Namen eingeben', 'Lena Hartmann', { help: 'Name stimmt überein.' })}
+      <div class="row end" style="margin-top:.8rem">${btn('Abbrechen', 'is-focus')}${btn('Endgültig löschen', 'btn-danger-solid')}</div>
+    </div>
+  </div>
+`);
+
+/* ── 11 Chat + scoreboard ────────────────────────────────────────── */
+const players = [[1, 'Kai Brandt', 'Zivil', V('job-civil'), 42], [7, 'Lena Hartmann', 'LSPD', V('job-police'), 38], [12, 'Mara Voss', 'EMS', V('job-ems'), 61], [19, 'Jonas Petersen', 'Werkstatt', V('job-mechanic'), 95], [23, 'Tariq Ozturk', 'Zivil', V('job-civil'), 128], [31, 'Ella Nowak', 'LSPD', V('job-police'), 54], [42, 'Finn Albers', 'Zivil', V('job-civil'), 172], [57, 'Sofia Reyes', 'EMS', V('job-ems'), 33]];
+const ping = p => `<span class="row end" style="gap:.6rem;color:${p < 80 ? V('success') : p < 150 ? V('warning') : V('danger')}"><span class="dot" style="background:currentColor"></span><span style="color:${V('text-primary')}">${p} ms</span></span>`;
+board('chat', '11 · Chat geöffnet mit Befehlsvorschlägen · Scoreboard (gehalten)', 'world-night', `
+  <div class="abs glass m-thick col" style="left:4rem;top:4rem;width:52rem;border-radius:2rem;padding:1.6rem;gap:0">
+    ${chatLine('OOC', V('job-civil'), 'Kai', 'wer hat Bock auf Hafenrennen später?')}${chatLine('/me', V('text-secondary'), 'Lena Hartmann', 'zieht die Handschuhe an.')}
+    ${chatLine('Polizei', V('job-police'), 'Dispatch', '10-31 Vinewood Blvd, Einheit 2-A-12 übernimmt.')}${chatLine('/do', V('text-secondary'), 'Jonas', 'Die Motorhaube qualmt leicht.')}
+    ${chatLine('EMS', V('job-ems'), 'Mara Voss', 'RTW 3 frei, Standort Pillbox.')}${chatLine('Admin', V('accent-primary'), 'Support', 'Serverneustart um 06:00 Uhr.')}
+    ${chatLine('OOC', V('job-civil'), 'Finn', 'gg, bis morgen')}
+    <div class="t-sm" style="padding:.3rem 0;opacity:.6"><span class="badge neutral" style="height:2rem;margin-right:.6rem">/me</span><b class="w6">Lena Hartmann</b> <span class="sec">winkt dem Fahrer zu.</span> <span class="mut t-xs">sendet …</span></div>
+    <div class="t-sm" style="padding:.3rem 0"><span class="badge tint" style="color:${V('danger')};height:2rem;margin-right:.6rem">${I('alert')}</span><span class="sec">Nicht gesendet –</span> <u style="color:${V('text-primary')}">erneut senden</u></div>
+    <div class="popover" style="margin-top:1.2rem">${[['/me', '[Aktion]', 1], ['/do', '[Beschreibung]'], ['/ooc', '[Nachricht]']].map(([c, p, h]) => `<div class="lrow ${h ? 'hover' : ''}"><span class="mono w5">${c}</span><span class="sec t-sm grow">${p}</span>${h ? K('Tab') : ''}</div>`).join('')}</div>
+    <div class="input is-focus" style="margin-top:.8rem;border-radius:var(--fh-radius-pill)"><span class="mono">/m</span><span class="caret" style="margin-left:0"></span><span class="unit">${K('Enter')}</span></div>
+  </div>
+  <div class="abs panel col" style="right:4rem;top:50%;transform:translateY(-50%);width:72rem;gap:2rem">
+    <div class="row between"><div><div class="t-xl w65">Harbour RP</div><div class="t-sm sec">128 / 200 Spieler · online seit 14 h 22 min</div></div>${field('', 'Name oder ID', { ph: true, icon: 'search', style: 'width:24rem' })}</div>
+    <div class="row" style="gap:1.2rem">${[['police', 'Polizei', 12, V('job-police')], ['cross', 'EMS', 6, V('job-ems')], ['wrench', 'Werkstatt', 4, V('job-mechanic')], ['user', 'Zivil', 106, V('job-civil')]].map(([ic, l, n, c]) => `<div class="stat grow row" style="flex-direction:row;align-items:center;gap:1.2rem">${tile(ic, c)}<div><div class="t-xl w7">${n}</div><div class="t-xs sec">${l}</div></div></div>`).join('')}</div>
+    <div class="well" style="overflow:hidden"><table class="tb"><tr><th>ID</th><th>Name</th><th>Job</th><th class="tr">Ping</th></tr>${players.map(([id, n, j, c, p]) => `<tr><td class="mono sec">${id}</td><td class="w5">${n}</td><td>${j === 'Zivil' ? '<span class="t-sm mut">—</span>' : badge(j, c)}</td><td class="tr">${ping(p)}</td></tr>`).join('')}</table></div>
+    ${keys([['Tab', 'Halten'], ['L', 'Fixieren']])}
+  </div>
+`);
+
+/* ── 12 Inventory ────────────────────────────────────────────────── */
+const slot = (icon, n, wt, o = {}) => `<div class="slot ${o.cls || ''}" style="${o.style || ''}">${o.hk ? `<span class="kbd hk">${o.hk}</span>` : ''}${icon ? I(icon) : ''}${n ? `<span class="n">${n}</span>` : ''}${wt ? `<span class="wt">${wt}</span>` : ''}${o.dur != null ? `<span class="dur"><i style="width:${o.dur}%;background:${o.dur > 50 ? V('success') : o.dur > 25 ? V('warning') : V('danger')}"></i></span>` : ''}</div>`;
+const inv = [['phone', '', '0,2'], ['id', '', '0,1'], ['wallet', '2.450 €', '0,0'], ['bottle', '×3', '1,5'], ['food', '×2', '0,6'], ['bandage', '×5', '0,5'], ['radio', '', '0,8'], ['key', '×2', '0,1'], ['bullet', '×48', '0,9'], ['wrench', '', '1,2', 60], ['box', '×2', '2,0'], ['chip', '×4', '0,4'], ['', '', ''], ['', '', ''], ['', '', ''], ['', '', ''], ['', '', ''], ['', '', ''], ['', '', ''], ['', '', ''], ['', '', ''], ['', '', ''], ['', '', ''], ['', '', '']];
+const trunk = [['box', '×6', '12,0'], ['tool', '', '3,5', 22], ['bottle', '×12', '6,0'], ['', '', ''], ['fuel', '', '5,0'], ['', '', '']].concat(Array(24).fill(['', '', '']));
+board('inventory', '12 · Inventar — Ziehen auf Kofferraum-Slot, Detailkarte im Hover', 'world-day', `
+  <div class="scrim"></div>
+  <div class="abs row" style="left:50%;top:50%;transform:translate(-50%,-50%);gap:4rem;align-items:flex-start">
+    <div class="panel" style="width:64rem;position:relative">
+      <div class="row between" style="margin-bottom:2.4rem"><div><div class="t-xl w65">Rucksack</div><div class="t-sm sec">Lena Hartmann · ID 7</div></div><div class="col" style="gap:.6rem;width:20rem"><div class="row between t-sm"><span class="sec">Gewicht</span><span class="w6">18,4 / 30 kg</span></div>${bar(61, V('accent-secondary'))}</div></div>
+      <div class="caps" style="margin-bottom:1rem">Schnellzugriff</div>
+      <div class="slots" style="margin-bottom:2rem">${inv.slice(0, 5).map((s, i) => slot(s[0], s[1], s[2], { hk: i + 1, cls: i === 3 ? 'ghost' : '' })).join('')}<div></div></div>
+      <div class="caps" style="margin-bottom:1rem">Inventar</div>
+      <div class="slots">${inv.slice(5, 23).map((s, i) => slot(s[0], s[1], s[2], { dur: s[3], cls: i === 4 ? 'sel' : '' })).join('')}</div>
+      <div class="row between" style="margin-top:2.4rem">${keys([['Doppelklick', 'Benutzen'], ['Shift', 'Teilen'], ['Esc', 'Schließen']])}</div>
+      <div class="abs popover col" style="left:52rem;top:22rem;width:38rem;padding:1.6rem;gap:1rem;z-index:6">
+        <div class="row">${tile('wrench')}<div><div class="w6">Werkzeugkasten</div><div class="t-xs sec">1,2 kg · Zustand 60 %</div></div></div>
+        <div class="t-sm sec">Repariert Motor und Karosserie bis 70&nbsp;%. Nutzt sich bei jeder Reparatur ab.</div>
+        <div class="t-xs mut mono">SN 7741-WK-22</div>
+        <div class="row" style="gap:.6rem">${btn('Benutzen', 'btn-primary btn-sm')}${btn('Geben', 'btn-sm')}${btn('Wegwerfen', 'btn-danger btn-sm')}</div>
+      </div>
+    </div>
+    <div class="panel" style="width:64rem;position:relative">
+      <div class="row between" style="margin-bottom:2.4rem"><div><div class="t-xl w65">Kofferraum</div><div class="t-sm sec">Sultan RS · <span class="mono">HH-SN 2047</span></div></div><div class="col" style="gap:.6rem;width:20rem"><div class="row between t-sm"><span class="sec">Gewicht</span><span class="w6">42,0 / 80 kg</span></div>${bar(52, V('accent-secondary'))}</div></div>
+      <div class="slots">${trunk.slice(0, 30).map((s, i) => slot(s[0], s[1], s[2], { dur: s[3], cls: i === 3 ? 'target' : '' })).join('')}</div>
+      ${slot('bottle', '×3', '1,5', { cls: 'drag', style: 'left:31rem;top:13rem' })}
+    </div>
+  </div>
+`);
+
+/* ── 13 Phone ────────────────────────────────────────────────────── */
+const app = (icon, l, nb = '') => `<div class="app"><div class="ai">${I(icon)}</div>${nb ? `<span class="nb">${nb}</span>` : ''}<span>${l}</span></div>`;
+const sbar = `<div class="sb"><span>22:47</span><span class="row" style="gap:.6rem">${I('signal', 's16')}${I('battery', 's24')}</span></div><div class="cut"></div>`;
+board('phone', '13 · Telefon — Home und Nachrichten · Anruf-Kapsel (bei geschlossenem Telefon)', 'world-night', `
+  <div class="abs glass m-reg capsule row" style="left:50%;top:4rem;transform:translateX(-50%);padding:.8rem .8rem .8rem 1.2rem;gap:1.6rem">
+    <span class="tile round" style="width:4.4rem;height:4.4rem">MV</span><div><div class="w6">Mara Voss</div><div class="t-xs sec">ruft an …</div></div>
+    <button class="btn icon-btn lg" style="background:${V('danger')};color:${V('text-on-accent')}" aria-label="Ablehnen">${I('call', 's24 fill')}</button>
+    <button class="btn icon-btn lg" style="background:${V('success')};color:${V('text-on-accent')}" aria-label="Annehmen">${I('call', 's24 fill')}</button>
+    <span class="t-xs sec row" style="gap:.4rem;padding-right:.8rem">${K('Y')}/${K('N')}</span>
+  </div>
+  <div class="phone" style="right:42rem"><div class="scr" style="background:radial-gradient(60% 40% at 30% 20%, rgba(255,79,163,.45), transparent 70%),radial-gradient(60% 40% at 80% 70%, rgba(92,225,255,.3), transparent 70%),#0d0b18">${sbar}
+    <div class="tc" style="padding-top:8rem"><div class="t-4xl w65">22:47</div><div class="sec">Donnerstag, 15. Oktober</div></div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:2rem .8rem;padding:4rem 1.6rem 0">${app('message', 'Nachrichten', '3')}${app('call', 'Telefon')}${app('users', 'Kontakte')}${app('bank', 'Bank')}${app('car', 'Garage')}${app('map-pin', 'Karten')}${app('camera', 'Kamera')}${app('briefcase', 'Dienste')}${app('send', 'Chirp', '12')}${app('note', 'Notizen')}${app('file', 'Rechnungen', '1')}${app('gear', 'System')}</div>
+    <div class="abs" style="left:1.2rem;right:1.2rem;bottom:1.2rem;height:9.6rem;border-radius:3.2rem;background:var(--fh-material-thin);border:var(--fh-border-width) solid var(--fh-border);display:flex;align-items:center;justify-content:space-around">${['call', 'message', 'camera', 'map-pin'].map(i => `<div class="app"><div class="ai">${I(i)}</div></div>`).join('')}</div>
+  </div></div>
+  <div class="phone" style="right:4rem"><div class="scr col" style="background:${V('bg-base')};gap:0">${sbar}
+    <div class="row" style="padding:5.6rem 1.6rem 1.2rem;gap:1rem;border-bottom:var(--fh-border-width) solid var(--fh-border)"><span style="color:${V('accent-primary')}">${I('chevron-left', 's24')}</span><span class="tile round" style="width:4rem;height:4rem;font-weight:650">MV</span><div class="grow"><div class="w6">Mara Voss</div><div class="t-xs sec">zuletzt aktiv vor 1 Min</div></div>${I('call', 's24 sec')}</div>
+    <div class="col grow" style="padding:1.6rem;gap:.8rem;justify-content:flex-end">
+      <div class="t-xs mut tc">Heute 22:31</div>
+      <div class="bub in">Bist du noch im Dienst?</div><div class="bub out">Ja, bis Mitternacht. Was gibt's?</div>
+      <div class="bub in">Der Futo steht wieder beim Abschlepphof</div><div class="bub out">Klassiker. Ich hol dich am Hafen ab.</div>
+      <div class="bub in">Bin in 5 Minuten da.</div>
+      <div class="bub in row" style="gap:.4rem;padding:1.2rem 1.4rem">${[1, .6, .3].map(o => `<span class="dot" style="background:${V('accent-secondary')};opacity:${o}"></span>`).join('')}</div>
+    </div>
+    <div class="row" style="padding:1.2rem 1.2rem 2.8rem;gap:.8rem"><div class="input grow" style="border-radius:var(--fh-radius-pill);height:4rem"><span class="ph t-sm">Nachricht</span></div><button class="btn icon-btn" style="width:4rem;height:4rem;background:${V('accent-primary')};color:${V('text-on-accent')}" aria-label="Senden">${I('send', 's16 fill')}</button></div>
+  </div></div>
+`);
+
+/* ── 14 Bank + ATM ───────────────────────────────────────────────── */
+const tx = (d, icon, who, why, amt, inc) => `<div class="lrow" style="min-height:6rem;border-bottom:var(--fh-border-width) solid rgba(255,255,255,.06);border-radius:0">${tile(icon)}<div class="grow"><div class="t">${who}</div><div class="s">${why}</div></div><div class="tr"><div class="w6" style="color:${inc ? V('success') : V('text-primary')}">${amt}</div><div class="t-xs mut">${d}</div></div></div>`;
+const acct = (n, iban, bal, o = {}) => `<div class="card col" style="gap:.4rem;padding:1.6rem;${o.sel ? 'background:var(--fh-bg-elevated);box-shadow:inset 0 0 0 var(--fh-border-width-strong) var(--fh-accent-primary)' : ''}"><div class="row between"><span class="w6">${n}</span>${o.badge || ''}</div><span class="mono t-xs sec">${iban}</span><span class="t-lg w6" style="margin-top:.4rem">${bal}</span></div>`;
+const pk = (k, o = {}) => `<div style="height:7.2rem;border-radius:2rem;display:grid;place-items:center;font-size:var(--fh-text-xl);font-weight:600;background:${o.bg || 'rgba(255,255,255,.08)'};color:${o.col || 'inherit'}">${k}</div>`;
+board('bank', '14 · Bank (Girokonto) und Geldautomat (PIN-Eingabe)', 'world-day', `
+  <div class="scrim"></div>
+  <div class="abs row" style="left:50%;top:50%;transform:translate(-50%,-50%);gap:3.2rem;align-items:center">
+    <div class="panel row" style="width:100rem;height:72rem;padding:0;overflow:hidden;align-items:stretch;gap:0;position:relative">${closeBtn}
+      <div class="col" style="width:30rem;background:${V('bg-surface')};padding:2.8rem 2rem;gap:1.2rem">
+        <div class="row" style="margin-bottom:1.2rem">${tile('bank')}<div><div class="w6">Fleeca Bank</div><div class="t-xs sec">Lena Hartmann</div></div></div>
+        ${acct('Girokonto', 'SA12 4471 0000 0099 20', '48.920,00 €', { sel: 1 })}${acct('Sparkonto', 'SA12 4471 0000 0099 21', '12.000,00 €')}${acct('Gemeinschaft', 'SA12 4471 0000 0133 04', '3.140,50 €', { badge: nbadge('mit Mara') })}
+      </div>
+      <div class="col grow" style="padding:2.8rem 3.2rem;gap:2rem">
+        <div><div class="caps">Girokonto · verfügbar</div><div class="t-3xl w7" style="margin-top:.6rem">48.920,00 €</div></div>
+        <div class="row">${btn('Einzahlen', 'btn-lg', 'plus')}${btn('Abheben', 'btn-lg', 'minus')}${btn('Überweisen', 'btn-lg btn-primary', 'send')}</div>
+        <div class="row between" style="margin-top:.8rem"><span class="t-lg w6">Umsätze</span><div class="seg"><span class="on">Alle</span><span>Eingang</span><span>Ausgang</span></div></div>
+        <div class="col" style="gap:0">${tx('Heute, 22:12', 'wrench', 'Los Santos Customs', 'Rechnung RE-2026-0412', '− 1.480,00 €')}${tx('Heute, 18:00', 'police', 'LSPD Gehalt', 'Woche 41', '+ 2.400,00 €', 1)}${tx('Gestern', 'cart', '24/7 Clinton Ave', 'Einkauf', '− 37,50 €')}${tx('Gestern', 'user', 'Mara Voss', 'Pizza', '+ 18,00 €', 1)}${tx('13.10.', 'car', 'Abschlepphof', 'Karin Futo', '− 450,00 €')}</div>
+      </div>
+    </div>
+    <div class="panel col" style="width:44rem;gap:2rem">
+      <div class="row">${tile('wallet')}<div><div class="w6">Geldautomat</div><div class="t-xs sec">Fleeca · Alta St</div></div></div>
+      <div class="col" style="align-items:center;gap:1.2rem;padding:1.2rem 0"><div class="row" style="gap:1.6rem">${[1, 1, 1, 0].map(f => `<span style="width:1.6rem;height:1.6rem;border-radius:50%;${f ? 'background:#fff' : 'border:.2rem solid rgba(255,255,255,.35)'}"></span>`).join('')}</div><div class="t-sm sec">PIN eingeben</div></div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem">${[1, 2, 3, 4, 5, 6, 7, 8, 9].map(n => pk(n)).join('')}${pk(I('x', 's24'), { col: V('text-secondary') })}${pk(0)}${pk(I('check', 's24'), { bg: V('accent-primary'), col: V('text-on-accent') })}</div>
+    </div>
+  </div>
+`);
+
+/* ── 15 Shop ─────────────────────────────────────────────────────── */
+const prod = (icon, n, d, p, o = {}) => `<div class="card col" style="padding:1.2rem;gap:1rem;${o.dis ? 'opacity:.38' : ''}"><div class="well" style="height:10.4rem;display:grid;place-items:center">${I(icon, 's48')}</div><div style="padding:0 .4rem"><div class="w6">${n}</div><div class="t-xs ${o.warn ? '' : 'sec'}" style="${o.warn ? `color:${V('warning')}` : ''}">${d}</div></div><div class="row between" style="padding:0 .4rem"><span class="t-lg w6">${p}</span>${o.dis ? '' : ibtn('plus', '', 'Hinzufügen')}</div></div>`;
+const cartRow = (n, p, q) => `<div class="row" style="padding:1rem 0;border-bottom:var(--fh-border-width) solid rgba(255,255,255,.06)"><div class="grow"><div class="w6 t-sm">${n}</div><div class="t-xs sec">${p}</div></div><div class="stepper" style="padding:.2rem">${ibtn('minus')}<b class="t-sm">${q}</b>${ibtn('plus')}</div></div>`;
+board('shop', '15 · Shop — Warenkorb gefüllt, Artikel ausverkauft und knapp', 'world-day', `
+  <div class="scrim"></div>
+  <div class="abs panel" style="left:50%;top:50%;transform:translate(-50%,-50%);width:128rem;position:absolute">${closeBtn}
+    ${head('cart', '', '24/7 · Clinton Ave', 'Geöffnet · 24 h', field('', 'Artikel suchen', { ph: true, icon: 'search', style: 'width:28rem;margin-right:6rem' }))}
+    <div class="row" style="align-items:flex-start;gap:3.2rem">
+      <div class="col" style="width:80.8rem;gap:2rem">
+        <div class="seg" style="align-self:flex-start"><span class="on">Alles</span><span>Essen</span><span>Getränke</span><span>Werkzeug</span><span>Elektronik</span></div>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1.6rem">${prod('bottle', 'Wasser 0,5 l', 'Durst +35', '2,50 €')}${prod('food', 'Sandwich', 'Hunger +40', '6,50 €')}${prod('wrench', 'Reparaturkit', 'Noch 3 auf Lager', '26,00 €', { warn: 1 })}${prod('phone', 'Prepaid-Handy', 'Ausverkauft', '180,00 €', { dis: 1 })}${prod('radio', 'Funkgerät', 'Kanäle 1–100', '95,00 €')}${prod('bandage', 'Verband', 'Stoppt Blutung', '12,00 €')}${prod('chip', 'Akku', 'Für Handy & Funk', '15,00 €')}${prod('key', 'Schlüsselband', 'Hält 10 Schlüssel', '4,00 €')}</div>
+      </div>
+      <div class="col grow" style="gap:.4rem">
+        <div class="caps">Warenkorb · 3 Artikel</div>
+        ${cartRow('Wasser 0,5 l', '2,50 € · je', 2)}${cartRow('Sandwich', '6,50 € · je', 1)}${cartRow('Reparaturkit', '26,00 € · je', 1)}
+        <div class="row between" style="padding:1.6rem 0"><span class="sec">Summe</span><span class="t-xl w7">37,50 €</span></div>
+        <div class="seg" style="display:flex"><span class="grow" style="justify-content:center">${I('wallet', 's16')}Bar</span><span class="on grow" style="justify-content:center">${I('bank', 's16')}Karte</span></div>
+        <div class="t-xs sec" style="margin:.8rem 0 1.6rem">Girokonto · 48.920 € verfügbar · passt in den Rucksack (+1,6 kg)</div>
+        ${btn('Bezahlen · 37,50 €', 'btn-primary btn-lg btn-block')}
+      </div>
+    </div>
+  </div>
+`);
+
+/* ── 16 Garage ───────────────────────────────────────────────────── */
+const gv = (n, plate, st, o = {}) => { const m = { in: ['Eingeparkt', V('success')], out: ['Draußen', V('warning')], imp: ['Abgeschleppt', V('danger')] }[st]; return `<div class="lrow ${o.sel ? 'sel' : ''}">${tile(o.icon || 'car')}<div class="grow"><div class="t">${n}</div><div class="s"><span class="plate">${plate}</span></div></div>${badge(m[0], m[1])}</div>`; };
+const cond = (l, v, col) => `<div class="col" style="gap:.6rem"><div class="row between t-sm"><span class="sec">${l}</span><span class="w6">${v} %</span></div>${bar(v, col)}</div>`;
+board('garage', '16 · Garage — Fahrzeug eingeparkt und ausgewählt', 'world-night', `
+  <div class="scrim"></div>
+  <div class="abs panel" style="left:50%;top:50%;transform:translate(-50%,-50%);width:128rem">${closeBtn}
+    ${head('car', '', 'Garage · Pillbox Parkhaus', '6 Fahrzeuge · 14 Stellplätze')}
+    <div class="tabs" style="margin-bottom:2.4rem"><span class="on">Eigene Fahrzeuge <span class="count">6</span></span><span>Job-Fahrzeuge <span class="count">3</span></span><span>Abschlepphof <span class="count">1</span></span><span>Boote <span class="count">1</span></span></div>
+    <div class="row" style="align-items:stretch;gap:3.2rem">
+      <div class="col" style="width:56rem;gap:1.2rem">
+        <div class="row">${field('', 'Name oder Kennzeichen', { ph: true, icon: 'search', style: 'flex:1' })}</div>
+        <div class="seg" style="align-self:flex-start"><span class="on">Alle</span><span>Eingeparkt</span><span>Draußen</span><span>Abgeschleppt</span></div>
+        <div class="col" style="gap:.4rem">${gv('Sultan RS', 'HH-SN 2047', 'in', { sel: 1 })}${gv('Bravado Buffalo', 'HH-LH 0314', 'out')}${gv('Karin Futo', 'HH-KF 7781', 'imp')}${gv('Vapid Speedo', 'HH-HW 1120', 'in')}${gv('Pegassi Faggio', 'HH-PF 0042', 'in')}${gv('Dinghi Hafen', 'HH-B 0007', 'in', { icon: 'boat' })}</div>
+      </div>
+      <div class="col grow" style="gap:2rem">
+        <div class="well" style="height:22rem;display:grid;place-items:center;background:radial-gradient(60% 70% at 50% 60%, rgba(255,255,255,.08), transparent 70%),${V('bg-surface')}">${carArt('62%')}</div>
+        <div class="row between"><div><div class="t-2xl w65">Sultan RS</div><div class="row t-sm sec" style="margin-top:.6rem"><span class="plate">HH-SN 2047</span>Stellplatz 14 · Pillbox Parkhaus</div></div>${badge('Eingeparkt', V('success'), 'check')}</div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2.4rem">${cond('Tank', 72, V('hud-fuel'))}${cond('Motor', 91, V('text-primary'))}${cond('Karosserie', 46, V('warning'))}</div>
+        <div class="row" style="margin-top:auto">${btn('Ausparken', 'btn-primary btn-lg', 'car')}${btn('Orten', 'btn-lg is-disabled', 'map-pin')}<span class="t-xs mut">Orten nur für Fahrzeuge draußen</span></div>
+      </div>
+    </div>
+  </div>
+`);
+
+/* ── 17 Clothing ─────────────────────────────────────────────────── */
+const crow = (icon, l, n, sel) => `<div class="lrow ${sel ? 'sel' : ''}" style="min-height:4.8rem">${I(icon, 's24')}<span class="grow w5">${l}</span><span class="t-xs mut">${n}</span></div>`;
+const stepRow = (l, v, pct, on) => `<div class="col" style="gap:.8rem"><div class="row between"><span class="sec t-sm">${l}</span><div class="row" style="gap:.6rem">${ibtn('chevron-left')}<span class="w6" style="min-width:8rem;text-align:center">${v}</span>${ibtn('chevron')}</div></div><div class="slider ${on ? 'on' : ''}"><div class="trk"></div><div class="fil" style="width:${pct}%"></div><div class="th" style="left:${pct}%"></div></div></div>`;
+board('clothing', '17 · Kleidungsladen — Oberteile, Modell 12 / 148', 'world-night', `
+  ${ped('left:calc(50% - 6rem)')}
+  <div class="abs panel col" style="left:4rem;top:4rem;bottom:4rem;width:36rem;gap:.4rem;padding:2.4rem">
+    <div class="t-xl w65" style="margin-bottom:1.6rem">Ponsonbys</div>
+    ${crow('shirt', 'Oberteile', '148', 1)}${crow('shirt', 'Jacken', '96')}${crow('user', 'Unterteile', '112')}${crow('run', 'Schuhe', '84')}${crow('crown', 'Hüte', '61')}${crow('eye', 'Brillen', '33')}${crow('key', 'Accessoires', '40')}${crow('bag', 'Taschen', '18')}
+    <div class="caps" style="margin:2rem 0 .8rem">Gespeicherte Outfits</div>
+    <div class="lrow">${tile('shirt')}<div class="grow"><div class="t">Dienst</div><div class="s">LSPD · gesperrt im Laden</div></div></div>
+    <div class="lrow">${tile('shirt')}<div class="grow"><div class="t">Hafenabend</div><div class="s">6 Teile</div></div></div>
+  </div>
+  <div class="abs panel col" style="right:4rem;top:4rem;width:40rem;gap:2.4rem">
+    <div><div class="t-xl w65">Oberteile</div><div class="t-sm sec">Hafen-Hoodie · 120 €</div></div>
+    ${stepRow('Modell', '12 / 148', 8, 1)}${stepRow('Textur', '2 / 6', 33)}
+    <div class="row" style="gap:1rem">${['#1d1d24', '#e8e8ed', '#7a2a44', '#2a4a7a', '#3a5a3a', '#b08a4a'].map((c, i) => `<span style="width:3.2rem;height:3.2rem;border-radius:50%;background:${c};${i === 2 ? 'box-shadow:var(--fh-focus-ring)' : 'border:var(--fh-border-width) solid var(--fh-border)'}"></span>`).join('')}</div>
+  </div>
+  <div class="abs glass m-reg capsule row" style="left:calc(50% - 6rem);bottom:4rem;transform:translateX(-50%);padding:.6rem;gap:.4rem">${['Oberkörper', 'Beine', 'Füße', 'Ganz'].map((c, i) => `<button class="btn btn-sm ${i ? 'btn-ghost' : ''}" type="button" style="${i ? '' : 'background:rgba(255,255,255,.18)'}">${c}</button>`).join('')}<span style="width:var(--fh-border-width);height:2rem;background:var(--fh-border);margin:0 .4rem"></span>${ibtn('rotate', '', 'Drehen')}</div>
+  <div class="abs panel col" style="right:4rem;bottom:4rem;width:40rem;gap:1.6rem;padding:2.4rem">
+    <div class="row between"><span class="sec">3 Änderungen</span><span class="t-xl w7">420 €</span></div>
+    <div class="row">${btn('Zurücksetzen', 'btn-ghost')}${btn('Kaufen', 'btn-primary grow')}</div>
+  </div>
+`);
+
+/* ── 18 Crafting ─────────────────────────────────────────────────── */
+const rec = (icon, n, t, o = {}) => `<div class="lrow ${o.sel ? 'sel' : ''} ${o.dis ? 'dis' : ''}">${tile(icon)}<div class="grow"><div class="t">${n}</div><div class="s">${t}</div></div>${o.dis ? I('lock', 's16') : ''}</div>`;
+const ing = (icon, n, have, need) => { const ok = have >= need; return `<div class="lrow" style="background:rgba(255,255,255,.04)">${tile(icon)}<span class="grow w5">${n}</span><span class="w6" style="color:${ok ? V('success') : V('danger')}">${have} / ${need}</span>${ok ? `<span style="color:${V('success')}">${I('check', 's16')}</span>` : `<span class="t-xs" style="color:${V('danger')}">fehlt ${need - have}</span>`}</div>`; };
+board('crafting', '18 · Werkbank — Rezept ausgewählt, eine Zutat fehlt', 'world-night', `
+  <div class="scrim"></div>
+  <div class="abs panel" style="left:50%;top:50%;transform:translate(-50%,-50%);width:120rem">${closeBtn}
+    ${head('hammer', '', 'Werkbank · Hafenwerkstatt', 'Handwerk Stufe 2 · 340 / 500 XP')}
+    <div class="row" style="align-items:stretch;gap:3.2rem">
+      <div class="col" style="width:44rem;gap:1.2rem">
+        ${field('', 'Rezept suchen', { ph: true, icon: 'search' })}
+        <div class="seg" style="align-self:flex-start"><span class="on">Alle</span><span>Werkzeug</span><span>Elektronik</span></div>
+        <div class="col" style="gap:.4rem">${rec('key', 'Dietrich', '20 s · Werkzeug', { sel: 1 })}${rec('wrench', 'Reparaturkit', '45 s · Werkzeug')}${rec('radio', 'Funkgerät', '60 s · Elektronik')}${rec('tool', 'Bohrer', '90 s · Werkzeug')}${rec('chip', 'Störsender', 'Ab Stufe 3', { dis: 1 })}</div>
+      </div>
+      <div class="col grow" style="gap:1.6rem">
+        <div class="row" style="gap:2rem"><div class="well" style="width:16rem;height:16rem;display:grid;place-items:center">${I('key', 's48')}</div><div class="col" style="gap:.6rem"><div class="t-2xl w65">Dietrich</div><div class="sec">Werkzeug · 0,1 kg · bricht bei Fehlversuch</div><div class="row" style="margin-top:1rem"><div class="stepper">${ibtn('minus')}<b>2</b>${ibtn('plus')}</div><span class="t-sm sec">max. 1 mit deinem Material</span></div></div></div>
+        <div class="caps">Zutaten für 2 Stück</div>
+        ${ing('box', 'Metallschrott', 12, 8)}${ing('chip', 'Kunststoff', 4, 4)}${ing('tool', 'Feder', 1, 2)}
+        <div class="row" style="margin-top:auto"><span class="t-sm sec grow">20 s je Stück · +12 XP Handwerk</span>${btn('Herstellen · 2×', 'btn-primary btn-lg is-disabled')}</div>
+        <div class="help err" style="justify-content:flex-end">${I('alert', 's16')}Zutaten fehlen – setze die Menge auf 1 oder besorge eine Feder.</div>
+      </div>
+    </div>
+  </div>
+`);
+
+/* ── 19 Invoice + ID ─────────────────────────────────────────────── */
+const idRow = (k, v, mono) => `<div class="col" style="gap:.1rem"><span class="caps" style="font-size:var(--fh-text-2xs)">${k}</span><span class="${mono ? 'mono w5' : 'w6'}">${v}</span></div>`;
+board('invoice-id', '19 · Rechnung (offen, fällig in 1 Tag) · Personalausweis und Führerschein gezeigt', 'world-day', `
+  <div class="scrim"></div>
+  <div class="abs row" style="left:50%;top:50%;transform:translate(-50%,-50%);gap:4.8rem;align-items:center">
+    <div class="panel col" style="width:48rem;gap:2rem">
+      <div class="row">${tile('wrench', V('job-mechanic'))}<div class="grow"><div class="w6">Los Santos Customs</div><div class="t-xs sec">an Lena Hartmann</div></div><span class="mono t-xs sec">RE-2026-0412</span></div>
+      <div class="col" style="gap:0">${[['Motorreparatur', '1', '850,00 €'], ['Karosserie, Kotflügel', '1', '420,00 €'], ['Ölwechsel', '1', '90,00 €'], ['Anfahrt', '1', '120,00 €']].map(([d, q, a]) => `<div class="row" style="padding:1rem 0;border-bottom:var(--fh-border-width) solid rgba(255,255,255,.06)"><span class="grow">${d}</span><span class="sec t-sm" style="width:4rem">${q}×</span><span class="w5 tr" style="width:12rem">${a}</span></div>`).join('')}</div>
+      <div class="row between"><span class="sec">Gesamt</span><span class="t-2xl w7">1.480,00 €</span></div>
+      <div class="row">${badge('Fällig in 1 Tag', V('warning'), 'clock')}<span class="t-xs mut">ausgestellt von J. Petersen · 15.10.</span></div>
+      <div class="row end">${btn('Ablehnen', 'btn-danger')}${btn('Bezahlen · 1.480 €', 'btn-primary')}</div>
+    </div>
+    <div class="col" style="gap:2.4rem">
+      <div style="width:54rem;height:34rem;border-radius:2rem;padding:2rem 2.4rem;background:linear-gradient(135deg, rgba(255,255,255,.06), transparent 40%, rgba(92,225,255,.06) 70%, transparent),${V('bg-elevated')};border:var(--fh-border-width) solid var(--fh-border);box-shadow:var(--fh-shadow-3)" class="col">
+        <div class="row between"><span class="caps" style="color:${V('text-secondary')}">Staat San Andreas · Personalausweis</span>${I('id', 's24 sec')}</div>
+        <div class="row" style="gap:2.4rem;margin-top:1.6rem;align-items:flex-start"><div class="well" style="width:12rem;height:16rem;display:grid;place-items:end center;overflow:hidden;border-radius:1.2rem">${I('user', 's48')}</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.2rem 2.4rem" class="grow">${idRow('Name', 'Hartmann')}${idRow('Vorname', 'Lena')}${idRow('Geburtsdatum', '14.03.1996')}${idRow('Geburtsort', 'Los Santos')}${idRow('Größe', '172 cm')}${idRow('Staatsangeh.', 'San Andreas')}${idRow('Ausweis-Nr.', 'SA-4471-9920', 1)}<div class="col"><span class="caps">Unterschrift</span><span style="font-weight:300;font-size:var(--fh-text-xl);letter-spacing:-.04em">L. Hartmann</span></div></div></div>
+      </div>
+      <div style="width:54rem;border-radius:2rem;padding:2rem 2.4rem;background:${V('bg-elevated')};border:var(--fh-border-width) solid var(--fh-border);box-shadow:var(--fh-shadow-3)" class="col">
+        <div class="row between"><span class="caps" style="color:${V('text-secondary')}">Führerschein</span>${badge('Abgelaufen', V('warning'), 'alert')}</div>
+        <div class="row" style="margin-top:1.4rem;gap:.8rem">${['A', 'B', 'C'].map((c, i) => `<span class="badge ${i < 2 ? 'neutral' : ''}" style="${i < 2 ? 'color:var(--fh-text-primary)' : 'color:var(--fh-text-muted);text-decoration:line-through;border:var(--fh-border-width) solid var(--fh-border)'}">Klasse ${c}</span>`).join('')}<span class="t-xs sec grow tr">gültig bis 01.10.2026</span></div>
+      </div>
+      <div class="glass m-reg capsule row t-sm" style="align-self:flex-start;padding:.6rem 1.4rem;gap:.8rem">${I('eye', 's16 sec')}Gezeigt von Lena Hartmann · ${K('Esc')} Schließen</div>
+    </div>
+  </div>
+`);
+
+/* ── 20–23 Tablets ───────────────────────────────────────────────── */
+const nav = (items, on) => items.map(([ic, l, n], i) => `<div class="lrow ${i === on ? 'sel' : ''}" style="${i === on ? 'box-shadow:none' : ''}">${I(ic, 's24' + (i === on ? ' fill' : ''))}<span class="grow ${i === on ? 'w6' : 'sec'}">${l}</span>${n ? `<span class="count">${n}</span>` : ''}</div>`).join('');
+const sideHead = (ic, col, t, s) => `<div class="row" style="margin-bottom:2rem">${tile(ic, col)}<div><div class="w6">${t}</div><div class="t-xs sec">${s}</div></div></div>`;
+const sideFoot = (n, s, extra = '') => `<div style="margin-top:auto" class="col">${extra}<div class="row" style="gap:1rem;padding-top:1.2rem;border-top:var(--fh-border-width) solid var(--fh-border)"><span class="tile round" style="width:3.6rem;height:3.6rem;font-size:var(--fh-text-sm);font-weight:650">${n.split(' ').map(x => x[0]).join('')}</span><div class="grow"><div class="w6 t-sm">${n}</div><div class="t-xs sec mono">${s}</div></div>${I('logout', 's16 sec')}</div></div>`;
+const tabletClose = `<button class="btn icon-btn" type="button" aria-label="Schließen" style="position:absolute;top:2.4rem;right:2.4rem">${I('x', 's16')}</button>`;
+board('mdt', '20 · Polizei-MDT — Personenakte mit aktivem Haftbefehl', 'world-night', `
+  <div class="scrim"></div>
+  <div class="tablet" style="--job:${V('job-police')}">${tabletClose}
+    <div class="side">${sideHead('police', V('job-police'), 'LSPD MDT', 'Mission Row')}${nav([['eye', 'Übersicht'], ['user', 'Personen'], ['car', 'Fahrzeuge'], ['file', 'Vorfälle', 3], ['alert', 'Haftbefehle', 2], ['users', 'Einheiten'], ['note', 'Strafkatalog']], 1)}
+      ${sideFoot('Lena Hartmann', '2-ADAM-12', `<div class="seg" style="display:flex;margin-bottom:1.2rem"><span class="on grow" style="justify-content:center;padding:0">10-8</span><span class="grow" style="justify-content:center;padding:0">10-6</span><span class="grow" style="justify-content:center;padding:0">10-7</span></div>`)}</div>
+    <div class="main">
+      <div class="row" style="padding-right:5rem">${field('', 'Hartmann', { icon: 'search', style: 'flex:1' })}<div class="seg"><span class="on">Name</span><span>ID</span><span>Telefon</span></div></div>
+      <div class="row grow" style="align-items:stretch;gap:2.4rem;min-height:0">
+        <div class="col" style="width:28rem;gap:.4rem"><div class="caps" style="margin-bottom:.6rem">3 Treffer</div>
+          <div class="lrow sel"><span class="tile round">JH</span><div class="grow"><div class="t">Jonas Hartmann</div><div class="s">02.07.1991</div></div><span class="dot" style="background:${V('danger')}"></span></div>
+          <div class="lrow"><span class="tile round">LH</span><div class="grow"><div class="t">Lena Hartmann</div><div class="s">LSPD · Officer II</div></div></div>
+          <div class="lrow"><span class="tile round">PH</span><div class="grow"><div class="t">Paul Hartmann</div><div class="s">11.11.1978</div></div></div>
+        </div>
+        <div class="col grow" style="gap:2rem;min-width:0">
+          <div class="row" style="gap:2.4rem;align-items:flex-start"><div class="well" style="width:12rem;height:14rem;display:grid;place-items:end center;overflow:hidden">${I('user', 's48')}</div>
+            <div class="col grow" style="gap:1rem"><div class="t-2xl w65">Jonas Hartmann</div>
+              <div class="row t-sm sec" style="gap:2.4rem"><span>Geb. 02.07.1991</span><span>Tel. 555-0187</span><span class="mono">SA-2210-4471</span></div>
+              <div class="row" style="gap:.8rem">${badge('Haftbefehl aktiv', V('danger'), 'alert')}${badge('Bewaffnet', V('warning'))}${nbadge('Führerschein B')}${nbadge('Kein Waffenschein')}</div></div></div>
+          <div class="well" style="overflow:hidden"><table class="tb"><tr><th>Datum</th><th>Delikt</th><th class="tr">Strafe</th><th>Beamter</th><th>Akte</th></tr>
+            <tr><td class="sec">12.10.2026</td><td class="w5">Bewaffneter Raubüberfall · 24/7 Clinton</td><td class="tr">18.000 € · 40 Mon.</td><td>Ofc. Nowak</td><td class="mono sec">V-2026-1182</td></tr>
+            <tr><td class="sec">28.09.2026</td><td class="w5">Fahren ohne Zulassung</td><td class="tr">850 €</td><td>Ofc. Hartmann</td><td class="mono sec">V-2026-1033</td></tr>
+            <tr><td class="sec">03.09.2026</td><td class="w5">Widerstand gegen Vollstreckung</td><td class="tr">2.500 € · 10 Mon.</td><td>Sgt. Brandt</td><td class="mono sec">V-2026-0871</td></tr></table></div>
+          <div class="card t-sm"><div class="caps" style="margin-bottom:.6rem">Notiz · Sgt. Brandt · 13.10.</div><span class="sec">Fährt häufig einen grauen Karin Futo (HH-KF 7781). Hält sich nachts am Containerhafen auf.</span></div>
+          <div class="row end" style="margin-top:auto">${btn('Notiz hinzufügen', '', 'note')}${btn('Haftbefehl ansehen', '', 'alert')}${btn('Bericht erstellen', 'btn-primary', 'file')}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+`);
+const triage = (w, c) => badge(w, c);
+board('ems', '21 · EMS-Tablet — Patient mit Verletzungskarte und Behandlungsverlauf', 'world-night', `
+  <div class="scrim"></div>
+  <div class="tablet" style="--job:${V('job-ems')}">${tabletClose}
+    <div class="side">${sideHead('cross', V('job-ems'), 'EMS Tablet', 'Pillbox Medical')}${nav([['alert', 'Einsätze', 2], ['user', 'Patienten', 4], ['file', 'Behandlungen'], ['users', 'Personal'], ['box', 'Bestand']], 1)}${sideFoot('Mara Voss', 'RTW-3 · im Dienst')}</div>
+    <div class="main">
+      <div class="row between" style="padding-right:5rem"><div class="t-xl w65">Patienten</div>${field('', 'Name oder ID', { ph: true, icon: 'search', style: 'width:32rem' })}</div>
+      <div class="row grow" style="align-items:stretch;gap:2.4rem;min-height:0">
+        <div class="col" style="width:30rem;gap:.4rem">
+          <div class="lrow sel"><div class="grow"><div class="t">Lena Hartmann</div><div class="s">Bewusstlos · Vinewood Blvd</div></div>${triage('Rot', V('danger'))}</div>
+          <div class="lrow"><div class="grow"><div class="t">Kai Brandt</div><div class="s">Fraktur Arm</div></div>${triage('Gelb', V('warning'))}</div>
+          <div class="lrow"><div class="grow"><div class="t">Finn Albers</div><div class="s">Schnittwunde</div></div>${triage('Grün', V('success'))}</div>
+          <div class="lrow"><div class="grow"><div class="t">Ella Nowak</div><div class="s">Kontrolle</div></div>${triage('Grün', V('success'))}</div>
+        </div>
+        <div class="row grow" style="align-items:stretch;gap:2.4rem;min-width:0">
+          <div class="well" style="width:30rem;position:relative;display:grid;place-items:center">
+            <svg viewBox="0 0 22 62" style="height:52rem;fill:#2a2a36">${'<circle cx="11" cy="5" r="4.2"/><path d="M5 11.5c0-1.4 1.2-2.5 2.6-2.5h6.8c1.4 0 2.6 1.1 2.6 2.5L18.5 30h-2.2l-1-11-.6 15 .9 27h-3.4L11 36l-1.2 25H6.4l.9-27-.6-15-1 11H3.5z"/>'}</svg>
+            <div class="abs" style="left:41%;top:72%"><span class="dot" style="width:1.6rem;height:1.6rem;background:${V('danger')};box-shadow:0 0 0 .4rem rgba(255,90,82,.3)"></span></div>
+            <div class="abs glass m-reg capsule t-xs w6" style="left:52%;top:70%;padding:.4rem 1rem">Schusswunde · Bein links</div>
+            <div class="abs" style="left:56%;top:30%"><span class="dot" style="width:1.2rem;height:1.2rem;background:${V('warning')};box-shadow:0 0 0 .4rem rgba(255,179,64,.3)"></span></div>
+            <div class="abs glass m-reg capsule t-xs w6" style="left:16%;top:24%;padding:.4rem 1rem">Prellung · Brust</div>
+          </div>
+          <div class="col grow" style="gap:2rem;min-width:0">
+            <div><div class="t-2xl w65">Lena Hartmann</div><div class="t-sm sec">Eingeliefert 22:51 · Blutgruppe A+ · Allergien: keine</div></div>
+            <div class="row" style="gap:1.2rem">${[['Puls', '128', 'bpm', V('warning')], ['Blutdruck', '90/60', 'mmHg', V('warning')], ['Bewusstsein', 'GCS 7', '', V('danger')]].map(([l, v, u, c]) => `<div class="stat grow"><span class="t-xs sec">${l}</span><span class="t-xl w7">${v} <span class="t-xs sec w4">${u}</span></span><span class="row t-xs" style="gap:.4rem;color:${c}"><span class="dot" style="background:currentColor"></span>${c === V('danger') ? 'kritisch' : 'auffällig'}</span></div>`).join('')}</div>
+            <div class="caps">Verlauf</div>
+            <div class="col" style="gap:1.2rem">${[['22:54', 'Druckverband angelegt', 'M. Voss'], ['22:56', 'Infusion 500 ml', 'M. Voss'], ['22:58', 'Transport Pillbox eingeleitet', 'S. Reyes']].map(([t, a, w]) => `<div class="row t-sm"><span class="mono sec" style="width:5.6rem">${t}</span><span class="dot" style="background:${V('accent-secondary')}"></span><span class="grow w5">${a}</span><span class="sec">${w}</span></div>`).join('')}</div>
+            <div class="row end" style="margin-top:auto">${btn('Rechnung stellen', '', 'file')}${btn('Behandlung eintragen', 'btn-primary', 'plus')}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+`);
+const emp = (n, r, w, duty, d, sel) => `<tr class="${sel ? 'sel' : ''}"><td class="w5">${n}</td><td><span class="input" style="height:3.2rem;display:inline-flex;font-size:var(--fh-text-sm);gap:1.2rem">${r}${I('chevron-down', 's16 sec')}</span></td><td class="tr">${w}</td><td>${duty ? `<span class="row t-sm" style="gap:.6rem;color:${V('accent-secondary')}"><span class="dot" style="background:currentColor"></span><span style="color:${V('text-primary')}">${duty}</span></span>` : '<span class="t-sm mut">außer Dienst</span>'}</td><td class="sec">${d}</td><td class="tr">${ibtn('chevron-down', '', 'Aktionen')}</td></tr>`;
+board('boss', '22 · Chefmenü — Mitarbeiterliste, Aktionsmenü geöffnet', 'world-night', `
+  <div class="scrim"></div>
+  <div class="tablet" style="--job:${V('job-mechanic')}">${tabletClose}
+    <div class="side">${sideHead('wrench', V('job-mechanic'), 'Hafenwerkstatt', 'Chefmenü')}${nav([['eye', 'Übersicht'], ['users', 'Mitarbeiter', 8], ['crown', 'Ränge & Gehälter'], ['bank', 'Firmenkonto'], ['gear', 'Einstellungen']], 1)}${sideFoot('Jonas Petersen', 'Geschäftsführer')}</div>
+    <div class="main" style="position:relative">
+      <div class="row between" style="padding-right:5rem"><div><div class="t-xl w65">Mitarbeiter</div><div class="t-sm sec">8 Mitarbeiter · 3 im Dienst</div></div><div class="row">${field('', 'Name suchen', { ph: true, icon: 'search', style: 'width:28rem' })}${btn('Einstellen', 'btn-primary', 'plus')}</div></div>
+      <div class="row" style="gap:1.2rem">${[['Firmenkonto', '184.300 €'], ['Gehälter / Woche', '12.400 €'], ['Umsatz Oktober', '96.750 €'], ['Offene Rechnungen', '4']].map(([l, v]) => `<div class="stat grow"><span class="t-xs sec">${l}</span><span class="t-xl w7">${v}</span></div>`).join('')}</div>
+      <div class="well" style="overflow:visible"><table class="tb"><tr><th>Name</th><th>Rang</th><th class="tr">Lohn / Woche</th><th>Dienst</th><th>Eingestellt</th><th></th></tr>
+        ${emp('Jonas Petersen', 'Geschäftsführer', '2.400 €', '3 h 12 min', '02.03.2026')}${emp('Tariq Ozturk', 'Meister', '1.800 €', '1 h 40 min', '14.04.2026', 1)}${emp('Finn Albers', 'Geselle', '1.400 €', '', '01.06.2026')}${emp('Kai Brandt', 'Azubi', '900 €', '0 h 22 min', '20.09.2026')}${emp('Ella Nowak', 'Geselle', '1.400 €', '', '11.07.2026')}</table></div>
+      <div class="abs popover" style="right:3.2rem;top:39rem;width:24rem;z-index:5">${[['plus', 'Befördern'], ['minus', 'Degradieren'], ['file', 'Lohn ändern']].map(([i, l], k) => `<div class="lrow ${k === 0 ? 'hover' : ''}">${I(i, 's16')}<span>${l}</span></div>`).join('')}<hr class="divider" style="margin:.4rem 1rem"><div class="lrow" style="color:${V('danger')}">${I('trash', 's16')}<span>Entlassen …</span></div></div>
+    </div>
+  </div>
+`);
+board('admin', '23 · Adminpanel — Spieler ausgewählt, Aktionen gruppiert, Protokoll', 'world-night', `
+  <div class="scrim"></div>
+  <div class="tablet" style="--job:${V('accent-primary')}">${tabletClose}
+    <div class="side">${sideHead('terminal', '', 'Admin', 'Harbour RP · Live')}${nav([['users', 'Spieler', 128], ['flag', 'Meldungen', 4], ['gauge', 'Server'], ['terminal', 'Protokolle'], ['car', 'Fahrzeuge'], ['clock', 'Wetter & Zeit']], 0)}${sideFoot('Support Nora', 'Admin · Stufe 3')}</div>
+    <div class="main">
+      <div class="row" style="gap:1.2rem;padding-right:5rem">${[['Spieler', '128 / 200'], ['Meldungen offen', '4'], ['Ressourcen', '386 / 386'], ['Uptime', '14 h 22 min']].map(([l, v]) => `<div class="stat grow"><span class="t-xs sec">${l}</span><span class="t-lg w7">${v}</span></div>`).join('')}</div>
+      <div class="row grow" style="align-items:stretch;gap:2.4rem;min-height:0">
+        <div class="col grow" style="gap:1.6rem;min-width:0">
+          <div class="row">${field('', 'Name, ID oder Lizenz', { ph: true, icon: 'search', style: 'flex:1' })}<div class="seg"><span class="on">Alle</span><span>Im Dienst</span><span>Markiert</span></div></div>
+          <div class="well" style="overflow:hidden"><table class="tb dense"><tr><th>ID</th><th>Name</th><th>Lizenz</th><th>Job</th><th class="tr">Ping</th><th>Hinweis</th></tr>
+            ${players.slice(0, 7).map(([id, n, j, c, p], i) => `<tr class="${i === 4 ? 'sel' : ''}"><td class="mono sec">${id}</td><td class="w5">${n}</td><td class="mono t-xs sec">license:${(id * 7919).toString(16)}a3f…</td><td>${j === 'Zivil' ? '<span class="t-sm mut">—</span>' : badge(j, c)}</td><td class="tr">${ping(p)}</td><td>${i === 4 ? badge('Verwarnt 2×', V('warning')) : ''}</td></tr>`).join('')}</table></div>
+          <div class="well mono t-xs" style="padding:1.2rem 1.6rem;line-height:1.8">
+            <div><span class="dot" style="background:${V('accent-secondary')};margin-right:.8rem"></span><span class="mut">23:02:14</span>  <span style="color:${V('text-primary')}">[bank]</span> <span class="sec">ID 7 → ID 12 · 1.250 € · Überweisung</span></div>
+            <div><span class="dot" style="background:transparent;margin-right:.8rem"></span><span class="mut">23:01:58</span>  <span style="color:${V('text-primary')}">[garage]</span> <span class="sec">ID 19 takeOut HH-SN 2047</span></div>
+            <div><span class="dot" style="background:transparent;margin-right:.8rem"></span><span class="mut">23:01:31</span>  <span style="color:${V('warning')}">[anticheat]</span> <span class="sec">ID 23 speed 312 km/h (Fahrzeug: Faggio)</span></div>
+          </div>
+        </div>
+        <div class="col" style="width:36rem;gap:1.6rem">
+          <div class="card col" style="gap:.4rem"><div class="row"><span class="tile round">TO</span><div class="grow"><div class="w6">Tariq Ozturk</div><div class="t-xs sec mono">ID 23 · 41 h Spielzeit</div></div>${badge('Verwarnt 2×', V('warning'))}</div></div>
+          ${[['Bewegen', [['map-pin', 'Teleportieren zu'], ['user', 'Holen'], ['eye', 'Zuschauen']]], ['Zustand', [['heart', 'Heilen'], ['cross', 'Wiederbeleben'], ['lock', 'Einfrieren']]]].map(([g, a]) => `<div class="col" style="gap:.6rem"><span class="caps">${g}</span><div class="row" style="flex-wrap:wrap;gap:.8rem">${a.map(([i, l]) => btn(l, 'btn-sm', i)).join('')}</div></div>`).join('')}
+          <div class="col" style="gap:.6rem"><span class="caps">Strafen</span><div class="row" style="flex-wrap:wrap;gap:.8rem">${btn('Verwarnen', 'btn-sm', 'alert')}${btn('Kicken', 'btn-sm btn-danger', 'logout')}${btn('Bannen …', 'btn-sm btn-danger', 'x')}</div></div>
+          <div class="help" style="margin-top:auto">${I('info', 's16')}Jede Aktion wird mit deinem Namen protokolliert.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+`);
+
+/* ── 24 Data states ──────────────────────────────────────────────── */
+const mini = (title, sub, inner) => `<div class="panel col" style="width:68rem;height:36rem;gap:1.6rem;padding:2.8rem"><div class="row between"><div><div class="t-lg w6">${title}</div><div class="t-xs sec">${sub}</div></div>${ibtn('x', '', 'Schließen')}</div><div class="grow col" style="justify-content:center">${inner}</div></div>`;
+board('states', '24 · Datenzustände — leer, lädt, Fehler, keine Treffer (gefüllt: alle Boards oben)', 'world-night', `
+  <div class="scrim"></div>
+  <div class="abs" style="left:50%;top:50%;transform:translate(-50%,-50%);display:grid;grid-template-columns:68rem 68rem;gap:3.2rem">
+    ${mini('Rucksack', 'Leer', `<div class="state">${I('bag', 's32')}<div class="ttl">Dein Rucksack ist leer</div><div class="t-sm">Gegenstände, die du aufhebst oder kaufst, landen hier.</div></div>`)}
+    ${mini('Garage · Pillbox Parkhaus', 'Lädt', `<div class="col" style="gap:1rem">${[1, 2, 3].map(() => `<div class="row"><div class="skel" style="width:3.6rem;height:3.6rem"></div><div class="col grow" style="gap:.6rem"><div class="skel" style="height:1.4rem;width:40%"></div><div class="skel" style="height:1.2rem;width:24%"></div></div><div class="skel" style="width:10rem;height:2.4rem;border-radius:99rem"></div></div>`).join('')}<div class="t-xs mut row" style="gap:.8rem;margin-top:.4rem"><span class="spinner"></span>Dauert länger als üblich …${btn('Erneut versuchen', 'btn-ghost btn-sm')}</div></div>`)}
+    ${mini('Fleeca Bank', 'Fehler', `<div class="state">${tile('alert', V('danger'), 'round')}<div class="ttl">Konnte nicht geladen werden</div><div class="t-sm">Keine Verbindung zum Server. Dein Geld ist sicher.</div><div style="margin-top:1rem">${btn('Erneut versuchen', '', 'refresh')}</div></div>`)}
+    ${mini('LSPD MDT · Personen', 'Keine Treffer', `${field('', 'Hartmanm', { icon: 'search' })}<div class="state" style="padding-bottom:0">${I('search', 's32')}<div class="ttl">Keine Treffer für „Hartmanm“</div><div class="t-sm">Prüfe die Schreibweise oder suche nach ID oder Telefonnummer.</div></div>`)}
+  </div>
+`);
+
+/* ── Render ──────────────────────────────────────────────────────── */
+document.getElementById('app').innerHTML = boards.join('');
+document.querySelectorAll('.city').forEach(c => {
+  let seed = (+c.dataset.seed + 1) * 7919, x = -1, h = '';
+  const rnd = () => (seed = (seed * 9301 + 49297) % 233280) / 233280;
+  while (x < 101) { const w = 3 + rnd() * 6; h += `<i style="left:${x.toFixed(1)}%;width:${w.toFixed(1)}%;height:${(25 + rnd() * 75).toFixed(0)}%"></i>`; x += w + rnd() * 0.8; }
+  c.innerHTML = h;
+});
+</script>
+</body>
+</html>

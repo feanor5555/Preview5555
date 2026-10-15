@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content="Vorschau der FiveM-UI-Design-Varianten des Projekts Preview5555." />
+<title>FiveM UI – Design-Varianten</title>
+<style>
+  :root {
+    --bg: #f4f5f7;
+    --card: #ffffff;
+    --ink: #1c2024;
+    --muted: #61696f;
+    --line: #d9dde2;
+    --accent: #2f5fd0;
+    --badge: #8a9299;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font: 15px/1.5 -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  }
+  header {
+    max-width: 1040px;
+    margin: 0 auto;
+    padding: 40px 20px 8px;
+  }
+  header h1 { margin: 0 0 4px; font-size: 26px; letter-spacing: -0.01em; }
+  header p { margin: 0; color: var(--muted); }
+  main {
+    max-width: 1040px;
+    margin: 0 auto;
+    padding: 24px 20px 56px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+  }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .thumb {
+    height: 170px;
+    border-bottom: 1px solid var(--line);
+    background: #e8eaee;
+  }
+  .thumb img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+  }
+  .thumb.pending {
+    display: grid;
+    place-items: center;
+    color: var(--badge);
+    font-size: 40px;
+    font-weight: 700;
+  }
+  .body { padding: 14px 16px 16px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+  .title { display: flex; align-items: baseline; gap: 8px; }
+  .letter { color: var(--muted); font-weight: 700; font-size: 13px; }
+  .name { font-size: 17px; font-weight: 700; }
+  .desc { margin: 0; color: var(--muted); font-size: 14px; flex: 1; }
+  .links { display: flex; flex-wrap: wrap; gap: 12px; padding-top: 4px; }
+  .links a { color: var(--accent); text-decoration: none; font-size: 14px; }
+  .links a:hover { text-decoration: underline; }
+  .state {
+    display: inline-block;
+    margin-top: 4px;
+    padding: 2px 10px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    color: var(--badge);
+    font-size: 13px;
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>FiveM UI – Design-Varianten</h1>
+  <p id="summary"></p>
+</header>
+<main id="gallery"></main>
+<script>
+// Eine Karte pro Eintrag — neue Variante = ein neuer Eintrag in diesem Array.
+// overview:true verlinkt die #overview-Ankerseite der Vorschau; ein String verlinkt direkt (z.B. Kontaktbogen-Bild).
+const VARIANTS = [
+  {
+    letter: "A", name: "Maritim", dir: "maritim/", ready: true,
+    desc: "Helles Hafen-Instrumenten-UI: foam-weiße Flächen, tiefes Hafenblau, Signalgelb und Wasser-Türkis.",
+    image: "assets/maritim-preview-full.png",
+  },
+  {
+    letter: "B", name: "Plattenbau", dir: "plattenbau/", ready: true,
+    desc: "Beton-Wohnblocks und Hafenkriminalität bei Nacht: asphaltgraue Panels, Natriumgelb, Containerblau und Rost.",
+    image: "assets/plattenbau-contact-sheet.png",
+    overview: "assets/plattenbau-contact-sheet.png",
+  },
+  {
+    letter: "C", name: "Kiez", dir: "kiez/", ready: true,
+    desc: "Gehobener Hafen-Nachtclub: aubergine-schwarze Panels, Champagner-Typografie, Messing-Detail und ein sparsamer Rosé-Rot-Akzent.",
+    image: "assets/kiez-preview-overview.png",
+    overview: true,
+  },
+  {
+    letter: "D", name: "Glass", dir: "apple-glass/", ready: false,
+    desc: "Dunkles, getöntes Liquid Glass: durchgehende Rundungen, großzügiger Raum, ruhige Hierarchie und ein reduziertes Blau.",
+  },
+  {
+    letter: "E", name: "Street Neon", dir: "apple-neon/", ready: true,
+    desc: "Apple-Zurückhaltung auf fast Schwarz: Glas-Materialien, Magenta und Cyan nur für Zustand und Fokus.",
+    image: "assets/apple-neon-preview.png",
+  },
+  {
+    letter: "F", name: "Tactical", dir: "apple-tactical/", ready: true,
+    desc: "Liquid Glass in Graphit mit Sand- und Oliven-Akzenten: datendichte Layouts, tabellarische Ziffern und feine Linien.",
+    image: "assets/apple-tactical-preview.png",
+    query: "?res=1080",
+    overview: false,
+  },
+];
+
+function card(v) {
+  const previewUrl = v.dir + "index.html" + (v.query ?? "");
+  const head =
+    v.ready && v.image
+      ? `<div class="thumb"><img src="${v.image}" alt="Übersicht ${v.name}" loading="lazy" /></div>`
+      : `<div class="thumb pending" aria-hidden="true">${v.letter}</div>`;
+  const links = !v.ready
+    ? `<span class="state">in Arbeit</span>`
+    : `<nav class="links">
+         <a href="${previewUrl}">Vorschau</a>
+         ${v.overview ? `<a href="${typeof v.overview === "string" ? v.overview : previewUrl + "#overview"}">Übersicht</a>` : ""}
+         <a href="${v.dir}DESIGN.md">DESIGN.md</a>
+       </nav>`;
+  return `<article class="card">
+    ${head}
+    <div class="body">
+      <div class="title"><span class="letter">${v.letter}</span><span class="name">${v.name}</span></div>
+      <p class="desc">${v.desc}</p>
+      ${links}
+    </div>
+  </article>`;
+}
+
+document.getElementById("gallery").innerHTML = VARIANTS.map(card).join("");
+document.getElementById("summary").textContent =
+  `${VARIANTS.length} Varianten · ${VARIANTS.filter(v => v.ready).length} fertig · ` +
+  `${VARIANTS.filter(v => !v.ready).length} in Arbeit`;
+</script>
+</body>
+</html>

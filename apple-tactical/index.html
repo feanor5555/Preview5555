@@ -1,0 +1,1662 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>FiveM Apple Tactical – Variante F – Vorschau</title>
+<style>
+/* ── Fonts (self-hosted, relative path, no CDN) ───────────────────────── */
+@font-face { font-family: "Inter"; src: url("fonts/inter-latin-wght-normal.woff2") format("woff2"); font-weight: 100 900; font-display: block; }
+@font-face { font-family: "Inter"; src: url("fonts/inter-latin-ext-wght-normal.woff2") format("woff2"); font-weight: 100 900; font-display: block; unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20C0; }
+@font-face { font-family: "JetBrains Mono"; src: url("fonts/jetbrains-mono-latin-wght-normal.woff2") format("woff2"); font-weight: 100 800; font-display: block; }
+@font-face { font-family: "JetBrains Mono"; src: url("fonts/jetbrains-mono-latin-ext-wght-normal.woff2") format("woff2"); font-weight: 100 800; font-display: block; unicode-range: U+0100-024F, U+1E00-1EFF; }
+
+/* ── Shared root scaling rule (all six variants). The preview overrides it
+      per selected reference resolution so each stage behaves like a viewport. */
+html { font-size: clamp(8px, calc(100vh / 108), 16px); }
+
+/* ── --fh-* token block (identical to DESIGN.md §8) ───────────────────── */
+:root {
+  --fh-bg-base: #0C0D0B;
+  --fh-bg-surface: #161814;
+  --fh-bg-elevated: #20231E;
+  --fh-bg-overlay: rgba(16, 17, 15, 0.80);
+  --fh-border: #3B3F37;
+  --fh-text-primary: #ECEDE6;
+  --fh-text-secondary: #B5B9AD;
+  --fh-text-muted: #8D9285;
+  --fh-text-on-accent: #15160F;
+  --fh-accent-primary: #D3C29A;
+  --fh-accent-secondary: #A4AC7C;
+  --fh-success: #73C08B;
+  --fh-warning: #E8B04E;
+  --fh-danger: #F46A58;
+  --fh-info: #8DBBCB;
+  --fh-job-police: #7499DB;
+  --fh-job-ems: #E8907F;
+  --fh-job-mechanic: #D08E5A;
+  --fh-job-civil: #AEB3A7;
+  --fh-hud-health: #EE7B6C;
+  --fh-hud-armor: #93B2DE;
+  --fh-hud-hunger: #D8AB78;
+  --fh-hud-thirst: #70C0D6;
+  --fh-hud-stamina: #B2CB7E;
+  --fh-hud-stress: #B79AD8;
+  --fh-hud-voice: #A2DBB2;
+  --fh-hud-radio: #EE9759;
+  --fh-hud-fuel: #DDC95F;
+  --fh-font-sans: "Inter", "Segoe UI", system-ui, sans-serif;
+  --fh-font-display: "Inter", "Segoe UI", system-ui, sans-serif;
+  --fh-font-mono: "JetBrains Mono", ui-monospace, Consolas, monospace;
+  --fh-text-2xs: 1.1rem;
+  --fh-text-xs: 1.2rem;
+  --fh-text-sm: 1.3rem;
+  --fh-text-md: 1.5rem;
+  --fh-text-lg: 1.7rem;
+  --fh-text-xl: 2rem;
+  --fh-text-2xl: 2.4rem;
+  --fh-text-3xl: 3.2rem;
+  --fh-text-4xl: 4.8rem;
+  --fh-weight-regular: 400;
+  --fh-weight-medium: 500;
+  --fh-weight-semibold: 600;
+  --fh-weight-bold: 700;
+  --fh-space-0_5: 0.2rem;
+  --fh-space-1: 0.4rem;
+  --fh-space-2: 0.8rem;
+  --fh-space-3: 1.2rem;
+  --fh-space-4: 1.6rem;
+  --fh-space-5: 2rem;
+  --fh-space-6: 2.4rem;
+  --fh-space-8: 3.2rem;
+  --fh-space-10: 4rem;
+  --fh-space-12: 4.8rem;
+  --fh-space-16: 6.4rem;
+  --fh-radius-xs: 0.4rem;
+  --fh-radius-sm: 0.8rem;
+  --fh-radius-md: 1.2rem;
+  --fh-radius-lg: 1.8rem;
+  --fh-radius-xl: 2.8rem;
+  --fh-radius-pill: 999px;
+  --fh-border-width: 1px;
+  --fh-border-width-strong: 2px;
+  --fh-shadow-1: 0 0.2rem 0.6rem rgba(0, 0, 0, 0.28);
+  --fh-shadow-2: inset 0 1px 0 rgba(236, 237, 230, 0.06), 0 0.8rem 2.4rem rgba(0, 0, 0, 0.36);
+  --fh-shadow-3: inset 0 1px 0 rgba(236, 237, 230, 0.08), 0 2.4rem 6.4rem rgba(0, 0, 0, 0.5);
+  --fh-glow-accent: 0 0 0 1px rgba(211, 194, 154, 0.35), 0 0 1.6rem rgba(211, 194, 154, 0.18);
+  --fh-focus-ring: 0 0 0 2px #0C0D0B, 0 0 0 4px #D3C29A;
+  --fh-blur-thin: 1.2rem;
+  --fh-blur-regular: 2.4rem;
+  --fh-blur-thick: 4rem;
+  --fh-material-thin: rgba(22, 24, 20, 0.56);
+  --fh-material-regular: rgba(16, 17, 15, 0.80);
+  --fh-material-thick: rgba(12, 13, 11, 0.90);
+  --fh-duration-fast: 120ms;
+  --fh-duration-enter: 200ms;
+  --fh-duration-exit: 140ms;
+  --fh-duration-slow: 320ms;
+  --fh-ease-standard: cubic-bezier(0.23, 1, 0.32, 1);
+  --fh-ease-spring: cubic-bezier(0.34, 1.36, 0.64, 1);
+}
+
+/* ── Preview document chrome (px, not part of the system) ─────────────── */
+* { box-sizing: border-box; }
+body { margin: 0; background: #050605; color: #ECEDE6; font-family: var(--fh-font-sans); }
+.doc-bar { display: flex; align-items: center; gap: 16px; padding: 14px 24px; font-size: 13px; background: #0C0D0B; border-bottom: 1px solid #3B3F37; }
+.doc-bar b { font-size: 15px; }
+.doc-bar a { color: #D3C29A; text-decoration: none; padding: 4px 10px; border-radius: 999px; border: 1px solid #3B3F37; }
+.doc-bar a.on { background: #D3C29A; color: #15160F; }
+.doc-bar span { color: #B5B9AD; }
+.doc-sec { padding: 28px 0 0; }
+.doc-cap { padding: 0 24px 12px; display: flex; gap: 18px; align-items: baseline; flex-wrap: wrap; }
+.doc-cap h2 { margin: 0; font-size: 20px; font-weight: 600; letter-spacing: -0.01em; }
+.doc-cap p { margin: 0; color: #B5B9AD; font-size: 13px; max-width: 1400px; }
+.doc-cap code { font-family: var(--fh-font-mono); color: #D3C29A; font-size: 12px; }
+
+/* ── Stage: one reference viewport ───────────────────────────────────── */
+.stage { position: relative; width: var(--stage-w, 1920px); height: var(--stage-h, 1080px); overflow: hidden; color: var(--fh-text-primary); font-family: var(--fh-font-sans); font-size: var(--fh-text-md); line-height: 1.45; font-feature-settings: "tnum" 1, "cv11" 1; background: var(--fh-bg-base); isolation: isolate; }
+.stage *, .stage *::before, .stage *::after { box-sizing: border-box; }
+.world { position: absolute; inset: 0; overflow: hidden; z-index: 0; }
+.world .wi { position: absolute; inset: 0; }
+.world.blurred .wi { filter: blur(1.4rem) brightness(0.72) saturate(0.85); transform: scale(1.04); }
+.world.dim::after { content: ""; position: absolute; inset: 0; background: rgba(12, 13, 11, 0.35); }
+.layer { position: absolute; inset: 0; z-index: 1; }
+
+/* ── Type helpers ────────────────────────────────────────────────────── */
+.lbl { font-size: var(--fh-text-2xs); font-weight: var(--fh-weight-semibold); letter-spacing: 0.08em; text-transform: uppercase; color: var(--fh-text-secondary); line-height: 1.2; }
+.mono { font-family: var(--fh-font-mono); font-feature-settings: normal; }
+.sec { color: var(--fh-text-secondary); }
+.mut { color: var(--fh-text-muted); }
+.t2xs { font-size: var(--fh-text-2xs); } .txs { font-size: var(--fh-text-xs); } .tsm { font-size: var(--fh-text-sm); } .tmd { font-size: var(--fh-text-md); }
+.tlg { font-size: var(--fh-text-lg); } .txl { font-size: var(--fh-text-xl); } .t2xl { font-size: var(--fh-text-2xl); letter-spacing: -0.02em; } .t3xl { font-size: var(--fh-text-3xl); letter-spacing: -0.02em; line-height: 1.1; } .t4xl { font-size: var(--fh-text-4xl); letter-spacing: -0.02em; line-height: 1; }
+.w5 { font-weight: var(--fh-weight-medium); } .w6 { font-weight: var(--fh-weight-semibold); } .w7 { font-weight: var(--fh-weight-bold); }
+.ok { color: var(--fh-success); } .warn { color: var(--fh-warning); } .bad { color: var(--fh-danger); } .inf { color: var(--fh-info); } .acc { color: var(--fh-accent-primary); }
+.right { text-align: right; } .center { text-align: center; }
+.flex { display: flex; align-items: center; } .col { display: flex; flex-direction: column; } .between { justify-content: space-between; } .wrap { flex-wrap: wrap; }
+.g1 { gap: var(--fh-space-1); } .g2 { gap: var(--fh-space-2); } .g3 { gap: var(--fh-space-3); } .g4 { gap: var(--fh-space-4); } .g5 { gap: var(--fh-space-5); } .g6 { gap: var(--fh-space-6); }
+.grow { flex: 1 1 auto; min-width: 0; }
+.hr { height: 1px; background: var(--fh-border); border: 0; margin: 0; }
+.ico { width: 2rem; height: 2rem; flex: none; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; vertical-align: middle; }
+.ico.s { width: 1.6rem; height: 1.6rem; } .ico.l { width: 2.4rem; height: 2.4rem; } .ico.xl { width: 3.2rem; height: 3.2rem; }
+.ico.fill { fill: currentColor; stroke: none; }
+
+/* ── Materials ───────────────────────────────────────────────────────── */
+.glass { background: var(--fh-material-regular); border: var(--fh-border-width) solid var(--fh-border); box-shadow: var(--fh-shadow-2); }
+.glass-thick { background: var(--fh-material-thick); border: var(--fh-border-width) solid var(--fh-border); box-shadow: var(--fh-shadow-3); }
+.glass-thin { background: var(--fh-material-thin); border: var(--fh-border-width) solid var(--fh-border); box-shadow: var(--fh-shadow-1); }
+/* backdrop blur only for NUI-over-NUI layering (never on HUD) */
+.nui-blur { -webkit-backdrop-filter: blur(var(--fh-blur-regular)); backdrop-filter: blur(var(--fh-blur-regular)); }
+.nui-blur-thick { -webkit-backdrop-filter: blur(var(--fh-blur-thick)); backdrop-filter: blur(var(--fh-blur-thick)); }
+body.no-backdrop .nui-blur, body.no-backdrop .nui-blur-thick { -webkit-backdrop-filter: none; backdrop-filter: none; }
+.solid { background: var(--fh-bg-surface); border: var(--fh-border-width) solid var(--fh-border); box-shadow: var(--fh-shadow-3); }
+
+/* ── Panels ──────────────────────────────────────────────────────────── */
+.panel { position: absolute; display: flex; flex-direction: column; border-radius: var(--fh-radius-lg); overflow: hidden; }
+.center-abs { left: 50%; top: 50%; transform: translate(-50%, -50%); }
+.panel-h { display: flex; align-items: center; gap: var(--fh-space-3); min-height: 5.6rem; padding: 0 var(--fh-space-5); border-bottom: var(--fh-border-width) solid var(--fh-border); flex: none; }
+.panel-h .title { font-size: var(--fh-text-lg); font-weight: var(--fh-weight-semibold); line-height: 1.2; }
+.panel-b { padding: var(--fh-space-5); flex: 1 1 auto; min-height: 0; }
+.close { width: 3.2rem; height: 3.2rem; border-radius: var(--fh-radius-pill); display: grid; place-items: center; color: var(--fh-text-secondary); background: var(--fh-bg-elevated); border: var(--fh-border-width) solid var(--fh-border); flex: none; }
+.rail-top { height: 0.3rem; flex: none; background: var(--c, var(--fh-accent-secondary)); }
+.card { background: var(--fh-bg-elevated); border-radius: var(--fh-radius-md); border: var(--fh-border-width) solid var(--fh-border); padding: var(--fh-space-4); }
+.card.flat { background: transparent; }
+
+/* ── Buttons ─────────────────────────────────────────────────────────── */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: var(--fh-space-2); height: 3.6rem; padding: 0 var(--fh-space-4); border-radius: var(--fh-radius-pill); font: inherit; font-size: var(--fh-text-md); font-weight: var(--fh-weight-semibold); border: var(--fh-border-width) solid transparent; white-space: nowrap; cursor: pointer; transition: background var(--fh-duration-fast) var(--fh-ease-standard), transform var(--fh-duration-fast) var(--fh-ease-standard); }
+.btn.lg { height: 4.4rem; padding: 0 var(--fh-space-6); }
+.btn.sm { height: 2.8rem; padding: 0 var(--fh-space-3); font-size: var(--fh-text-sm); }
+.btn-p { background: var(--fh-accent-primary); color: var(--fh-text-on-accent); }
+.btn-p.hover { background: #DED0AE; } .btn-p.press { background: #BFAE86; transform: scale(0.98); }
+.btn-s { background: var(--fh-bg-elevated); color: var(--fh-text-primary); border-color: var(--fh-border); }
+.btn-s.hover { background: #2A2E27; }
+.btn-d { background: var(--fh-danger); color: var(--fh-text-on-accent); }
+.btn-g { background: transparent; color: var(--fh-text-secondary); }
+.btn-g.hover { background: var(--fh-bg-elevated); }
+.btn-gd { background: transparent; color: var(--fh-danger); border-color: rgba(244, 106, 88, 0.4); }
+.btn.dis, .btn:disabled { opacity: 0.4; cursor: not-allowed; }
+.btn.focus { box-shadow: var(--fh-focus-ring); }
+.btn.full { width: 100%; }
+.spin { width: 1.6rem; height: 1.6rem; border-radius: 50%; border: 0.2rem solid currentColor; border-right-color: transparent; animation: spin 900ms linear infinite; flex: none; opacity: 0.85; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── Pills, key caps, chips ──────────────────────────────────────────── */
+.pill { display: inline-flex; align-items: center; gap: 0.6rem; height: 2.2rem; padding: 0 var(--fh-space-2); border-radius: var(--fh-radius-pill); background: var(--fh-bg-elevated); border: var(--fh-border-width) solid var(--fh-border); font-size: var(--fh-text-xs); font-weight: var(--fh-weight-semibold); color: var(--fh-text-primary); white-space: nowrap; }
+.pill .dot, .dot { width: 0.6rem; height: 0.6rem; border-radius: 50%; background: var(--c, var(--fh-text-muted)); flex: none; display: inline-block; }
+.pill.solid-c { background: var(--c); color: var(--fh-text-on-accent); border-color: transparent; }
+.pill.out { background: transparent; border-color: var(--c); color: var(--c); }
+.kc { display: inline-grid; place-items: center; min-width: 2.8rem; height: 2.8rem; padding: 0 0.7rem; border-radius: var(--fh-radius-sm); background: var(--fh-text-primary); color: var(--fh-text-on-accent); font-family: var(--fh-font-mono); font-weight: var(--fh-weight-bold); font-size: var(--fh-text-sm); line-height: 1; box-shadow: var(--fh-shadow-1); flex: none; }
+.kc.sm { min-width: 2.2rem; height: 2.2rem; font-size: var(--fh-text-xs); border-radius: 0.6rem; }
+.kc.dim { background: var(--fh-bg-elevated); color: var(--fh-text-muted); box-shadow: none; border: 1px solid var(--fh-border); }
+.chip { display: inline-flex; align-items: center; gap: var(--fh-space-1); height: 2.8rem; padding: 0 var(--fh-space-3); border-radius: var(--fh-radius-pill); border: var(--fh-border-width) solid var(--fh-border); font-size: var(--fh-text-sm); color: var(--fh-text-secondary); background: transparent; }
+.chip.on { background: rgba(164, 172, 124, 0.16); border-color: var(--fh-accent-secondary); color: var(--fh-text-primary); }
+.plate { display: inline-flex; align-items: center; height: 2.4rem; padding: 0 var(--fh-space-2); border-radius: var(--fh-radius-xs); border: 1px solid var(--fh-text-muted); background: var(--fh-bg-elevated); font-family: var(--fh-font-mono); font-size: var(--fh-text-sm); font-weight: var(--fh-weight-medium); letter-spacing: 0.04em; }
+.badge { display: inline-grid; place-items: center; min-width: 2rem; height: 2rem; padding: 0 0.5rem; border-radius: var(--fh-radius-pill); background: var(--fh-bg-elevated); border: 1px solid var(--fh-border); font-family: var(--fh-font-mono); font-size: var(--fh-text-2xs); color: var(--fh-text-secondary); }
+.badge.hot { background: var(--fh-danger); color: var(--fh-text-on-accent); border-color: transparent; }
+
+/* ── Tabs, segmented ─────────────────────────────────────────────────── */
+.tabs { display: flex; gap: var(--fh-space-5); border-bottom: var(--fh-border-width) solid var(--fh-border); }
+.tabs > span { padding: var(--fh-space-3) 0; font-size: var(--fh-text-sm); font-weight: var(--fh-weight-semibold); color: var(--fh-text-secondary); border-bottom: 2px solid transparent; margin-bottom: -1px; white-space: nowrap; }
+.tabs > span.on { color: var(--fh-text-primary); border-bottom-color: var(--fh-accent-secondary); }
+.seg { display: inline-flex; padding: 0.3rem; gap: 0.3rem; border-radius: var(--fh-radius-pill); background: var(--fh-bg-elevated); border: 1px solid var(--fh-border); }
+.seg > span { padding: 0 var(--fh-space-3); height: 2.8rem; display: inline-flex; align-items: center; border-radius: var(--fh-radius-pill); font-size: var(--fh-text-sm); font-weight: var(--fh-weight-medium); color: var(--fh-text-secondary); white-space: nowrap; }
+.seg > span.on { background: #343830; color: var(--fh-text-primary); box-shadow: var(--fh-shadow-1); }
+.seg.v { flex-direction: column; border-radius: var(--fh-radius-md); }
+.seg.v > span { border-radius: var(--fh-radius-sm); }
+
+/* ── Form fields ─────────────────────────────────────────────────────── */
+.field { display: grid; gap: var(--fh-space-1); }
+.field > label { font-size: var(--fh-text-xs); font-weight: var(--fh-weight-medium); color: var(--fh-text-secondary); }
+.inp { display: flex; align-items: center; gap: var(--fh-space-2); height: 4rem; padding: 0 var(--fh-space-3); background: var(--fh-bg-elevated); border: 1px solid var(--fh-text-muted); border-radius: var(--fh-radius-sm); font-size: var(--fh-text-md); color: var(--fh-text-primary); }
+.inp.ph { color: var(--fh-text-muted); }
+.inp.focus { border-color: transparent; box-shadow: var(--fh-focus-ring); }
+.inp.focus::after { content: ""; width: 1px; height: 1.8rem; background: var(--fh-accent-primary); margin-left: -0.4rem; }
+.inp.err { border: var(--fh-border-width-strong) solid var(--fh-danger); }
+.inp.ro { background: var(--fh-bg-surface); border-color: transparent; }
+.inp.num { justify-content: flex-end; font-family: var(--fh-font-mono); }
+.inp .unit { color: var(--fh-text-muted); font-family: var(--fh-font-mono); }
+.inp.area { height: 9.6rem; align-items: flex-start; padding-top: var(--fh-space-2); font-size: var(--fh-text-sm); line-height: 1.5; }
+.help { font-size: var(--fh-text-xs); color: var(--fh-text-muted); }
+.help.err { color: var(--fh-danger); }
+.slider { position: relative; height: 1.6rem; display: flex; align-items: center; }
+.slider::before { content: ""; position: absolute; left: 0; right: 0; height: 0.4rem; border-radius: var(--fh-radius-pill); background: rgba(236, 237, 230, 0.14); }
+.slider i { position: absolute; left: 0; height: 0.4rem; width: var(--v); border-radius: var(--fh-radius-pill); background: var(--fh-accent-primary); }
+.slider b { position: absolute; left: calc(var(--v) - 0.8rem); width: 1.6rem; height: 1.6rem; border-radius: 50%; background: var(--fh-text-primary); box-shadow: var(--fh-shadow-1); }
+.toggle { width: 4.4rem; height: 2.6rem; border-radius: var(--fh-radius-pill); background: var(--fh-bg-elevated); border: 1px solid var(--fh-border); position: relative; flex: none; }
+.toggle::after { content: ""; position: absolute; top: 0.2rem; left: 0.2rem; width: 2rem; height: 2rem; border-radius: 50%; background: var(--fh-text-secondary); }
+.toggle.on { background: var(--fh-accent-primary); border-color: transparent; }
+.toggle.on::after { left: 2.2rem; background: var(--fh-text-on-accent); }
+
+/* ── Lists and tables ────────────────────────────────────────────────── */
+.list { display: flex; flex-direction: column; }
+.li { display: flex; align-items: center; gap: var(--fh-space-3); min-height: 4.4rem; padding: 0 var(--fh-space-3); border-bottom: 1px solid var(--fh-border); font-size: var(--fh-text-sm); position: relative; }
+.li.compact { min-height: 3.6rem; }
+.li .t { font-weight: var(--fh-weight-medium); }
+.li .s { font-size: var(--fh-text-xs); color: var(--fh-text-muted); }
+.li.hov { background: var(--fh-bg-elevated); }
+.li.sel { background: var(--fh-bg-elevated); }
+.li.sel::before { content: ""; position: absolute; left: 0; top: 0.6rem; bottom: 0.6rem; width: 2px; border-radius: 2px; background: var(--fh-accent-primary); }
+.li.own::before { content: ""; position: absolute; left: 0; top: 0.6rem; bottom: 0.6rem; width: 2px; border-radius: 2px; background: var(--fh-accent-secondary); }
+.li.dis { opacity: 0.4; }
+.tbl { width: 100%; border-collapse: collapse; font-size: var(--fh-text-sm); }
+.tbl th { text-align: left; font-size: var(--fh-text-2xs); font-weight: var(--fh-weight-semibold); letter-spacing: 0.08em; text-transform: uppercase; color: var(--fh-text-secondary); padding: 0 var(--fh-space-3) var(--fh-space-2); border-bottom: 1px solid var(--fh-border); white-space: nowrap; }
+.tbl td { padding: 0 var(--fh-space-3); height: 3.6rem; border-bottom: 1px solid var(--fh-border); white-space: nowrap; }
+.tbl tr.own td:first-child { box-shadow: inset 2px 0 0 var(--fh-accent-secondary); }
+.tbl tr.sel td { background: var(--fh-bg-elevated); }
+.tbl tr.sel td:first-child { box-shadow: inset 2px 0 0 var(--fh-accent-primary); }
+.tbl .num, .tbl td.mono { font-family: var(--fh-font-mono); }
+.tbl td.r, .tbl th.r { text-align: right; }
+
+/* ── Gauges ──────────────────────────────────────────────────────────── */
+.bar { height: 0.4rem; border-radius: var(--fh-radius-xs); background: rgba(236, 237, 230, 0.14); overflow: hidden; flex: 1 1 auto; }
+.bar.h6 { height: 0.6rem; }
+.bar > i { display: block; height: 100%; width: var(--v); background: var(--c, var(--fh-accent-primary)); border-radius: inherit; }
+.ring { position: relative; width: 4.4rem; height: 4.4rem; display: grid; place-items: center; color: var(--c); flex: none; }
+.ring svg.r { position: absolute; inset: 0; width: 100%; height: 100%; transform: rotate(-90deg); }
+.ring .trk { fill: none; stroke: rgba(236, 237, 230, 0.14); stroke-width: 3.2; }
+.ring .arc { fill: none; stroke: var(--c); stroke-width: 3.2; stroke-linecap: round; }
+.ring .ico { width: 1.8rem; height: 1.8rem; }
+.pulse { animation: pulse 1000ms linear infinite; }
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.45; } }
+.blink { animation: blink 660ms steps(1) infinite; }
+@keyframes blink { 50% { opacity: 0.15; } }
+@media (prefers-reduced-motion: reduce) { .pulse, .blink, .spin, .skel::after { animation: none; } }
+
+/* ── States ──────────────────────────────────────────────────────────── */
+.skel { position: relative; overflow: hidden; background: rgba(236, 237, 230, 0.06); border-radius: var(--fh-radius-xs); }
+.skel::after { content: ""; position: absolute; inset: 0; transform: translateX(-100%); background: linear-gradient(90deg, transparent, rgba(236, 237, 230, 0.06), transparent); animation: shimmer 1400ms linear infinite; }
+@keyframes shimmer { to { transform: translateX(100%); } }
+.state { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: var(--fh-space-2); padding: var(--fh-space-8) var(--fh-space-6); color: var(--fh-text-secondary); font-size: var(--fh-text-sm); }
+.state .st-ico { color: var(--fh-text-muted); margin-bottom: var(--fh-space-1); }
+.state .st-t { color: var(--fh-text-primary); font-size: var(--fh-text-md); font-weight: var(--fh-weight-semibold); }
+.state.error .st-ico { color: var(--fh-danger); }
+.banner { display: flex; align-items: center; gap: var(--fh-space-3); padding: var(--fh-space-2) var(--fh-space-3); border-radius: var(--fh-radius-sm); background: rgba(244, 106, 88, 0.12); border: 1px solid rgba(244, 106, 88, 0.45); font-size: var(--fh-text-sm); }
+.banner.w { background: rgba(232, 176, 78, 0.12); border-color: rgba(232, 176, 78, 0.45); }
+.banner .ico { color: var(--fh-danger); } .banner.w .ico { color: var(--fh-warning); }
+.dimmed { opacity: 0.5; }
+
+/* ── HUD ─────────────────────────────────────────────────────────────── */
+.hud-chip { background: var(--fh-material-regular); border: var(--fh-border-width) solid var(--fh-border); border-radius: var(--fh-radius-md); box-shadow: var(--fh-shadow-1); }
+.status-card { position: absolute; right: 3.2rem; top: 3.2rem; width: 30rem; padding: var(--fh-space-3) var(--fh-space-4); display: flex; flex-direction: column; gap: var(--fh-space-2); }
+.money { display: flex; align-items: baseline; justify-content: space-between; gap: var(--fh-space-3); }
+.money .v { font-size: var(--fh-text-lg); font-weight: var(--fh-weight-semibold); letter-spacing: -0.01em; }
+.delta { font-family: var(--fh-font-mono); font-size: var(--fh-text-xs); margin-right: auto; padding-left: var(--fh-space-2); }
+.notes { position: absolute; right: 3.2rem; width: 36rem; display: flex; flex-direction: column; gap: var(--fh-space-2); }
+.note { display: grid; grid-template-columns: 0.3rem 2rem 1fr; gap: var(--fh-space-3); align-items: start; padding: var(--fh-space-3) var(--fh-space-4) var(--fh-space-3) var(--fh-space-3); border-radius: var(--fh-radius-md); background: var(--fh-material-regular); border: 1px solid var(--fh-border); box-shadow: var(--fh-shadow-2); position: relative; overflow: hidden; }
+.note .rl { align-self: stretch; border-radius: var(--fh-radius-pill); background: var(--c); }
+.note .ico { color: var(--c); margin-top: 0.1rem; }
+.note .nt { font-size: var(--fh-text-md); font-weight: var(--fh-weight-semibold); line-height: 1.3; display: flex; justify-content: space-between; gap: var(--fh-space-2); }
+.note .nt small { font-size: var(--fh-text-2xs); color: var(--fh-text-secondary); font-weight: var(--fh-weight-medium); font-family: var(--fh-font-mono); }
+.note .nb { font-size: var(--fh-text-sm); color: var(--fh-text-secondary); line-height: 1.4; }
+.note .tl { position: absolute; left: 0; bottom: 0; height: 1px; width: var(--v); background: var(--c); opacity: 0.8; }
+.minimap { position: absolute; left: 3.2rem; bottom: 4rem; width: 27.2rem; }
+.mm-bars { display: grid; gap: 0.4rem; margin-bottom: var(--fh-space-2); }
+.mm-bar { display: flex; align-items: center; gap: var(--fh-space-2); padding: 0.5rem var(--fh-space-2); border-radius: var(--fh-radius-sm); background: var(--fh-material-regular); border: 1px solid var(--fh-border); }
+.mm-bar .ico { width: 1.4rem; height: 1.4rem; color: var(--c); }
+.mm-bar b { font-family: var(--fh-font-mono); font-size: var(--fh-text-xs); font-weight: var(--fh-weight-medium); min-width: 3ch; text-align: right; }
+.mm-frame { height: 17.6rem; border-radius: var(--fh-radius-md); border: 1px solid var(--fh-border); box-shadow: var(--fh-shadow-1); overflow: hidden; position: relative; background: #2a2f33; }
+.mm-street { margin-top: var(--fh-space-2); display: flex; justify-content: space-between; align-items: center; padding: 0.5rem var(--fh-space-3); border-radius: var(--fh-radius-sm); background: var(--fh-material-regular); border: 1px solid var(--fh-border); font-size: var(--fh-text-xs); }
+.needs { position: absolute; left: 31.6rem; bottom: 4rem; display: flex; flex-direction: column; gap: var(--fh-space-2); align-items: flex-start; }
+.needs-grid { display: grid; grid-template-columns: repeat(2, 5.6rem); gap: var(--fh-space-2); }
+.need { width: 5.6rem; height: 5.6rem; border-radius: var(--fh-radius-md); background: var(--fh-material-regular); border: 1px solid var(--fh-border); display: grid; place-items: center; position: relative; }
+.need .nv { position: absolute; bottom: -0.1rem; font-family: var(--fh-font-mono); font-size: var(--fh-text-2xs); font-weight: var(--fh-weight-semibold); background: var(--fh-bg-base); padding: 0 0.4rem; border-radius: var(--fh-radius-xs); line-height: 1.4; }
+.need.crit { border: var(--fh-border-width-strong) solid var(--fh-danger); }
+.voice { display: inline-flex; align-items: stretch; height: 3.2rem; border-radius: var(--fh-radius-pill); background: var(--fh-material-regular); border: 1px solid var(--fh-border); overflow: hidden; font-size: var(--fh-text-xs); font-weight: var(--fh-weight-semibold); }
+.voice.talk { border: var(--fh-border-width-strong) solid var(--fh-hud-voice); }
+.voice .vs { display: flex; align-items: center; gap: var(--fh-space-2); padding: 0 var(--fh-space-3); }
+.voice .vs + .vs { border-left: 1px solid var(--fh-border); }
+.ticks { display: inline-flex; gap: 0.2rem; align-items: flex-end; }
+.ticks i { width: 0.3rem; border-radius: 1px; background: rgba(236, 237, 230, 0.2); }
+.ticks i:nth-child(1) { height: 0.6rem; } .ticks i:nth-child(2) { height: 1rem; } .ticks i:nth-child(3) { height: 1.4rem; }
+.ticks i.on { background: var(--c, var(--fh-hud-voice)); }
+.voice .tx { background: var(--fh-hud-radio); color: var(--fh-text-on-accent); }
+.ammo { position: absolute; right: 3.2rem; bottom: 4rem; padding: var(--fh-space-3) var(--fh-space-4); display: flex; flex-direction: column; align-items: flex-end; gap: var(--fh-space-1); }
+.ammo .cnt { font-family: var(--fh-font-mono); font-size: var(--fh-text-4xl); font-weight: var(--fh-weight-medium); line-height: 1; letter-spacing: -0.03em; }
+.ammo .res { font-family: var(--fh-font-mono); font-size: var(--fh-text-xl); color: var(--fh-text-secondary); }
+.veh { position: absolute; left: 50%; bottom: 4rem; transform: translateX(-50%); width: 56rem; padding: var(--fh-space-3) var(--fh-space-5) var(--fh-space-3); border-radius: var(--fh-radius-lg); display: grid; grid-template-columns: 15rem 1fr 15rem; align-items: center; gap: var(--fh-space-4); }
+.speed { position: relative; display: grid; place-items: center; height: 12.4rem; }
+.speed svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.speed .sv { font-size: calc(var(--fh-text-4xl) * 1.5); font-weight: var(--fh-weight-semibold); letter-spacing: -0.03em; line-height: 1; margin-top: 1.2rem; }
+.speed .sv .z { color: var(--fh-text-muted); opacity: 0.55; }
+.ind { width: 3.6rem; height: 3.6rem; display: grid; place-items: center; color: var(--fh-text-muted); opacity: 0.45; }
+.ind.on { color: var(--fh-success); opacity: 1; }
+.vrow { display: flex; align-items: center; gap: var(--fh-space-2); font-size: var(--fh-text-xs); }
+.vglyph { display: inline-flex; align-items: center; gap: var(--fh-space-1); color: var(--fh-text-muted); }
+.vglyph.on { color: var(--fh-text-primary); }
+.progress { position: absolute; left: 50%; transform: translateX(-50%); bottom: 22rem; width: 40rem; padding: var(--fh-space-3) var(--fh-space-4); border-radius: var(--fh-radius-md); display: grid; gap: var(--fh-space-2); }
+.hint { position: absolute; left: 50%; bottom: 31.2rem; transform: translateX(-50%); display: flex; flex-direction: column; gap: var(--fh-space-2); align-items: flex-start; }
+.hint-p { display: inline-flex; align-items: center; gap: var(--fh-space-3); height: 4.4rem; padding: 0 var(--fh-space-5) 0 0.8rem; border-radius: var(--fh-radius-pill); font-size: var(--fh-text-md); font-weight: var(--fh-weight-medium); white-space: nowrap; }
+.hint-p .ctx { font-size: var(--fh-text-xs); color: var(--fh-text-secondary); font-weight: var(--fh-weight-regular); }
+.hold { position: relative; width: 3.6rem; height: 3.6rem; display: grid; place-items: center; }
+.hold svg { position: absolute; inset: 0; transform: rotate(-90deg); }
+.chat { position: absolute; left: 3.2rem; top: 3.2rem; width: 52rem; display: flex; flex-direction: column; gap: 0.4rem; }
+.cl { display: flex; gap: var(--fh-space-2); align-items: baseline; padding: 0.5rem var(--fh-space-3); border-radius: var(--fh-radius-sm); background: var(--fh-material-regular); font-size: var(--fh-text-sm); align-self: flex-start; max-width: 100%; }
+.cl .ts { font-family: var(--fh-font-mono); color: var(--fh-text-muted); font-size: var(--fh-text-xs); }
+.tag { display: inline-flex; align-items: center; height: 1.8rem; padding: 0 0.6rem; border-radius: var(--fh-radius-xs); font-size: var(--fh-text-2xs); font-weight: var(--fh-weight-bold); letter-spacing: 0.06em; border: 1px solid var(--c); color: var(--c); flex: none; position: relative; top: -0.1rem; }
+
+/* ── Full-screen menu pieces ─────────────────────────────────────────── */
+.slot { position: relative; aspect-ratio: 1; border-radius: var(--fh-radius-sm); background: rgba(32, 35, 30, 0.7); border: 1px solid var(--fh-border); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.4rem; color: var(--fh-text-secondary); }
+.slot .qty { position: absolute; top: 0.6rem; right: 0.8rem; font-family: var(--fh-font-mono); font-size: var(--fh-text-xs); color: var(--fh-text-primary); }
+.slot .hk { position: absolute; top: 0.6rem; left: 0.8rem; font-family: var(--fh-font-mono); font-size: var(--fh-text-2xs); color: var(--fh-text-muted); }
+.slot .nm { position: absolute; bottom: 0.7rem; left: 0.8rem; right: 0.8rem; font-size: var(--fh-text-2xs); color: var(--fh-text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-align: center; }
+.slot .dur { position: absolute; bottom: 0.3rem; left: 0.8rem; right: 0.8rem; height: 0.2rem; border-radius: 1px; background: rgba(236, 237, 230, 0.14); }
+.slot .dur i { display: block; height: 100%; width: var(--v); background: var(--c, var(--fh-success)); }
+.slot .ico { width: 3.2rem; height: 3.2rem; color: var(--fh-text-secondary); margin-top: -1rem; }
+.slot.sel { border: var(--fh-border-width-strong) solid var(--fh-accent-primary); background: rgba(211, 194, 154, 0.08); }
+.slot.drop-ok { border: var(--fh-border-width-strong) solid var(--fh-accent-primary); background: rgba(211, 194, 154, 0.12); }
+.slot.drop-bad { border: var(--fh-border-width-strong) solid var(--fh-danger); }
+.slot.src { opacity: 0.4; border-style: dashed; }
+.slot.empty { background: rgba(32, 35, 30, 0.35); }
+.ghost { position: absolute; width: 10.4rem; height: 10.4rem; border: 1px solid var(--fh-accent-primary); box-shadow: var(--fh-shadow-2); background: rgba(32, 35, 30, 0.95); transform: rotate(-2deg); z-index: 5; }
+.tablet { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 156rem; height: 88rem; padding: 1.2rem; border-radius: var(--fh-radius-xl); background: var(--fh-material-thick); border: 1px solid var(--fh-border); box-shadow: var(--fh-shadow-3); }
+.tablet-s { width: 100%; height: 100%; border-radius: calc(var(--fh-radius-xl) - 1.2rem); background: var(--fh-bg-surface); overflow: hidden; display: grid; grid-template-rows: 0.3rem 5.6rem 1fr; }
+.tablet-s > .rail-top { grid-column: 1 / -1; }
+.tablet-body { display: grid; grid-template-columns: 22rem 1fr; min-height: 0; }
+.tnav { border-right: 1px solid var(--fh-border); padding: var(--fh-space-3); display: flex; flex-direction: column; gap: 0.2rem; }
+.tnav a { display: flex; align-items: center; gap: var(--fh-space-3); height: 4rem; padding: 0 var(--fh-space-3); border-radius: var(--fh-radius-sm); font-size: var(--fh-text-sm); font-weight: var(--fh-weight-medium); color: var(--fh-text-secondary); position: relative; text-decoration: none; }
+.tnav a.on { background: var(--fh-bg-elevated); color: var(--fh-text-primary); }
+.tnav a.on::before { content: ""; position: absolute; left: 0; top: 0.8rem; bottom: 0.8rem; width: 2px; border-radius: 2px; background: var(--fh-accent-secondary); }
+.tnav a .badge { margin-left: auto; }
+.tmain { padding: var(--fh-space-5) var(--fh-space-6); min-height: 0; overflow: hidden; display: grid; gap: var(--fh-space-5); }
+.sect-h { display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--fh-space-2); }
+.phone { position: relative; width: 36rem; height: 74rem; padding: 0.8rem; border-radius: var(--fh-radius-xl); background: var(--fh-material-thick); border: 1px solid var(--fh-border); box-shadow: var(--fh-shadow-3); }
+.phone-s { position: relative; width: 100%; height: 100%; border-radius: calc(var(--fh-radius-xl) - 0.8rem); background: var(--fh-bg-base); overflow: hidden; display: flex; flex-direction: column; }
+.ph-status { display: flex; justify-content: space-between; align-items: center; height: 4.4rem; padding: 0 var(--fh-space-6) 0 var(--fh-space-6); font-size: var(--fh-text-xs); font-weight: var(--fh-weight-semibold); flex: none; }
+.ph-island { position: absolute; top: 1rem; left: 50%; transform: translateX(-50%); width: 9.6rem; height: 2.6rem; border-radius: var(--fh-radius-pill); background: #000; }
+.app { display: flex; flex-direction: column; align-items: center; gap: 0.6rem; font-size: var(--fh-text-2xs); color: var(--fh-text-secondary); }
+.app i { width: 6.4rem; height: 6.4rem; border-radius: 1.6rem; display: grid; place-items: center; background: var(--fh-bg-elevated); border: 1px solid var(--fh-border); color: var(--c, var(--fh-text-primary)); font-style: normal; position: relative; }
+.app i .badge { position: absolute; top: -0.6rem; right: -0.6rem; }
+.bubble { max-width: 76%; padding: var(--fh-space-2) var(--fh-space-3); border-radius: 1.6rem; font-size: var(--fh-text-sm); line-height: 1.4; }
+.bubble.me { align-self: flex-end; background: var(--fh-accent-primary); color: var(--fh-text-on-accent); border-bottom-right-radius: 0.4rem; }
+.bubble.them { align-self: flex-start; background: var(--fh-bg-elevated); border-bottom-left-radius: 0.4rem; }
+.avatar { width: 4rem; height: 4rem; border-radius: 50%; display: grid; place-items: center; background: #2A2E27; border: 1px solid var(--fh-border); font-size: var(--fh-text-sm); font-weight: var(--fh-weight-semibold); color: var(--fh-text-secondary); flex: none; }
+.ped { position: absolute; width: 22rem; height: 64rem; }
+.ped::before { content: ""; position: absolute; left: 50%; top: 0; width: 7.6rem; height: 9.2rem; transform: translateX(-50%); border-radius: 46% 46% 42% 42%; background: linear-gradient(180deg, #5b5a55, #3a3a36); }
+.ped::after { content: ""; position: absolute; left: 50%; top: 9.6rem; width: 20rem; height: 54rem; transform: translateX(-50%); border-radius: 8rem 8rem 3rem 3rem; background: linear-gradient(180deg, #44473f 0%, #2d302a 55%, #22251f 100%); clip-path: polygon(10% 0, 90% 0, 100% 46%, 84% 48%, 78% 100%, 54% 100%, 50% 58%, 46% 100%, 22% 100%, 16% 48%, 0 46%); }
+.ped.dim { opacity: 0.85; }
+.kv { display: grid; grid-template-columns: auto 1fr; gap: var(--fh-space-1) var(--fh-space-4); font-size: var(--fh-text-sm); }
+.kv dt { color: var(--fh-text-secondary); } .kv dd { margin: 0; text-align: right; }
+.swatch { width: 2.8rem; height: 2.8rem; border-radius: 50%; border: 1px solid rgba(0, 0, 0, 0.4); }
+.swatch.on { box-shadow: 0 0 0 2px var(--fh-bg-surface), 0 0 0 4px var(--fh-accent-primary); }
+.stepper { display: inline-flex; align-items: center; height: 3.2rem; border-radius: var(--fh-radius-pill); background: var(--fh-bg-elevated); border: 1px solid var(--fh-border); }
+.stepper span { width: 3.2rem; display: grid; place-items: center; color: var(--fh-text-secondary); }
+.stepper b { min-width: 3.2rem; text-align: center; font-family: var(--fh-font-mono); font-weight: var(--fh-weight-medium); font-size: var(--fh-text-sm); }
+.dialog { border-radius: var(--fh-radius-lg); padding: var(--fh-space-6); display: flex; flex-direction: column; gap: var(--fh-space-4); }
+.dialog .dt { font-size: var(--fh-text-xl); font-weight: var(--fh-weight-semibold); line-height: 1.25; }
+.dialog .acts { display: flex; justify-content: flex-end; gap: var(--fh-space-3); margin-top: var(--fh-space-2); }
+.sticker { align-self: flex-start; position: absolute; z-index: 20; display: inline-flex; align-items: center; gap: 0.6rem; padding: 0.3rem 0.9rem; border-radius: 999px; font: 600 1.1rem/1.4 var(--fh-font-sans); letter-spacing: 0.06em; text-transform: uppercase; background: rgba(12, 13, 11, 0.92); color: #D3C29A; border: 1px dashed rgba(211, 194, 154, 0.55); }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-heart" viewBox="0 0 24 24"><path d="M19 14c1.5-1.5 3-3.2 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.8 0-3 .5-4.5 2-1.5-1.5-2.7-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4 3 5.5l7 7Z"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></symbol>
+    <symbol id="i-food" viewBox="0 0 24 24"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2M7 2v20M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/></symbol>
+    <symbol id="i-drop" viewBox="0 0 24 24"><path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z"/></symbol>
+    <symbol id="i-pulse" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></symbol>
+    <symbol id="i-zap" viewBox="0 0 24 24"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></symbol>
+    <symbol id="i-mic" viewBox="0 0 24 24"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3ZM19 10v2a7 7 0 0 1-14 0v-2M12 19v3"/></symbol>
+    <symbol id="i-micoff" viewBox="0 0 24 24"><path d="M2 2l20 20M9 9v3a3 3 0 0 0 5.1 2.1M15 9.3V5a3 3 0 0 0-5.7-1.3M19 10v2a7 7 0 0 1-1.1 3.8M5 10v2a7 7 0 0 0 11.4 5.4M12 19v3"/></symbol>
+    <symbol id="i-radio" viewBox="0 0 24 24"><path d="M4.9 19.1C1 15.2 1 8.8 4.9 4.9M7.8 16.2c-2.3-2.3-2.3-6.1 0-8.5M16.2 7.8c2.3 2.3 2.3 6.1 0 8.5M19.1 4.9C23 8.8 23 15.1 19.1 19"/><circle cx="12" cy="12" r="2"/></symbol>
+    <symbol id="i-fuel" viewBox="0 0 24 24"><path d="M3 22h12M4 9h10M14 22V4a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v18M14 13h2a2 2 0 0 1 2 2v2a2 2 0 0 0 4 0V9.8a2 2 0 0 0-.6-1.4L18 5"/></symbol>
+    <symbol id="i-belt" viewBox="0 0 24 24"><circle cx="12" cy="4.5" r="2.2"/><path d="M6.5 21v-6.5a5.5 5.5 0 0 1 11 0V21M8 9.5l9.5 9.5"/></symbol>
+    <symbol id="i-engine" viewBox="0 0 24 24"><path d="M7 8h7l2 2h3v7h-3l-2 2H8l-2-2H4v-7h3zM9 5h5M11.5 5v3M2 11v5M22 10v8"/></symbol>
+    <symbol id="i-left" viewBox="0 0 24 24"><path d="M10 5 3 12l7 7v-4.5h10v-5H10z"/></symbol>
+    <symbol id="i-right" viewBox="0 0 24 24"><path d="M14 5l7 7-7 7v-4.5H4v-5h10z"/></symbol>
+    <symbol id="i-beam" viewBox="0 0 24 24"><path d="M11 6C6.5 6 4 8.7 4 12s2.5 6 7 6h1V6zM15.5 7.5h6M15.5 12h6M15.5 16.5h6"/></symbol>
+    <symbol id="i-cruise" viewBox="0 0 24 24"><path d="M12 14l4-4M3.3 19a10 10 0 1 1 17.4 0"/></symbol>
+    <symbol id="i-wallet" viewBox="0 0 24 24"><path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4"/></symbol>
+    <symbol id="i-bank" viewBox="0 0 24 24"><path d="M3 22h18M6 18v-7M10 18v-7M14 18v-7M18 18v-7M12 2l9 5H3z"/></symbol>
+    <symbol id="i-case" viewBox="0 0 24 24"><path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><rect x="2" y="6" width="20" height="14" rx="2"/></symbol>
+    <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 2v5M12 17v5M2 12h5M17 12h5"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></symbol>
+    <symbol id="i-msg" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></symbol>
+    <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M22 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/><circle cx="9" cy="7" r="4"/></symbol>
+    <symbol id="i-car" viewBox="0 0 24 24"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9L18 10l-2.7-3.6A2 2 0 0 0 13.7 6H8.3a2 2 0 0 0-1.6.8L4 10l-1.5.6C1.7 11 1 11.8 1 12.7V16c0 .6.4 1 1 1h2M9 17h6"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></symbol>
+    <symbol id="i-wrench" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.8-3.8a6 6 0 0 1-7.9 7.9l-6.9 6.9a2.1 2.1 0 0 1-3-3l6.9-6.9a6 6 0 0 1 7.9-7.9z"/></symbol>
+    <symbol id="i-box" viewBox="0 0 24 24"><path d="M21 8 12 3 3 8v8l9 5 9-5zM3 8l9 5 9-5M12 13v8"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0zM12 9v4M12 17h.01"/></symbol>
+    <symbol id="i-alertc" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></symbol>
+    <symbol id="i-okc" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 12.5l2.7 2.7L16.5 9.5"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-minus" viewBox="0 0 24 24"><path d="M5 12h14"/></symbol>
+    <symbol id="i-chev" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></symbol>
+    <symbol id="i-chevl" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></symbol>
+    <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2zM9 22V12h6v10"/></symbol>
+    <symbol id="i-sliders" viewBox="0 0 24 24"><path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M1 14h6M9 8h6M17 16h6"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol>
+    <symbol id="i-cart" viewBox="0 0 24 24"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2 2h2l2.7 12.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L22 7H5.1"/></symbol>
+    <symbol id="i-shirt" viewBox="0 0 24 24"><path d="M20.4 3.5 16 2a4 4 0 0 1-8 0L3.6 3.5a2 2 0 0 0-1.3 2.2l.6 3.5a1 1 0 0 0 1 .8H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.2a1 1 0 0 0 1-.8l.6-3.5a2 2 0 0 0-1.4-2.2z"/></symbol>
+    <symbol id="i-hammer" viewBox="0 0 24 24"><path d="M15 12l-8.5 8.5a2.1 2.1 0 0 1-3-3L12 9M17.6 15 22 10.6M20 8.6 15.4 4 13 6.4 17.6 11z"/></symbol>
+    <symbol id="i-file" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zM14 2v6h6M16 13H8M16 17H8"/></symbol>
+    <symbol id="i-id" viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><circle cx="8" cy="12" r="2.2"/><path d="M14 10h4M14 14h4"/></symbol>
+    <symbol id="i-power" viewBox="0 0 24 24"><path d="M12 2v10M18.4 6.6a9 9 0 1 1-12.8 0"/></symbol>
+    <symbol id="i-signal" viewBox="0 0 24 24"><path d="M2 20h.01M7 20v-4M12 20v-8M17 20V8M22 20V4"/></symbol>
+    <symbol id="i-battery" viewBox="0 0 24 24"><rect x="2" y="7" width="17" height="10" rx="2"/><path d="M22 11v2M5 10v4M8 10v4M11 10v4"/></symbol>
+    <symbol id="i-camera" viewBox="0 0 24 24"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3z"/><circle cx="12" cy="13" r="3"/></symbol>
+    <symbol id="i-music" viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></symbol>
+    <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></symbol>
+    <symbol id="i-flag" viewBox="0 0 24 24"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1zM4 22v-7"/></symbol>
+    <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></symbol>
+    <symbol id="i-ban" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M4.9 4.9l14.2 14.2"/></symbol>
+    <symbol id="i-cross" viewBox="0 0 24 24"><path d="M9 3h6v6h6v6h-6v6H9v-6H3V9h6z"/></symbol>
+    <symbol id="i-send" viewBox="0 0 24 24"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4z"/></symbol>
+    <symbol id="i-trash" viewBox="0 0 24 24"><path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></symbol>
+    <symbol id="i-share" viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8M16 6l-4-4-4 4M12 2v13"/></symbol>
+    <symbol id="i-hand" viewBox="0 0 24 24"><path d="M18 11V6a2 2 0 0 0-4 0v5M14 10V4a2 2 0 0 0-4 0v6M10 10.5V6a2 2 0 0 0-4 0v8a8 8 0 0 0 8 8h1a7 7 0 0 0 7-7v-3a2 2 0 0 0-4 0"/></symbol>
+    <symbol id="i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M16.2 7.8l-2.1 6.3-6.3 2.1 2.1-6.3z"/></symbol>
+    <symbol id="i-bed" viewBox="0 0 24 24"><path d="M2 4v16M2 8h18a2 2 0 0 1 2 2v10M2 17h20M6 8v9"/></symbol>
+    <symbol id="i-vol" viewBox="0 0 24 24"><path d="M11 5 6 9H2v6h4l5 4zM15.5 8.5a5 5 0 0 1 0 7M19 5a10 10 0 0 1 0 14"/></symbol>
+    <symbol id="i-pause" viewBox="0 0 24 24"><path d="M7 4h3v16H7zM14 4h3v16h-3z"/></symbol>
+    <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 15-6.7L21 8M21 3v5h-5M21 12a9 9 0 0 1-15 6.7L3 16M3 21v-5h5"/></symbol>
+    <symbol id="i-pill" viewBox="0 0 24 24"><path d="M10.5 20.5a5 5 0 0 1-7-7l10-10a5 5 0 0 1 7 7zM8.5 8.5l7 7"/></symbol>
+    <symbol id="i-gavel" viewBox="0 0 24 24"><path d="M14 13l-7.5 7.5a2.1 2.1 0 0 1-3-3L11 10M16 16l6-6M8 8l6-6M9 7l8 8M21 11l-8-8"/></symbol>
+    <symbol id="i-gun" viewBox="0 0 24 24"><path d="M2 8h18l1 3h-6l-1 2h-3l-2 5H5l1.5-6H3z"/></symbol>
+    <symbol id="i-key" viewBox="0 0 24 24"><circle cx="7.5" cy="15.5" r="5.5"/><path d="M21 2l-9.6 9.6M15.5 7.5l3 3L22 7l-3-3"/></symbol>
+    <symbol id="i-door" viewBox="0 0 24 24"><path d="M13 4h3a2 2 0 0 1 2 2v14M2 20h3M13 20h9M10 12v.01M13 4.6v16.8a.6.6 0 0 1-.8.6L5 20V5.6a1 1 0 0 1 .7-1L12 3a.8.8 0 0 1 1 .6z"/></symbol>
+    <symbol id="i-smile" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/></symbol>
+    <symbol id="i-receipt" viewBox="0 0 24 24"><path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1zM16 8H8M16 12H8M13 16H8"/></symbol>
+    <symbol id="i-map" viewBox="0 0 24 24"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2zM9 4v14M15 6v14"/></symbol>
+    <symbol id="i-anchor" viewBox="0 0 24 24"><circle cx="12" cy="5" r="3"/><path d="M12 22V8M5 12H2a10 10 0 0 0 20 0h-3"/></symbol>
+    <symbol id="i-server" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="8" rx="2"/><rect x="2" y="13" width="20" height="8" rx="2"/><path d="M6 7h.01M6 17h.01"/></symbol>
+    <symbol id="i-logs" viewBox="0 0 24 24"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24"><path d="M3 3v18h18M7 16v-5M12 16V8M17 16v-8"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></symbol>
+    <symbol id="i-snow" viewBox="0 0 24 24"><path d="M12 2v20M4.9 4.9l14.2 14.2M2 12h20M4.9 19.1 19.1 4.9"/></symbol>
+  </defs>
+</svg>
+
+<div class="doc-bar">
+  <b>FiveM Apple Tactical · Variante F</b>
+  <span>Referenz</span>
+  <a href="?res=720" data-res="720">1280×720</a>
+  <a href="?res=1080" data-res="1080">1920×1080</a>
+  <a href="?res=1440" data-res="1440">2560×1440</a>
+  <span>·</span>
+  <a href="#" id="blurToggle">NUI-Backdrop-Blur: an</a>
+  <span id="resInfo"></span>
+</div>
+
+<!-- ═══ 00 TOKENS ═══════════════════════════════════════════════════════ -->
+<section class="doc-sec" id="s-tokens">
+  <div class="doc-cap"><h2>00 · Tokens</h2><p>Palette with contrast against the background named in DESIGN.md §2, type scale, spacing, radii, materials. HUD colours are measured on <code>bg-overlay</code> over pure white (worst case).</p></div>
+  <div class="stage"><div class="world" data-world="day"></div>
+    <div class="layer" style="padding: 3.2rem; display: grid; grid-template-columns: 1fr 1fr; gap: 2.4rem; align-content: start;">
+      <div class="solid" style="border-radius: var(--fh-radius-lg); padding: 2rem; grid-row: span 2;">
+        <div class="lbl" style="margin-bottom: 1.2rem;">Palette · --fh-*</div>
+        <div id="swatches" style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem 2rem;"></div>
+      </div>
+      <div class="solid" style="border-radius: var(--fh-radius-lg); padding: 2rem;">
+        <div class="lbl" style="margin-bottom: 1.2rem;">Typografie · Inter / JetBrains Mono</div>
+        <div id="typescale" class="col g2" style="align-items: stretch;"></div>
+      </div>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2.4rem;">
+        <div class="solid" style="border-radius: var(--fh-radius-lg); padding: 2rem;">
+          <div class="lbl" style="margin-bottom: 1.2rem;">Abstände · 1 = 0,4rem</div>
+          <div id="spacing" class="col g1" style="align-items: stretch;"></div>
+        </div>
+        <div class="col g3" style="align-items: stretch;">
+          <div class="solid" style="border-radius: var(--fh-radius-lg); padding: 2rem;">
+            <div class="lbl" style="margin-bottom: 1.2rem;">Radien · konzentrisch</div>
+            <div class="flex g3" id="radii"></div>
+          </div>
+          <div class="flex g3" style="align-items: stretch;">
+            <div class="glass-thin" style="flex:1; border-radius: var(--fh-radius-md); padding: 1.2rem;"><div class="lbl">Material thin</div><div class="tsm">0,56 · nur über NUI/Blur</div></div>
+            <div class="glass" style="flex:1; border-radius: var(--fh-radius-md); padding: 1.2rem;"><div class="lbl">Material regular</div><div class="tsm">0,80 · HUD-Standard</div></div>
+            <div class="glass-thick" style="flex:1; border-radius: var(--fh-radius-md); padding: 1.2rem;"><div class="lbl">Material thick</div><div class="tsm">0,90 · Dialoge, Text</div></div>
+          </div>
+          <div class="flex g3" style="align-items: stretch;">
+            <div class="solid" style="flex:1; border-radius: var(--fh-radius-md); padding: 1.2rem; box-shadow: var(--fh-shadow-1);"><div class="lbl">Shadow 1</div></div>
+            <div class="solid" style="flex:1; border-radius: var(--fh-radius-md); padding: 1.2rem; box-shadow: var(--fh-shadow-2);"><div class="lbl">Shadow 2</div></div>
+            <div class="solid" style="flex:1; border-radius: var(--fh-radius-md); padding: 1.2rem; box-shadow: var(--fh-glow-accent);"><div class="lbl">Glow accent</div></div>
+            <div class="solid" style="flex:1; border-radius: var(--fh-radius-md); padding: 1.2rem; box-shadow: var(--fh-focus-ring);"><div class="lbl">Focus ring</div></div>
+          </div>
+          <div class="solid" style="border-radius: var(--fh-radius-md); padding: 1.2rem 1.6rem;">
+            <div class="lbl" style="margin-bottom: 0.8rem;">Bewegung</div>
+            <div class="mono tsm sec">fast 120ms · enter 200ms · exit 140ms · slow 320ms<br>standard cubic-bezier(0.23,1,0.32,1) · spring cubic-bezier(0.34,1.36,0.64,1)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 01 LOADING ══════════════════════════════════════════════════════ -->
+<section class="doc-sec" id="s-loading">
+  <div class="doc-cap"><h2>01 · Ladebildschirm</h2><p>Filled: loading at 46 %. The stage text, tip and news are shown. Other states (initialising, stalled, complete) are drawn in the strip at the top right.</p></div>
+  <div class="stage"><div class="world" data-world="dusk"></div>
+    <div class="layer" style="background: linear-gradient(180deg, rgba(12,13,11,0.35) 0%, rgba(12,13,11,0) 30%, rgba(12,13,11,0.85) 100%);"></div>
+    <div class="layer">
+      <div style="position:absolute; left: 6.4rem; top: 6.4rem;">
+        <div class="lbl" style="letter-spacing: 0.3em;">Roleplay · Seit 2024</div>
+        <div style="font-size: var(--fh-text-4xl); font-weight: 600; letter-spacing: 0.2em; margin-top: 0.8rem;">HAFENSTADT</div>
+        <div class="sec tmd" style="margin-top: 0.4rem;">Containerhafen · Speicherstadt · Kiez</div>
+      </div>
+      <div style="position:absolute; right: 6.4rem; top: 6.4rem; display:flex; flex-direction: column; gap: 0.8rem; align-items: flex-end;">
+        <div class="flex g2 wrap" style="justify-content: flex-end;">
+          <span class="glass-thin nui-blur flex g2" style="border-radius:999px; padding: 0.4rem 1.2rem 0.4rem 0.4rem;"><span class="kc sm">F1</span><span class="tsm">Handy</span></span>
+          <span class="glass-thin nui-blur flex g2" style="border-radius:999px; padding: 0.4rem 1.2rem 0.4rem 0.4rem;"><span class="kc sm">TAB</span><span class="tsm">Inventar</span></span>
+          <span class="glass-thin nui-blur flex g2" style="border-radius:999px; padding: 0.4rem 1.2rem 0.4rem 0.4rem;"><span class="kc sm">M</span><span class="tsm">Menü</span></span>
+          <span class="glass-thin nui-blur flex g2" style="border-radius:999px; padding: 0.4rem 1.2rem 0.4rem 0.4rem;"><span class="kc sm">Z</span><span class="tsm">Sprechweite</span></span>
+        </div>
+        <div class="flex g2" style="margin-top: 1.6rem;">
+          <span class="lbl">Weitere Zustände</span>
+          <span class="glass-thin nui-blur" style="border-radius: var(--fh-radius-md); padding: 0.8rem 1.2rem; width: 22rem;"><span class="txs sec">Initialisierung</span><div class="flex g2 tsm"><span class="spin"></span>Verbinde mit Server …</div></span>
+          <span class="glass-thin nui-blur" style="border-radius: var(--fh-radius-md); padding: 0.8rem 1.2rem; width: 26rem;"><span class="txs sec">Hängt</span><div class="tsm warn w6">Hängt bei: hk-housing</div><div class="txs sec">Spiel nicht schließen – manche Ressourcen brauchen länger.</div></span>
+          <span class="glass-thin nui-blur" style="border-radius: var(--fh-radius-md); padding: 0.8rem 1.2rem; width: 16rem;"><span class="txs sec">Abgeschlossen</span><div class="tsm ok w6 flex g1"><svg class="ico s"><use href="#i-check"/></svg>Fertig · 100 %</div></span>
+        </div>
+      </div>
+      <div class="glass-thin nui-blur" style="position:absolute; left: 6.4rem; bottom: 6.4rem; width: 56rem; border-radius: var(--fh-radius-xl); padding: 2.4rem 2.8rem;">
+        <div class="flex between" style="align-items: flex-end;">
+          <div><div class="lbl">Lade Spielwelt</div><div class="tmd sec" style="margin-top: 0.4rem;">Ressourcen <span class="mono">142 / 310</span> · hk-vehicles</div></div>
+          <div class="mono t3xl w5">46<span class="sec tlg"> %</span></div>
+        </div>
+        <div class="bar" style="margin-top: 1.6rem; --v: 46%;"><i></i></div>
+        <div class="hr" style="margin: 2rem 0 1.6rem;"></div>
+        <div class="flex g3 tmd"><svg class="ico acc"><use href="#i-info"/></svg><span>Tipp: Mit <span class="kc sm">F1</span> öffnest du das Handy.</span></div>
+      </div>
+      <div style="position:absolute; right: 6.4rem; bottom: 6.4rem; width: 48rem; display: flex; flex-direction: column; gap: 1.2rem;">
+        <div class="glass-thin nui-blur" style="border-radius: var(--fh-radius-lg); padding: 1.6rem 2rem;">
+          <div class="lbl" style="margin-bottom: 0.8rem;">Neuigkeiten</div>
+          <div class="list">
+            <div class="li compact" style="padding: 0;"><span class="mono txs mut">14.10.</span><span class="grow">Fähre Linie 62 fährt wieder bis Finkenwerder</span><svg class="ico s mut"><use href="#i-chev"/></svg></div>
+            <div class="li compact" style="padding: 0;"><span class="mono txs mut">11.10.</span><span class="grow">Neue Werkstatt am Reiherstieg eröffnet</span><svg class="ico s mut"><use href="#i-chev"/></svg></div>
+            <div class="li compact" style="padding: 0; border: 0;"><span class="mono txs mut">08.10.</span><span class="grow">Serverregeln §7 (Fahrzeuge) aktualisiert</span><svg class="ico s mut"><use href="#i-chev"/></svg></div>
+          </div>
+        </div>
+        <div class="glass-thin nui-blur flex g3" style="border-radius: 999px; padding: 0.8rem 1.6rem 0.8rem 0.8rem;">
+          <span class="close" style="background: var(--fh-text-primary); color: var(--fh-text-on-accent); border: 0;"><svg class="ico s fill"><use href="#i-pause"/></svg></span>
+          <div class="grow"><div class="tsm w6">Nebelhorn</div><div class="txs sec">Hafenradio · Ambient</div></div>
+          <svg class="ico s sec"><use href="#i-vol"/></svg>
+          <div class="slider" style="width: 10rem; --v: 60%;"><i></i><b></b></div>
+          <span class="kc sm">␣</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 02 CHARACTER SELECT ════════════════════════════════════════════ -->
+<section class="doc-sec" id="s-chars">
+  <div class="doc-cap"><h2>02 · Charakterauswahl</h2><p>Filled: one character selected (glow, 2px accent edge), two more characters, a free slot and a locked slot. Inset: the empty state (no character) and the loading skeleton.</p></div>
+  <div class="stage"><div class="world blurred" data-world="dusk"></div>
+    <div class="layer">
+      <div class="ped" style="left: 50%; top: 18rem; transform: translateX(-50%);"></div>
+      <div style="position:absolute; left: 3.2rem; top: 3.2rem; bottom: 3.2rem; width: 40rem; display:flex; flex-direction: column; gap: 1.2rem;">
+        <div><div class="lbl">Charakter wählen</div><div class="t2xl w6" style="margin-top: 0.4rem;">Willkommen zurück</div></div>
+        <div class="glass" style="border-radius: var(--fh-radius-xl); padding: 1.6rem 2rem; border: var(--fh-border-width-strong) solid var(--fh-accent-primary); box-shadow: var(--fh-glow-accent), var(--fh-shadow-2); transform: translateX(0.8rem);">
+          <div class="flex between"><span class="tlg w6">Jonas Petersen</span><span class="pill"><span class="dot" style="--c: var(--fh-job-police)"></span>Polizei · Kommissar</span></div>
+          <div class="flex g5 tsm" style="margin-top: 0.8rem;"><span><span class="sec">Bar </span><span class="mono">12.480 $</span></span><span><span class="sec">Bank </span><span class="mono">248.300 $</span></span></div>
+          <div class="flex between txs sec" style="margin-top: 0.4rem;"><span>Zuletzt: <span class="mono">14.10. · 22:41</span></span><span class="mono">212 h</span></div>
+        </div>
+        <div class="glass" style="border-radius: var(--fh-radius-xl); padding: 1.6rem 2rem;">
+          <div class="flex between"><span class="tlg w6">Mara Krüger</span><span class="pill"><span class="dot" style="--c: var(--fh-job-ems)"></span>Rettungsdienst</span></div>
+          <div class="flex g5 tsm" style="margin-top: 0.8rem;"><span><span class="sec">Bar </span><span class="mono">860 $</span></span><span><span class="sec">Bank </span><span class="mono">41.020 $</span></span></div>
+          <div class="flex between txs sec" style="margin-top: 0.4rem;"><span>Zuletzt: <span class="mono">02.10. · 19:05</span></span><span class="mono">58 h</span></div>
+        </div>
+        <div class="glass" style="border-radius: var(--fh-radius-xl); padding: 1.6rem 2rem;">
+          <div class="flex between"><span class="tlg w6">Ole Hansen</span><span class="pill"><span class="dot" style="--c: var(--fh-job-mechanic)"></span>Hafenwerkstatt</span></div>
+          <div class="flex g5 tsm" style="margin-top: 0.8rem;"><span><span class="sec">Bar </span><span class="mono">3.115 $</span></span><span><span class="sec">Bank </span><span class="mono">9.870 $</span></span></div>
+          <div class="flex between txs sec" style="margin-top: 0.4rem;"><span>Zuletzt: <span class="mono">21.09. · 23:58</span></span><span class="mono">97 h</span></div>
+        </div>
+        <div style="border-radius: var(--fh-radius-xl); padding: 1.6rem 2rem; border: 1px dashed var(--fh-text-muted); background: rgba(16,17,15,0.55);" class="flex g2 sec"><svg class="ico"><use href="#i-plus"/></svg><span class="tmd w5">Neuer Charakter</span></div>
+        <div class="glass flex g2 mut" style="border-radius: var(--fh-radius-xl); padding: 1.6rem 2rem; opacity: 0.7;"><svg class="ico"><use href="#i-lock"/></svg><span class="tmd">Slot gesperrt · Supporter</span></div>
+      </div>
+      <div class="glass" style="position:absolute; right: 3.2rem; top: 3.2rem; width: 36rem; border-radius: var(--fh-radius-lg); padding: 2rem;">
+        <div class="lbl">Details</div>
+        <div class="tlg w6" style="margin: 0.4rem 0 1.2rem;">Jonas Petersen</div>
+        <dl class="kv">
+          <dt>Geburtsdatum</dt><dd class="mono">03.05.1991</dd>
+          <dt>Staatsangehörigkeit</dt><dd>Deutsch</dd>
+          <dt>Telefon</dt><dd class="mono">0176 418 2207</dd>
+          <dt>Wohnung</dt><dd>Am Sandtorkai 12</dd>
+        </dl>
+        <div class="hr" style="margin: 1.6rem 0 1.2rem;"></div>
+        <div class="lbl" style="margin-bottom: 0.8rem;">Lizenzen</div>
+        <div class="flex g2 wrap"><span class="pill"><span class="dot" style="--c: var(--fh-success)"></span>Führerschein B</span><span class="pill"><span class="dot" style="--c: var(--fh-success)"></span>Waffenschein</span><span class="pill"><span class="dot" style="--c: var(--fh-text-muted)"></span>Bootsschein</span></div>
+      </div>
+      <div style="position:absolute; right: 3.2rem; bottom: 22rem; width: 36rem;" class="col g3">
+        <span class="sticker" style="position: static; align-self: flex-start;">Zustand · leer</span>
+        <div class="glass" style="border-radius: var(--fh-radius-lg); width: 100%;"><div class="state"><svg class="ico xl st-ico"><use href="#i-user"/></svg><div class="st-t">Noch kein Charakter</div><div>Erstelle deinen ersten Bürger der Hafenstadt.</div><span class="btn btn-p" style="margin-top: 0.8rem;">Charakter erstellen</span></div></div>
+      </div>
+      <div style="position:absolute; right: 3.2rem; bottom: 3.2rem; width: 36rem;" class="col g2">
+        <span class="sticker" style="position: static; align-self: flex-start;">Zustand · lädt</span>
+        <div class="glass" style="border-radius: var(--fh-radius-xl); padding: 1.6rem 2rem; width: 100%;"><div class="skel" style="height: 1.8rem; width: 60%;"></div><div class="skel" style="height: 1.2rem; width: 85%; margin-top: 1rem;"></div><div class="skel" style="height: 1.2rem; width: 40%; margin-top: 0.8rem;"></div></div>
+      </div>
+      <div style="position:absolute; left: 50%; bottom: 4rem; transform: translateX(-50%);" class="flex g3">
+        <span class="btn btn-gd">Löschen</span>
+        <span class="btn btn-p lg focus" style="min-width: 24rem;">Spielen <span class="kc sm" style="background: var(--fh-text-on-accent); color: var(--fh-accent-primary);">↵</span></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 03 CHARACTER CREATOR ═══════════════════════════════════════════ -->
+<section class="doc-sec" id="s-creator">
+  <div class="doc-cap"><h2>03 · Charaktererstellung</h2><p>Step 3, Gesicht, with a slider accordion. Inset: the step 1 field errors. The camera controls are on the right.</p></div>
+  <div class="stage"><div class="world blurred" data-world="dusk"></div>
+    <div class="layer">
+      <div class="ped" style="left: 58%; top: 16rem; transform: translateX(-50%);"></div>
+      <div class="panel glass" style="left: 3.2rem; top: 3.2rem; bottom: 3.2rem; width: 44rem;">
+        <div style="padding: 1.6rem 2rem; border-bottom: 1px solid var(--fh-border);">
+          <div class="lbl">Charaktererstellung · Schritt 3 von 5</div>
+          <div class="flex g1" style="margin-top: 1.2rem;" id="stepper"></div>
+          <div class="flex between txs sec" style="margin-top: 0.6rem;"><span>Identität</span><span>Herkunft</span><span class="acc w6">Gesicht</span><span>Haare</span><span>Kleidung</span></div>
+        </div>
+        <div class="panel-b col g3" style="align-items: stretch; overflow: hidden;">
+          <div class="flex between"><span class="lbl">Nase</span><svg class="ico s sec" style="transform: rotate(90deg)"><use href="#i-chev"/></svg></div>
+          <div id="sliders-nose" class="col g3" style="align-items: stretch;"></div>
+          <div class="hr"></div>
+          <div class="flex between"><span class="lbl">Augen</span><svg class="ico s sec" style="transform: rotate(90deg)"><use href="#i-chev"/></svg></div>
+          <div id="sliders-eyes" class="col g3" style="align-items: stretch;"></div>
+          <div class="hr"></div>
+          <div class="flex between"><span class="lbl">Kiefer &amp; Kinn</span><svg class="ico s sec"><use href="#i-chev"/></svg></div>
+          <div class="hr"></div>
+          <div class="flex between"><span class="lbl">Wangen</span><svg class="ico s sec"><use href="#i-chev"/></svg></div>
+        </div>
+        <div class="flex between" style="padding: 1.6rem 2rem; border-top: 1px solid var(--fh-border);"><span class="btn btn-s">Zurück</span><span class="btn btn-p" style="min-width: 16rem;">Weiter</span></div>
+      </div>
+      <div class="glass" style="position:absolute; left: 50.4rem; top: 3.2rem; width: 40rem; border-radius: var(--fh-radius-lg); padding: 2rem;">
+        <span class="sticker" style="position: static; margin-bottom: 1.2rem;">Schritt 1 · Fehler</span>
+        <div class="col g3" style="align-items: stretch; margin-top: 1.2rem;">
+          <div class="field"><label>Vorname</label><div class="inp err">Jonas2</div><div class="help err">⚠ Nur Buchstaben, Bindestrich und Leerzeichen.</div></div>
+          <div class="field"><label>Geburtsdatum</label><div class="inp err mono">03.05.2011</div><div class="help err">⚠ Mindestalter 18 Jahre.</div></div>
+          <div class="field"><label>Nachname</label><div class="inp">Petersen</div><div class="help err">⚠ Dieser Name ist bereits vergeben.</div></div>
+        </div>
+      </div>
+      <div style="position:absolute; right: 3.2rem; top: 50%; transform: translateY(-50%);" class="col g4">
+        <div class="seg v glass" style="padding: 0.4rem;"><span>Ganzkörper</span><span>Oberkörper</span><span class="on">Gesicht</span></div>
+        <div class="glass" style="border-radius: var(--fh-radius-md); padding: 1.2rem; width: 20rem;"><div class="flex between txs sec"><span>Drehen</span><span class="mono">−24°</span></div><div class="slider" style="--v: 43%; margin-top: 0.8rem;"><i></i><b></b></div></div>
+        <div class="glass flex g2" style="border-radius: 999px; padding: 0.4rem 1.2rem 0.4rem 0.4rem;"><span class="kc sm">A</span><span class="kc sm">D</span><span class="tsm">drehen</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 04 SPAWN ═══════════════════════════════════════════════════════ -->
+<section class="doc-sec" id="s-spawn">
+  <div class="doc-cap"><h2>04 · Spawn-Auswahl</h2><p>Filled: Fähranleger is selected (pin glow and callout). Two locations are disabled with their reason. The button is in its spawning (busy) state.</p></div>
+  <div class="stage"><div class="world" data-world="map"></div>
+    <div class="layer">
+      <div class="lbl" style="position:absolute; left: 3.2rem; top: 3.2rem;">Wo möchtest du aufwachen?</div>
+      <div id="pins"></div>
+      <div class="panel glass" style="right: 3.2rem; top: 3.2rem; bottom: 3.2rem; width: 40rem;">
+        <div class="panel-h"><div><div class="lbl">Spawn</div><div class="title">Startpunkt wählen</div></div></div>
+        <div class="list" style="padding: 0.8rem 1.2rem; flex: 1;" id="spawnlist"></div>
+        <div style="padding: 1.6rem 2rem; border-top: 1px solid var(--fh-border);" class="col g2"><span class="btn btn-p lg full"><span class="spin"></span>Bitte warten …</span><span class="txs sec center">Kamera fährt zu: Fähranleger</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 05 HUD DAY ═════════════════════════════════════════════════════ -->
+<section class="doc-sec" id="s-hud-day">
+  <div class="doc-cap"><h2>05 · HUD bei Tag (ohne Backdrop-Blur)</h2><p>Bright stand-in world with a sun glare under the status card and white containers under the minimap. HUD material only, no <code>backdrop-filter</code>, as in FiveM. Shown: all status values, voice while talking with the radio channel, money with a delta, ammo, vehicle HUD with the left indicator on, the 4 notification types, the progress bar, the interaction hint and the collapsed chat.</p></div>
+  <div class="stage"><div class="world" data-world="day"></div>
+    <div class="layer" id="hud-day"></div>
+  </div>
+</section>
+
+<!-- ═══ 06 HUD NIGHT ═══════════════════════════════════════════════════ -->
+<section class="doc-sec" id="s-hud-night">
+  <div class="doc-cap"><h2>06 · HUD bei Nacht – kritische Zustände</h2><p>Health 8 % (pulsing), thirst critical, hunger low, stress shown, radio transmitting, seatbelt off at speed, engine damaged, fuel low, hazards on, high beam, empty magazine, a hold interaction with an unavailable option, a cancelled progress bar and a money delta.</p></div>
+  <div class="stage"><div class="world" data-world="night"></div>
+    <div class="layer" id="hud-night"></div>
+  </div>
+</section>
+
+<!-- ═══ 07 DEATH ═══════════════════════════════════════════════════════ -->
+<section class="doc-sec" id="s-death">
+  <div class="doc-cap"><h2>07 · Bewusstlos / Tod</h2><p>Filled: countdown running, emergency call sent, EMS en route. The strip at the bottom right shows the other states: before the call, revival in progress, countdown done.</p></div>
+  <div class="stage"><div class="world blurred" data-world="night" style="filter: grayscale(0.7);"></div>
+    <div class="layer" style="background: radial-gradient(ellipse at center, rgba(12,13,11,0.25) 0%, rgba(12,13,11,0.8) 75%);"></div>
+    <div class="layer">
+      <div style="position:absolute; left: 50%; top: 46%; transform: translate(-50%, -50%); text-align: center; align-items: center;" class="col g4">
+        <div class="lbl" style="letter-spacing: 0.3em;">Zustand kritisch</div>
+        <div class="t4xl w6">Bewusstlos</div>
+        <div class="sec tlg" style="max-width: 56rem;">Du wurdest schwer verletzt. Warte auf den Rettungsdienst.</div>
+        <div class="ring" style="width: 16rem; height: 16rem; --c: var(--fh-accent-primary); margin-top: 1.6rem;">
+          <svg class="r" viewBox="0 0 44 44"><circle class="trk" cx="22" cy="22" r="20" pathLength="100" style="stroke-width: 1"/><circle class="arc" cx="22" cy="22" r="20" pathLength="100" stroke-dasharray="76 100" style="stroke-width: 1"/></svg>
+          <div><div class="mono t3xl w5">04:32</div><div class="lbl" style="margin-top: 0.4rem;">bis Aufwachen</div></div>
+        </div>
+        <div class="glass flex g3" style="border-radius: 999px; padding: 0.8rem 2rem; margin-top: 1.2rem;"><span class="dot" style="--c: var(--fh-success)"></span><span class="tmd">Notruf gesendet · Rettungsdienst unterwegs · ETA <span class="mono">01:10</span></span></div>
+        <span class="btn btn-s lg dis">Aufwachen im Krankenhaus in <span class="mono">04:32</span></span>
+      </div>
+      <div style="position:absolute; left: 50%; bottom: 4rem; transform: translateX(-50%);" class="flex g4">
+        <div class="col g1"><span class="sticker" style="position: static;">vor Notruf</span><div class="glass flex g3" style="border-radius: 999px; padding: 0.6rem 2rem 0.6rem 0.6rem;"><span class="kc">G</span><span class="tmd">Notruf absetzen</span></div></div>
+        <div class="col g1"><span class="sticker" style="position: static;">Wiederbelebung</span><div class="glass" style="border-radius: var(--fh-radius-md); padding: 1rem 1.6rem; width: 32rem;"><div class="flex between tsm"><span>Wiederbelebung läuft …</span><span class="mono">58 %</span></div><div class="bar h6" style="--v: 58%; --c: var(--fh-success); margin-top: 0.6rem;"><i></i></div></div></div>
+        <div class="col g1"><span class="sticker" style="position: static;">Countdown abgelaufen</span><div class="glass flex g3" style="border-radius: 999px; padding: 0.6rem 2rem 0.6rem 0.6rem;"><span class="kc">E</span><span class="tmd">Im Krankenhaus aufwachen <span class="sec">(Kosten 500 $)</span></span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 08 RADIAL + CONTEXT ════════════════════════════════════════════ -->
+<section class="doc-sec" id="s-radial">
+  <div class="doc-cap"><h2>08 · Radialmenü &amp; Kontextmenü</h2><p>Radial: segment "Fahrzeug" hovered (glow, accent arc), "GPS" disabled, the centre showing the description. Context menu: the "Geben" submenu open, flipped to the left, and one disabled row. Inset: the radial empty state.</p></div>
+  <div class="stage"><div class="world" data-world="day"></div>
+    <div class="layer">
+      <div id="radial" style="position:absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 44rem; height: 44rem;"></div>
+      <div style="position:absolute; right: 3.2rem; top: 30rem;" class="flex g1" >
+        <div class="glass-thick" style="width: 24rem; border-radius: var(--fh-radius-md); padding: 0.6rem; align-self: flex-start; margin-top: 8rem;">
+          <div class="lbl" style="padding: 0.8rem 1.2rem 0.6rem;">Spieler in der Nähe</div>
+          <div class="li compact hov" style="border:0; border-radius: var(--fh-radius-sm);"><span class="grow">Mara Krüger</span><span class="mono txs mut">[57]</span></div>
+          <div class="li compact" style="border:0; border-radius: var(--fh-radius-sm);"><span class="grow">Ole Hansen</span><span class="mono txs mut">[203]</span></div>
+        </div>
+        <div class="glass-thick" style="width: 24rem; border-radius: var(--fh-radius-md); padding: 0.6rem; box-shadow: var(--fh-shadow-2);">
+          <div class="lbl" style="padding: 0.8rem 1.2rem 0.6rem;">Wasserflasche</div>
+          <div class="li compact" style="border:0; border-radius: var(--fh-radius-sm);"><svg class="ico s sec"><use href="#i-drop"/></svg><span class="grow">Benutzen</span><span class="mono txs mut">↵</span></div>
+          <div class="li compact hov" style="border:0; border-radius: var(--fh-radius-sm);"><svg class="ico s sec"><use href="#i-hand"/></svg><span class="grow">Geben …</span><svg class="ico s sec"><use href="#i-chev"/></svg></div>
+          <div class="li compact" style="border:0; border-radius: var(--fh-radius-sm);"><svg class="ico s sec"><use href="#i-share"/></svg><span class="grow">Teilen …</span><span class="mono txs mut">⇧ Ziehen</span></div>
+          <div class="li compact dis" style="border:0; border-radius: var(--fh-radius-sm);"><svg class="ico s sec"><use href="#i-snow"/></svg><span class="grow">Kühlen</span><span class="txs mut">Kühlbox fehlt</span></div>
+          <div class="hr" style="margin: 0.4rem 0.8rem;"></div>
+          <div class="li compact bad" style="border:0; border-radius: var(--fh-radius-sm);"><svg class="ico s"><use href="#i-trash"/></svg><span class="grow">Wegwerfen</span><span class="mono txs">Entf</span></div>
+        </div>
+      </div>
+      <div style="position:absolute; left: 3.2rem; top: 3.2rem;" class="col g2">
+        <span class="sticker" style="position: static;">Radial · leer</span>
+        <div class="glass-thick" style="width: 20rem; height: 20rem; border-radius: 50%; display: grid; place-items: center; text-align: center; padding: 3rem;"><div class="col g2" style="align-items: center;"><svg class="ico l mut"><use href="#i-grid"/></svg><span class="tsm sec">Keine Aktionen verfügbar</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 09 DIALOGS + CHAT ══════════════════════════════════════════════ -->
+<section class="doc-sec" id="s-dialogs">
+  <div class="doc-cap"><h2>09 · Eingabedialog, Bestätigungsdialog, Chat</h2><p>Input dialog with a field error. Destructive confirm dialog with a typed confirmation, focus on "Abbrechen". Chat open with command suggestions and a send error. A second confirm dialog shows the busy state.</p></div>
+  <div class="stage"><div class="world" data-world="night"></div>
+    <div class="layer">
+      <div class="chat" style="gap: 0;">
+        <div class="glass" style="border-radius: var(--fh-radius-lg); overflow: hidden;">
+          <div class="flex g4" style="padding: 0 1.6rem; border-bottom: 1px solid var(--fh-border);"><div class="tabs" style="border: 0;"><span class="on">Alle</span><span>OOC</span><span>Fraktion</span><span>Admin</span></div></div>
+          <div class="col g1" style="align-items: stretch; padding: 1.2rem 1.6rem; height: 34rem; overflow: hidden;" id="chatlines"></div>
+          <div style="padding: 0 1.2rem;"><div class="glass-thick" style="border-radius: var(--fh-radius-md); padding: 0.4rem; margin-bottom: 0.8rem;">
+            <div class="li compact hov" style="border:0; border-radius: var(--fh-radius-sm);"><span class="mono tsm">/me</span><span class="mono txs mut">[aktion]</span><span class="txs sec grow right">Beschreibt eine Handlung</span></div>
+            <div class="li compact" style="border:0; border-radius: var(--fh-radius-sm);"><span class="mono tsm">/meld</span><span class="mono txs mut">[text]</span><span class="txs sec grow right">Meldung an Admins</span></div>
+          </div></div>
+          <div style="padding: 0 1.2rem 1.2rem;"><div class="inp focus mono">/me</div><div class="help err" style="margin-top: 0.4rem;">⚠ Du schreibst zu schnell. Warte 2 s.</div></div>
+        </div>
+      </div>
+      <div style="position:absolute; right: 3.2rem; top: 50%; transform: translateY(-50%); width: 96rem;" class="flex g4" >
+        <div class="glass-thick dialog" style="width: 48rem; align-self: center;">
+          <div><div class="lbl">Bank · Girokonto</div><div class="dt" style="margin-top: 0.4rem;">Überweisung</div><div class="tsm sec" style="margin-top: 0.4rem;">Das Geld wird sofort gutgeschrieben.</div></div>
+          <div class="field"><label>Empfänger-Konto</label><div class="inp err mono">HK-DE 0000 0000</div><div class="help err">⚠ Konto nicht gefunden. Prüfe die Nummer.</div></div>
+          <div class="field"><label>Betrag</label><div class="inp num focus">2.500<span class="unit">$</span></div><div class="help">Verfügbar 248.300 $ · max. 10.000 $ pro Überweisung</div></div>
+          <div class="field"><label>Verwendungszweck <span class="mut">(optional)</span></label><div class="inp ph">z. B. Miete Oktober</div></div>
+          <div class="acts"><span class="btn btn-s">Abbrechen</span><span class="btn btn-p dis">Überweisen</span></div>
+        </div>
+        <div class="col g4" style="width: 44rem;">
+          <div class="glass-thick dialog" style="width: 100%;">
+            <div class="flex g3" style="align-items: flex-start;"><svg class="ico l bad"><use href="#i-alert"/></svg><div><div class="dt">Charakter löschen?</div><div class="tsm sec" style="margin-top: 0.4rem;">Ole Hansen und sein gesamter Besitz (2 Fahrzeuge, 9.870 $) werden dauerhaft gelöscht. Das kann nicht rückgängig gemacht werden.</div></div></div>
+            <div class="field"><label>Gib <span class="mono">LÖSCHEN</span> ein, um zu bestätigen</label><div class="inp mono">LÖSCH</div></div>
+            <div class="acts"><span class="btn btn-s focus">Abbrechen</span><span class="btn btn-d dis">Endgültig löschen</span></div>
+          </div>
+          <div class="glass-thick dialog" style="width: 100%;">
+            <div class="flex g3" style="align-items: flex-start;"><svg class="ico l warn"><use href="#i-alert"/></svg><div><div class="dt">Fahrzeug verkaufen?</div><div class="tsm sec" style="margin-top: 0.4rem;">Der Sultan RS wird für <span class="mono">18.400 $</span> an den Händler verkauft.</div></div></div>
+            <div class="banner"><svg class="ico s"><use href="#i-alertc"/></svg><span>Händler nicht erreichbar · <span class="mono txs">ERR 504 · dealer:sell</span></span></div>
+            <div class="acts"><span class="btn btn-s">Abbrechen</span><span class="btn btn-p"><span class="spin"></span>Bitte warten …</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 10 SCOREBOARD ══════════════════════════════════════════════════ -->
+<section class="doc-sec" id="s-score">
+  <div class="doc-cap"><h2>10 · Scoreboard</h2><p>Filled: own row marked olive, sorted by ID, ping colour-coded with bar glyphs. Job counts only. Inset: search with no result.</p></div>
+  <div class="stage"><div class="world blurred" data-world="day"></div>
+    <div class="layer">
+      <div class="panel glass center-abs" style="width: 96rem; height: 72rem;">
+        <div class="panel-h" style="min-height: 7.2rem;">
+          <div class="grow"><div class="lbl">Hafenstadt Roleplay</div><div class="title"><span class="mono">128 / 200</span> Spieler</div></div>
+          <span class="pill"><span class="dot" style="--c: var(--fh-job-police)"></span>Polizei <span class="mono">14</span></span>
+          <span class="pill"><span class="dot" style="--c: var(--fh-job-ems)"></span>Rettungsdienst <span class="mono">6</span></span>
+          <span class="pill"><span class="dot" style="--c: var(--fh-job-mechanic)"></span>Mechaniker <span class="mono">4</span></span>
+          <span class="txs sec" style="margin-left: 0.8rem;">Neustart in <span class="mono">02:14</span></span>
+        </div>
+        <div style="padding: 1.2rem 2rem 0;" class="flex g3"><div class="inp ph grow"><svg class="ico s"><use href="#i-search"/></svg>Spieler suchen …</div><span class="seg"><span class="on">ID ↑</span><span>Name</span><span>Ping</span></span></div>
+        <div class="panel-b" style="padding-top: 1.2rem;"><table class="tbl" id="scoretbl"></table></div>
+      </div>
+      <div style="position:absolute; right: 3.2rem; bottom: 4rem; width: 36rem;" class="col g2">
+        <span class="sticker" style="position: static;">Suche ohne Treffer</span>
+        <div class="glass" style="border-radius: var(--fh-radius-lg); width: 100%;"><div class="state"><svg class="ico xl st-ico"><use href="#i-search"/></svg><div class="st-t">Kein Spieler mit „Möller“ gefunden.</div><div>Prüfe die Schreibweise oder suche nach der ID.</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 11 INVENTORY ═══════════════════════════════════════════════════ -->
+<section class="doc-sec" id="s-inv">
+  <div class="doc-cap"><h2>11 · Inventar</h2><p>Filled: an item being dragged from slot 7 (source dimmed, ghost follows the cursor) to a valid target slot in the trunk, with one invalid target ("Zu schwer"). Selected item detail in the centre. Weight bars: player 61 %, trunk 88 % (warning).</p></div>
+  <div class="stage"><div class="world blurred" data-world="day"></div>
+    <div class="layer">
+      <div class="panel glass center-abs" style="width: 156rem; height: 80rem; flex-direction: row;">
+        <div style="flex: 0 0 60rem; border-right: 1px solid var(--fh-border);" class="col">
+          <div class="panel-h" style="width: 100%;"><div class="grow"><div class="lbl">Taschen</div><div class="title">Jonas Petersen</div></div><div style="width: 22rem;"><div class="flex between txs"><span class="sec">Gewicht</span><span class="mono">24,6 / 40,0 kg</span></div><div class="bar" style="--v: 61%; margin-top: 0.4rem;"><i></i></div></div></div>
+          <div class="panel-b" style="width: 100%;"><div id="inv-player" style="display:grid; grid-template-columns: repeat(5, 1fr); gap: 0.8rem;"></div></div>
+        </div>
+        <div style="flex: 1 1 auto;" class="col">
+          <div class="panel-h" style="width: 100%;"><div class="grow"><div class="lbl">Ausrüstung</div><div class="title">Ausgerüstet</div></div></div>
+          <div class="panel-b col g4" style="width: 100%; align-items: stretch;">
+            <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 0.8rem;" id="inv-equip"></div>
+            <div class="card col g2" style="align-items: stretch;">
+              <div class="flex between"><span class="tlg w6">Funkgerät</span><span class="pill"><span class="dot" style="--c: var(--fh-success)"></span>Qualität 92 %</span></div>
+              <div class="tsm sec">Digitales Handfunkgerät. Mit <span class="kc sm">CAPS</span> senden.</div>
+              <dl class="kv txs" style="font-size: var(--fh-text-xs);"><dt>Gewicht</dt><dd class="mono">0,8 kg</dd><dt>Seriennummer</dt><dd class="mono">FG-7Q41-0932</dd><dt>Kanal</dt><dd class="mono">112,40</dd></dl>
+              <div class="flex g2" style="margin-top: 0.4rem;"><span class="btn btn-p sm">Benutzen</span><span class="btn btn-s sm">Teilen</span><span class="btn btn-s sm">Geben</span></div>
+            </div>
+          </div>
+        </div>
+        <div style="flex: 0 0 48rem; border-left: 1px solid var(--fh-border);" class="col">
+          <div class="panel-h" style="width: 100%;"><div class="grow"><div class="lbl">Kofferraum</div><div class="title flex g2">Sultan RS <span class="plate">HK · 4127</span></div></div><div style="width: 16rem;"><div class="flex between txs"><span class="sec">Gewicht</span><span class="mono warn">52,8 / 60 kg</span></div><div class="bar" style="--v: 88%; --c: var(--fh-warning); margin-top: 0.4rem;"><i></i></div></div></div>
+          <div class="panel-b" style="width: 100%;"><div id="inv-trunk" style="display:grid; grid-template-columns: repeat(4, 1fr); gap: 0.8rem;"></div></div>
+        </div>
+        <div class="ghost slot" id="ghost" style="left: 104rem; top: 33rem;"><span class="qty">×1</span><svg class="ico"><use href="#i-wrench"/></svg><span class="nm">Werkzeugkasten</span></div>
+      </div>
+      <div class="flex g2 glass" style="position:absolute; left: 50%; bottom: 1.6rem; transform: translateX(-50%); border-radius: 999px; padding: 0.6rem 1.6rem;"><span class="txs sec">Ziehen: verschieben · <span class="kc sm">⇧</span> + Ziehen: teilen · Rechtsklick: Menü · <span class="kc sm">TAB</span> schließen</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 12 PHONE ═══════════════════════════════════════════════════════ -->
+<section class="doc-sec" id="s-phone">
+  <div class="doc-cap"><h2>12 · Handy</h2><p>Three phone screens: home with badges, a message thread with "Kein Netz" (sending disabled), and an incoming call. In-game it sits bottom-right; here the three are shown side by side.</p></div>
+  <div class="stage"><div class="world blurred" data-world="night"></div>
+    <div class="layer flex g6" style="justify-content: center;">
+      <div class="phone"><div class="phone-s"><div class="ph-island"></div>
+        <div class="ph-status"><span class="mono">21:47</span><span class="flex g1"><svg class="ico s"><use href="#i-signal"/></svg><svg class="ico s"><use href="#i-battery"/></svg></span></div>
+        <div style="padding: 2.4rem 2.4rem 0;"><div class="lbl">Hafen Mobil · Mittwoch, 15. Oktober</div><div class="mono" style="font-size: 6.4rem; font-weight: 300; letter-spacing: -0.04em; line-height: 1.1;">21:47</div></div>
+        <div id="apps" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem 0.8rem; padding: 2.4rem 1.6rem;"></div>
+        <div style="margin-top: auto; margin: auto 1.2rem 1.2rem; padding: 1.2rem; border-radius: 2.4rem; background: rgba(236,237,230,0.06); border: 1px solid var(--fh-border); display: grid; grid-template-columns: repeat(4, 1fr);" id="dock"></div>
+      </div></div>
+      <div class="phone"><div class="phone-s"><div class="ph-island"></div>
+        <div class="ph-status"><span class="mono">21:49</span><span class="flex g1 bad"><span class="txs w6">Kein Netz</span><svg class="ico s"><use href="#i-signal"/></svg></span></div>
+        <div class="flex g3" style="padding: 0.8rem 1.6rem 1.2rem; border-bottom: 1px solid var(--fh-border);"><svg class="ico acc"><use href="#i-chevl"/></svg><span class="avatar">MK</span><div class="grow"><div class="tmd w6">Mara Krüger</div><div class="txs sec mono">0151 220 4419</div></div><svg class="ico sec"><use href="#i-phone"/></svg></div>
+        <div class="col g2" style="padding: 1.6rem; align-items: stretch; flex: 1; display: flex;">
+          <div class="center txs mut mono">Heute 21:31</div>
+          <div class="bubble them">Bist du heute noch am Hafen?</div>
+          <div class="bubble me">Ja, Schicht bis 23 Uhr. Warum?</div>
+          <div class="bubble them">Treffpunkt Fischmarkt? Ich hab was für dich.</div>
+          <div class="bubble me">Okay, 22:15 an der Halle.</div>
+          <div class="bubble me" style="opacity: 0.55;">Bring den Schlüssel mit</div>
+          <div class="txs right bad" style="margin-top: -0.2rem;">Nicht gesendet · wird gesendet, sobald du Empfang hast</div>
+        </div>
+        <div style="padding: 1.2rem; border-top: 1px solid var(--fh-border);" class="flex g2"><div class="inp ph grow" style="border-radius: 999px; height: 3.6rem;">Nachricht</div><span class="close" style="background: var(--fh-bg-elevated); opacity: 0.4;"><svg class="ico s"><use href="#i-send"/></svg></span></div>
+      </div></div>
+      <div class="phone"><div class="phone-s" style="background: linear-gradient(180deg, #1b1e19 0%, var(--fh-bg-base) 70%);"><div class="ph-island"></div>
+        <div class="ph-status"><span class="mono">21:52</span><span class="flex g1"><svg class="ico s"><use href="#i-signal"/></svg><svg class="ico s"><use href="#i-battery"/></svg></span></div>
+        <div class="col g2" style="padding-top: 8rem; text-align: center; align-items: center;"><span class="avatar" style="width: 9.6rem; height: 9.6rem; font-size: var(--fh-text-2xl);">AL</span><div class="lbl" style="margin-top: 1.6rem;">Eingehender Anruf</div><div class="t2xl w6">Arne Lorenz</div><div class="mono sec">0160 7731 008</div></div>
+        <div class="flex" style="margin-top: auto; padding: 0 4rem 8rem; justify-content: space-between;">
+          <div class="col g2"><span style="width: 6.4rem; height: 6.4rem; border-radius: 50%; background: var(--fh-danger); color: var(--fh-text-on-accent); display: grid; place-items: center;"><svg class="ico l" style="transform: rotate(135deg);"><use href="#i-phone"/></svg></span><span class="txs sec">Ablehnen</span></div>
+          <div class="col g2"><span style="width: 6.4rem; height: 6.4rem; border-radius: 50%; background: var(--fh-success); color: var(--fh-text-on-accent); display: grid; place-items: center;"><svg class="ico l"><use href="#i-phone"/></svg></span><span class="txs sec">Annehmen</span></div>
+        </div>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 13 BANK / ATM ══════════════════════════════════════════════════ -->
+<section class="doc-sec" id="s-bank">
+  <div class="doc-cap"><h2>13 · Bank &amp; Geldautomat</h2><p>Bank counter: Girokonto selected with its transactions. ATM: PIN entry after one wrong attempt (danger dots, attempts left). The bank error is drawn as the inline banner.</p></div>
+  <div class="stage"><div class="world blurred" data-world="day"></div>
+    <div class="layer flex g4" style="justify-content: center;">
+      <div class="panel glass" style="position: relative; width: 100rem; height: 72rem; flex-direction: row;">
+        <div style="flex: 0 0 30rem; border-right: 1px solid var(--fh-border); padding: 2rem 1.2rem;" class="col g2">
+          <div class="lbl" style="padding: 0 0.8rem 0.8rem; align-self: flex-start;">Konten</div>
+          <div class="li sel" style="border: 0; border-radius: var(--fh-radius-sm); width: 100%;"><svg class="ico sec"><use href="#i-wallet"/></svg><div class="grow"><div class="t">Girokonto</div><div class="s mono">HK-DE 0482 1173</div></div><span class="mono tsm">248.300 $</span></div>
+          <div class="li" style="border: 0; border-radius: var(--fh-radius-sm); width: 100%;"><svg class="ico sec"><use href="#i-bank"/></svg><div class="grow"><div class="t">Sparkonto</div><div class="s mono">HK-DE 0482 2290</div></div><span class="mono tsm">60.000 $</span></div>
+          <div class="li" style="border: 0; border-radius: var(--fh-radius-sm); width: 100%;"><svg class="ico sec"><use href="#i-case"/></svg><div class="grow"><div class="t">Polizei · Kasse</div><div class="s">Rolle: Zeichnungsberechtigt</div></div><span class="mono tsm">1,2 Mio $</span></div>
+        </div>
+        <div class="grow col" style="align-items: stretch;">
+          <div style="padding: 2.4rem 2.8rem 2rem;" class="col g2">
+            <div class="flex between"><div><div class="lbl">Girokonto · Kontostand</div><div class="mono" style="font-size: var(--fh-text-3xl); font-weight: 500; letter-spacing: -0.02em; margin-top: 0.4rem;">248.300,00 $</div><div class="txs sec mono">HK-DE 0482 1173</div></div><span class="close"><svg class="ico s"><use href="#i-x"/></svg></span></div>
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; margin-top: 1.2rem;">
+              <div class="card flex g3"><svg class="ico l acc"><use href="#i-plus"/></svg><div><div class="tmd w6">Einzahlen</div><div class="txs sec">Bargeld 12.480 $</div></div></div>
+              <div class="card flex g3"><svg class="ico l acc"><use href="#i-minus"/></svg><div><div class="tmd w6">Abheben</div><div class="txs sec">Tageslimit 5.000 $</div></div></div>
+              <div class="card flex g3" style="border-color: var(--fh-accent-primary);"><svg class="ico l acc"><use href="#i-send"/></svg><div><div class="tmd w6">Überweisen</div><div class="txs sec">An Konto oder Firma</div></div></div>
+            </div>
+            <div class="banner w" style="margin-top: 1.2rem;"><svg class="ico s"><use href="#i-alertc"/></svg><span class="grow">Umsätze konnten nicht vollständig geladen werden · <span class="mono txs">ERR 503 · bank:history</span></span><span class="btn btn-s sm">Erneut versuchen</span></div>
+          </div>
+          <div style="padding: 0 2.8rem;" class="flex between"><div class="tabs" style="border: 0;"><span class="on">Umsätze</span><span>Daueraufträge</span><span>Rechnungen</span></div><span class="seg"><span>7 Tage</span><span class="on">30 Tage</span><span>90 Tage</span></span></div>
+          <div style="padding: 0 2.8rem 2rem;"><table class="tbl" id="banktbl"></table></div>
+        </div>
+      </div>
+      <div class="panel glass-thick" style="position: relative; width: 52rem; height: 72rem;">
+        <div class="panel-h"><svg class="ico acc"><use href="#i-bank"/></svg><div class="grow"><div class="lbl">Geldautomat · Fischmarkt</div><div class="title">PIN eingeben</div></div></div>
+        <div class="panel-b col g4">
+          <div class="flex g4" style="margin-top: 2rem;"><span class="dot" style="--c: var(--fh-danger); width: 1.6rem; height: 1.6rem;"></span><span class="dot" style="--c: var(--fh-danger); width: 1.6rem; height: 1.6rem;"></span><span class="dot" style="--c: var(--fh-danger); width: 1.6rem; height: 1.6rem;"></span><span class="dot" style="--c: var(--fh-danger); width: 1.6rem; height: 1.6rem;"></span></div>
+          <div class="tmd bad w6">PIN falsch · 2 Versuche übrig</div>
+          <div id="keypad" style="display: grid; grid-template-columns: repeat(3, 8.8rem); gap: 1.2rem; margin-top: 1.2rem;"></div>
+          <div class="txs sec" style="margin-top: auto;">Tageslimit <span class="mono">5.000 $</span> · verbleibend <span class="mono">3.200 $</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 14 SHOP ════════════════════════════════════════════════════════ -->
+<section class="doc-sec" id="s-shop">
+  <div class="doc-cap"><h2>14 · Shop</h2><p>Filled: a cart with 3 lines, payment by cash, low stock (warning) and sold out (disabled). The pay button is enabled.</p></div>
+  <div class="stage"><div class="world blurred" data-world="night"></div>
+    <div class="layer">
+      <div class="panel glass center-abs" style="width: 140rem; height: 80rem; flex-direction: row;">
+        <div class="grow col" style="align-items: stretch;">
+          <div class="panel-h"><svg class="ico acc"><use href="#i-cart"/></svg><div class="grow"><div class="lbl">24/7 · geöffnet</div><div class="title">Kiosk Sandtorkai</div></div><div class="inp ph" style="width: 32rem;"><svg class="ico s"><use href="#i-search"/></svg>Artikel suchen …</div></div>
+          <div style="padding: 0 2rem;"><div class="tabs"><span class="on">Alle</span><span>Getränke</span><span>Essen</span><span>Werkzeug</span><span>Elektronik</span></div></div>
+          <div class="panel-b"><div id="shopgrid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.2rem;"></div></div>
+        </div>
+        <div style="flex: 0 0 40rem; border-left: 1px solid var(--fh-border);" class="col">
+          <div class="panel-h" style="width: 100%;"><div class="grow"><div class="lbl">Warenkorb</div><div class="title">3 Artikel</div></div></div>
+          <div class="list" style="padding: 0.8rem 1.6rem; width: 100%;" id="cart"></div>
+          <div style="margin-top: auto; padding: 2rem; border-top: 1px solid var(--fh-border); width: 100%;" class="col g3">
+            <div class="flex between tsm sec" style="width: 100%;"><span>Zwischensumme</span><span class="mono">55,00 $</span></div>
+            <div class="flex between" style="width: 100%;"><span class="tmd w6">Gesamt</span><span class="mono txl w6">55,00 $</span></div>
+            <span class="seg" style="width: 100%;"><span class="on" style="flex: 1; justify-content: center;">Bar · 12.480 $</span><span style="flex: 1; justify-content: center;">Karte</span></span>
+            <span class="btn btn-p lg full">Bezahlen · 55 $</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 15 GARAGE ══════════════════════════════════════════════════════ -->
+<section class="doc-sec" id="s-garage">
+  <div class="doc-cap"><h2>15 · Garage</h2><p>Filled: four vehicles in three statuses, one selected. Inset: the "Ausfahrt blockiert" error banner and the empty state.</p></div>
+  <div class="stage"><div class="world blurred" data-world="night"></div>
+    <div class="layer">
+      <div class="panel glass center-abs" style="width: 130rem; height: 76rem; flex-direction: row;">
+        <div class="grow col" style="align-items: stretch;">
+          <div class="panel-h"><svg class="ico acc"><use href="#i-car"/></svg><div class="grow"><div class="lbl">Garage</div><div class="title">Speicherstadt · Block D</div></div><span class="txs sec">Stellplätze <span class="mono">4 / 6</span></span></div>
+          <div style="padding: 0 2rem;"><div class="tabs"><span class="on">Alle <span class="mono mut">4</span></span><span>Hier geparkt <span class="mono mut">2</span></span><span>Abgeschleppt <span class="mono mut">1</span></span><span>Unterwegs <span class="mono mut">1</span></span></div></div>
+          <div class="list" style="padding: 0.8rem 1.2rem;" id="garagelist"></div>
+          <div style="padding: 0 2rem 2rem; margin-top: auto;"><div class="banner"><svg class="ico s"><use href="#i-alertc"/></svg><span>Ausfahrt blockiert – warte, bis der Platz frei ist.</span></div></div>
+        </div>
+        <div style="flex: 0 0 46rem; border-left: 1px solid var(--fh-border);" class="col">
+          <div style="width: 100%; height: 22rem; background: radial-gradient(ellipse at 50% 80%, #2c302a 0%, var(--fh-bg-surface) 70%); display: grid; place-items: center; border-bottom: 1px solid var(--fh-border);"><svg class="ico" style="width: 22rem; height: 14rem; color: var(--fh-text-secondary); stroke-width: 0.6;"><use href="#i-car"/></svg></div>
+          <div style="padding: 2rem; width: 100%;" class="col g3">
+            <div class="flex between" style="width: 100%;"><div><div class="tlg w6">Sultan RS</div><div class="txs sec">Sportlimousine · gekauft 03.08.2026</div></div><span class="plate">HK · 4127</span></div>
+            <div style="display: grid; grid-template-columns: auto 1fr auto; gap: 0.8rem 1.2rem; align-items: center; width: 100%;" class="tsm">
+              <span class="sec">Tank</span><div class="bar" style="--v: 62%; --c: var(--fh-hud-fuel);"><i></i></div><span class="mono">62 %</span>
+              <span class="sec">Motor</span><div class="bar" style="--v: 91%; --c: var(--fh-success);"><i></i></div><span class="mono">91 %</span>
+              <span class="sec">Karosserie</span><div class="bar" style="--v: 38%; --c: var(--fh-warning);"><i></i></div><span class="mono">38 %</span>
+            </div>
+            <dl class="kv" style="width: 100%;"><dt>Kilometerstand</dt><dd class="mono">18.204 km</dd><dt>Schlüssel</dt><dd>Jonas P., Mara K.</dd></dl>
+            <span class="btn btn-p lg full">Ausparken</span>
+            <div class="flex g2" style="width: 100%;"><span class="btn btn-s grow">Umbenennen</span><span class="btn btn-s grow">Schlüssel teilen</span></div>
+          </div>
+        </div>
+      </div>
+      <div style="position:absolute; left: 3.2rem; bottom: 3.2rem; width: 30rem;" class="col g2">
+        <span class="sticker" style="position: static;">Zustand · leer</span>
+        <div class="glass" style="border-radius: var(--fh-radius-lg); width: 100%;"><div class="state"><svg class="ico xl st-ico"><use href="#i-car"/></svg><div class="st-t">Keine Fahrzeuge in dieser Garage.</div><div>Parke ein Fahrzeug, indem du in die Einfahrt fährst und <span class="kc sm">E</span> drückst.</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 16 CLOTHING ════════════════════════════════════════════════════ -->
+<section class="doc-sec" id="s-clothing">
+  <div class="doc-cap"><h2>16 · Kleidungsgeschäft</h2><p>Filled: category Oberteil with 3 changed items (accent dots), one restricted job item, the price summary and the saved outfits.</p></div>
+  <div class="stage"><div class="world blurred" data-world="day"></div>
+    <div class="layer">
+      <div class="ped" style="left: 62%; top: 16rem; transform: translateX(-50%);"></div>
+      <div class="panel glass" style="left: 3.2rem; top: 3.2rem; bottom: 3.2rem; width: 48rem;">
+        <div class="panel-h"><svg class="ico acc"><use href="#i-shirt"/></svg><div class="grow"><div class="lbl">Kleidung</div><div class="title">Hafenkontor Mode</div></div></div>
+        <div class="flex g2" style="padding: 1.2rem 2rem; border-bottom: 1px solid var(--fh-border);" id="clothtabs"></div>
+        <div class="panel-b col g4" style="align-items: stretch;" id="clothrows"></div>
+        <div style="padding: 0 2rem 1.6rem;" class="col g2">
+          <div class="lbl">Gespeicherte Outfits</div>
+          <div class="flex g2 wrap"><span class="chip on">Dienst</span><span class="chip">Freizeit</span><span class="chip">Hafen-Schicht</span><span class="chip"><svg class="ico s"><use href="#i-plus"/></svg>Outfit speichern</span></div>
+        </div>
+        <div style="padding: 1.6rem 2rem; border-top: 1px solid var(--fh-border);" class="col g3">
+          <div class="flex between tsm"><span class="sec">Änderungen: 3 Teile</span><span class="mono">240 $</span></div>
+          <div class="flex g2"><span class="btn btn-s">Verwerfen</span><span class="btn btn-p grow">Kaufen · 240 $</span></div>
+        </div>
+      </div>
+      <div style="position:absolute; right: 3.2rem; top: 50%; transform: translateY(-50%);" class="col g4">
+        <div class="seg v glass" style="padding: 0.4rem;"><span class="on">Ganzkörper</span><span>Oberkörper</span><span>Füße</span></div>
+        <div class="glass flex g2" style="border-radius: 999px; padding: 0.4rem 1.2rem 0.4rem 0.4rem;"><span class="kc sm">←</span><span class="kc sm">→</span><span class="tsm">Modell</span></div>
+        <div class="glass flex g2" style="border-radius: 999px; padding: 0.4rem 1.2rem 0.4rem 0.4rem;"><span class="kc sm">↑</span><span class="kc sm">↓</span><span class="tsm">Kategorie</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 17 CRAFTING ════════════════════════════════════════════════════ -->
+<section class="doc-sec" id="s-craft">
+  <div class="doc-cap"><h2>17 · Herstellung</h2><p>Filled: a recipe with one missing ingredient (danger), so the primary button is disabled with its reason. The queue holds 2 jobs: one running, one done with "Abholen".</p></div>
+  <div class="stage"><div class="world blurred" data-world="night"></div>
+    <div class="layer">
+      <div class="panel glass center-abs" style="width: 130rem; height: 76rem; flex-direction: row;">
+        <div style="flex: 0 0 36rem; border-right: 1px solid var(--fh-border);" class="col">
+          <div class="panel-h" style="width: 100%;"><svg class="ico acc"><use href="#i-hammer"/></svg><div class="grow"><div class="lbl">Werkbank · Stufe 2</div><div class="title">Hafenwerkstatt</div></div></div>
+          <div class="list" style="padding: 0.8rem 1.2rem; width: 100%;" id="recipes"></div>
+        </div>
+        <div class="grow col" style="align-items: stretch;">
+          <div style="padding: 2.4rem 2.8rem;" class="col g4">
+            <div class="flex g4"><div class="slot" style="width: 10.4rem;"><svg class="ico"><use href="#i-wrench"/></svg><span class="nm">Dietrich</span><span class="qty">×5</span></div><div><div class="lbl">Ergebnis</div><div class="t2xl w6">Dietrich-Set</div><div class="tsm sec">5 Dietriche · Dauer <span class="mono">45 s</span> · Werkbank Stufe 2</div></div></div>
+            <div class="hr"></div>
+            <div class="lbl">Zutaten</div>
+            <div class="list" id="ingredients"></div>
+            <div class="flex between"><span class="tsm sec">Benötigtes Werkzeug: <span class="ok">Feile ✓</span></span><span class="flex g2 tsm"><span class="sec">Menge</span><span class="stepper"><span><svg class="ico s"><use href="#i-minus"/></svg></span><b>1</b><span><svg class="ico s"><use href="#i-plus"/></svg></span></span></span></div>
+            <div class="col g1" style="align-items: stretch;"><span class="btn btn-p lg dis full">Herstellen · 45 s</span><span class="txs bad center">Es fehlen 2 Zutaten</span></div>
+          </div>
+        </div>
+        <div style="flex: 0 0 36rem; border-left: 1px solid var(--fh-border);" class="col">
+          <div class="panel-h" style="width: 100%;"><div class="grow"><div class="lbl">Warteschlange</div><div class="title"><span class="mono">2 / 3</span></div></div></div>
+          <div style="padding: 1.6rem; width: 100%;" class="col g3">
+            <div class="card" style="width: 100%;"><div class="flex between tsm"><span class="w5">Reparaturkit ×2</span><svg class="ico s mut"><use href="#i-x"/></svg></div><div class="bar h6" style="--v: 64%; margin-top: 1rem;"><i></i></div><div class="flex between txs sec" style="margin-top: 0.6rem;"><span>läuft</span><span class="mono">00:21</span></div></div>
+            <div class="card" style="width: 100%;"><div class="flex between tsm"><span class="w5">Metallplatte ×4</span><span class="ok flex g1 txs"><svg class="ico s"><use href="#i-check"/></svg>fertig</span></div><span class="btn btn-s sm full" style="margin-top: 1rem;">Abholen</span></div>
+            <div style="width: 100%; border: 1px dashed var(--fh-border); border-radius: var(--fh-radius-md); padding: 1.6rem;" class="center txs mut">Freier Platz</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 18 INVOICE + ID ════════════════════════════════════════════════ -->
+<section class="doc-sec" id="s-invoice">
+  <div class="doc-cap"><h2>18 · Rechnung &amp; Ausweis</h2><p>Received invoice (open, overdue), invoice creation (a business-side dialog with a field error), the invoice list with the paid stamp, the Personalausweis and the Führerschein (with "Abgelaufen").</p></div>
+  <div class="stage"><div class="world" data-world="day"></div>
+    <div class="layer">
+      <div class="solid" style="position:absolute; left: 3.2rem; top: 3.2rem; width: 48rem; border-radius: var(--fh-radius-lg); overflow: hidden;">
+        <div class="rail-top" style="--c: var(--fh-job-mechanic);"></div>
+        <div style="padding: 2.4rem;" class="col g3">
+          <div class="flex between" style="align-items: flex-start;"><div><div class="lbl">Rechnung</div><div class="tlg w6">Hafenwerkstatt Reiherstieg</div></div><div class="right"><div class="mono tsm">RE-2026-00417</div><div class="txs sec">vom <span class="mono">12.10.2026</span></div></div></div>
+          <div class="hr"></div>
+          <div class="flex between tsm"><span>Motorreparatur Sultan RS</span><span class="mono">450,00 $</span></div>
+          <div class="flex between tsm"><span>Abschleppen Speicherstadt</span><span class="mono">120,00 $</span></div>
+          <div class="flex between tsm"><span class="sec">Mahngebühr 10 %</span><span class="mono">57,00 $</span></div>
+          <div class="hr"></div>
+          <div class="flex between" style="align-items: flex-end;"><span class="pill out" style="--c: var(--fh-danger);"><span class="dot" style="--c: var(--fh-danger)"></span>seit 3 Tagen überfällig</span><span class="mono t3xl w5">627,00 $</span></div>
+          <div class="txs sec">Fällig am <span class="mono">12.10.2026</span> · Empfänger: Jonas Petersen</div>
+          <div class="flex g2" style="justify-content: flex-end;"><span class="btn btn-s">Später</span><span class="btn btn-p">Bezahlen</span></div>
+        </div>
+      </div>
+      <div class="glass-thick dialog" style="position:absolute; left: 54.4rem; top: 3.2rem; width: 52rem;">
+        <div><div class="lbl">Hafenwerkstatt · Rechnung stellen</div><div class="dt" style="margin-top: 0.4rem;">Neue Rechnung</div></div>
+        <div class="field"><label>Empfänger</label><div class="inp">Jonas Petersen <span class="mono mut">[128]</span><span class="grow"></span><svg class="ico s sec" style="transform: rotate(90deg)"><use href="#i-chev"/></svg></div><div class="help">Spieler in 5 m Umkreis</div></div>
+        <div class="field"><label>Betrag</label><div class="inp num err">0<span class="unit">$</span></div><div class="help err">⚠ Betrag muss größer als 0 $ sein.</div></div>
+        <div class="field"><label>Grund</label><div class="inp">Ölwechsel und Inspektion</div></div>
+        <div class="acts"><span class="btn btn-s">Abbrechen</span><span class="btn btn-p dis">Rechnung senden</span></div>
+      </div>
+      <div class="glass" style="position:absolute; left: 3.2rem; bottom: 4rem; width: 48rem; border-radius: var(--fh-radius-lg); overflow: hidden;">
+        <div style="padding: 0 2rem;"><div class="tabs" style="border: 0;"><span>Offen <span class="mono mut">1</span></span><span class="on">Bezahlt <span class="mono mut">2</span></span></div></div>
+        <div class="list" style="padding: 0 1.2rem 1.2rem; border-top: 1px solid var(--fh-border);">
+          <div class="li"><div class="grow"><div class="t">Rettungsdienst · Behandlung</div><div class="s mono">RE-2026-00398 · 04.10.</div></div><span class="mono tsm">300,00 $</span><span class="pill out" style="--c: var(--fh-success);">BEZAHLT</span></div>
+          <div class="li" style="border: 0;"><div class="grow"><div class="t">Polizei · Bußgeld §12 StVO</div><div class="s mono">RE-2026-00311 · 21.09.</div></div><span class="mono tsm">150,00 $</span><span class="pill out" style="--c: var(--fh-success);">BEZAHLT</span></div>
+        </div>
+      </div>
+      <div style="position:absolute; right: 3.2rem; top: 3.2rem;" class="col g4">
+        <div class="solid" style="width: 48rem; height: 30rem; border-radius: var(--fh-radius-lg); overflow: hidden; display: grid; grid-template-rows: 0.4rem auto 1fr auto;">
+          <div style="background: var(--fh-accent-secondary);"></div>
+          <div class="flex between" style="padding: 1.2rem 2rem 0;"><span class="lbl">Hafenstadt · Personalausweis</span><svg class="ico s mut"><use href="#i-anchor"/></svg></div>
+          <div style="display: grid; grid-template-columns: 11.2rem 1fr; gap: 1.6rem; padding: 1.2rem 2rem;">
+            <div style="border-radius: var(--fh-radius-sm); background: linear-gradient(180deg, #2c302a, #1c1f1a); display: grid; place-items: end center; overflow: hidden; height: 14rem;"><svg class="ico" style="width: 10rem; height: 11rem; color: #4a4e45; stroke-width: 1;"><use href="#i-user"/></svg></div>
+            <dl class="kv txs" style="grid-template-columns: auto 1fr; font-size: var(--fh-text-xs); align-content: start;">
+              <dt>Name</dt><dd class="w6" style="font-size: var(--fh-text-sm);">Petersen, Jonas</dd>
+              <dt>Geburtsdatum</dt><dd class="mono">03.05.1991</dd>
+              <dt>Staatsangehörigkeit</dt><dd>Deutsch</dd>
+              <dt>Größe</dt><dd class="mono">184 cm</dd>
+              <dt>Ausweisnummer</dt><dd class="mono">HK 7Q4 18C 2</dd>
+              <dt>Gültig bis</dt><dd class="mono">02.05.2031</dd>
+            </dl>
+          </div>
+          <div class="mono mut" style="font-size: var(--fh-text-2xs); letter-spacing: 0.12em; padding: 0.8rem 2rem; border-top: 1px solid var(--fh-border);">IDHKPETERSEN&lt;&lt;JONAS&lt;&lt;&lt;&lt;&lt;&lt;7Q418C2&lt;910503</div>
+        </div>
+        <div class="solid" style="width: 48rem; border-radius: var(--fh-radius-lg); overflow: hidden;">
+          <div style="height: 0.4rem; background: var(--fh-info);"></div>
+          <div style="padding: 1.2rem 2rem;" class="col g2">
+            <div class="flex between"><span class="lbl">Führerschein</span><span class="mono txs sec">FS-0093-2217</span></div>
+            <div class="flex between"><span class="tmd w6">Petersen, Jonas</span><span class="flex g2"><span class="mono txs sec">Gültig bis 01.09.2026</span><span class="pill out" style="--c: var(--fh-danger);">Abgelaufen</span></span></div>
+            <div class="flex g2"><span class="pill">A</span><span class="pill">B</span><span class="pill" style="opacity: 0.4;">C</span><span class="pill" style="opacity: 0.4;">CE</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 19 MDT ═════════════════════════════════════════════════════════ -->
+<section class="doc-sec" id="s-mdt">
+  <div class="doc-cap"><h2>19 · Polizei-MDT</h2><p>Overview: dispatch calls by priority, units, and a person profile with the "Gesucht" flag and record. A call detail drawer is open. The search list is in its loading skeleton.</p></div>
+  <div class="stage"><div class="world blurred" data-world="night"></div>
+    <div class="layer">
+      <div class="tablet"><div class="tablet-s" style="--c: var(--fh-job-police);">
+        <div class="rail-top"></div>
+        <div class="flex g4" style="padding: 0 2.4rem; border-bottom: 1px solid var(--fh-border);">
+          <span style="width: 3.2rem; height: 3.2rem; border-radius: var(--fh-radius-sm); background: rgba(116,153,219,0.18); color: var(--fh-job-police); display: grid; place-items: center; font-weight: 700;">P</span>
+          <div class="grow"><div class="lbl">MDT · Polizei Hafenstadt</div><div class="tmd w6">Jonas Petersen · <span class="mono">A-12</span></div></div>
+          <span class="seg"><span class="on"><span class="dot" style="--c: var(--fh-success); margin-right: 0.6rem;"></span>Verfügbar</span><span>Im Einsatz</span><span>Pause</span></span>
+          <span class="mono tsm sec">21:47</span><span class="close"><svg class="ico s"><use href="#i-x"/></svg></span>
+        </div>
+        <div class="tablet-body">
+          <nav class="tnav" id="mdtnav"></nav>
+          <div class="tmain" style="grid-template-columns: 1fr 1fr 40rem; grid-template-rows: auto 1fr; position: relative;">
+            <div style="grid-column: 1 / 3;">
+              <div class="sect-h"><span class="lbl">Aktive Einsätze · <span class="mono">5</span></span><span class="txs sec">Live</span></div>
+              <table class="tbl" id="calls"></table>
+            </div>
+            <div style="grid-row: 1 / 3; grid-column: 3;" class="card col g3" >
+              <div class="flex between" style="width: 100%;"><span class="lbl">Einsatz · 10-31</span><svg class="ico s mut"><use href="#i-x"/></svg></div>
+              <div class="tlg w6" style="width: 100%;">Einbruch in Lagerhalle</div>
+              <div class="flex g2 wrap" style="width: 100%;"><span class="pill solid-c" style="--c: var(--fh-danger);">P1</span><span class="pill">Kehrwieder 4 · Speicherstadt</span></div>
+              <div style="width: 100%; height: 16rem; border-radius: var(--fh-radius-sm); border: 1px solid var(--fh-border);" data-world="map" class="world-mini"></div>
+              <dl class="kv" style="width: 100%;"><dt>Eingang</dt><dd class="mono">21:43:12</dd><dt>Melder</dt><dd>Anonym · <span class="mono">0151 …</span></dd><dt>Einheiten</dt><dd class="mono">A-07, A-15</dd><dt>Entfernung</dt><dd class="mono">1,4 km</dd></dl>
+              <div class="tsm sec" style="width: 100%;">„Zwei Personen am Rolltor, dunkler Transporter ohne Licht.“</div>
+              <div class="flex g2" style="width: 100%; margin-top: auto;"><span class="btn btn-s grow">Wegpunkt setzen</span><span class="btn btn-p grow">Übernehmen</span></div>
+            </div>
+            <div>
+              <div class="sect-h"><span class="lbl">Einheiten</span></div>
+              <table class="tbl" id="units"></table>
+            </div>
+            <div class="col g3" style="align-items: stretch;">
+              <div class="sect-h" style="margin: 0;"><span class="lbl">Person</span><span class="flex g1 txs sec"><span class="spin"></span>Lade Treffer …</span></div>
+              <div class="inp focus">Krüger</div>
+              <div class="flex g3"><div class="skel" style="width: 4rem; height: 4rem; border-radius: 50%;"></div><div class="grow col g1" style="align-items: stretch;"><div class="skel" style="height: 1.4rem; width: 60%;"></div><div class="skel" style="height: 1.1rem; width: 40%;"></div></div></div>
+              <div class="card col g2" style="align-items: stretch;">
+                <div class="flex g3"><span class="avatar">DK</span><div class="grow"><div class="tmd w6">Dirk Krüger</div><div class="txs sec mono">* 17.11.1987 · 0157 330 1188</div></div><span class="pill solid-c" style="--c: var(--fh-danger);">Gesucht</span><span class="pill solid-c" style="--c: var(--fh-warning);">Bewaffnet</span></div>
+                <table class="tbl"><tr><th>Datum</th><th>Delikt</th><th class="r">Strafe</th></tr><tr><td class="mono">02.10.</td><td>Schmuggel §3</td><td class="mono r">4.000 $ · 20 HE</td></tr><tr><td class="mono">14.09.</td><td>Körperverletzung</td><td class="mono r">1.500 $ · 10 HE</td></tr></table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 20 EMS ═════════════════════════════════════════════════════════ -->
+<section class="doc-sec" id="s-ems">
+  <div class="doc-cap"><h2>20 · EMS-Tablet</h2><p>Patient sheet with vitals checked against their reference ranges, the injury body map with a selected zone, the treatment log, open calls and bed occupancy.</p></div>
+  <div class="stage"><div class="world blurred" data-world="day"></div>
+    <div class="layer">
+      <div class="tablet"><div class="tablet-s" style="--c: var(--fh-job-ems);">
+        <div class="rail-top"></div>
+        <div class="flex g4" style="padding: 0 2.4rem; border-bottom: 1px solid var(--fh-border);">
+          <span style="width: 3.2rem; height: 3.2rem; border-radius: var(--fh-radius-sm); background: rgba(232,144,127,0.18); color: var(--fh-job-ems); display: grid; place-items: center;"><svg class="ico s"><use href="#i-cross"/></svg></span>
+          <div class="grow"><div class="lbl">Rettungsdienst · Krankenhaus Mitte</div><div class="tmd w6">Mara Krüger · <span class="mono">R-04</span></div></div>
+          <span class="pill"><span class="dot" style="--c: var(--fh-success)"></span>Im Dienst</span><span class="mono tsm sec">14:12</span><span class="close"><svg class="ico s"><use href="#i-x"/></svg></span>
+        </div>
+        <div class="tablet-body">
+          <nav class="tnav" id="emsnav"></nav>
+          <div class="tmain" style="grid-template-columns: 1fr 1fr 40rem; grid-template-rows: auto auto 1fr;">
+            <div style="grid-column: 1 / 3;" class="flex between">
+              <div class="flex g3"><span class="avatar">OH</span><div><div class="tlg w6">Ole Hansen</div><div class="txs sec">Patient <span class="mono">#P-2213</span> · aufgenommen <span class="mono">13:58</span> · Behandlung 3</div></div></div>
+              <div class="flex g2"><span class="btn btn-s">Rechnung stellen</span><span class="btn btn-p">Behandlung eintragen</span></div>
+            </div>
+            <div style="grid-column: 1 / 3; display: grid; grid-template-columns: repeat(5, 1fr); gap: 1.2rem;" id="vitals"></div>
+            <div class="card" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; place-items: center; position: relative;">
+              <div class="lbl" style="position: absolute; left: 1.6rem; top: 1.6rem;">Verletzungen</div>
+              <div id="body-front" style="position: relative; width: 14rem; height: 34rem; margin-top: 2rem;"></div>
+              <div id="body-back" style="position: relative; width: 14rem; height: 34rem; margin-top: 2rem;"></div>
+              <div class="glass-thick" style="position: absolute; left: 50%; top: 40%; width: 24rem; border-radius: var(--fh-radius-md); padding: 1.2rem;"><div class="tsm w6">Rechter Oberschenkel</div><div class="txs sec">Schussverletzung · stark blutend</div><div class="flex g2" style="margin-top: 0.8rem;"><span class="pill">Druckverband</span><span class="pill">Tourniquet</span></div></div>
+            </div>
+            <div class="card col g2" style="align-items: stretch;">
+              <div class="lbl">Behandlungsprotokoll</div>
+              <div class="list">
+                <div class="li compact" style="padding: 0;"><span class="mono txs mut">14:06</span><span class="grow">Tourniquet angelegt</span><span class="txs sec">M. Krüger</span></div>
+                <div class="li compact" style="padding: 0;"><span class="mono txs mut">14:03</span><span class="grow">Zugang gelegt, NaCl 500 ml</span><span class="txs sec">M. Krüger</span></div>
+                <div class="li compact" style="padding: 0;"><span class="mono txs mut">13:59</span><span class="grow">Erstbefund, GCS 9</span><span class="txs sec">T. Brandt</span></div>
+                <div class="li compact" style="padding: 0; border: 0;"><span class="mono txs mut">13:58</span><span class="grow">Aufnahme Notaufnahme</span><span class="txs sec">System</span></div>
+              </div>
+            </div>
+            <div style="grid-column: 3; grid-row: 1 / 4;" class="col g4">
+              <div class="card col g2" style="width: 100%; align-items: stretch;">
+                <div class="flex between"><span class="lbl">Offene Notrufe · <span class="mono">2</span></span></div>
+                <div class="li" style="padding: 0;"><span class="pill solid-c" style="--c: var(--fh-danger);">P1</span><div class="grow"><div class="t">Bewusstlose Person</div><div class="s">Fischmarkt · <span class="mono">2,1 km · ETA 01:40</span></div></div><span class="btn btn-p sm">Annehmen</span></div>
+                <div class="li" style="padding: 0; border: 0;"><span class="pill solid-c" style="--c: var(--fh-warning);">P2</span><div class="grow"><div class="t">Verkehrsunfall</div><div class="s">Elbbrücken · <span class="mono">4,8 km · ETA 03:20</span></div></div><span class="btn btn-s sm">Annehmen</span></div>
+              </div>
+              <div class="card col g2" style="width: 100%; align-items: stretch;">
+                <div class="flex between"><span class="lbl">Betten · Krankenhaus Mitte</span><span class="mono txs">7 / 12</span></div>
+                <div id="beds" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.6rem;"></div>
+                <div class="flex g3 txs sec"><span class="flex g1"><span class="dot" style="--c: var(--fh-success)"></span>frei</span><span class="flex g1"><span class="dot" style="--c: var(--fh-job-ems)"></span>belegt</span><span class="flex g1"><span class="dot" style="--c: var(--fh-text-muted)"></span>gesperrt</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 21 BOSS ════════════════════════════════════════════════════════ -->
+<section class="doc-sec" id="s-boss">
+  <div class="doc-cap"><h2>21 · Chefmenü</h2><p>Mitarbeiter tab: the rank select, online status and a row menu open. Finanzen preview: a weekly bar chart. One action is disabled by rank.</p></div>
+  <div class="stage"><div class="world blurred" data-world="day"></div>
+    <div class="layer">
+      <div class="panel glass center-abs" style="width: 140rem; height: 80rem;">
+        <div class="rail-top" style="--c: var(--fh-job-mechanic);"></div>
+        <div class="panel-h"><span style="width: 3.2rem; height: 3.2rem; border-radius: var(--fh-radius-sm); background: rgba(208,142,90,0.18); color: var(--fh-job-mechanic); display: grid; place-items: center;"><svg class="ico s"><use href="#i-wrench"/></svg></span><div class="grow"><div class="lbl">Chefmenü</div><div class="title">Hafenwerkstatt Reiherstieg</div></div>
+          <div class="right"><div class="lbl">Firmenkonto</div><div class="mono t2xl w5">84.210 $</div></div><span class="btn btn-s">Einzahlen</span><span class="btn btn-s">Abheben</span></div>
+        <div style="padding: 0 2rem;"><div class="tabs"><span class="on">Mitarbeiter <span class="mono mut">7</span></span><span>Ränge &amp; Gehälter</span><span>Einstellen</span><span>Finanzen</span></div></div>
+        <div class="panel-b" style="display: grid; grid-template-columns: 1fr 44rem; gap: 2.4rem; position: relative;">
+          <div style="position: relative;"><table class="tbl" id="staff"></table>
+            <div class="glass-thick nui-blur" style="position: absolute; right: 1.2rem; top: 12.8rem; width: 30rem; border-radius: var(--fh-radius-md); padding: 0.6rem;">
+              <div class="li compact hov" style="border:0; border-radius: var(--fh-radius-sm);"><svg class="ico s sec"><use href="#i-chev" style="transform: rotate(-90deg); transform-origin: center;"/></svg><span class="grow">Befördern</span></div>
+              <div class="li compact" style="border:0; border-radius: var(--fh-radius-sm);"><svg class="ico s sec"><use href="#i-chev"/></svg><span class="grow">Degradieren</span></div>
+              <div class="li compact dis" style="border:0; border-radius: var(--fh-radius-sm);"><svg class="ico s sec"><use href="#i-case"/></svg><span class="grow">Gehalt ändern</span><span class="txs mut">Nur ab Rang Chef</span></div>
+              <div class="hr" style="margin: 0.4rem 0.8rem;"></div>
+              <div class="li compact bad" style="border:0; border-radius: var(--fh-radius-sm);"><svg class="ico s"><use href="#i-x"/></svg><span class="grow">Entlassen …</span></div>
+            </div>
+          </div>
+          <div class="card col g3" style="align-items: stretch;">
+            <div class="flex between"><span class="lbl">Finanzen · 8 Wochen</span><span class="flex g3 txs sec"><span class="flex g1"><span class="dot" style="--c: var(--fh-success)"></span>Einnahmen</span><span class="flex g1"><span class="dot" style="--c: var(--fh-text-muted)"></span>Ausgaben</span></span></div>
+            <div id="chart" style="height: 24rem; display: flex; align-items: flex-end; gap: 1.6rem; padding: 0 0.4rem; border-bottom: 1px solid var(--fh-border);"></div>
+            <div class="flex between mono txs mut" id="chartx"></div>
+            <dl class="kv"><dt>Einnahmen Woche 42</dt><dd class="mono ok">+18.420 $</dd><dt>Gehälter Woche 42</dt><dd class="mono">−9.800 $</dd><dt>Saldo</dt><dd class="mono w6">+8.620 $</dd></dl>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 22 ADMIN ═══════════════════════════════════════════════════════ -->
+<section class="doc-sec" id="s-admin">
+  <div class="doc-cap"><h2>22 · Admin-Panel</h2><p>Players table with a player selected and grouped actions in the side panel. The ban dialog is open with permanent chosen, so a typed confirmation is required. The report queue is shown in the side panel.</p></div>
+  <div class="stage"><div class="world blurred" data-world="night"></div>
+    <div class="layer">
+      <div class="tablet"><div class="tablet-s" style="--c: var(--fh-danger);">
+        <div class="rail-top"></div>
+        <div class="flex g4" style="padding: 0 2.4rem; border-bottom: 1px solid var(--fh-border);">
+          <span class="pill solid-c" style="--c: var(--fh-danger);">ADMIN-MODUS</span>
+          <div class="grow"><div class="lbl">Administration</div><div class="tmd w6">feanor · superadmin</div></div>
+          <span class="txs sec">Uptime <span class="mono">05:46:12</span> · Tick <span class="mono">4,1 ms</span> · <span class="mono">312</span> Ressourcen</span><span class="close"><svg class="ico s"><use href="#i-x"/></svg></span>
+        </div>
+        <div class="tablet-body">
+          <nav class="tnav" id="adminnav"></nav>
+          <div class="tmain" style="grid-template-columns: 1fr 44rem; position: relative;">
+            <div class="col g3" style="align-items: stretch;">
+              <div class="flex g3"><div class="inp ph grow"><svg class="ico s"><use href="#i-search"/></svg>ID, Name oder Identifier</div><span class="chip on">Online</span><span class="chip">Markiert</span></div>
+              <table class="tbl" id="admintbl"></table>
+            </div>
+            <div class="col g4" style="align-items: stretch;">
+              <div class="card col g3" style="align-items: stretch;">
+                <div class="flex g3"><span class="avatar">DK</span><div class="grow"><div class="tmd w6">Dirk Krüger <span class="mono mut">[88]</span></div><div class="mono txs sec">license:4f1c…a92e</div></div><span class="pill"><span class="dot" style="--c: var(--fh-warning)"></span>2 Reports</span></div>
+                <div class="lbl">Teleport</div><div class="flex g2"><span class="btn btn-s sm grow">Zu Spieler</span><span class="btn btn-s sm grow">Spieler holen</span></div>
+                <div class="lbl">Hilfe</div><div class="flex g2"><span class="btn btn-s sm grow">Heilen</span><span class="btn btn-s sm grow">Wiederbeleben</span><span class="btn btn-s sm grow">Inventar</span></div>
+                <div class="lbl">Moderation</div><div class="flex g2"><span class="btn btn-s sm grow">Freeze</span><span class="btn btn-s sm grow">Spectate</span><span class="btn btn-gd sm grow">Kick</span><span class="btn btn-d sm grow">Ban</span></div>
+              </div>
+              <div class="card col g2" style="align-items: stretch;">
+                <div class="flex between"><span class="lbl">Reports · <span class="mono">3</span></span></div>
+                <div class="li compact" style="padding: 0;"><span class="mono txs mut">04 min</span><span class="grow">VDM am Hafentor · <span class="sec">Mara K.</span></span><span class="pill out" style="--c: var(--fh-warning);">Offen</span></div>
+                <div class="li compact" style="padding: 0;"><span class="mono txs mut">11 min</span><span class="grow">Bug: Garage leer · <span class="sec">Ole H.</span></span><span class="pill out" style="--c: var(--fh-info);">In Bearbeitung</span></div>
+                <div class="li compact" style="padding: 0; border: 0;"><span class="mono txs mut">32 min</span><span class="grow">Frage zu Regeln · <span class="sec">Tim B.</span></span><span class="pill out" style="--c: var(--fh-success);">Erledigt</span></div>
+              </div>
+            </div>
+            <div style="position: absolute; inset: 0; background: rgba(12,13,11,0.55);"></div><div class="glass-thick dialog nui-blur" style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 52rem;">
+              <div class="flex g3" style="align-items: flex-start;"><svg class="ico l bad"><use href="#i-ban"/></svg><div><div class="dt">Dirk Krüger bannen</div><div class="tsm sec" style="margin-top: 0.4rem;">Der Spieler wird sofort getrennt. Der Bann wird im Log mit deinem Namen gespeichert.</div></div></div>
+              <div class="field"><label>Grund (Pflicht)</label><div class="inp">Wiederholtes VDM trotz Verwarnung</div></div>
+              <div class="field"><label>Dauer</label><span class="seg"><span>1 h</span><span>24 h</span><span>7 d</span><span class="on">permanent</span></span></div>
+              <div class="field"><label>Gib <span class="mono">BANNEN</span> ein, um einen permanenten Bann zu bestätigen</label><div class="inp mono focus">BANNEN</div></div>
+              <div class="acts"><span class="btn btn-s">Abbrechen</span><span class="btn btn-d">Permanent bannen</span></div>
+            </div>
+          </div>
+        </div>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 23 STATES ══════════════════════════════════════════════════════ -->
+<section class="doc-sec" id="s-states">
+  <div class="doc-cap"><h2>23 · Zustände</h2><p>The generic screen states (loading, empty, error, error over loaded data) and the screen-specific empty states, plus the control states for buttons, inputs, list rows, gauges, pills and the voice capsule.</p></div>
+  <div class="stage"><div class="world blurred" data-world="day"></div>
+    <div class="layer" style="padding: 3.2rem; display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: auto auto 1fr; gap: 2rem;">
+      <div class="glass" style="border-radius: var(--fh-radius-lg); overflow: hidden;"><div class="panel-h"><div class="grow"><div class="lbl">Lädt</div><div class="title">Inventar</div></div><span class="flex g1 txs sec"><span class="spin"></span>Lade …</span></div><div style="padding: 1.6rem;" class="col g2" id="skelrows"></div></div>
+      <div class="glass" style="border-radius: var(--fh-radius-lg); overflow: hidden;"><div class="panel-h"><div class="grow"><div class="lbl">Leer</div><div class="title">Inventar</div></div></div><div class="state"><svg class="ico xl st-ico"><use href="#i-box"/></svg><div class="st-t">Deine Taschen sind leer.</div><div>Kaufe Dinge im Kiosk oder sammle sie bei Jobs.</div></div></div>
+      <div class="glass" style="border-radius: var(--fh-radius-lg); overflow: hidden;"><div class="panel-h"><div class="grow"><div class="lbl">Fehler</div><div class="title">Bank</div></div></div><div class="state error"><svg class="ico xl st-ico"><use href="#i-alertc"/></svg><div class="st-t">Bank nicht erreichbar</div><div>Der Server antwortet gerade nicht. <span class="mono txs">ERR 503 · bank:balance</span></div><div class="flex g2" style="margin-top: 0.8rem;"><span class="btn btn-p sm">Erneut versuchen</span><span class="btn btn-g sm">Schließen</span></div></div></div>
+      <div class="glass" style="border-radius: var(--fh-radius-lg); overflow: hidden;"><div class="panel-h"><div class="grow"><div class="lbl">Fehler über Daten</div><div class="title">Garage</div></div></div><div style="padding: 1.2rem 1.6rem;" class="col g2"><div class="banner"><svg class="ico s"><use href="#i-alertc"/></svg><span class="grow">Aktualisierung fehlgeschlagen</span><span class="btn btn-s sm">Erneut</span></div><div class="dimmed list" style="width: 100%;"><div class="li"><div class="grow"><div class="t">Sultan RS</div><div class="s">Geparkt</div></div><span class="plate">HK · 4127</span></div><div class="li" style="border:0;"><div class="grow"><div class="t">Bison</div><div class="s">Abgeschleppt</div></div><span class="plate">HK · 0815</span></div></div></div></div>
+      <div style="grid-column: 1 / -1; display: grid; grid-template-columns: repeat(6, 1fr); gap: 1.2rem;" id="empties"></div>
+      <div style="grid-column: 1 / -1; display: grid; grid-template-columns: 1.3fr 1fr 1fr 1fr; gap: 2rem; align-items: start;">
+        <div class="glass col g3" style="border-radius: var(--fh-radius-lg); padding: 1.6rem 2rem; align-items: stretch;">
+          <div class="lbl">Buttons · normal / hover / gedrückt / Fokus / deaktiviert / beschäftigt</div>
+          <div class="flex g2 wrap"><span class="btn btn-p">Primär</span><span class="btn btn-p hover">Hover</span><span class="btn btn-p press">Gedrückt</span><span class="btn btn-p focus">Fokus</span><span class="btn btn-p dis">Deaktiviert</span><span class="btn btn-p"><span class="spin"></span>Bitte warten …</span></div>
+          <div class="flex g2 wrap"><span class="btn btn-s">Sekundär</span><span class="btn btn-s hover">Hover</span><span class="btn btn-s focus">Fokus</span><span class="btn btn-s dis">Deaktiviert</span><span class="btn btn-d">Löschen</span><span class="btn btn-gd">Entlassen</span><span class="btn btn-g">Ghost</span><span class="btn btn-g hover">Ghost Hover</span></div>
+          <div class="flex g3 wrap"><span class="toggle"></span><span class="toggle on"></span><span class="seg"><span class="on">An</span><span>Aus</span></span><span class="chip">Filter</span><span class="chip on">Filter an</span><span class="stepper"><span><svg class="ico s"><use href="#i-minus"/></svg></span><b>2</b><span><svg class="ico s"><use href="#i-plus"/></svg></span></span></div>
+        </div>
+        <div class="glass col g2" style="border-radius: var(--fh-radius-lg); padding: 1.6rem 2rem; align-items: stretch;">
+          <div class="lbl">Eingabefelder</div>
+          <div class="field"><label>Leer</label><div class="inp ph">Platzhalter</div></div>
+          <div class="field"><label>Fokus</label><div class="inp focus">Hafen</div></div>
+          <div class="field"><label>Fehler</label><div class="inp err">abc</div><div class="help err">⚠ Nur Zahlen erlaubt.</div></div>
+          <div class="field"><label>Schreibgeschützt</label><div class="inp ro mono">HK-DE 0482 1173</div></div>
+          <div class="field" style="opacity: 0.4;"><label>Deaktiviert</label><div class="inp">—</div></div>
+        </div>
+        <div class="glass col g2" style="border-radius: var(--fh-radius-lg); padding: 1.6rem 2rem; align-items: stretch;">
+          <div class="lbl">Listenzeilen</div>
+          <div class="list"><div class="li"><span class="grow">Normal</span><span class="mono">×4</span></div><div class="li hov"><span class="grow">Hover</span><span class="mono">×1</span></div><div class="li sel"><span class="grow">Ausgewählt</span><span class="mono">×12</span></div><div class="li own"><span class="grow">Eigene Zeile</span><span class="mono">128</span></div><div class="li dis"><span class="grow">Deaktiviert</span><span class="mono">×0</span></div></div>
+        </div>
+        <div class="glass col g3" style="border-radius: var(--fh-radius-lg); padding: 1.6rem 2rem; align-items: stretch;">
+          <div class="lbl">Anzeigen · normal / niedrig / kritisch</div>
+          <div class="flex g3"><span class="need"><span class="ring" style="--c: var(--fh-hud-hunger);" data-ring="72" data-i="food"></span></span><span class="need"><span class="ring" style="--c: var(--fh-warning);" data-ring="22" data-i="food"></span><span class="nv warn">22</span></span><span class="need crit pulse"><span class="ring" style="--c: var(--fh-danger);" data-ring="7" data-i="drop"></span><span class="nv bad">7</span></span></div>
+          <div class="flex g2 tsm"><span class="sec" style="width: 4rem;">HP</span><div class="bar h6" style="--v: 82%; --c: var(--fh-hud-health);"><i></i></div><span class="mono">82</span></div>
+          <div class="flex g2 tsm"><span class="sec" style="width: 4rem;">Tank</span><div class="bar" style="--v: 16%; --c: var(--fh-warning);"><i></i></div><span class="mono warn">16</span></div>
+          <div class="flex g2 wrap"><span class="voice"><span class="vs sec"><svg class="ico s"><use href="#i-mic"/></svg>Normal<span class="ticks"><i class="on" style="--c: var(--fh-text-secondary)"></i><i class="on" style="--c: var(--fh-text-secondary)"></i><i></i></span></span></span><span class="voice"><span class="vs bad"><svg class="ico s"><use href="#i-micoff"/></svg>Kein Mikro</span></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+(function () {
+  /* ── resolution handling: each stage behaves like a viewport ─────── */
+  var params = new URLSearchParams(location.search);
+  var res = { "720": [1280, 720], "1080": [1920, 1080], "1440": [2560, 1440] }[params.get("res") || "1080"] || [1920, 1080];
+  var rootPx = Math.min(16, Math.max(8, res[1] / 108));
+  document.documentElement.style.fontSize = rootPx + "px";
+  document.documentElement.style.setProperty("--stage-w", res[0] + "px");
+  document.documentElement.style.setProperty("--stage-h", res[1] + "px");
+  document.querySelectorAll("[data-res]").forEach(function (a) { if (+a.dataset.res === res[1]) a.classList.add("on"); });
+  document.getElementById("resInfo").textContent = "Stage " + res[0] + "×" + res[1] + " · 1rem = " + rootPx.toFixed(2) + "px";
+  if (params.get("blur") === "0") document.body.classList.add("no-backdrop");
+  var bt = document.getElementById("blurToggle");
+  bt.textContent = "NUI-Backdrop-Blur: " + (document.body.classList.contains("no-backdrop") ? "aus" : "an");
+  bt.addEventListener("click", function (e) { e.preventDefault(); document.body.classList.toggle("no-backdrop"); bt.textContent = "NUI-Backdrop-Blur: " + (document.body.classList.contains("no-backdrop") ? "aus" : "an"); });
+
+  var $ = function (id) { return document.getElementById(id); };
+  var ico = function (n, cls) { return '<svg class="ico ' + (cls || "") + '"><use href="#i-' + n + '"/></svg>'; };
+  var rnd = (function () { var s = 7; return function () { s = (s * 9301 + 49297) % 233280; return s / 233280; }; })();
+
+  /* ── stand-in game worlds ─────────────────────────────────────────── */
+  function skyline(mode, base, count, hMin, hMax) {
+    var out = "", x = -2;
+    var pal = mode === "day" ? ["#c4c9cc", "#dcdedb", "#a9b1b6", "#ecebe6", "#b7bbb4", "#f7f7f4", "#9aa2a8", "#d2cdc2"]
+            : mode === "night" ? ["#151a24", "#1a2030", "#10141c", "#1d2433", "#131822"]
+            : ["#3a3330", "#2e2a28", "#443a33", "#28252a", "#352f2c"];
+    while (x < 196) {
+      var w = 3 + rnd() * 8, h = hMin + rnd() * (hMax - hMin), c = pal[Math.floor(rnd() * pal.length)];
+      var win = mode === "day" ? "repeating-linear-gradient(0deg, transparent 0 1.4rem, rgba(70,80,90,0.16) 1.4rem 2rem), " : mode === "night" ? "repeating-linear-gradient(0deg, transparent 0 1.2rem, rgba(232,184,96," + (0.15 + rnd() * 0.35).toFixed(2) + ") 1.2rem 1.6rem), " : "repeating-linear-gradient(0deg, transparent 0 1.3rem, rgba(240,170,110,0.18) 1.3rem 1.7rem), ";
+      out += '<div style="position:absolute; left:' + x.toFixed(1) + "rem; bottom:" + base + "; width:" + w.toFixed(1) + "rem; height:" + h.toFixed(1) + "rem; background:" + win + c + ';"></div>';
+      x += w + rnd() * 0.6;
+    }
+    return out;
+  }
+  function crane(left, h, col) {
+    return '<div style="position:absolute; left:' + left + "; bottom:38%; width:0.8rem; height:" + h + "rem; background:" + col + ';"></div>' +
+      '<div style="position:absolute; left:calc(' + left + " - 8rem); bottom:calc(38% + " + (h - 1.2) + "rem); width:26rem; height:0.9rem; background:" + col + ';"></div>' +
+      '<div style="position:absolute; left:calc(' + left + " + 12rem); bottom:calc(38% + " + (h - 9) + "rem); width:1px; height:7.8rem; background:" + col + ';"></div>';
+  }
+  function world(el) {
+    var m = el.dataset.world, h = "";
+    if (m === "day") {
+      h += '<div style="position:absolute; inset:0; background: linear-gradient(180deg, #a8c3d7 0%, #d4e2ea 40%, #f4f5f0 62%);"></div>';
+      h += '<div style="position:absolute; inset:0; background: radial-gradient(circle at 86% 9%, #ffffff 0 5rem, rgba(255,255,255,0.92) 9rem, rgba(255,255,255,0) 30rem);"></div>';
+      h += skyline("day", "38%", 0, 6, 30);
+      h += crane("62%", 34, "#7f8784") + crane("80%", 28, "#8b928e");
+      h += '<div style="position:absolute; left:0; right:0; bottom:26%; height:12%; background: linear-gradient(180deg, #9fb6c1, #c9d7db); "></div>';
+      h += '<div style="position:absolute; left:0; right:0; bottom:26%; height:12%; background: repeating-linear-gradient(90deg, transparent 0 7rem, rgba(255,255,255,0.7) 7rem 9rem); opacity:0.6;"></div>';
+      h += '<div style="position:absolute; left:0; right:0; bottom:0; height:26%; background: linear-gradient(180deg, #d8d5cd 0%, #e9e7e0 60%, #f1efe9 100%);"></div>';
+      h += '<div style="position:absolute; left:0; right:0; bottom:11%; height:0.6rem; background: repeating-linear-gradient(90deg, #ffffff 0 6rem, transparent 6rem 12rem);"></div>';
+      h += '<div style="position:absolute; left:1rem; bottom:2rem; width:40rem; height:22rem; background: linear-gradient(180deg, #fbfbf9, #efeeea); box-shadow: 0 0 0 1px #e2e0da;"></div>';
+      h += '<div style="position:absolute; left:42rem; bottom:2rem; width:22rem; height:14rem; background: #f6f5f1;"></div>';
+      h += '<div style="position:absolute; right:3rem; bottom:3rem; width:30rem; height:12rem; background: #f2f1ec;"></div>';
+    } else if (m === "night") {
+      h += '<div style="position:absolute; inset:0; background: linear-gradient(180deg, #070b14 0%, #111a2a 45%, #1d2638 62%);"></div>';
+      h += skyline("night", "38%", 0, 6, 32);
+      h += crane("58%", 34, "#1f2532") + crane("76%", 28, "#222937");
+      h += '<div style="position:absolute; left:0; right:0; bottom:26%; height:12%; background: linear-gradient(180deg, #0c121c, #121a26);"></div>';
+      h += '<div style="position:absolute; left:0; right:0; bottom:26%; height:12%; background: repeating-linear-gradient(90deg, transparent 0 5rem, rgba(232,184,96,0.25) 5rem 5.4rem); filter: blur(0.3rem);"></div>';
+      h += '<div style="position:absolute; left:0; right:0; bottom:0; height:26%; background: linear-gradient(180deg, #181b20, #0f1115);"></div>';
+      [12, 40, 70, 96, 130, 160].forEach(function (x) { h += '<div style="position:absolute; left:' + x + 'rem; bottom:18%; width:24rem; height:24rem; transform:translateX(-50%); background: radial-gradient(circle, rgba(255,176,80,0.55) 0, rgba(255,176,80,0.12) 35%, transparent 65%);"></div>'; });
+      h += '<div style="position:absolute; left:112rem; top:34%; width:40rem; height:20rem; background: radial-gradient(ellipse, rgba(255,70,100,0.35), transparent 65%);"></div>';
+      h += '<div style="position:absolute; left:20rem; top:28%; width:30rem; height:16rem; background: radial-gradient(ellipse, rgba(90,160,255,0.22), transparent 65%);"></div>';
+    } else if (m === "dusk") {
+      h += '<div style="position:absolute; inset:0; background: linear-gradient(180deg, #1c1e22 0%, #3b3936 38%, #8a6f55 58%, #d1a173 64%, #2a2622 66%);"></div>';
+      h += skyline("dusk", "34%", 0, 5, 26);
+      h += crane("66%", 32, "#211e1c") + crane("82%", 26, "#24211e");
+      h += '<div style="position:absolute; left:0; right:0; bottom:0; height:34%; background: linear-gradient(180deg, #3a3029 0%, #1a1715 40%, #0e0d0b 100%);"></div>';
+      h += '<div style="position:absolute; left:0; right:0; bottom:22%; height:12%; background: repeating-linear-gradient(90deg, transparent 0 6rem, rgba(209,161,115,0.25) 6rem 8rem); filter: blur(0.4rem);"></div>';
+    } else if (m === "map") {
+      h += '<div style="position:absolute; inset:0; background: #171a16;"></div>';
+      h += '<div style="position:absolute; inset:0; background: radial-gradient(ellipse 60% 40% at 30% 70%, #1b2a2e 0 60%, transparent 61%), radial-gradient(ellipse 50% 30% at 70% 30%, #1b2a2e 0 55%, transparent 56%), linear-gradient(170deg, transparent 0 46%, #1b2a2e 46% 54%, transparent 54%);"></div>';
+      h += '<div style="position:absolute; inset:0; background: repeating-linear-gradient(0deg, transparent 0 7.9rem, rgba(59,63,55,0.6) 7.9rem 8rem), repeating-linear-gradient(90deg, transparent 0 7.9rem, rgba(59,63,55,0.6) 7.9rem 8rem);"></div>';
+      h += '<div style="position:absolute; inset:0; background: linear-gradient(25deg, transparent 0 40%, #2c302a 40% 40.4%, transparent 40.4%), linear-gradient(-35deg, transparent 0 58%, #2c302a 58% 58.4%, transparent 58.4%), linear-gradient(95deg, transparent 0 30%, #2c302a 30% 30.3%, transparent 30.3%);"></div>';
+    }
+    el.innerHTML = '<div class="wi">' + h + "</div>";
+  }
+  document.querySelectorAll(".world, .world-mini").forEach(function (el) { if (el.classList.contains("world-mini")) { el.style.position = "relative"; el.style.overflow = "hidden"; } world(el); });
+
+  /* ── rings ─────────────────────────────────────────────────────────── */
+  function ringSvg(v) { return '<svg class="r" viewBox="0 0 44 44"><circle class="trk" cx="22" cy="22" r="19" pathLength="100"/><circle class="arc" cx="22" cy="22" r="19" pathLength="100" stroke-dasharray="' + v + ' 100"/></svg>'; }
+  function hydrateRings(root) { (root || document).querySelectorAll("[data-ring]").forEach(function (el) { el.innerHTML = ringSvg(el.dataset.ring) + ico(el.dataset.i); }); }
+
+  /* ── 00 tokens ─────────────────────────────────────────────────────── */
+  var sw = [
+    ["bg-base", "#0C0D0B", "16.53 · text-primary darauf"], ["bg-surface", "#161814", "15.17 · text-primary darauf"], ["bg-elevated", "#20231E", "13.50 · text-primary darauf"], ["bg-overlay", "rgba(16,17,15,.80)", "8.71 weiß / 16.42 schwarz"],
+    ["border", "#3B3F37", "1.66 · dekorativ"], ["text-primary", "#ECEDE6", "15.17 auf surface"], ["text-secondary", "#B5B9AD", "8.94 auf surface"], ["text-muted", "#8D9285", "5.60 auf surface"],
+    ["text-on-accent", "#15160F", "10.36 auf accent"], ["accent-primary", "#D3C29A", "10.17 auf surface"], ["accent-secondary", "#A4AC7C", "7.47 auf surface"], ["success", "#73C08B", "8.21 auf surface"],
+    ["warning", "#E8B04E", "9.15 auf surface"], ["danger", "#F46A58", "6.00 auf surface"], ["info", "#8DBBCB", "8.60 auf surface"], ["job-police", "#7499DB", "6.23 auf surface"],
+    ["job-ems", "#E8907F", "7.43 auf surface"], ["job-mechanic", "#D08E5A", "6.55 auf surface"], ["job-civil", "#AEB3A7", "8.35 auf surface"], ["hud-health", "#EE7B6C", "3.76 Overlay weiß"],
+    ["hud-armor", "#93B2DE", "4.72 Overlay weiß"], ["hud-hunger", "#D8AB78", "4.90 Overlay weiß"], ["hud-thirst", "#70C0D6", "4.99 Overlay weiß"], ["hud-stamina", "#B2CB7E", "5.74 Overlay weiß"],
+    ["hud-stress", "#B79AD8", "4.22 Overlay weiß"], ["hud-voice", "#A2DBB2", "6.51 Overlay weiß"], ["hud-radio", "#EE9759", "4.50 Overlay weiß"], ["hud-fuel", "#DDC95F", "6.16 Overlay weiß"]
+  ];
+  $("swatches").innerHTML = sw.map(function (s) {
+    return '<div class="flex g3" style="height: 4.6rem;"><span style="width: 4rem; height: 4rem; border-radius: var(--fh-radius-sm); background: var(--fh-' + s[0] + '); border: 1px solid rgba(236,237,230,0.14); flex: none;"></span><div class="grow"><div class="tsm w6">' + s[0] + '</div><div class="mono txs sec">' + s[1] + '</div></div><span class="mono txs mut right">' + s[2] + "</span></div>";
+  }).join("");
+  $("typescale").innerHTML = [["4xl", "4.8rem", "Hafenstadt 248.300 $"], ["3xl", "3.2rem", "Kontostand 12.480 $"], ["2xl", "2.4rem", "Polizei-MDT"], ["xl", "2rem", "Fahrzeug verkaufen?"], ["lg", "1.7rem", "Jonas Petersen"], ["md", "1.5rem", "Überweisung erhalten – Körper 15"], ["sm", "1.3rem", "Dichte Liste, Chat, Tabellen"], ["xs", "1.2rem", "Metadaten · 14.10. · 22:41"], ["2xs", "1.1rem", "KLEINE LABEL · EINHEITEN"]].map(function (t) {
+    return '<div class="flex g4" style="border-bottom: 1px solid var(--fh-border); padding-bottom: 0.6rem;"><span class="mono txs mut" style="width: 9rem;">' + t[0] + " · " + t[1] + '</span><span style="font-size: var(--fh-text-' + t[0] + "); font-weight: " + (/4xl|3xl|2xl|xl|lg/.test(t[0]) ? 600 : 400) + "; letter-spacing: " + (/4xl|3xl|2xl/.test(t[0]) ? "-0.02em" : t[0] === "2xs" ? "0.08em" : "0") + '; line-height: 1.15;">' + t[2] + "</span></div>";
+  }).join("") + '<div class="flex g4" style="margin-top: 0.4rem;"><span class="mono txs mut" style="width: 9rem;">mono</span><span class="mono tlg">HK · 4127  112,40  RE-2026-00417  0123456789</span></div><div class="flex g4"><span class="mono txs mut" style="width: 9rem;">gewichte</span><span class="tlg"><span class="w5" style="font-weight:400">Regular 400</span> · <span class="w5">Medium 500</span> · <span class="w6">Semibold 600</span> · <span class="w7">Bold 700</span></span></div>';
+  $("spacing").innerHTML = [["0_5", 0.2], ["1", 0.4], ["2", 0.8], ["3", 1.2], ["4", 1.6], ["5", 2], ["6", 2.4], ["8", 3.2], ["10", 4], ["12", 4.8], ["16", 6.4]].map(function (s) {
+    return '<div class="flex g3"><span class="mono txs mut" style="width: 7rem;">space-' + s[0] + '</span><span style="height: 1.2rem; width: var(--fh-space-' + s[0] + '); background: var(--fh-accent-secondary); border-radius: 2px;"></span><span class="mono txs sec">' + s[1] + "rem</span></div>";
+  }).join("");
+  $("radii").innerHTML = ["xs", "sm", "md", "lg", "xl"].map(function (r) { return '<div class="col g1"><span style="width: 6.4rem; height: 6.4rem; border-radius: var(--fh-radius-' + r + '); background: var(--fh-bg-elevated); border: 1px solid var(--fh-border);"></span><span class="mono txs sec">' + r + "</span></div>"; }).join("");
+
+  /* ── 03 creator ────────────────────────────────────────────────────── */
+  $("stepper").innerHTML = [1, 2, 3, 4, 5].map(function (n) { var c = n < 3 ? "var(--fh-accent-secondary)" : n === 3 ? "var(--fh-accent-primary)" : "rgba(236,237,230,0.14)"; return '<span style="flex:1; height: 0.4rem; border-radius: 2px; background:' + c + ';"></span>'; }).join("");
+  function sliders(id, list) { $(id).innerHTML = list.map(function (s) { return '<div class="col g1" style="align-items: stretch;"><div class="flex between tsm"><span>' + s[0] + '</span><span class="mono sec">' + s[1] + '</span></div><div class="slider" style="--v:' + s[1] + '%;"><i></i><b></b></div></div>'; }).join(""); }
+  sliders("sliders-nose", [["Breite", 42], ["Höhe", 61], ["Länge", 35], ["Spitze", 50]]);
+  sliders("sliders-eyes", [["Öffnung", 55], ["Brauenhöhe", 28], ["Brauentiefe", 47]]);
+
+  /* ── 04 spawn ──────────────────────────────────────────────────────── */
+  var spawns = [["Letzte Position", "Am Sandtorkai", "pin", 0, "", 44, 52], ["Wohnung", "Speicherstadt", "home", 0, "", 38, 40], ["Fähranleger", "Landungsbrücken", "anchor", 1, "", 22, 58], ["Fischmarkt", "Altona", "food", 0, "", 14, 34], ["Hauptbahnhof", "St. Georg", "map", 0, "", 60, 28], ["Krankenhaus", "Mitte", "cross", 2, "Nur im Dienst", 70, 62], ["Präsidium", "Alsterufer", "shield", 2, "Nur Polizei", 52, 20]];
+  $("spawnlist").innerHTML = spawns.map(function (s) { return '<div class="li ' + (s[3] === 1 ? "sel" : s[3] === 2 ? "dis" : "") + '" style="border-radius: var(--fh-radius-sm);">' + ico(s[2], "sec") + '<div class="grow"><div class="t">' + s[0] + '</div><div class="s">' + s[1] + "</div></div>" + (s[4] ? '<span class="txs mut">' + s[4] + "</span>" : ico("chev", "s mut")) + "</div>"; }).join("");
+  $("pins").insertAdjacentHTML("beforebegin", [["Altona", 10, 26], ["St. Pauli", 24, 44], ["Speicherstadt", 40, 47], ["HafenCity", 47, 62], ["Veddel", 64, 76], ["St. Georg", 62, 22], ["Elbe", 30, 72]].map(function (d) { return '<div class="lbl" style="position:absolute; left:' + d[1] + "%; top:" + d[2] + '%; color: var(--fh-text-muted); letter-spacing: 0.2em;">' + d[0] + "</div>"; }).join(""));
+  $("pins").innerHTML = spawns.map(function (s) {
+    var sel = s[3] === 1, dis = s[3] === 2;
+    return '<div style="position:absolute; left:' + s[5] + "%; top:" + s[6] + '%; transform: translate(-50%,-50%);" class="flex g2"><span style="width: 3.2rem; height: 3.2rem; border-radius: 50%; display:grid; place-items:center; ' + (sel ? "background: var(--fh-accent-primary); color: var(--fh-text-on-accent); box-shadow: var(--fh-glow-accent);" : "background: var(--fh-material-regular); border: 1px solid var(--fh-border); color: var(--fh-text-secondary);") + (dis ? "opacity:0.4;" : "") + '">' + ico(s[2], "s") + "</span>" + (sel ? '<span class="glass" style="border-radius: var(--fh-radius-md); padding: 0.8rem 1.2rem;"><div class="tsm w6">Fähranleger</div><div class="txs sec">Landungsbrücken · Brücke 3</div></span>' : "") + "</div>";
+  }).join("");
+
+  /* ── 05 / 06 HUD ───────────────────────────────────────────────────── */
+  function hud(o) {
+    var h = "";
+    h += '<div class="chat">' + o.chat.map(function (c) { return '<div class="cl"><span class="ts">' + c[0] + '</span><span class="tag" style="--c:' + c[1] + ';">' + c[2] + '</span><span class="w6">' + c[3] + "</span><span>" + c[4] + "</span></div>"; }).join("") + "</div>";
+    h += '<div class="status-card hud-chip"><div class="flex between txs sec"><span class="mono">' + o.time + '</span><span>ID <span class="mono">128</span></span></div>' +
+      '<div class="flex between"><span class="pill"><span class="dot" style="--c: var(--fh-job-police)"></span>Polizei · Kommissar</span><span class="flex g1 txs ' + (o.duty ? "ok" : "mut") + '"><span class="dot" style="--c: currentColor"></span>' + (o.duty ? "Im Dienst" : "Außer Dienst") + "</span></div>" +
+      '<div class="hr"></div><div class="money"><span class="lbl">Bargeld</span>' + (o.cashDelta ? '<span class="delta ' + o.cashDelta[1] + '">' + o.cashDelta[0] + "</span>" : "") + '<span class="v">' + o.cash + ' $</span></div><div class="money"><span class="lbl">Bank</span>' + (o.bankDelta ? '<span class="delta ' + o.bankDelta[1] + '">' + o.bankDelta[0] + "</span>" : "") + '<span class="v">' + o.bank + " $</span></div></div>";
+    if (o.notes) h += '<div class="notes" style="top: 21.6rem;">' + o.notes.map(function (n) { return '<div class="note" style="--c:' + n[0] + ';"><i class="rl"></i>' + ico(n[1]) + '<div><div class="nt"><span>' + n[2] + "</span><small>" + n[4] + '</small></div><div class="nb">' + n[3] + '</div></div><i class="tl" style="--v:' + n[5] + '%;"></i></div>'; }).join("") + "</div>";
+    h += '<div class="minimap"><div class="mm-bars"><div class="mm-bar" style="--c: ' + o.hpC + ';">' + ico("heart", o.hpPulse ? "pulse" : "") + '<div class="bar h6' + (o.hpPulse ? " pulse" : "") + '" style="--v:' + o.hp + "%; --c:" + o.hpC + ';"><i></i></div><b class="' + (o.hpPulse ? "bad" : "") + '">' + o.hp + "</b></div>" +
+      (o.ar ? '<div class="mm-bar" style="--c: var(--fh-hud-armor);">' + ico("shield") + '<div class="bar" style="--v:' + o.ar + '%; --c: var(--fh-hud-armor);"><i></i></div><b>' + o.ar + "</b></div>" : "") + "</div>" +
+      '<div class="mm-frame">' + minimap(o.night) + '</div><div class="mm-street"><span><span class="w6">' + o.street + '</span> <span class="sec">· ' + o.district + '</span></span><span class="mono sec">' + o.heading + "</span></div></div>";
+    h += '<div class="needs"><div class="needs-grid">' + o.needs.map(function (n) { return '<span class="need' + (n[3] ? " crit pulse" : "") + '"><span class="ring" style="--c:' + n[1] + ';" data-ring="' + n[2] + '" data-i="' + n[0] + '"></span>' + (n[2] < 50 ? '<span class="nv" style="color:' + n[1] + ';">' + n[2] + "</span>" : "") + "</span>"; }).join("") + "</div>" + '<div class="col g1" style="align-items: flex-start;">' + o.voice + "</div></div>";
+    h += o.ammo;
+    h += o.veh;
+    if (o.progress) h += o.progress;
+    h += '<div class="hint">' + o.hint + "</div>";
+    return h;
+  }
+  function minimap(night) {
+    var bg = night ? "#1d2229" : "#2f353a";
+    return '<div style="position:absolute; inset:0; background:' + bg + ';"></div>' +
+      '<div style="position:absolute; inset:0; background: radial-gradient(ellipse 50% 40% at 80% 20%, #2a4552 0 60%, transparent 61%), linear-gradient(160deg, transparent 0 55%, #2a4552 55% 68%, transparent 68%);"></div>' +
+      '<div style="position:absolute; inset:0; background: linear-gradient(90deg, transparent 0 30%, #59606a 30% 31.5%, transparent 31.5%), linear-gradient(0deg, transparent 0 46%, #59606a 46% 48%, transparent 48%), linear-gradient(35deg, transparent 0 60%, #4d545c 60% 61%, transparent 61%), linear-gradient(-20deg, transparent 0 30%, #4d545c 30% 31%, transparent 31%);"></div>' +
+      '<div style="position:absolute; left:50%; top:55%; transform: translate(-50%,-50%) rotate(42deg); width:0; height:0; border-left: 0.7rem solid transparent; border-right: 0.7rem solid transparent; border-bottom: 1.6rem solid #ECEDE6; filter: drop-shadow(0 0 0.3rem rgba(0,0,0,0.6));"></div>' +
+      '<div style="position:absolute; left: 0.8rem; top: 0.8rem;" class="mono t2xs sec">N</div>';
+  }
+  function vehicle(o) {
+    var speed = String(o.speed).padStart(3, "0"), lead = speed.match(/^0*/)[0], rest = speed.slice(lead.length) || "0";
+    if (rest === "0" && lead.length === 3) lead = "00";
+    var rpmDash = (o.rpm * 66.7 / 100).toFixed(1);
+    return '<div class="veh glass">' +
+      '<div class="col g2" style="align-items: flex-start;">' +
+        '<div class="vrow" style="width: 100%;">' + ico("fuel", "s") + '<div class="bar" style="--v:' + o.fuel + "%; --c:" + o.fuelC + ';"><i></i></div><span class="mono w6" style="color:' + (o.fuelC === "var(--fh-hud-fuel)" ? "var(--fh-text-primary)" : o.fuelC) + ';">' + o.fuel + " %</span></div>" +
+        '<div class="vrow" style="color:' + o.beltC + ';">' + ico("belt", "s" + (o.beltPulse ? " pulse" : "")) + '<span class="w6">' + o.belt + "</span></div>" +
+        '<div class="vrow" style="color:' + o.engC + ';">' + ico("engine", "s") + '<span class="w6">' + o.eng + "</span></div>" +
+      "</div>" +
+      '<div class="speed"><svg viewBox="0 0 100 60"><path d="M10 56 A42 42 0 1 1 90 56" fill="none" stroke="rgba(236,237,230,0.14)" stroke-width="1.2" stroke-linecap="round" pathLength="100" stroke-dasharray="66.7 100"/><path d="M10 56 A42 42 0 1 1 90 56" fill="none" stroke="' + o.rpmC + '" stroke-width="1.2" stroke-linecap="round" pathLength="100" stroke-dasharray="' + rpmDash + ' 100"/></svg>' +
+        '<div class="ind ' + (o.left ? "on blink" : "") + '" style="position:absolute; left: -0.4rem; top: -0.4rem;">' + ico("left", "fill") + "</div>" +
+        '<div class="ind ' + (o.right ? "on blink" : "") + '" style="position:absolute; right: -0.4rem; top: -0.4rem;">' + ico("right", "fill") + "</div>" +
+        '<div class="center"><div class="sv"><span class="z">' + lead + "</span>" + rest + '</div><div class="lbl" style="margin-top: 0.4rem;">km/h · Gang <span class="mono" style="color: var(--fh-text-primary);">' + o.gear + "</span></div></div></div>" +
+      '<div class="col g2" style="align-items: flex-end;">' +
+        '<div class="vrow"><span class="vglyph ' + (o.low ? "on" : "") + '">' + ico("beam", "s") + '</span><span class="vglyph" style="' + (o.high ? "color: var(--fh-info);" : "") + '">' + ico("beam", "s") + '<span class="t2xs w6">FERN</span></span></div>' +
+        '<div class="vrow"><span class="vglyph ' + (o.cruise ? "on" : "") + '">' + ico("cruise", "s") + '<span class="mono">' + (o.cruise ? "TEMPOMAT " + o.cruise : "TEMPOMAT") + "</span></span></div>" +
+        '<div class="vrow mono sec">18.204 km</div>' +
+        '<div class="vrow"><span class="plate" style="height: 2.2rem; font-size: var(--fh-text-xs);">HK · 4127</span></div>' +
+      "</div></div>";
+  }
+  var voiceDay = '<span class="voice talk"><span class="vs" style="color: var(--fh-hud-voice);">' + ico("mic", "s") + '<span style="color: var(--fh-text-primary);">Normal</span><span class="ticks"><i class="on"></i><i class="on"></i><i></i></span></span></span><span class="voice"><span class="vs" style="color: var(--fh-hud-radio);">' + ico("radio", "s") + '<span>FUNK</span><span class="mono" style="color: var(--fh-text-primary);">112,40</span></span></span>';
+  var voiceNight = '<span class="voice"><span class="vs sec">' + ico("mic", "s") + '<span>Rufen</span><span class="ticks"><i class="on" style="--c: var(--fh-text-secondary)"></i><i class="on" style="--c: var(--fh-text-secondary)"></i><i class="on" style="--c: var(--fh-text-secondary)"></i></span></span></span><span class="voice" style="border-color: transparent;"><span class="vs tx">' + ico("radio", "s") + '<span>SENDET</span><span class="mono">112,40</span></span></span>';
+  $("hud-day").innerHTML = hud({
+    time: "14:12", duty: true, cash: "12.480", bank: "248.300", cashDelta: ["−80 $", "bad"], bankDelta: ["+1.250 $", "ok"],
+    chat: [["14:09", "var(--fh-text-secondary)", "OOC", "Tim B. [12]", "kurz afk, bin gleich zurück"], ["14:10", "var(--fh-hud-stress)", "ME", "Mara K. [57]", "zieht die Handschuhe an"], ["14:11", "var(--fh-info)", "DO", "Ole H. [203]", "Der Motor qualmt sichtbar."], ["14:11", "var(--fh-job-police)", "POLIZEI", "Leitstelle", "A-12 bitte zum Hafentor."]],
+    notes: [["var(--fh-info)", "msg", "Neue Nachricht", "Von Mara K.: Treffpunkt Fischmarkt?", "jetzt", 92], ["var(--fh-success)", "okc", "Überweisung erhalten", "+1.250 $ von Hafenlogistik GmbH", "vor 2 s", 70], ["var(--fh-warning)", "alert", "Tank fast leer", "Reichweite ca. 8 km", "vor 4 s", 45], ["var(--fh-danger)", "alertc", "Aktion fehlgeschlagen", "Du hast nicht genug Platz im Inventar.", "vor 6 s", 30]],
+    hp: 82, hpC: "var(--fh-hud-health)", ar: 46, street: "Am Sandtorkai", district: "Speicherstadt", heading: "NO 042°",
+    needs: [["food", "var(--fh-hud-hunger)", 68], ["drop", "var(--fh-hud-thirst)", 54], ["pulse", "var(--fh-hud-stamina)", 41], ["zap", "var(--fh-hud-stress)", 18]],
+    voice: voiceDay,
+    ammo: '<div class="ammo hud-chip" style="bottom: 4rem;"><span class="lbl">Pistole .50 · Einzel</span><div class="flex g2" style="align-items: baseline;"><span class="cnt">09</span><span class="res">/ 120</span></div></div>',
+    veh: vehicle({ speed: 87, gear: "4", rpm: 62, rpmC: "var(--fh-text-secondary)", fuel: 62, fuelC: "var(--fh-hud-fuel)", belt: "Angeschnallt", beltC: "var(--fh-success)", eng: "Motor OK", engC: "var(--fh-text-secondary)", left: true, low: true, cruise: 80 }),
+    progress: '<div class="progress glass"><div class="flex between tsm"><span>Reparatur läuft …</span><span class="mono">62 %</span></div><div class="bar h6" style="--v: 62%;"><i></i></div><div class="flex g2 txs sec"><span class="kc sm">X</span>Abbrechen</div></div>',
+    hint: '<span class="hint-p glass"><span class="kc">E</span><span>Garage öffnen <span class="ctx">· Garage Speicherstadt</span></span></span><span class="hint-p glass"><span class="kc">G</span><span>Fahrzeug abschließen</span></span>'
+  });
+  $("hud-night").innerHTML = hud({
+    time: "02:31", duty: false, cash: "12.400", bank: "247.050", cashDelta: null, bankDelta: ["−1.250 $", "bad"],
+    chat: [["02:29", "var(--fh-danger)", "ADMIN", "Server", "Neustart in 30 Minuten."], ["02:30", "var(--fh-job-ems)", "LSMD", "Leitstelle", "R-04 zum Fischmarkt."]],
+    notes: null,
+    hp: 8, hpC: "var(--fh-danger)", hpPulse: true, ar: 0, street: "Reeperbahn", district: "Kiez", heading: "W 271°",
+    needs: [["food", "var(--fh-warning)", 22], ["drop", "var(--fh-danger)", 7, true], ["zap", "var(--fh-hud-stress)", 64]],
+    voice: voiceNight,
+    ammo: '<div class="ammo hud-chip"><span class="lbl">Karabiner · Auto</span><div class="flex g2" style="align-items: baseline;"><span class="cnt bad">00</span><span class="res">/ 60</span></div><span class="flex g2 tsm w6 bad"><span class="kc sm">R</span>Nachladen</span></div>',
+    veh: vehicle({ speed: 124, gear: "5", rpm: 92, rpmC: "var(--fh-warning)", fuel: 14, fuelC: "var(--fh-warning)", belt: "Nicht angeschnallt", beltC: "var(--fh-danger)", beltPulse: true, eng: "Motor beschädigt", engC: "var(--fh-warning)", left: true, right: true, low: true, high: true, cruise: null }),
+    progress: '<div class="progress glass"><div class="flex between tsm"><span class="bad w6">Abgebrochen</span><span class="mono">34 %</span></div><div class="bar h6" style="--v: 34%; --c: var(--fh-danger);"><i></i></div></div>',
+    hint: '<span class="hint-p glass"><span class="hold"><svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="18" fill="none" stroke="rgba(236,237,230,0.14)" stroke-width="3"/><circle cx="20" cy="20" r="18" fill="none" stroke="#D3C29A" stroke-width="3" stroke-linecap="round" pathLength="100" stroke-dasharray="58 100"/></svg><span class="kc sm">E</span></span><span>Halten: Tür aufbrechen</span></span><span class="hint-p glass"><span class="kc dim">H</span><span class="sec">Klingeln <span class="ctx">· Abgeschlossen</span></span></span>'
+  });
+  $("hud-night").insertAdjacentHTML("beforeend", '<div class="note" style="position:absolute; right: 3.2rem; top: 21.6rem; width: 36rem; --c: var(--fh-warning);"><i class="rl"></i>' + ico("alert") + '<div><div class="nt"><span>Anschnallen!</span><small>×3</small></div><div class="nb"><span class="kc sm">B</span> Anschnallen · über 20 km/h ohne Gurt</div></div><i class="tl" style="--v: 60%;"></i></div>');
+
+  /* ── 08 radial ─────────────────────────────────────────────────────── */
+  (function () {
+    var items = [["car", "Fahrzeug", 1], ["shirt", "Kleidung"], ["id", "Ausweis zeigen"], ["smile", "Emotes"], ["receipt", "Rechnungen"], ["case", "Job"], ["radio", "Walkie-Talkie"], ["map", "GPS", 2]];
+    var n = items.length, R = 22, r0 = 7.6, svg = '<svg viewBox="-22 -22 44 44" style="position:absolute; inset:0; width:100%; height:100%; overflow: visible;">';
+    var labels = "";
+    items.forEach(function (it, i) {
+      var a0 = (i / n) * 2 * Math.PI - Math.PI / 2 - Math.PI / n, a1 = ((i + 1) / n) * 2 * Math.PI - Math.PI / 2 - Math.PI / n;
+      var p = function (rad, a) { return (rad * Math.cos(a)).toFixed(3) + " " + (rad * Math.sin(a)).toFixed(3); };
+      var d = "M" + p(R, a0) + " A" + R + " " + R + " 0 0 1 " + p(R, a1) + " L" + p(r0, a1) + " A" + r0 + " " + r0 + " 0 0 0 " + p(r0, a0) + "Z";
+      var on = it[2] === 1;
+      svg += '<path d="' + d + '" fill="' + (on ? "#2C3029" : "rgba(12,13,11,0.92)") + '" stroke="#3B3F37" stroke-width="0.08"/>';
+      if (on) svg += '<path d="M' + p(R - 0.15, a0 + 0.01) + " A" + (R - 0.15) + " " + (R - 0.15) + " 0 0 1 " + p(R - 0.15, a1 - 0.01) + '" fill="none" stroke="#D3C29A" stroke-width="0.35" style="filter: drop-shadow(0 0 0.6px rgba(211,194,154,0.6));"/>';
+      var am = (a0 + a1) / 2, lr = (R + r0) / 2;
+      labels += '<div style="position:absolute; left:' + (50 + (lr * Math.cos(am)) / 44 * 100) + "%; top:" + (50 + (lr * Math.sin(am)) / 44 * 100) + '%; transform: translate(-50%,-50%); text-align:center; ' + (it[2] === 2 ? "opacity:0.4;" : "") + '" class="col g1"><span style="color:' + (on ? "var(--fh-accent-primary)" : "var(--fh-text-secondary)") + ';">' + ico(it[0], "l") + '</span><span class="txs ' + (on ? "w6" : "sec") + '">' + it[1] + "</span></div>";
+    });
+    svg += '<circle r="' + r0 + '" fill="rgba(22,24,20,0.95)" stroke="#3B3F37" stroke-width="0.06"/></svg>';
+    $("radial").innerHTML = svg + labels + '<div style="position:absolute; left:50%; top:50%; transform: translate(-50%,-50%); width: 12rem; text-align:center;" class="col g1"><span class="tmd w6">Fahrzeug</span><span class="txs sec">Türen, Motor, Kofferraum</span><span class="t2xs mut" style="margin-top: 0.4rem;">GPS: Nur im Fahrzeug</span></div>';
+  })();
+
+  /* ── 09 chat ───────────────────────────────────────────────────────── */
+  $("chatlines").innerHTML = [["21:40", "var(--fh-text-secondary)", "OOC", "Tim B. [12]", "jemand Lust auf Angeln am Fischmarkt?"], ["21:41", "var(--fh-info)", "TWT", "@hafenkiosk", "Heute Fischbrötchen 2 für 1!"], ["21:42", "var(--fh-hud-stress)", "ME", "Mara K. [57]", "tippt nervös auf das Funkgerät"], ["21:43", "var(--fh-info)", "DO", "Ole H. [203]", "Aus der Halle dringt Licht."], ["21:44", "var(--fh-job-police)", "POLIZEI", "Leitstelle", "10-31 Kehrwieder 4, A-07 und A-15."], ["21:45", "var(--fh-danger)", "ADMIN", "Server", "Neustart um 02:00 Uhr."], ["21:46", "var(--fh-text-secondary)", "OOC", "Jonas P. [128]", "bin unterwegs"]]
+    .map(function (c) { return '<div class="flex g2 tsm" style="align-items: baseline;"><span class="mono txs mut">' + c[0] + '</span><span class="tag" style="--c:' + c[1] + ';">' + c[2] + '</span><span class="w6" style="white-space: nowrap;">' + c[3] + '</span><span class="sec">' + c[4] + "</span></div>"; }).join("");
+
+  /* ── 10 scoreboard ─────────────────────────────────────────────────── */
+  var players = [[3, "Tim Brandt", "var(--fh-job-ems)", "Rettungsdienst", "41 h", 38], [12, "Lea Vogt", "var(--fh-job-civil)", "Zivil", "8 h", 64], [27, "Hauke Jensen", "var(--fh-job-mechanic)", "Hafenwerkstatt", "120 h", 92], [57, "Mara Krüger", "var(--fh-job-ems)", "Rettungsdienst", "58 h", 45], [88, "Dirk Krüger", "var(--fh-job-civil)", "Zivil", "311 h", 171], [128, "Jonas Petersen", "var(--fh-job-police)", "Polizei", "212 h", 52, 1], [141, "Svenja Ahrens", "var(--fh-job-civil)", "Taxi", "17 h", 77], [160, "Piet Lorenz", "var(--fh-job-civil)", "Hafenlogistik", "66 h", 128], [177, "Nils Behrens", "var(--fh-job-mechanic)", "Hafenwerkstatt", "29 h", 59], [203, "Ole Hansen", "var(--fh-job-mechanic)", "Hafenwerkstatt", "97 h", 41], [214, "Frieda Lange", "var(--fh-job-civil)", "Zivil", "3 h", 233]];
+  $("scoretbl").innerHTML = '<tr><th class="r" style="width: 7rem;">ID ↑</th><th>Name</th><th>Job</th><th class="r">Spielzeit</th><th class="r">Ping</th></tr>' + players.map(function (p) {
+    var pc = p[5] < 80 ? "var(--fh-success)" : p[5] < 150 ? "var(--fh-warning)" : "var(--fh-danger)", bars = p[5] < 80 ? 3 : p[5] < 150 ? 2 : 1;
+    return "<tr" + (p[6] ? ' class="own"' : "") + '><td class="mono r">' + p[0] + '</td><td class="' + (p[6] ? "w6" : "") + '">' + p[1] + (p[6] ? ' <span class="txs sec">(du)</span>' : "") + '</td><td><span class="flex g2"><span class="dot" style="--c:' + p[2] + '"></span>' + p[3] + '</span></td><td class="mono r">' + p[4] + '</td><td class="r"><span class="flex g2" style="justify-content: flex-end;"><span class="ticks">' + [1, 2, 3].map(function (b) { return "<i" + (b <= bars ? ' class="on" style="--c:' + pc + '"' : "") + "></i>"; }).join("") + '</span><span class="mono" style="min-width: 4ch;">' + p[5] + "</span></span></td></tr>";
+  }).join("");
+
+  /* ── 11 inventory ──────────────────────────────────────────────────── */
+  var inv = [["drop", "Wasserflasche", 4], ["food", "Fischbrötchen", 2], ["phone", "Handy", 1], ["radio", "Funkgerät", 1, "sel"], ["key", "Schlüssel HK 4127", 1], ["wallet", "Geldbörse", 1], ["wrench", "Werkzeugkasten", 1, "src"], ["pill", "Verbandskasten", 3], ["gun", "Pistole .50", 1, "", 84], ["box", "Munition .50", 120], ["id", "Personalausweis", 1], ["file", "Notizblock", 1], ["hammer", "Dietrich", 12], ["camera", "Kamera", 1, "", 40], ["music", "Kopfhörer", 1]];
+  var invHtml = "";
+  for (var i = 0; i < 25; i++) {
+    var it = inv[i];
+    if (!it) { invHtml += '<div class="slot empty">' + (i < 5 ? '<span class="hk">' + (i + 1) + "</span>" : "") + "</div>"; continue; }
+    invHtml += '<div class="slot ' + (it[3] || "") + '">' + (i < 5 ? '<span class="hk">' + (i + 1) + "</span>" : "") + '<span class="qty">×' + it[2] + "</span>" + ico(it[0]) + '<span class="nm">' + it[1] + "</span>" + (it[4] ? '<span class="dur"><i style="--v:' + it[4] + "%; --c:" + (it[4] < 50 ? "var(--fh-warning)" : "var(--fh-success)") + ';"></i></span>' : "") + "</div>";
+  }
+  $("inv-player").innerHTML = invHtml;
+  $("inv-equip").innerHTML = [["gun", "Waffe", "Pistole .50"], ["box", "Rucksack", "Leer"], ["shield", "Weste", "—"], ["phone", "Telefon", "Handy"], ["radio", "Funkgerät", "112,40"], ["key", "Schlüsselbund", "3 Schlüssel"]].map(function (e) { return '<div class="card flex g3" style="padding: 1.2rem;">' + ico(e[0], "sec") + '<div><div class="lbl">' + e[1] + '</div><div class="tsm ' + (e[2] === "—" || e[2] === "Leer" ? "mut" : "") + '">' + e[2] + "</div></div></div>"; }).join("");
+  var trunk = [["box", "Kanister", 2], ["wrench", "Ersatzrad", 1], ["drop", "Motoröl", 3], ["box", "Holzkiste", 1, "", "Zu schwer"], null, null, null, null, null, null, null, null, null, null, null, null];
+  $("inv-trunk").innerHTML = trunk.map(function (t, i) {
+    if (i === 5) return '<div class="slot drop-ok"><span class="txs acc w6">Ablegen</span></div>';
+    if (i === 3) return '<div class="slot drop-bad"><span class="qty">×1</span>' + ico("box") + '<span class="nm">Holzkiste</span><span class="glass-thick" style="position:absolute; top: -3.4rem; left: 50%; transform: translateX(-50%); padding: 0.4rem 0.8rem; border-radius: var(--fh-radius-sm); white-space: nowrap;" ><span class="txs bad w6">Zu schwer</span></span></div>';
+    if (!t) return '<div class="slot empty"></div>';
+    return '<div class="slot"><span class="qty">×' + t[2] + "</span>" + ico(t[0]) + '<span class="nm">' + t[1] + "</span></div>";
+  }).join("");
+  (function () { var g = $("ghost"), tgt = $("inv-trunk").children[5], panel = g.parentElement; var pr = panel.getBoundingClientRect(), tr = tgt.getBoundingClientRect(); var fs = parseFloat(getComputedStyle(document.documentElement).fontSize); g.style.left = ((tr.left - pr.left) / fs + 3) + "rem"; g.style.top = ((tr.top - pr.top) / fs + 3) + "rem"; })();
+
+  /* ── 12 phone ──────────────────────────────────────────────────────── */
+  $("apps").innerHTML = [["msg", "Nachrichten", "var(--fh-success)", 3], ["users", "Kontakte"], ["camera", "Kamera"], ["grid", "Galerie"], ["bank", "Bank", "var(--fh-accent-primary)"], ["cart", "Hafenmarkt", "var(--fh-hud-hunger)"], ["car", "Dienste", "var(--fh-info)"], ["map", "Karte", "var(--fh-accent-secondary)"], ["file", "Notizen"], ["music", "Musik", "var(--fh-hud-stress)"], ["receipt", "Rechnungen", "var(--fh-warning)", 1], ["sliders", "Einstellungen"]]
+    .map(function (a) { return '<div class="app"><i style="--c:' + (a[2] || "var(--fh-text-primary)") + ';">' + ico(a[0], "l") + (a[3] ? '<span class="badge hot">' + a[3] + "</span>" : "") + "</i>" + a[1] + "</div>"; }).join("");
+  $("dock").innerHTML = [["phone", "var(--fh-success)"], ["msg", "var(--fh-success)"], ["users", ""], ["camera", ""]].map(function (a) { return '<div class="app"><i style="--c:' + (a[1] || "var(--fh-text-primary)") + ';">' + ico(a[0], "l") + "</i></div>"; }).join("");
+
+  /* ── 13 bank ───────────────────────────────────────────────────────── */
+  $("banktbl").innerHTML = '<tr><th>Datum</th><th>Gegenpartei</th><th>Verwendungszweck</th><th class="r">Betrag</th></tr>' + [["15.10.", "Hafenlogistik GmbH", "Lohn KW 42", "+1.250,00", 1], ["15.10.", "Kiosk Sandtorkai", "Kartenzahlung", "−37,00"], ["14.10.", "Hafenwerkstatt Reiherstieg", "RE-2026-00417", "−627,00"], ["13.10.", "Mara Krüger", "Miete Oktober", "+400,00", 1], ["12.10.", "Tankstelle Elbbrücken", "Kartenzahlung", "−88,40"], ["10.10.", "Stadtkasse", "Bußgeld §12 StVO", "−150,00"], ["09.10.", "Polizei Hafenstadt", "Gehalt", "+3.200,00", 1]]
+    .map(function (r) { return '<tr><td class="mono">' + r[0] + "</td><td>" + r[1] + '</td><td class="sec">' + r[2] + '</td><td class="mono r ' + (r[4] ? "ok" : "") + '">' + r[3] + " $</td></tr>"; }).join("");
+  $("keypad").innerHTML = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "⌫", "0", "↵"].map(function (k) { var acc = k === "↵", del = k === "⌫"; return '<span style="height: 6.4rem; border-radius: var(--fh-radius-md); display:grid; place-items:center; font-family: var(--fh-font-mono); font-size: var(--fh-text-2xl); ' + (acc ? "background: var(--fh-accent-primary); color: var(--fh-text-on-accent);" : "background: var(--fh-bg-elevated); border: 1px solid var(--fh-border);" + (del ? "color: var(--fh-text-secondary);" : "")) + '">' + k + "</span>"; }).join("");
+
+  /* ── 14 shop ───────────────────────────────────────────────────────── */
+  $("shopgrid").innerHTML = [["drop", "Wasser 0,5 l", "2", "48 auf Lager"], ["food", "Fischbrötchen", "6", "12 auf Lager"], ["food", "Franzbrötchen", "3", "3 auf Lager", "warn"], ["drop", "Kaffee", "4", "30 auf Lager"], ["wrench", "Reparaturkit", "250", "Ausverkauft", "bad"], ["phone", "Prepaid-Handy", "180", "6 auf Lager"], ["radio", "Funkgerät", "420", "2 auf Lager", "warn"], ["pill", "Verbandskasten", "35", "20 auf Lager"]]
+    .map(function (p) { var out = p[4] === "bad"; return '<div class="card col g2" style="align-items: stretch; padding: 1.2rem; ' + (out ? "opacity: 0.4;" : "") + '"><div style="height: 9.6rem; border-radius: var(--fh-radius-sm); background: var(--fh-bg-surface); display:grid; place-items:center; color: var(--fh-text-secondary);">' + ico(p[0], "xl") + '</div><div class="tmd w6">' + p[1] + '</div><div class="flex between"><span class="mono tlg">' + p[2] + ' $</span><span class="close" style="width: 3.2rem; height: 3.2rem; ' + (out ? "" : "background: var(--fh-accent-primary); color: var(--fh-text-on-accent); border: 0;") + '">' + ico("plus", "s") + '</span></div><div class="txs ' + (p[4] === "warn" ? "warn" : p[4] === "bad" ? "bad" : "sec") + '">' + p[3] + "</div></div>"; }).join("");
+  $("cart").innerHTML = [["Fischbrötchen", 2, "12,00"], ["Wasser 0,5 l", 4, "8,00"], ["Verbandskasten", 1, "35,00"]].map(function (c, i) { return '<div class="li" style="padding: 0; ' + (i === 2 ? "border:0;" : "") + '"><div class="grow"><div class="t">' + c[0] + '</div></div><span class="stepper" style="height: 2.8rem;"><span style="width: 2.8rem;">' + ico("minus", "s") + "</span><b>" + c[1] + '</b><span style="width: 2.8rem;">' + ico("plus", "s") + '</span></span><span class="mono" style="min-width: 7rem; text-align: right;">' + c[2] + " $</span>" + ico("x", "s mut") + "</div>"; }).join("");
+
+  /* ── 15 garage ─────────────────────────────────────────────────────── */
+  $("garagelist").innerHTML = [["Sultan RS", "HK · 4127", "Hier · Platz 3", 62, 91, 38, "Geparkt", "var(--fh-success)", 1], ["Bison", "HK · 0815", "Abschlepphof Veddel", 20, 45, 22, "Abgeschleppt", "var(--fh-warning)"], ["Faggio", "HK · 2290", "Unterwegs", 80, 100, 96, "Unterwegs", "var(--fh-info)"], ["Speedo", "HK · 1712", "Hier · Platz 5", 9, 74, 81, "Geparkt", "var(--fh-success)"]]
+    .map(function (v) { var mini = function (l, x, c) { return '<span class="col" style="width: 7.2rem; gap: 0.3rem;"><span class="flex between t2xs sec" style="width:100%;"><span>' + l + '</span><span class="mono" style="color: var(--fh-text-primary);">' + x + '</span></span><span class="bar" style="width:100%; --v:' + x + "%; --c:" + c + ';"><i></i></span></span>'; };
+      return '<div class="li ' + (v[8] ? "sel" : "") + '" style="min-height: 6.8rem; border-radius: var(--fh-radius-sm);">' + ico("car", "l sec") + '<div style="width: 18rem;"><div class="t tmd">' + v[0] + '</div><div class="s">' + v[2] + '</div></div><span class="plate">' + v[1] + '</span><span class="grow"></span>' + mini("Tank", v[3], v[3] < 20 ? "var(--fh-warning)" : "var(--fh-hud-fuel)") + mini("Motor", v[4], v[4] < 40 ? "var(--fh-warning)" : "var(--fh-success)") + mini("Karosserie", v[5], v[5] < 40 ? "var(--fh-warning)" : "var(--fh-success)") + '<span class="pill" style="min-width: 12rem;"><span class="dot" style="--c:' + v[7] + '"></span>' + v[6] + "</span></div>"; }).join("");
+
+  /* ── 16 clothing ───────────────────────────────────────────────────── */
+  $("clothtabs").innerHTML = [["shirt", 1, 1], ["user", 0, 1], ["box", 0, 0], ["smile", 0, 1], ["eye", 0, 0], ["star", 0, 0], ["lock", 0, 0]].map(function (t) { return '<span style="position: relative; width: 4.4rem; height: 4.4rem; border-radius: var(--fh-radius-sm); display:grid; place-items:center; ' + (t[1] ? "background: var(--fh-bg-elevated); color: var(--fh-text-primary); box-shadow: inset 0 -2px 0 var(--fh-accent-secondary);" : "color: var(--fh-text-secondary);") + '">' + ico(t[0]) + (t[2] ? '<span class="dot" style="--c: var(--fh-accent-primary); position:absolute; top: 0.6rem; right: 0.6rem;"></span>' : "") + "</span>"; }).join("");
+  $("clothrows").innerHTML = '<div class="flex between"><span class="tlg w6">Oberteil</span><span class="txs sec">Änderung <span class="mono">+120 $</span></span></div>' + [["Unterhemd", "14", "212", "2", "6"], ["Jacke", "88", "301", "1", "4"], ["Arme", "4", "167", "—", "—"]].map(function (r) {
+    return '<div class="card col g2" style="align-items: stretch; padding: 1.2rem 1.6rem;"><div class="lbl">' + r[0] + '</div><div class="flex between"><span class="tsm sec">Modell</span><span class="flex g2"><span class="close" style="width: 2.8rem; height: 2.8rem;">' + ico("chevl", "s") + '</span><span class="mono tsm" style="min-width: 9rem; text-align:center;">' + r[1] + " / " + r[2] + '</span><span class="close" style="width: 2.8rem; height: 2.8rem;">' + ico("chev", "s") + '</span></span></div><div class="flex between"><span class="tsm sec">Textur</span><span class="flex g2"><span class="close" style="width: 2.8rem; height: 2.8rem;">' + ico("chevl", "s") + '</span><span class="mono tsm" style="min-width: 9rem; text-align:center;">' + r[3] + " / " + r[4] + '</span><span class="close" style="width: 2.8rem; height: 2.8rem;">' + ico("chev", "s") + "</span></span></div></div>";
+  }).join("") + '<div class="card flex g3" style="padding: 1.2rem 1.6rem; opacity: 0.4;">' + ico("lock", "s") + '<span class="grow tsm">Uniformjacke Polizei</span><span class="txs">Nur für Polizei</span></div>';
+
+  /* ── 17 crafting ───────────────────────────────────────────────────── */
+  $("recipes").innerHTML = '<div class="lbl" style="padding: 0.8rem 1.2rem;">Werkzeug</div>' + [["wrench", "Dietrich-Set", "45 s", 1, "sel"], ["wrench", "Reparaturkit", "60 s", 1], ["box", "Metallplatte", "20 s", 1]].map(function (r) { return '<div class="li ' + (r[4] || "") + '" style="border-radius: var(--fh-radius-sm);">' + ico(r[0], "s sec") + '<span class="grow">' + r[1] + '</span><span class="mono txs mut">' + r[2] + '</span><span class="dot" style="--c:' + (r[3] ? "var(--fh-success)" : "var(--fh-text-muted)") + '"></span></div>'; }).join("") + '<div class="lbl" style="padding: 1.6rem 1.2rem 0.8rem;">Elektronik</div>' + [["radio", "Funkscanner", "120 s", 0], ["phone", "Wegwerfhandy", "90 s", 0]].map(function (r) { return '<div class="li" style="border-radius: var(--fh-radius-sm);">' + ico(r[0], "s sec") + '<span class="grow">' + r[1] + '</span><span class="mono txs mut">' + r[2] + '</span><span class="dot" style="--c: var(--fh-text-muted)"></span></div>'; }).join("");
+  $("ingredients").innerHTML = [["Metallschrott", 4, 6], ["Draht", 3, 2], ["Feder", 0, 1]].map(function (g) { var ok = g[1] >= g[2]; return '<div class="li" style="padding: 0;">' + ico(ok ? "check" : "x", "s " + (ok ? "ok" : "bad")) + '<span class="grow">' + g[0] + '</span><span class="mono ' + (ok ? "ok" : "bad") + '">' + g[1] + " / " + g[2] + "</span>" + (ok ? "" : '<span class="txs bad">fehlt ' + (g[2] - g[1]) + "</span>") + "</div>"; }).join("");
+
+  /* ── 19 MDT ────────────────────────────────────────────────────────── */
+  function nav(id, list) { $(id).innerHTML = list.map(function (n) { return '<a class="' + (n[2] ? "on" : "") + '">' + ico(n[0], "s") + "<span>" + n[1] + "</span>" + (n[3] ? '<span class="badge ' + (n[4] ? "hot" : "") + '">' + n[3] + "</span>" : "") + "</a>"; }).join(""); }
+  nav("mdtnav", [["grid", "Übersicht", 1], ["flag", "Einsätze", 0, 5, 1], ["user", "Personen"], ["car", "Fahrzeuge"], ["file", "Akten", 0, 12], ["gavel", "Haftbefehle", 0, 3], ["receipt", "Bußgeldkatalog"], ["users", "Beamte", 0, 14]]);
+  $("calls").innerHTML = '<tr><th>Prio</th><th>Code</th><th>Einsatz</th><th>Ort</th><th class="r">Seit</th><th>Einheiten</th></tr>' + [["P1", "var(--fh-danger)", "10-31", "Einbruch in Lagerhalle", "Kehrwieder 4", "04:12", "A-07, A-15", 1], ["P1", "var(--fh-danger)", "10-71", "Schüsse gemeldet", "Reeperbahn 112", "01:48", "—"], ["P2", "var(--fh-warning)", "10-50", "Verkehrsunfall", "Elbbrücken", "09:30", "A-03"], ["P2", "var(--fh-warning)", "10-16", "Ruhestörung", "Hafenstraße 8", "14:02", "—"], ["P3", "var(--fh-info)", "10-37", "Verdächtiges Fahrzeug", "Fischmarkt", "22:45", "A-12"]]
+    .map(function (c) { return "<tr" + (c[7] ? ' class="sel"' : "") + '><td><span class="pill solid-c" style="--c:' + c[1] + ';">' + c[0] + '</span></td><td class="mono">' + c[2] + "</td><td>" + c[3] + '</td><td class="sec">' + c[4] + '</td><td class="mono r">' + c[5] + '</td><td class="mono ' + (c[6] === "—" ? "mut" : "") + '">' + c[6] + "</td></tr>"; }).join("");
+  $("units").innerHTML = '<tr><th>Ruf</th><th>Beamter</th><th>Status</th></tr>' + [["A-03", "K. Möller", "Im Einsatz", "var(--fh-warning)"], ["A-07", "S. Ahrens", "Im Einsatz", "var(--fh-warning)"], ["A-12", "J. Petersen", "Verfügbar", "var(--fh-success)"], ["A-15", "H. Jensen", "Im Einsatz", "var(--fh-warning)"], ["W-01", "F. Lange", "Pause", "var(--fh-text-muted)"]].map(function (u) { return '<tr><td class="mono">' + u[0] + "</td><td>" + u[1] + '</td><td><span class="flex g2"><span class="dot" style="--c:' + u[3] + '"></span>' + u[2] + "</span></td></tr>"; }).join("");
+
+  /* ── 20 EMS ────────────────────────────────────────────────────────── */
+  nav("emsnav", [["grid", "Übersicht"], ["flag", "Einsätze", 0, 2, 1], ["user", "Patienten", 1], ["file", "Behandlungen"], ["pill", "Medikamente"], ["clock", "Dienstplan"]]);
+  $("vitals").innerHTML = [["Puls", "112", "bpm", "60–100", "warn"], ["Blutdruck", "90/60", "mmHg", "110/70–140/90", "warn"], ["SpO₂", "92", "%", "≥ 95", "warn"], ["Temperatur", "36,4", "°C", "36,1–37,2", "ok"], ["GCS", "9", "/ 15", "15", "bad"]]
+    .map(function (v) { return '<div class="card col g1" style="align-items: flex-start;"><span class="lbl">' + v[0] + '</span><span><span class="mono t3xl w5 ' + v[4] + '">' + v[1] + '</span> <span class="mono tsm sec">' + v[2] + '</span></span><span class="txs mut">Normal ' + v[3] + "</span></div>"; }).join("");
+  function body(id, zones) { var html = '<svg viewBox="0 0 60 150" style="position:absolute; inset:0; width:100%; height:100%;" fill="none" stroke="#5c6156" stroke-width="0.8"><circle cx="30" cy="12" r="9"/><path d="M18 26h24l6 34-6 2-4-24v40l4 64h-9l-3-50-3 50h-9l4-64V38l-4 24-6-2z"/>' + zones + "</svg>"; $(id).innerHTML = html; }
+  body("body-front", '<path d="M24 82l-3 26h7l1-26z" fill="rgba(244,106,88,0.35)" stroke="#F46A58" stroke-width="1.2"/><circle cx="24" cy="44" r="3" fill="rgba(232,176,78,0.35)" stroke="#E8B04E"/>');
+  body("body-back", '<circle cx="30" cy="34" r="3.5" fill="rgba(232,176,78,0.35)" stroke="#E8B04E"/>');
+  $("beds").innerHTML = ["b", "b", "f", "b", "x", "b", "f", "b", "f", "b", "f", "f"].map(function (b, i) { var c = b === "b" ? "var(--fh-job-ems)" : b === "f" ? "var(--fh-success)" : "var(--fh-text-muted)"; return '<span class="flex g1" style="height: 3.6rem; border-radius: var(--fh-radius-sm); border: 1px solid var(--fh-border); justify-content: center; ' + (b === "x" ? "opacity:0.5;" : "") + '"><span class="dot" style="--c:' + c + '"></span><span class="mono txs">' + String(i + 1).padStart(2, "0") + "</span></span>"; }).join("");
+
+  /* ── 21 boss ───────────────────────────────────────────────────────── */
+  $("staff").innerHTML = '<tr><th>Name</th><th>Rang</th><th>Status</th><th class="r">Seit</th><th class="r">Gehalt</th><th></th></tr>' + [["Hauke Jensen", "Chef", 1, "01.02.2025", "1.800"], ["Ole Hansen", "Meister", 1, "14.03.2025", "1.400"], ["Nils Behrens", "Geselle", 0, "02.06.2025", "1.100", 1], ["Arne Lorenz", "Geselle", 1, "19.07.2025", "1.100"], ["Lea Vogt", "Azubi", 0, "30.09.2026", "650"], ["Jan Peters", "Azubi", 0, "05.10.2026", "650"], ["Tom Sander", "Aushilfe", 1, "11.10.2026", "400"]]
+    .map(function (s) { return "<tr" + (s[5] ? ' class="sel"' : "") + "><td>" + s[0] + '</td><td><span class="inp" style="height: 2.8rem; font-size: var(--fh-text-sm); display: inline-flex; min-width: 13rem; justify-content: space-between;">' + s[1] + ico("chev", "s") + '</span></td><td><span class="flex g2"><span class="dot" style="--c:' + (s[2] ? "var(--fh-success)" : "var(--fh-text-muted)") + '"></span>' + (s[2] ? "online" : "offline") + '</span></td><td class="mono r">' + s[3] + '</td><td class="mono r">' + s[4] + ' $</td><td class="r">' + ico("grid", "s mut") + "</td></tr>"; }).join("");
+  $("chart").innerHTML = [[12, 8], [15, 9], [11, 9], [17, 10], [14, 9], [16, 10], [13, 9], [18.4, 9.8]].map(function (w) { return '<div class="flex g1" style="flex:1; align-items: flex-end; height: 100%;"><span style="flex:1; height:' + (w[0] / 20 * 100) + '%; background: var(--fh-success); border-radius: 2px 2px 0 0; opacity: 0.85;"></span><span style="flex:1; height:' + (w[1] / 20 * 100) + '%; background: var(--fh-text-muted); border-radius: 2px 2px 0 0; opacity: 0.6;"></span></div>'; }).join("");
+  $("chartx").innerHTML = ["KW35", "36", "37", "38", "39", "40", "41", "42"].map(function (k) { return "<span>" + k + "</span>"; }).join("");
+
+  /* ── 22 admin ──────────────────────────────────────────────────────── */
+  nav("adminnav", [["users", "Spieler", 1, 128], ["car", "Fahrzeuge"], ["flag", "Reports", 0, 3, 1], ["ban", "Bans"], ["server", "Server"], ["logs", "Logs"]]);
+  $("admintbl").innerHTML = '<tr><th class="r">ID</th><th>Name</th><th>Identifier</th><th>Job</th><th class="r">Ping</th><th>Flags</th></tr>' + players.slice(0, 10).map(function (p) { return "<tr" + (p[0] === 88 ? ' class="sel"' : "") + '><td class="mono r">' + p[0] + "</td><td>" + p[1] + '</td><td class="mono sec">license:' + (p[0] * 7919).toString(16).slice(0, 4) + '…</td><td><span class="flex g2"><span class="dot" style="--c:' + p[2] + '"></span>' + p[3] + '</span></td><td class="mono r">' + p[5] + "</td><td>" + (p[0] === 88 ? '<span class="pill out" style="--c: var(--fh-warning);">2 Reports</span>' : p[0] === 214 ? '<span class="pill">Neu</span>' : "") + "</td></tr>"; }).join("");
+
+  /* ── 23 states ─────────────────────────────────────────────────────── */
+  $("skelrows").innerHTML = [70, 55, 82, 40, 64].map(function (w) { return '<div class="flex g3" style="width: 100%;"><div class="skel" style="width: 3.2rem; height: 3.2rem; border-radius: var(--fh-radius-sm);"></div><div class="grow col g1" style="align-items: stretch;"><div class="skel" style="height: 1.3rem; width:' + w + '%;"></div><div class="skel" style="height: 1rem; width:' + (w / 2) + '%;"></div></div></div>'; }).join("");
+  $("empties").innerHTML = [["msg", "Chat", "Noch keine Nachrichten. Mit /help siehst du alle Befehle."], ["cart", "Shop", "Dein Warenkorb ist leer. Wähle links Artikel aus."], ["hammer", "Herstellung", "Noch keine Baupläne. Baupläne findest du bei Händlern am Hafen."], ["receipt", "Rechnungen", "Keine offenen Rechnungen."], ["flag", "EMS", "Keine offenen Notrufe. Gute Schicht."], ["users", "Chefmenü", "Noch keine Mitarbeiter. Stelle Personen in der Nähe ein."]]
+    .map(function (e) { return '<div class="glass" style="border-radius: var(--fh-radius-lg);"><div class="state" style="padding: 2rem 1.6rem;"><span class="lbl">' + e[1] + " · leer</span>" + ico(e[0], "xl st-ico") + '<div class="tsm">' + e[2] + "</div></div></div>"; }).join("");
+
+  hydrateRings();
+  document.documentElement.dataset.ready = "1";
+})();
+</script>
+</body>
+</html>

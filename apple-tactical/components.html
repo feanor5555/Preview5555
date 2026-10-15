@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>FiveM Apple Tactical - reference components</title>
+    <meta name="description" content="Reference fixture for design-systems/fivem-apple-tactical: graphite liquid-glass FiveM UI with sand and olive accents and tabular numerals." />
+    <style>
+      :root {
+        --bg: #0c0d0b;
+        --surface: #161814;
+        --surface-warm: #20231e;
+        --fg: #ecede6;
+        --fg-2: #b5b9ad;
+        --muted: #8d9285;
+        --meta: var(--muted);
+        --border: #3b3f37;
+        --border-soft: #262923;
+        --accent: #d3c29a;
+        --accent-on: #15160f;
+        --accent-hover: #ded0ae;
+        --accent-active: #bfae86;
+        --success: #73c08b;
+        --warn: #e8b04e;
+        --danger: #f46a58;
+        --font-display: "Inter", system-ui, sans-serif;
+        --font-body: "Inter", system-ui, sans-serif;
+        --font-mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+        --text-xs: 12px;
+        --text-sm: 13px;
+        --text-base: 15px;
+        --text-lg: 17px;
+        --text-xl: 20px;
+        --text-2xl: 24px;
+        --text-3xl: 32px;
+        --text-4xl: 48px;
+        --leading-body: 1.45;
+        --leading-tight: 1.1;
+        --tracking-display: -0.02em;
+        --space-1: 4px;
+        --space-2: 8px;
+        --space-3: 12px;
+        --space-4: 16px;
+        --space-5: 20px;
+        --space-6: 24px;
+        --space-8: 32px;
+        --space-12: 48px;
+        --section-y-desktop: 64px;
+        --section-y-tablet: 48px;
+        --section-y-phone: 32px;
+        --radius-sm: 8px;
+        --radius-md: 12px;
+        --radius-lg: 18px;
+        --radius-pill: 9999px;
+        --elev-flat: none;
+        --elev-ring: 0 0 0 1px var(--border);
+        --elev-raised: inset 0 1px 0 rgba(236, 237, 230, 0.06), 0 8px 24px rgba(0, 0, 0, 0.36);
+        --focus-ring: 0 0 0 2px #0c0d0b, 0 0 0 4px #d3c29a;
+        --motion-fast: 120ms;
+        --motion-base: 200ms;
+        --ease-standard: cubic-bezier(0.23, 1, 0.32, 1);
+        --container-max: 1600px;
+        --container-gutter-desktop: 48px;
+        --container-gutter-tablet: 32px;
+        --container-gutter-phone: 16px;
+      }
+      @font-face { font-family: "Inter"; src: url("fonts/inter-latin-wght-normal.woff2") format("woff2"); font-weight: 100 900; font-display: block; }
+      @font-face { font-family: "Inter"; src: url("fonts/inter-latin-ext-wght-normal.woff2") format("woff2"); font-weight: 100 900; font-display: block; unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20C0; }
+      @font-face { font-family: "JetBrains Mono"; src: url("fonts/jetbrains-mono-latin-wght-normal.woff2") format("woff2"); font-weight: 100 800; font-display: block; }
+      * { box-sizing: border-box; }
+      body { margin: 0; padding: var(--space-12); background: radial-gradient(120% 90% at 20% 0%, #4a5560 0%, #1b1f22 55%, var(--bg) 100%); color: var(--fg); font-family: var(--font-body); font-size: var(--text-base); line-height: var(--leading-body); font-feature-settings: "tnum" 1, "cv11" 1; }
+      h1 { font-family: var(--font-display); font-size: var(--text-3xl); letter-spacing: var(--tracking-display); line-height: var(--leading-tight); font-weight: 600; margin: 0 0 var(--space-2); }
+      h2 { font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); font-weight: 600; margin: 0 0 var(--space-3); }
+      .lede { color: var(--fg-2); margin: 0 0 var(--space-8); max-width: 64ch; }
+      .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: var(--space-6); }
+      .glass { background: rgba(16, 17, 15, 0.8); -webkit-backdrop-filter: blur(24px) saturate(120%); backdrop-filter: blur(24px) saturate(120%); border: 1px solid var(--border); border-radius: var(--radius-lg); box-shadow: var(--elev-raised); padding: var(--space-5); }
+      .row { display: flex; align-items: center; gap: var(--space-3); flex-wrap: wrap; }
+      .btn { font: inherit; font-size: var(--text-sm); font-weight: 600; height: 36px; padding: 0 var(--space-4); border-radius: var(--radius-pill); border: 1px solid transparent; cursor: pointer; transition: background var(--motion-fast) var(--ease-standard), transform var(--motion-fast) var(--ease-standard); }
+      .btn-primary { background: var(--accent); color: var(--accent-on); }
+      .btn-primary:hover { background: var(--accent-hover); }
+      .btn-primary:active { background: var(--accent-active); transform: scale(0.98); }
+      .btn-secondary { background: var(--surface-warm); color: var(--fg); border-color: var(--border); }
+      .btn-danger { background: var(--danger); color: var(--accent-on); }
+      .btn:disabled { opacity: 0.4; cursor: not-allowed; }
+      .btn:focus-visible, .field input:focus-visible { outline: none; box-shadow: var(--focus-ring); }
+      .field { display: grid; gap: var(--space-1); }
+      .field label { font-size: var(--text-xs); color: var(--fg-2); font-weight: 500; }
+      .field input { font: inherit; font-size: var(--text-sm); height: 36px; padding: 0 var(--space-3); color: var(--fg); background: var(--surface-warm); border: 1px solid var(--muted); border-radius: var(--radius-sm); }
+      .field.error input { border-color: var(--danger); }
+      .field .hint { font-size: var(--text-xs); color: var(--muted); }
+      .field.error .hint { color: var(--danger); }
+      .pill { display: inline-flex; align-items: center; gap: 6px; height: 22px; padding: 0 var(--space-2); border-radius: var(--radius-pill); font-size: var(--text-xs); font-weight: 600; background: var(--surface-warm); border: 1px solid var(--border); color: var(--fg-2); }
+      .pill i { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+      .pill.ok { color: var(--success); } .pill.warn { color: var(--warn); } .pill.bad { color: var(--danger); }
+      .stat { display: grid; grid-template-columns: 20px 1fr auto; align-items: center; gap: var(--space-2); font-size: var(--text-xs); color: var(--fg-2); }
+      .stat .bar { height: 4px; border-radius: var(--radius-pill); background: var(--border-soft); overflow: hidden; }
+      .stat .bar span { display: block; height: 100%; border-radius: inherit; background: var(--fg); }
+      .stat b { font-family: var(--font-mono); font-weight: 500; color: var(--fg); min-width: 3ch; text-align: right; }
+      .note { display: grid; grid-template-columns: 3px 1fr; gap: var(--space-3); padding: var(--space-3) var(--space-4); }
+      .note .rail { border-radius: var(--radius-pill); background: var(--accent); }
+      .note.ok .rail { background: var(--success); } .note.warn .rail { background: var(--warn); } .note.bad .rail { background: var(--danger); }
+      .note strong { display: block; font-size: var(--text-sm); }
+      .note span { font-size: var(--text-xs); color: var(--fg-2); }
+      .progress { display: grid; gap: var(--space-2); }
+      .progress .track { height: 6px; border-radius: var(--radius-pill); background: var(--border-soft); overflow: hidden; }
+      .progress .fill { height: 100%; width: 62%; background: var(--accent); border-radius: inherit; }
+      .progress .meta { display: flex; justify-content: space-between; font-size: var(--text-xs); color: var(--fg-2); }
+      .progress .meta b { font-family: var(--font-mono); font-weight: 500; color: var(--fg); }
+      .key { display: inline-grid; place-items: center; min-width: 28px; height: 28px; padding: 0 var(--space-2); border-radius: var(--radius-sm); background: var(--fg); color: var(--accent-on); font-family: var(--font-mono); font-weight: 700; font-size: var(--text-sm); }
+      .hint-row { display: inline-flex; align-items: center; gap: var(--space-3); padding: var(--space-2) var(--space-4) var(--space-2) var(--space-2); border-radius: var(--radius-pill); }
+      .list { display: grid; border-top: 1px solid var(--border-soft); }
+      .list-row { display: grid; grid-template-columns: 1fr auto; gap: var(--space-3); padding: var(--space-3) 0; border-bottom: 1px solid var(--border-soft); font-size: var(--text-sm); }
+      .list-row .num { font-family: var(--font-mono); color: var(--fg); }
+      .list-row small { display: block; color: var(--muted); font-size: var(--text-xs); }
+      @media (prefers-reduced-motion: reduce) { .btn { transition: none; } .btn-primary:active { transform: none; } }
+    </style>
+  </head>
+  <body>
+    <h1>FiveM Apple Tactical</h1>
+    <p class="lede">Graphitglas, Sand- und Olivakzente, tabellarische Ziffern. Referenzkomponenten für das FiveM-NUI eines Hafen-Roleplay-Servers.</p>
+    <div class="grid">
+      <section class="glass">
+        <h2>Buttons</h2>
+        <div class="row">
+          <button class="btn btn-primary" type="button">Bestätigen</button>
+          <button class="btn btn-secondary" type="button">Abbrechen</button>
+          <button class="btn btn-danger" type="button">Löschen</button>
+          <button class="btn btn-primary" type="button" disabled>Gesperrt</button>
+        </div>
+      </section>
+      <section class="glass">
+        <h2>Eingabe</h2>
+        <div class="field"><label for="f-amount">Betrag</label><input id="f-amount" value="2.500 $" /><span class="hint">Max. 10.000 $ pro Transaktion</span></div>
+        <div class="field error" style="margin-top: var(--space-3)"><label for="f-iban">Empfänger-Konto</label><input id="f-iban" value="HK-00 0000" /><span class="hint">Konto nicht gefunden</span></div>
+      </section>
+      <section class="glass">
+        <h2>Status</h2>
+        <div class="row"><span class="pill ok"><i></i>Im Dienst</span><span class="pill warn"><i></i>Pause</span><span class="pill bad"><i></i>Gesucht</span><span class="pill"><i></i>Zivil</span></div>
+      </section>
+      <section class="glass">
+        <h2>HUD-Werte</h2>
+        <div class="stat"><span>HP</span><div class="bar"><span style="width: 82%; background: var(--danger)"></span></div><b>82</b></div>
+        <div class="stat" style="margin-top: var(--space-2)"><span>AR</span><div class="bar"><span style="width: 40%"></span></div><b>40</b></div>
+        <div class="stat" style="margin-top: var(--space-2)"><span>ST</span><div class="bar"><span style="width: 64%; background: var(--success)"></span></div><b>64</b></div>
+      </section>
+      <section class="glass">
+        <h2>Benachrichtigungen</h2>
+        <div class="note ok"><i class="rail"></i><div><strong>Überweisung erhalten</strong><span>+1.250 $ von Hafenlogistik GmbH</span></div></div>
+        <div class="note warn"><i class="rail"></i><div><strong>Tank fast leer</strong><span>Reichweite ca. 8 km</span></div></div>
+        <div class="note bad"><i class="rail"></i><div><strong>Fahrzeug beschlagnahmt</strong><span>Kennzeichen HK 4127</span></div></div>
+      </section>
+      <section class="glass">
+        <h2>Fortschritt und Hinweis</h2>
+        <div class="progress"><div class="meta"><span>Reparatur läuft</span><b>62 %</b></div><div class="track"><div class="fill"></div></div></div>
+        <div class="hint-row glass" style="margin-top: var(--space-4); padding: var(--space-2) var(--space-4) var(--space-2) var(--space-2)"><span class="key">E</span><span>Tür öffnen</span></div>
+      </section>
+      <section class="glass">
+        <h2>Liste</h2>
+        <div class="list">
+          <div class="list-row"><div>Wasserflasche<small>0,5 kg</small></div><span class="num">×4</span></div>
+          <div class="list-row"><div>Funkgerät<small>0,8 kg</small></div><span class="num">×1</span></div>
+          <div class="list-row"><div>Dietrich<small>0,1 kg</small></div><span class="num">×12</span></div>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>

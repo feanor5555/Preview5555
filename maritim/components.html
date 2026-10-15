@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>FiveM Harbour — Maritim · reference components</title>
+    <meta name="description" content="Reference fixture for design-systems/fivem-harbour-maritim: bright harbour-instrument NUI components over the game world." />
+    <style>
+      :root {
+        --bg: #E7F1F5;
+        --surface: #F7FAFB;
+        --surface-warm: #FFFFFF;
+        --fg: #0B2236;
+        --fg-2: #3A5469;
+        --muted: #5A6F81;
+        --meta: #3A5469;
+        --border: #B9C8D3;
+        --border-soft: #D6E0E7;
+        --accent: #FFC21F;
+        --accent-on: #0B2236;
+        --accent-hover: #F0B400;
+        --accent-active: #DDA300;
+        --success: #16815A;
+        --warn: #A95F00;
+        --danger: #C42F3D;
+        --font-display: "Barlow Semi Condensed", "Barlow", system-ui, sans-serif;
+        --font-body: "Barlow", system-ui, sans-serif;
+        --font-mono: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+        --text-xs: 12px;
+        --text-sm: 14px;
+        --text-base: 16px;
+        --text-lg: 19px;
+        --text-xl: 24px;
+        --text-2xl: 32px;
+        --text-3xl: 44px;
+        --text-4xl: 64px;
+        --leading-body: 1.45;
+        --leading-tight: 1.05;
+        --tracking-display: 0.01em;
+        --space-1: 4px;
+        --space-2: 8px;
+        --space-3: 12px;
+        --space-4: 16px;
+        --space-5: 20px;
+        --space-6: 24px;
+        --space-8: 32px;
+        --space-12: 48px;
+        --section-y-desktop: 96px;
+        --section-y-tablet: 64px;
+        --section-y-phone: 48px;
+        --radius-sm: 4px;
+        --radius-md: 6px;
+        --radius-lg: 8px;
+        --radius-pill: 9999px;
+        --elev-flat: none;
+        --elev-ring: 0 0 0 1px var(--border);
+        --elev-raised: 0 2px 6px rgba(11, 34, 54, 0.14), 0 8px 24px rgba(11, 34, 54, 0.14);
+        --focus-ring: 0 0 0 2px #FFFFFF, 0 0 0 4px #0B2236;
+        --motion-fast: 120ms;
+        --motion-base: 200ms;
+        --ease-standard: cubic-bezier(0.23, 1, 0.32, 1);
+        --container-max: 1560px;
+        --container-gutter-desktop: 48px;
+        --container-gutter-tablet: 32px;
+        --container-gutter-phone: 16px;
+      }
+
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        padding: var(--space-8);
+        background: linear-gradient(180deg, #9FD3EC 0%, #CBE8F2 45%, #2E8CB0 46%, #15607F 100%);
+        color: var(--fg);
+        font-family: var(--font-body);
+        font-size: var(--text-base);
+        line-height: var(--leading-body);
+      }
+      .fixture { display: grid; grid-template-columns: repeat(2, minmax(0, 420px)); gap: var(--space-6); }
+
+      .panel {
+        background: var(--surface);
+        border: 1px solid var(--border-soft);
+        border-radius: var(--radius-lg);
+        box-shadow: var(--elev-raised);
+        padding: var(--space-5);
+      }
+      .panel-title {
+        margin: 0 0 var(--space-3);
+        font-family: var(--font-display);
+        font-size: var(--text-xl);
+        font-weight: 600;
+        line-height: var(--leading-tight);
+        letter-spacing: var(--tracking-display);
+      }
+      .label {
+        font-family: var(--font-display);
+        font-size: var(--text-xs);
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--meta);
+      }
+
+      .btn {
+        display: inline-flex; align-items: center; gap: var(--space-2);
+        min-height: 40px; padding: 0 var(--space-4);
+        border: 1px solid transparent; border-radius: var(--radius-md);
+        font: 600 var(--text-sm)/1 var(--font-body);
+        cursor: pointer;
+        transition: background-color var(--motion-fast) var(--ease-standard);
+      }
+      .btn:focus-visible { outline: none; box-shadow: var(--focus-ring); }
+      .btn-primary { background: var(--accent); color: var(--accent-on); }
+      .btn-primary:hover { background: var(--accent-hover); }
+      .btn-primary:active { background: var(--accent-active); }
+      .btn-secondary { background: var(--surface-warm); color: var(--fg); border-color: var(--border); }
+      .btn-danger { background: var(--danger); color: #FFFFFF; }
+      .btn:disabled { opacity: 0.45; cursor: not-allowed; }
+
+      .key {
+        display: inline-grid; place-items: center;
+        min-width: 24px; height: 24px; padding: 0 6px;
+        border-radius: var(--radius-sm);
+        background: var(--fg); color: var(--surface-warm);
+        font: 600 var(--text-xs)/1 var(--font-mono);
+      }
+      .hint {
+        display: inline-flex; align-items: center; gap: var(--space-2);
+        padding: var(--space-1) var(--space-3) var(--space-1) var(--space-1);
+        background: var(--surface); border-radius: var(--radius-md);
+        box-shadow: var(--elev-raised); font-weight: 500;
+      }
+
+      .field { display: grid; gap: var(--space-1); }
+      .input {
+        height: 40px; padding: 0 var(--space-3);
+        background: var(--bg); color: var(--fg);
+        border: 1px solid var(--border); border-bottom: 2px solid var(--muted);
+        border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+        font: 500 var(--text-base) var(--font-body);
+      }
+      .input:focus-visible { outline: none; border-bottom-color: var(--fg); box-shadow: var(--focus-ring); }
+      .field-error .input { border-bottom-color: var(--danger); }
+      .field-msg { font-size: var(--text-xs); color: var(--danger); }
+
+      .badge {
+        display: inline-flex; align-items: center; gap: 6px;
+        padding: 2px var(--space-2); border-radius: var(--radius-sm);
+        font: 600 var(--text-xs)/1.4 var(--font-display);
+        letter-spacing: 0.06em; text-transform: uppercase; color: #FFFFFF;
+      }
+      .badge-police { background: #1E4B9B; }
+      .badge-ems { background: #C83A24; }
+      .badge-mechanic { background: #6553B0; }
+      .badge-civil { background: #5A6E80; }
+
+      .toast {
+        display: grid; grid-template-columns: 6px 1fr; overflow: hidden;
+        background: var(--surface); border-radius: var(--radius-md);
+        box-shadow: var(--elev-raised);
+      }
+      .toast-flag { background: var(--toast-tone, var(--fg)); }
+      .toast-body { padding: var(--space-2) var(--space-3); }
+      .toast-title { font-weight: 600; }
+      .toast-text { font-size: var(--text-sm); color: var(--fg-2); }
+      .toast-info { --toast-tone: #1F64C4; }
+      .toast-success { --toast-tone: var(--success); }
+      .toast-warning { --toast-tone: var(--warn); }
+      .toast-error { --toast-tone: var(--danger); }
+
+      .progress { display: grid; gap: var(--space-1); }
+      .progress-track { height: 6px; background: var(--border-soft); border-radius: var(--radius-pill); overflow: hidden; }
+      .progress-fill { height: 100%; width: 42%; background: var(--fg); }
+
+      .row {
+        display: flex; justify-content: space-between; align-items: center;
+        padding: var(--space-2) var(--space-3); border-radius: var(--radius-sm);
+      }
+      .row + .row { border-top: 1px solid var(--border-soft); }
+      .row[aria-selected="true"] { background: #DBEAEF; box-shadow: inset 3px 0 0 #0A7896; }
+      .num { font-variant-numeric: tabular-nums; font-family: var(--font-display); font-weight: 600; }
+
+      .dial {
+        --value: 72; --tone: #D3334A;
+        width: 48px; height: 48px; border-radius: 50%;
+        background: conic-gradient(var(--tone) calc(var(--value) * 1%), var(--border-soft) 0);
+        display: grid; place-items: center;
+      }
+      .dial::after { content: ""; width: 38px; height: 38px; border-radius: 50%; background: var(--surface-warm); }
+      .vitals { display: flex; gap: var(--space-2); padding: var(--space-2); background: var(--surface); border-radius: var(--radius-pill); box-shadow: var(--elev-raised); width: max-content; }
+
+      @media (prefers-reduced-motion: reduce) {
+        .btn { transition: none; }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="fixture">
+      <section class="panel" aria-labelledby="t-actions">
+        <h2 class="panel-title" id="t-actions">Aktionen</h2>
+        <button class="btn btn-primary" type="button">Ausparken</button>
+        <button class="btn btn-secondary" type="button">Abbrechen</button>
+        <button class="btn btn-danger" type="button">Löschen</button>
+        <button class="btn btn-primary" type="button" disabled>Gesperrt</button>
+        <p><span class="hint"><span class="key">E</span>Kiste öffnen</span></p>
+      </section>
+
+      <section class="panel" aria-labelledby="t-form">
+        <h2 class="panel-title" id="t-form">Eingabe</h2>
+        <div class="field">
+          <label class="label" for="f-amount">Betrag</label>
+          <input class="input" id="f-amount" value="250" inputmode="numeric" />
+        </div>
+        <div class="field field-error">
+          <label class="label" for="f-plate">Kennzeichen</label>
+          <input class="input" id="f-plate" value="HH-AB 12345" aria-invalid="true" aria-describedby="f-plate-msg" />
+          <span class="field-msg" id="f-plate-msg">Höchstens 8 Zeichen.</span>
+        </div>
+      </section>
+
+      <section class="panel" aria-labelledby="t-notify">
+        <h2 class="panel-title" id="t-notify">Meldungen</h2>
+        <div class="toast toast-info" role="status"><span class="toast-flag"></span><div class="toast-body"><div class="toast-title">Fähre legt ab</div><div class="toast-text">Abfahrt Anleger 3 in 2 Minuten.</div></div></div>
+        <div class="toast toast-success" role="status"><span class="toast-flag"></span><div class="toast-body"><div class="toast-title">Gehalt erhalten</div><div class="toast-text">+ 850 € auf dein Konto.</div></div></div>
+        <div class="toast toast-warning" role="status"><span class="toast-flag"></span><div class="toast-body"><div class="toast-title">Tank fast leer</div><div class="toast-text">Noch 8 % — nächste Tankstelle 1,2 km.</div></div></div>
+        <div class="toast toast-error" role="alert"><span class="toast-flag"></span><div class="toast-body"><div class="toast-title">Zahlung abgelehnt</div><div class="toast-text">Nicht genug Guthaben.</div></div></div>
+      </section>
+
+      <section class="panel" aria-labelledby="t-status">
+        <h2 class="panel-title" id="t-status">Status</h2>
+        <div class="vitals" aria-label="Vitalwerte">
+          <span class="dial" style="--value: 72; --tone: #D3334A" aria-label="Leben 72 %"></span>
+          <span class="dial" style="--value: 40; --tone: #2A68D4" aria-label="Panzerung 40 %"></span>
+          <span class="dial" style="--value: 64; --tone: #C27812" aria-label="Hunger 64 %"></span>
+          <span class="dial" style="--value: 81; --tone: #138BBE" aria-label="Durst 81 %"></span>
+        </div>
+        <div class="progress" role="progressbar" aria-valuenow="42" aria-valuemin="0" aria-valuemax="100" aria-label="Netze flicken">
+          <span class="label">Netze flicken · 42 %</span>
+          <div class="progress-track"><div class="progress-fill"></div></div>
+        </div>
+        <p><span class="badge badge-police">Polizei</span> <span class="badge badge-ems">Rettung</span> <span class="badge badge-mechanic">Werkstatt</span> <span class="badge badge-civil">Zivil</span></p>
+        <div role="listbox" aria-label="Konten">
+          <div class="row" role="option" aria-selected="true"><span>Girokonto</span><span class="num">48.210 €</span></div>
+          <div class="row" role="option" aria-selected="false"><span>Firmenkonto</span><span class="num">212.940 €</span></div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

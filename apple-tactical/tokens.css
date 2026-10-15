@@ -1,0 +1,63 @@
+/* design-systems/fivem-apple-tactical/tokens.css
+ * Shared-schema bindings for FiveM Apple Tactical: graphite glass, sand and olive accents,
+ * tabular numerals. The full --fh-* FiveM token block lives in DESIGN.md.
+ */
+
+:root {
+  --bg: #0c0d0b;
+  --surface: #161814;
+  --surface-warm: #20231e;
+  --fg: #ecede6;
+  --fg-2: #b5b9ad;
+  --muted: #8d9285;
+  --meta: var(--muted);
+  --border: #3b3f37;
+  --border-soft: #262923;
+  --accent: #d3c29a;
+  --accent-on: #15160f;
+  --accent-hover: #ded0ae;
+  --accent-active: #bfae86;
+  --success: #73c08b;
+  --warn: #e8b04e;
+  --danger: #f46a58;
+  --font-display: "Inter", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+  --text-xs: 12px;
+  --text-sm: 13px;
+  --text-base: 15px;
+  --text-lg: 17px;
+  --text-xl: 20px;
+  --text-2xl: 24px;
+  --text-3xl: 32px;
+  --text-4xl: 48px;
+  --leading-body: 1.45;
+  --leading-tight: 1.1;
+  --tracking-display: -0.02em;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+  --section-y-desktop: 64px;
+  --section-y-tablet: 48px;
+  --section-y-phone: 32px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-pill: 9999px;
+  --elev-flat: none;
+  --elev-ring: 0 0 0 1px var(--border);
+  --elev-raised: inset 0 1px 0 rgba(236, 237, 230, 0.06), 0 8px 24px rgba(0, 0, 0, 0.36);
+  --focus-ring: 0 0 0 2px #0c0d0b, 0 0 0 4px #d3c29a;
+  --motion-fast: 120ms;
+  --motion-base: 200ms;
+  --ease-standard: cubic-bezier(0.23, 1, 0.32, 1);
+  --container-max: 1600px;
+  --container-gutter-desktop: 48px;
+  --container-gutter-tablet: 32px;
+  --container-gutter-phone: 16px;
+}

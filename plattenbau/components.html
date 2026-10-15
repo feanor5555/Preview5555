@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>FiveM Harbour — Plattenbau - reference components</title>
+    <meta name="description" content="Reference fixture for design-systems/fivem-harbour-plattenbau: concrete-block harbour game UI with hard edges, sodium-yellow accent and opaque HUD plates." />
+    <style>
+      :root {
+        --bg: #111315;
+        --surface: #1a1d20;
+        --surface-warm: #24282c;
+        --fg: #ece9e2;
+        --fg-2: #b3b5b2;
+        --muted: #989d9f;
+        --meta: var(--muted);
+        --border: #3b4045;
+        --border-soft: #2a2e32;
+        --accent: #f2b53a;
+        --accent-on: #14130f;
+        --accent-hover: #f4bf56;
+        --accent-active: #d59f33;
+        --success: #6cc08b;
+        --warn: #ee8a34;
+        --danger: #ea5d47;
+        --font-display: "Barlow Condensed", "Arial Narrow", "Inter", sans-serif;
+        --font-body: "Inter", "Segoe UI", Arial, sans-serif;
+        --font-mono: "JetBrains Mono", Consolas, "Courier New", monospace;
+        --text-xs: 12px;
+        --text-sm: 14px;
+        --text-base: 16px;
+        --text-lg: 20px;
+        --text-xl: 26px;
+        --text-2xl: 34px;
+        --text-3xl: 48px;
+        --text-4xl: 72px;
+        --leading-body: 1.45;
+        --leading-tight: 1.05;
+        --tracking-display: 0.04em;
+        --space-1: 4px;
+        --space-2: 8px;
+        --space-3: 12px;
+        --space-4: 16px;
+        --space-5: 20px;
+        --space-6: 24px;
+        --space-8: 32px;
+        --space-12: 48px;
+        --section-y-desktop: 64px;
+        --section-y-tablet: 48px;
+        --section-y-phone: 32px;
+        --radius-sm: 2px;
+        --radius-md: 3px;
+        --radius-lg: 4px;
+        --radius-pill: 9999px;
+        --elev-flat: none;
+        --elev-ring: 0 0 0 1px var(--border);
+        --elev-raised: 0 2px 0 rgba(0, 0, 0, 0.5), 0 24px 64px rgba(0, 0, 0, 0.6);
+        --focus-ring: 0 0 0 2px var(--bg), 0 0 0 4px var(--accent);
+        --motion-fast: 100ms;
+        --motion-base: 200ms;
+        --ease-standard: cubic-bezier(0.23, 1, 0.32, 1);
+        --container-max: 1500px;
+        --container-gutter-desktop: 48px;
+        --container-gutter-tablet: 32px;
+        --container-gutter-phone: 24px;
+      }
+    </style>
+    <style>
+      @font-face { font-family: "Barlow Condensed"; font-weight: 600; font-display: block; src: url("fonts/barlow-condensed-latin-600-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Barlow Condensed"; font-weight: 700; font-display: block; src: url("fonts/barlow-condensed-latin-700-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Inter"; font-weight: 100 900; font-display: block; src: url("fonts/inter-latin-wght-normal.woff2") format("woff2-variations"); }
+      @font-face { font-family: "JetBrains Mono"; font-weight: 500; font-display: block; src: url("fonts/jetbrains-mono-latin-500-normal.woff2") format("woff2"); }
+      * { box-sizing: border-box; }
+      body { margin: 0; padding: var(--space-12); background: var(--bg); color: var(--fg); font: 400 var(--text-base)/var(--leading-body) var(--font-body); display: grid; gap: var(--space-12); }
+      h2.group { margin: 0 0 var(--space-4); font: 600 var(--text-xs)/1 var(--font-display); letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg-2); }
+      .row-flex { display: flex; gap: var(--space-3); flex-wrap: wrap; align-items: center; }
+      .panel { width: 520px; background: var(--surface); border: 1px solid var(--border); border-top: 2px solid var(--accent); border-radius: var(--radius-md); box-shadow: var(--elev-raised); }
+      .panel-head { display: flex; align-items: center; gap: var(--space-3); padding: var(--space-4) var(--space-5); border-bottom: 1px solid var(--border); }
+      .panel-title { margin: 0; font: 600 var(--text-xl)/1 var(--font-display); letter-spacing: var(--tracking-display); text-transform: uppercase; }
+      .panel-sub { font-size: var(--text-sm); color: var(--muted); }
+      .panel-body { padding: var(--space-5); display: grid; gap: var(--space-4); }
+      .panel-foot { display: flex; justify-content: flex-end; gap: var(--space-3); padding: var(--space-3) var(--space-5); border-top: 1px solid var(--border); background: var(--bg); }
+      .code { display: inline-flex; align-items: center; justify-content: center; min-width: 34px; height: 34px; border: 2px solid var(--accent); color: var(--accent); font: 700 var(--text-lg)/1 var(--font-display); }
+      .btn { display: inline-flex; align-items: center; gap: var(--space-2); height: 40px; padding: 0 var(--space-5); border: 1px solid transparent; border-radius: var(--radius-sm); font: 600 var(--text-base)/1 var(--font-display); letter-spacing: 0.06em; text-transform: uppercase; cursor: pointer; transition: background-color var(--motion-fast) var(--ease-standard); }
+      .btn:focus-visible { outline: none; box-shadow: var(--focus-ring); }
+      .btn-primary { background: var(--accent); color: var(--accent-on); }
+      .btn-primary:hover { background: var(--accent-hover); }
+      .btn-primary:active { background: var(--accent-active); }
+      .btn-secondary { background: #2c68a0; color: var(--fg); }
+      .btn-ghost { background: transparent; border-color: var(--muted); color: var(--fg); }
+      .btn-ghost:hover { background: var(--surface-warm); }
+      .btn-danger { background: var(--danger); color: var(--accent-on); }
+      .btn:disabled { background: var(--surface-warm); border-color: transparent; color: var(--muted); cursor: not-allowed; }
+      .key { display: inline-flex; align-items: center; justify-content: center; min-width: 28px; height: 28px; padding: 0 6px; background: var(--accent); color: var(--accent-on); border-radius: var(--radius-sm); font: 700 var(--text-base)/1 var(--font-display); }
+      .key-ghost { background: transparent; color: var(--fg-2); border: 1px solid var(--muted); }
+      .field { display: grid; gap: var(--space-1); }
+      .label { font: 600 var(--text-xs)/1.2 var(--font-display); letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg-2); }
+      .input { height: 40px; width: 100%; background: var(--bg); border: 1px solid var(--muted); border-radius: var(--radius-sm); color: var(--fg); padding: 0 var(--space-3); font: 400 var(--text-base)/1 var(--font-body); }
+      .input:focus { outline: none; border-color: var(--accent); box-shadow: var(--focus-ring); }
+      .input[aria-invalid="true"] { border-color: var(--danger); }
+      .error { color: var(--danger); font-size: var(--text-sm); }
+      .stage { position: relative; height: 220px; padding: var(--space-8); background: linear-gradient(180deg, #a9cde8, #fafbfc 60%, #d3cfc6); display: flex; gap: var(--space-8); align-items: flex-end; }
+      .plate { background: rgba(13, 15, 17, 0.88); border: 1px solid rgba(0, 0, 0, 0.6); box-shadow: 0 1px 2px rgba(0, 0, 0, 0.7); }
+      .vitals { display: grid; gap: 4px; width: 210px; }
+      .vital { display: grid; grid-template-columns: 18px 1fr 34px; gap: var(--space-2); align-items: center; height: 30px; padding: 0 var(--space-2); font: 600 var(--text-base)/1 var(--font-display); font-variant-numeric: tabular-nums; }
+      .vital i { width: 12px; height: 12px; background: var(--c); }
+      .bar { position: relative; height: 8px; background: rgba(236, 233, 226, 0.12); -webkit-mask: repeating-linear-gradient(90deg, #000 0 calc(10% - 2px), transparent calc(10% - 2px) 10%); mask: repeating-linear-gradient(90deg, #000 0 calc(10% - 2px), transparent calc(10% - 2px) 10%); }
+      .bar > b { position: absolute; inset: 0 auto 0 0; width: var(--v); background: var(--c); }
+      .vital.is-low { box-shadow: inset 3px 0 0 var(--danger); }
+      .vital.is-low .bar > b { background: repeating-linear-gradient(-45deg, var(--c) 0 5px, #6b2f2a 5px 10px); }
+      .vital.is-low span { color: var(--danger); }
+      .hint { display: inline-flex; align-items: center; gap: var(--space-3); padding: 6px var(--space-4) 6px 6px; font: 600 var(--text-lg)/1 var(--font-display); }
+      .toast { display: grid; grid-template-columns: 1fr auto; gap: 2px var(--space-3); width: 380px; padding: var(--space-3) var(--space-4); border-left: 4px solid var(--c); }
+      .toast b { font: 700 var(--text-base)/1.15 var(--font-display); text-transform: uppercase; letter-spacing: 0.04em; color: var(--c); }
+      .toast p { margin: 0; grid-column: 1 / -1; font-size: var(--text-sm); color: var(--fg-2); }
+      .toast time { font: 500 var(--text-xs)/1 var(--font-mono); color: var(--muted); }
+      .list { width: 520px; border: 1px solid var(--border); background: var(--surface); }
+      .list-row { display: grid; grid-template-columns: 1fr auto; align-items: center; min-height: 44px; padding: var(--space-2) var(--space-3); border-bottom: 1px solid var(--border); }
+      .list-row[aria-selected="true"] { background: var(--surface-warm); box-shadow: inset 2px 0 0 var(--accent); }
+      .chip { display: inline-flex; align-items: center; height: 24px; padding: 0 8px; border-radius: var(--radius-sm); font: 600 var(--text-sm)/1 var(--font-display); text-transform: uppercase; letter-spacing: 0.04em; color: var(--c); position: relative; isolation: isolate; }
+      .chip::after { content: ""; position: absolute; inset: 0; background: var(--c); opacity: 0.14; z-index: -1; border-radius: inherit; }
+      .empty { padding: var(--space-8); text-align: center; color: var(--fg-2); border: 1px dashed var(--border); }
+      @media (prefers-reduced-motion: reduce) { .btn { transition: none; } }
+    </style>
+  </head>
+  <body>
+    <section>
+      <h2 class="group">Dialog panel</h2>
+      <div class="panel" role="dialog" aria-labelledby="dlg-title">
+        <div class="panel-head"><span class="code">€</span><div><h3 class="panel-title" id="dlg-title">Geld geben</h3><div class="panel-sub">an Mira Hansen · ID 23</div></div></div>
+        <div class="panel-body">
+          <label class="field"><span class="label">Betrag</span><input class="input" value="5.000" aria-invalid="true" aria-describedby="amt-err" /><span class="error" id="amt-err">Du hast nur 4.250 € Bargeld.</span></label>
+          <label class="field"><span class="label">Notiz</span><input class="input" placeholder="Wofür?" /></label>
+        </div>
+        <div class="panel-foot"><button class="btn btn-ghost">Abbrechen <span class="key key-ghost">Esc</span></button><button class="btn btn-primary" disabled>Geben</button></div>
+      </div>
+    </section>
+    <section>
+      <h2 class="group">Buttons and keys</h2>
+      <div class="row-flex"><button class="btn btn-primary">Bestätigen <span class="key key-ghost">Enter</span></button><button class="btn btn-secondary">Auswählen</button><button class="btn btn-ghost">Abbrechen</button><button class="btn btn-danger">Löschen</button><button class="btn btn-primary" disabled>Gesperrt</button><span class="key">E</span><span class="key key-ghost">Tab</span></div>
+    </section>
+    <section>
+      <h2 class="group">HUD plates over a bright scene</h2>
+      <div class="stage">
+        <div class="vitals">
+          <div class="plate vital is-low" style="--c: #ee6a5e"><i></i><div class="bar" style="--v: 18%"><b></b></div><span>18</span></div>
+          <div class="plate vital" style="--c: #5da2e8"><i></i><div class="bar" style="--v: 50%"><b></b></div><span>50</span></div>
+          <div class="plate vital" style="--c: #e39a3b"><i></i><div class="bar" style="--v: 66%"><b></b></div><span>66</span></div>
+          <div class="plate vital" style="--c: #46c0db"><i></i><div class="bar" style="--v: 72%"><b></b></div><span>72</span></div>
+        </div>
+        <div class="plate hint"><span class="key">E</span>Rolltor öffnen</div>
+        <div class="plate toast" style="--c: var(--success)"><b>Zahlung erhalten</b><time>jetzt</time><p>+250 € von Mira Hansen · Rechnung RE-0193</p></div>
+      </div>
+    </section>
+    <section>
+      <h2 class="group">List: filled and empty</h2>
+      <div class="row-flex" style="align-items: flex-start">
+        <div class="list" role="listbox">
+          <div class="list-row" role="option" aria-selected="true"><span>Kombi „Ostkai“</span><span class="chip" style="--c: var(--success)">Eingeparkt</span></div>
+          <div class="list-row" role="option"><span>Transporter</span><span class="chip" style="--c: #6aaee8">Draußen</span></div>
+          <div class="list-row" role="option"><span>Limousine „Kiez“</span><span class="chip" style="--c: var(--danger)">Abgeschleppt</span></div>
+        </div>
+        <div class="list empty"><b>Keine Fahrzeuge</b><br />Hier parkst du, sobald du eins besitzt.</div>
+      </div>
+    </section>
+  </body>
+</html>

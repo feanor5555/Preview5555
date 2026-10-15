@@ -1,0 +1,112 @@
+/* ─────────────────────────────────────────────────────────────────────────
+ * design-systems/fivem-apple-neon/tokens.css
+ *
+ * Shared-schema bindings for "FiveM Street Neon" (variant E): a dark,
+ * glass-material game UI for a FiveM roleplay server — Apple-style
+ * restraint carried into Los Santos nightlife. This file holds only the
+ * repository token schema (design-systems/_schema/tokens.schema.ts),
+ * expressed in px at the 1920×1080 reference size. The FiveM-specific
+ * `--fh-*` token set (rem-based, scales with the viewport) is defined in
+ * DESIGN.md §8 and is what NUI resources consume.
+ *
+ * Brand-specific schema decisions:
+ *   1. Dark-first: --bg is near-black #07070b with a faint violet cast,
+ *      --surface #111118 and --surface-warm #1b1b24 form the three
+ *      opaque tiers (base → surface → elevated).
+ *   2. --accent is Street Neon magenta #ff4fa3; --accent-on is near-black
+ *      #0a0a0f because dark text on the bright neon reads at 6.5:1 where
+ *      white would fail. Hover lightens, active darkens, both hand-picked
+ *      (no color-mix: FiveM NUI runs Chromium 103).
+ *   3. --border / --border-soft are white at 12% / 7% alpha — hairlines
+ *      that read as the specular edge of a glass sheet, not as outlines.
+ *   4. --meta aliases --muted: the system has three text tiers.
+ *   5. --focus-ring is a two-stop ring (base-colour gap + magenta ring)
+ *      so focus stays visible over any game frame.
+ *   6. Motion follows the repository ease-out (0.23, 1, 0.32, 1) with a
+ *      120ms micro / 200ms base rhythm.
+ * ─────────────────────────────────────────────────────────────────── */
+
+:root {
+  /* Surfaces */
+  --bg: #07070b;
+  --surface: #111118;
+  --surface-warm: #1b1b24;
+
+  /* Foreground */
+  --fg: #f5f5f7;
+  --fg-2: #b8b8c4;
+  --muted: #9a9aa8;
+  --meta: var(--muted);
+
+  /* Borders */
+  --border: rgba(255, 255, 255, 0.12);
+  --border-soft: rgba(255, 255, 255, 0.07);
+
+  /* Accent */
+  --accent: #ff4fa3;
+  --accent-on: #0a0a0f;
+  --accent-hover: #ff6bb3;
+  --accent-active: #e8408f;
+
+  /* Semantic */
+  --success: #30d158;
+  --warn: #ffb340;
+  --danger: #ff5a52;
+
+  /* Typography */
+  --font-display: "Inter Variable", "Inter", system-ui, "Segoe UI", sans-serif;
+  --font-body: "Inter Variable", "Inter", system-ui, "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, Consolas, "Courier New", monospace;
+
+  --text-xs: 12px;
+  --text-sm: 14px;
+  --text-base: 16px;
+  --text-lg: 20px;
+  --text-xl: 24px;
+  --text-2xl: 32px;
+  --text-3xl: 44px;
+  --text-4xl: 64px;
+
+  --leading-body: 1.45;
+  --leading-tight: 1.1;
+  --tracking-display: -0.02em;
+
+  /* Spacing */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+
+  --section-y-desktop: 80px;
+  --section-y-tablet: 48px;
+  --section-y-phone: 32px;
+
+  /* Radius */
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-pill: 9999px;
+
+  /* Elevation */
+  --elev-flat: none;
+  --elev-ring: 0 0 0 1px var(--border);
+  --elev-raised: 0 8px 24px rgba(0, 0, 0, 0.45), 0 2px 6px rgba(0, 0, 0, 0.3);
+
+  /* Focus */
+  --focus-ring: 0 0 0 2px #07070b, 0 0 0 4px #ff4fa3, 0 0 16px rgba(255, 79, 163, 0.45);
+
+  /* Motion */
+  --motion-fast: 120ms;
+  --motion-base: 200ms;
+  --ease-standard: cubic-bezier(0.23, 1, 0.32, 1);
+
+  /* Layout */
+  --container-max: 1600px;
+  --container-gutter-desktop: 48px;
+  --container-gutter-tablet: 32px;
+  --container-gutter-phone: 24px;
+}

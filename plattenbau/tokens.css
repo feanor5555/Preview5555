@@ -1,0 +1,66 @@
+/* design-systems/fivem-harbour-plattenbau/tokens.css
+ * Shared semantic-token bindings for FiveM Harbour — Plattenbau.
+ * Night at the docks between concrete housing blocks: asphalt-grey surfaces, warm off-white text,
+ * sodium-lamp yellow as the single accent, container blue as the selection fill, rust and signal red for state.
+ * Pixel values are the 1080p reference (1rem = 10px under the series scaling rule).
+ * The full --fh-* game-UI token block lives in DESIGN.md.
+ */
+
+:root {
+  --bg: #111315;
+  --surface: #1a1d20;
+  --surface-warm: #24282c;
+  --fg: #ece9e2;
+  --fg-2: #b3b5b2;
+  --muted: #989d9f;
+  --meta: var(--muted);
+  --border: #3b4045;
+  --border-soft: #2a2e32;
+  --accent: #f2b53a;
+  --accent-on: #14130f;
+  --accent-hover: #f4bf56;
+  --accent-active: #d59f33;
+  --success: #6cc08b;
+  --warn: #ee8a34;
+  --danger: #ea5d47;
+  --font-display: "Barlow Condensed", "Arial Narrow", "Inter", sans-serif;
+  --font-body: "Inter", "Segoe UI", Arial, sans-serif;
+  --font-mono: "JetBrains Mono", Consolas, "Courier New", monospace;
+  --text-xs: 12px;
+  --text-sm: 14px;
+  --text-base: 16px;
+  --text-lg: 20px;
+  --text-xl: 26px;
+  --text-2xl: 34px;
+  --text-3xl: 48px;
+  --text-4xl: 72px;
+  --leading-body: 1.45;
+  --leading-tight: 1.05;
+  --tracking-display: 0.04em;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+  --section-y-desktop: 64px;
+  --section-y-tablet: 48px;
+  --section-y-phone: 32px;
+  --radius-sm: 2px;
+  --radius-md: 3px;
+  --radius-lg: 4px;
+  --radius-pill: 9999px;
+  --elev-flat: none;
+  --elev-ring: 0 0 0 1px var(--border);
+  --elev-raised: 0 2px 0 rgba(0, 0, 0, 0.5), 0 24px 64px rgba(0, 0, 0, 0.6);
+  --focus-ring: 0 0 0 2px var(--bg), 0 0 0 4px var(--accent);
+  --motion-fast: 100ms;
+  --motion-base: 200ms;
+  --ease-standard: cubic-bezier(0.23, 1, 0.32, 1);
+  --container-max: 1500px;
+  --container-gutter-desktop: 48px;
+  --container-gutter-tablet: 32px;
+  --container-gutter-phone: 24px;
+}

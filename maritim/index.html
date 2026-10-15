@@ -1,0 +1,1250 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>FiveM Harbour — Maritim · Design-System-Vorschau</title>
+<style>
+@font-face { font-family: "Barlow"; src: url("fonts/barlow-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-display: block; }
+@font-face { font-family: "Barlow"; src: url("fonts/barlow-latin-500-normal.woff2") format("woff2"); font-weight: 500; font-display: block; }
+@font-face { font-family: "Barlow"; src: url("fonts/barlow-latin-600-normal.woff2") format("woff2"); font-weight: 600; font-display: block; }
+@font-face { font-family: "Barlow"; src: url("fonts/barlow-latin-700-normal.woff2") format("woff2"); font-weight: 700; font-display: block; }
+@font-face { font-family: "Barlow Semi Condensed"; src: url("fonts/barlow-semi-condensed-latin-500-normal.woff2") format("woff2"); font-weight: 500; font-display: block; }
+@font-face { font-family: "Barlow Semi Condensed"; src: url("fonts/barlow-semi-condensed-latin-600-normal.woff2") format("woff2"); font-weight: 600; font-display: block; }
+@font-face { font-family: "Barlow Semi Condensed"; src: url("fonts/barlow-semi-condensed-latin-700-normal.woff2") format("woff2"); font-weight: 700; font-display: block; }
+@font-face { font-family: "JetBrains Mono"; src: url("fonts/jetbrains-mono-latin-500-normal.woff2") format("woff2"); font-weight: 500; font-display: block; }
+
+html { font-size: clamp(8px, calc(100vh / 108), 16px); }
+
+:root {
+  --fh-bg-base: #E7F1F5;
+  --fh-bg-surface: #F7FAFB;
+  --fh-bg-elevated: #FFFFFF;
+  --fh-bg-overlay: rgba(8, 28, 46, 0.66);
+  --fh-border: #B9C8D3;
+  --fh-text-primary: #0B2236;
+  --fh-text-secondary: #3A5469;
+  --fh-text-muted: #5A6F81;
+  --fh-text-on-accent: #0B2236;
+  --fh-accent-primary: #FFC21F;
+  --fh-accent-secondary: #0A7896;
+  --fh-success: #16815A;
+  --fh-warning: #A95F00;
+  --fh-danger: #C42F3D;
+  --fh-info: #1F64C4;
+  --fh-job-police: #1E4B9B;
+  --fh-job-ems: #C83A24;
+  --fh-job-mechanic: #6553B0;
+  --fh-job-civil: #5A6E80;
+  --fh-hud-health: #D3334A;
+  --fh-hud-armor: #2A68D4;
+  --fh-hud-hunger: #C27812;
+  --fh-hud-thirst: #138BBE;
+  --fh-hud-stamina: #4F8E1A;
+  --fh-hud-stress: #8655C9;
+  --fh-hud-voice: #0F9775;
+  --fh-hud-radio: #C43C86;
+  --fh-hud-fuel: #C9600E;
+
+  --fh-font-sans: "Barlow", system-ui, sans-serif;
+  --fh-font-display: "Barlow Semi Condensed", "Barlow", system-ui, sans-serif;
+  --fh-font-mono: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+  --fh-text-2xs: 1.2rem;
+  --fh-text-xs: 1.3rem;
+  --fh-text-sm: 1.4rem;
+  --fh-text-md: 1.6rem;
+  --fh-text-lg: 1.9rem;
+  --fh-text-xl: 2.4rem;
+  --fh-text-2xl: 3.2rem;
+  --fh-text-3xl: 4.4rem;
+  --fh-text-4xl: 6.4rem;
+  --fh-weight-regular: 400;
+  --fh-weight-medium: 500;
+  --fh-weight-semibold: 600;
+  --fh-weight-bold: 700;
+
+  --fh-space-0_5: 0.2rem;
+  --fh-space-1: 0.4rem;
+  --fh-space-2: 0.8rem;
+  --fh-space-3: 1.2rem;
+  --fh-space-4: 1.6rem;
+  --fh-space-5: 2rem;
+  --fh-space-6: 2.4rem;
+  --fh-space-8: 3.2rem;
+  --fh-space-10: 4rem;
+  --fh-space-12: 4.8rem;
+  --fh-space-16: 6.4rem;
+
+  --fh-radius-xs: 0.2rem;
+  --fh-radius-sm: 0.4rem;
+  --fh-radius-md: 0.6rem;
+  --fh-radius-lg: 0.8rem;
+  --fh-radius-xl: 1.2rem;
+  --fh-radius-pill: 999rem;
+  --fh-border-width: max(1px, 0.1rem);
+  --fh-border-width-strong: 0.2rem;
+
+  --fh-shadow-1: 0 0.1rem 0.2rem rgba(11, 34, 54, 0.18), 0 0 0 max(1px, 0.1rem) rgba(11, 34, 54, 0.08);
+  --fh-shadow-2: 0 0.2rem 0.6rem rgba(11, 34, 54, 0.16), 0 0.8rem 2.4rem rgba(11, 34, 54, 0.16);
+  --fh-shadow-3: 0 0.4rem 1.2rem rgba(8, 28, 46, 0.20), 0 2.4rem 6.4rem rgba(8, 28, 46, 0.30);
+  --fh-glow-accent: 0 0 0 0.3rem rgba(255, 194, 31, 0.55);
+  --fh-focus-ring: 0 0 0 0.2rem var(--fh-bg-elevated), 0 0 0 0.4rem var(--fh-text-primary);
+  --fh-blur-thin: 0px;
+  --fh-blur-regular: 0px;
+  --fh-blur-thick: 0px;
+  --fh-material-thin: rgba(247, 250, 251, 0.86);
+  --fh-material-regular: rgba(247, 250, 251, 0.94);
+  --fh-material-thick: #F7FAFB;
+
+  --fh-duration-fast: 120ms;
+  --fh-duration-enter: 200ms;
+  --fh-duration-exit: 140ms;
+  --fh-duration-slow: 320ms;
+  --fh-ease-standard: cubic-bezier(0.23, 1, 0.32, 1);
+  --fh-ease-spring: cubic-bezier(0.34, 1.4, 0.64, 1);
+}
+
+/* ---------- base ---------- */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--fh-text-primary); color: var(--fh-text-primary); font-family: var(--fh-font-sans); font-size: var(--fh-text-md); line-height: 1.45; -webkit-font-smoothing: antialiased; }
+.num { font-family: var(--fh-font-display); font-variant-numeric: tabular-nums; font-weight: var(--fh-weight-bold); }
+.mono { font-family: var(--fh-font-mono); font-weight: var(--fh-weight-medium); }
+.sec { color: var(--fh-text-secondary); }
+.mut { color: var(--fh-text-muted); }
+.sm { font-size: var(--fh-text-sm); }
+.xs { font-size: var(--fh-text-xs); }
+.lg { font-size: var(--fh-text-lg); }
+.semi { font-weight: var(--fh-weight-semibold); }
+.r { text-align: right; }
+.grow { flex: 1; min-width: 0; }
+.hstack { display: flex; align-items: center; gap: var(--fh-space-2); }
+.vstack { display: flex; flex-direction: column; gap: var(--fh-space-2); }
+.between { display: flex; align-items: center; justify-content: space-between; gap: var(--fh-space-3); }
+.abs { position: absolute; }
+
+/* ---------- preview chrome (not part of the system) ---------- */
+.frame { position: relative; width: 100vw; height: 100vh; overflow: hidden; isolation: isolate; }
+.scene { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -2; }
+.scrim { position: absolute; inset: 0; background: var(--fh-bg-overlay); z-index: -1; }
+.frame-label { position: absolute; top: 1.2rem; left: 50%; transform: translateX(-50%); z-index: 90; font: 500 var(--fh-text-xs)/1 var(--fh-font-mono); color: #fff; background: rgba(11, 34, 54, 0.88); padding: 0.7rem 1.4rem; border-radius: var(--fh-radius-pill); border: 1px dashed rgba(255, 255, 255, 0.55); white-space: nowrap; }
+.ann { position: absolute; z-index: 80; font: 500 var(--fh-text-2xs)/1 var(--fh-font-mono); color: #fff; background: rgba(11, 34, 54, 0.88); padding: 0.5rem 0.9rem; border-radius: var(--fh-radius-sm); border: 1px dashed rgba(255, 255, 255, 0.55); white-space: nowrap; }
+.ann.static { position: static; display: inline-block; align-self: flex-start; }
+
+/* tint layer: token colour at low opacity under the content (no color-mix in Chromium 103) */
+.tint, .row.sel, .nv.on, .ccard.sel, .tbl tr.sel td, .voice.off, .badge.st, .banner, .slot.target, .slot.bad { position: relative; isolation: isolate; }
+.tint::after, .row.sel::after, .nv.on::after, .ccard.sel::after, .tbl tr.sel td::after, .voice.off::after, .badge.st::after, .banner::after, .slot.target::after, .slot.bad::after { content: ""; position: absolute; inset: 0; z-index: -1; border-radius: inherit; pointer-events: none; background: var(--tc, var(--fh-accent-secondary)); opacity: var(--ta, 0.12); }
+
+/* ---------- icons ---------- */
+.ico { width: 1.6rem; height: 1.6rem; stroke: currentColor; fill: none; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+.ico.lg { width: 2rem; height: 2rem; }
+.ico.xl { width: 2.4rem; height: 2.4rem; }
+.ico.xxl { width: 3.2rem; height: 3.2rem; }
+
+/* ---------- surfaces ---------- */
+.chip { background: var(--fh-material-thick); border-radius: var(--fh-radius-md); box-shadow: var(--fh-shadow-1); }
+.panel { background: var(--fh-bg-surface); border-radius: var(--fh-radius-lg); box-shadow: var(--fh-shadow-2); display: flex; flex-direction: column; overflow: hidden; }
+.panel.glass { background: var(--fh-material-thick); }
+.panel-head { display: flex; align-items: center; gap: var(--fh-space-3); padding: var(--fh-space-4) var(--fh-space-6); border-bottom: var(--fh-border-width) solid var(--fh-border); min-height: 6.4rem; }
+.panel-title { font: var(--fh-weight-semibold) var(--fh-text-xl)/1.15 var(--fh-font-display); }
+.panel-body { padding: var(--fh-space-6); }
+.panel-foot { display: flex; align-items: center; justify-content: flex-end; gap: var(--fh-space-2); padding: var(--fh-space-4) var(--fh-space-6); border-top: var(--fh-border-width) solid var(--fh-border); margin-top: auto; }
+.close { margin-left: auto; width: 3.2rem; height: 3.2rem; display: grid; place-items: center; border-radius: var(--fh-radius-md); color: var(--fh-text-secondary); }
+.label { font: var(--fh-weight-semibold) var(--fh-text-2xs)/1.2 var(--fh-font-display); letter-spacing: 0.08em; text-transform: uppercase; color: var(--fh-text-secondary); }
+.divider { height: var(--fh-border-width); background: var(--fh-border); }
+.mark { display: inline-block; width: 4.8rem; height: 4.8rem; border-radius: var(--fh-radius-xs); background: linear-gradient(135deg, var(--fh-accent-primary) 50%, var(--fh-text-primary) 50%); flex: none; }
+.mark.sm { width: 2.8rem; height: 2.8rem; }
+
+/* ---------- buttons, keys ---------- */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: var(--fh-space-2); height: 4rem; padding: 0 var(--fh-space-4); border-radius: var(--fh-radius-md); font: var(--fh-weight-semibold) var(--fh-text-md)/1 var(--fh-font-sans); border: var(--fh-border-width) solid transparent; white-space: nowrap; color: var(--fh-text-primary); background: transparent; }
+.btn-p { background: var(--fh-accent-primary); color: var(--fh-text-on-accent); }
+.btn-p.hover { filter: brightness(0.94); }
+.btn-s { background: var(--fh-bg-elevated); border-color: var(--fh-border); }
+.btn-t { background: var(--fh-accent-secondary); color: var(--fh-bg-elevated); }
+.btn-d { background: var(--fh-danger); color: var(--fh-bg-elevated); }
+.btn-dq { color: var(--fh-danger); }
+.btn-sm { height: 3.2rem; padding: 0 var(--fh-space-3); font-size: var(--fh-text-sm); }
+.btn-wide { width: 100%; }
+.btn.dis { opacity: 0.45; }
+.focus { box-shadow: var(--fh-focus-ring); }
+.key { display: inline-grid; place-items: center; min-width: 2.4rem; height: 2.4rem; padding: 0 0.6rem; border-radius: var(--fh-radius-sm); background: var(--fh-text-primary); color: var(--fh-bg-elevated); font: var(--fh-weight-medium) var(--fh-text-xs)/1 var(--fh-font-mono); flex: none; }
+.key.a { background: var(--fh-accent-primary); color: var(--fh-text-on-accent); }
+.key.l { background: var(--fh-bg-elevated); color: var(--fh-text-primary); }
+.key.off { background: var(--fh-border); color: var(--fh-text-secondary); }
+.btn-p .key { background: var(--fh-text-primary); color: var(--fh-accent-primary); }
+.spinner { width: 1.6rem; height: 1.6rem; border-radius: 50%; border: 0.2rem solid transparent; border-top-color: currentColor; border-right-color: currentColor; animation: spin 0.9s linear infinite; }
+
+/* ---------- badges ---------- */
+.badge { display: inline-flex; align-items: center; gap: 0.6rem; padding: 0.2rem 0.8rem; border-radius: var(--fh-radius-sm); font: var(--fh-weight-semibold) var(--fh-text-2xs)/1.5 var(--fh-font-display); letter-spacing: 0.06em; text-transform: uppercase; color: var(--fh-bg-elevated); background: var(--c); white-space: nowrap; }
+.badge.job::before { content: ""; width: 0.6rem; height: 0.6rem; background: var(--fh-bg-elevated); }
+.badge.st { color: var(--c); background: var(--fh-bg-elevated); --tc: var(--c); }
+.badge.sk2 { background: var(--fh-accent-primary); color: var(--fh-text-on-accent); }
+.c-police { --c: var(--fh-job-police); } .c-ems { --c: var(--fh-job-ems); } .c-mech { --c: var(--fh-job-mechanic); } .c-civil { --c: var(--fh-job-civil); }
+.c-ok { --c: var(--fh-success); } .c-warn { --c: var(--fh-warning); } .c-err { --c: var(--fh-danger); } .c-info { --c: var(--fh-info); } .c-teal { --c: var(--fh-accent-secondary); } .c-navy { --c: var(--fh-text-primary); } .c-radio { --c: var(--fh-hud-radio); }
+.dot { width: 0.8rem; height: 0.8rem; border-radius: 50%; background: var(--c); display: inline-block; flex: none; }
+
+/* ---------- form controls ---------- */
+.field { display: grid; gap: var(--fh-space-1); }
+.input { height: 4rem; display: flex; align-items: center; gap: var(--fh-space-2); padding: 0 var(--fh-space-3); background: var(--fh-bg-base); border: var(--fh-border-width) solid var(--fh-border); border-bottom: var(--fh-border-width-strong) solid var(--fh-text-muted); border-radius: var(--fh-radius-sm) var(--fh-radius-sm) 0 0; font-weight: var(--fh-weight-medium); white-space: nowrap; overflow: hidden; }
+.input.area { height: 8rem; align-items: flex-start; padding-top: var(--fh-space-2); white-space: normal; }
+.input.focus { border-bottom-color: var(--fh-text-primary); box-shadow: var(--fh-focus-ring); }
+.input.err { border-bottom-color: var(--fh-danger); }
+.input.ro { opacity: 0.6; }
+.input .ph { color: var(--fh-text-muted); font-weight: var(--fh-weight-regular); }
+.input .unit { margin-left: auto; color: var(--fh-text-muted); }
+.caret { display: inline-block; width: 0.15rem; height: 2rem; background: var(--fh-text-primary); margin-left: -0.4rem; }
+.ferr { display: flex; gap: var(--fh-space-1); align-items: center; color: var(--fh-danger); font-size: var(--fh-text-xs); font-weight: var(--fh-weight-medium); }
+.seg { display: flex; background: var(--fh-bg-base); border-radius: var(--fh-radius-md); padding: 0.3rem; gap: 0.3rem; }
+.seg > span { flex: 1; text-align: center; padding: 0.7rem 1rem; border-radius: var(--fh-radius-sm); color: var(--fh-text-secondary); font-weight: var(--fh-weight-semibold); font-size: var(--fh-text-sm); white-space: nowrap; }
+.seg > .on { background: var(--fh-bg-elevated); color: var(--fh-text-primary); box-shadow: var(--fh-shadow-1); }
+.stepper { display: flex; align-items: center; height: 4rem; background: var(--fh-bg-base); border-radius: var(--fh-radius-md); padding: 0 0.4rem; gap: var(--fh-space-1); }
+.stepper .sb { width: 3.2rem; height: 3.2rem; display: grid; place-items: center; border-radius: var(--fh-radius-sm); }
+.stepper .sv { flex: 1; text-align: center; font: var(--fh-weight-semibold) var(--fh-text-md)/1 var(--fh-font-display); font-variant-numeric: tabular-nums; }
+.slider { position: relative; height: 0.4rem; background: var(--fh-border); border-radius: var(--fh-radius-pill); margin: 0.9rem 0.9rem 0.9rem 0; }
+.slider > i { position: absolute; left: 0; top: 0; bottom: 0; width: var(--v); background: var(--fh-text-primary); border-radius: inherit; }
+.slider > i::after { content: ""; position: absolute; right: -0.9rem; top: 50%; width: 1.8rem; height: 1.8rem; margin-top: -0.9rem; border-radius: 50%; background: var(--fh-bg-elevated); box-shadow: var(--fh-shadow-1), inset 0 0 0 0.2rem var(--fh-text-primary); }
+.toggle { width: 4.4rem; height: 2.4rem; border-radius: var(--fh-radius-pill); background: var(--fh-border); position: relative; flex: none; }
+.toggle::after { content: ""; position: absolute; top: 0.3rem; left: 0.3rem; width: 1.8rem; height: 1.8rem; border-radius: 50%; background: var(--fh-bg-elevated); box-shadow: var(--fh-shadow-1); }
+.toggle.on { background: var(--fh-accent-secondary); }
+.toggle.on::after { left: 2.3rem; }
+.check { width: 2rem; height: 2rem; border-radius: var(--fh-radius-xs); border: var(--fh-border-width-strong) solid var(--fh-text-muted); display: grid; place-items: center; flex: none; }
+.check.on { background: var(--fh-accent-secondary); border-color: var(--fh-accent-secondary); color: var(--fh-bg-elevated); }
+.swatch { width: 3.2rem; height: 3.2rem; border-radius: var(--fh-radius-sm); background: var(--s); box-shadow: inset 0 0 0 var(--fh-border-width) rgba(11, 34, 54, 0.15); }
+.swatch.on { box-shadow: var(--fh-focus-ring); }
+.search { display: flex; align-items: center; gap: var(--fh-space-2); height: 4rem; padding: 0 var(--fh-space-3); background: var(--fh-bg-elevated); border: var(--fh-border-width) solid var(--fh-border); border-radius: var(--fh-radius-md); color: var(--fh-text-secondary); }
+.select { justify-content: space-between; }
+
+/* ---------- tabs, rows, tables ---------- */
+.tabs { display: flex; gap: var(--fh-space-5); border-bottom: var(--fh-border-width) solid var(--fh-border); }
+.tab { padding: var(--fh-space-3) 0 calc(var(--fh-space-3) - 0.3rem); font-weight: var(--fh-weight-semibold); color: var(--fh-text-secondary); border-bottom: 0.3rem solid transparent; white-space: nowrap; display: flex; align-items: center; gap: var(--fh-space-1); }
+.tab.on { color: var(--fh-text-primary); border-color: var(--fh-accent-secondary); }
+.chips { display: flex; gap: var(--fh-space-1); flex-wrap: wrap; }
+.fchip { padding: 0.5rem 1.2rem; border-radius: var(--fh-radius-pill); border: var(--fh-border-width) solid var(--fh-border); font-size: var(--fh-text-sm); font-weight: var(--fh-weight-semibold); color: var(--fh-text-secondary); background: var(--fh-bg-elevated); }
+.fchip.on { background: var(--fh-text-primary); border-color: var(--fh-text-primary); color: var(--fh-bg-elevated); }
+.row { display: flex; align-items: center; gap: var(--fh-space-3); min-height: 4.4rem; padding: var(--fh-space-2) var(--fh-space-3); border-bottom: var(--fh-border-width) solid var(--fh-border); }
+.row.sel { box-shadow: inset 0.3rem 0 0 var(--fh-accent-secondary); }
+.row.hov { background: var(--fh-bg-base); }
+.row.dis { opacity: 0.5; }
+.row .t { font-weight: var(--fh-weight-semibold); }
+.row .s { font-size: var(--fh-text-sm); color: var(--fh-text-secondary); }
+.tbl { width: 100%; border-collapse: collapse; font-size: var(--fh-text-sm); }
+.tbl th { font: var(--fh-weight-semibold) var(--fh-text-2xs)/1.2 var(--fh-font-display); letter-spacing: 0.08em; text-transform: uppercase; color: var(--fh-text-secondary); text-align: left; padding: 0.9rem 1.2rem; border-bottom: var(--fh-border-width) solid var(--fh-border); white-space: nowrap; }
+.tbl td { padding: 0.9rem 1.2rem; border-bottom: var(--fh-border-width) solid var(--fh-border); vertical-align: middle; }
+.tbl td.mono, .tbl td.num { white-space: nowrap; }
+.tbl .r { text-align: right; }
+.tbl td.num { font-weight: var(--fh-weight-semibold); }
+.tbl tr.sel td:first-child { box-shadow: inset 0.3rem 0 0 var(--fh-accent-secondary); }
+.tbl tr.me td { background: var(--fh-bg-base); }
+.bar { height: 0.4rem; border-radius: var(--fh-radius-pill); background: var(--fh-border); overflow: hidden; }
+.bar > i { display: block; height: 100%; width: var(--v); background: var(--c, var(--fh-text-primary)); border-radius: inherit; }
+
+/* ---------- notifications, banners, states ---------- */
+.toast { position: relative; display: grid; grid-template-columns: 0.6rem auto 1fr; column-gap: var(--fh-space-3); width: 40rem; background: var(--fh-material-thick); border-radius: var(--fh-radius-md); box-shadow: var(--fh-shadow-1); overflow: hidden; padding-right: var(--fh-space-4); }
+.toast::before { content: ""; grid-row: 1 / 3; grid-column: 1; background: var(--c); }
+.toast > .ico { grid-row: 1 / 3; grid-column: 2; color: var(--c); margin-top: 1.2rem; width: 2rem; height: 2rem; }
+.toast .tt { grid-column: 3; padding-top: 1rem; font-weight: var(--fh-weight-semibold); display: flex; justify-content: space-between; gap: var(--fh-space-2); }
+.toast .tt .meta { font-weight: var(--fh-weight-regular); font-size: var(--fh-text-xs); color: var(--fh-text-muted); }
+.toast .tx { grid-column: 3; padding-bottom: 1.2rem; font-size: var(--fh-text-sm); color: var(--fh-text-secondary); }
+.toast .timer { position: absolute; left: 0.6rem; bottom: 0; height: 0.2rem; width: var(--t); background: var(--c); }
+.toast.more { display: block; width: 40rem; padding: 0.8rem 1.6rem; font-size: var(--fh-text-sm); font-weight: var(--fh-weight-semibold); color: var(--fh-text-secondary); text-align: center; }
+.banner { --tc: var(--c, var(--fh-danger)); --ta: 0.08; display: grid; grid-template-columns: 0.6rem auto 1fr auto; column-gap: var(--fh-space-3); align-items: center; background: var(--fh-bg-elevated); border-radius: var(--fh-radius-md); overflow: hidden; padding-right: var(--fh-space-2); min-height: 5.6rem; }
+.banner::before { content: ""; align-self: stretch; background: var(--c, var(--fh-danger)); }
+.banner > .ico { color: var(--c, var(--fh-danger)); width: 2rem; height: 2rem; }
+.banner .bt { font-weight: var(--fh-weight-semibold); font-size: var(--fh-text-md); }
+.banner .bx { font-size: var(--fh-text-sm); color: var(--fh-text-secondary); }
+.banner > div { padding: 0.8rem 0; }
+.sk { background: var(--fh-bg-base); border-radius: var(--fh-radius-sm); animation: pulse 1.2s ease-in-out infinite alternate; }
+.panel .sk, .chip .sk { background: var(--fh-border); animation-name: pulse-soft; }
+.empty { display: grid; justify-items: center; text-align: center; gap: var(--fh-space-2); padding: var(--fh-space-10) var(--fh-space-6); }
+.empty > .ico { width: 3.2rem; height: 3.2rem; color: var(--fh-text-muted); }
+.empty h4 { font-size: var(--fh-text-lg); font-weight: var(--fh-weight-semibold); }
+.empty p { color: var(--fh-text-secondary); font-size: var(--fh-text-sm); max-width: 38rem; }
+.empty .btn { margin-top: var(--fh-space-2); }
+
+/* ---------- HUD ---------- */
+.vitals { display: flex; gap: var(--fh-space-2); padding: var(--fh-space-2) var(--fh-space-3) var(--fh-space-1); }
+.vital { display: grid; justify-items: center; gap: 0.3rem; width: 5.6rem; }
+.vital .label { font-size: 1.1rem; letter-spacing: 0.04em; }
+.dial { --v: 70; width: 4.8rem; height: 4.8rem; border-radius: 50%; background: conic-gradient(var(--c) calc(var(--v) * 1%), var(--fh-border) 0); display: grid; place-items: center; position: relative; }
+.dial::before { content: ""; position: absolute; inset: 0.4rem; border-radius: 50%; background: var(--fh-bg-elevated); }
+.dial.zero::after { content: ""; position: absolute; inset: 0.4rem; border-radius: 50%; background: var(--fh-danger); opacity: 0.12; }
+.dial .ico { position: relative; z-index: 1; color: var(--c); width: 2rem; height: 2rem; }
+.vital.low .ico { animation: blink 1s steps(1) infinite; }
+.vital.low .label { color: var(--fh-danger); }
+.vital.hide { width: 0; opacity: 0; overflow: hidden; }
+.c-health { --c: var(--fh-hud-health); } .c-armor { --c: var(--fh-hud-armor); } .c-hunger { --c: var(--fh-hud-hunger); } .c-thirst { --c: var(--fh-hud-thirst); } .c-stamina { --c: var(--fh-hud-stamina); } .c-stress { --c: var(--fh-hud-stress); } .c-voice { --c: var(--fh-hud-voice); } .c-fuel { --c: var(--fh-hud-fuel); }
+.voice { display: inline-flex; align-items: stretch; overflow: hidden; align-self: flex-start; }
+.voice .vm { display: flex; align-items: center; gap: var(--fh-space-2); padding: 0.8rem 1.2rem; }
+.voice .vm .ico { width: 2rem; height: 2rem; color: var(--fh-text-secondary); }
+.voice.speaking { box-shadow: var(--fh-shadow-1), 0 0 0 0.2rem var(--fh-hud-voice); }
+.voice.speaking .vm .ico, .voice.speaking .pip.on { color: var(--fh-hud-voice); background-color: currentColor; }
+.voice.speaking .vm .ico { background: none; }
+.pips { display: flex; gap: 0.3rem; align-items: flex-end; }
+.pip { width: 0.5rem; border-radius: 0.1rem; background: var(--fh-border); }
+.pip:nth-child(1) { height: 0.8rem; } .pip:nth-child(2) { height: 1.2rem; } .pip:nth-child(3) { height: 1.6rem; }
+.pip.on { background: var(--fh-text-primary); }
+.voice .vr { display: flex; align-items: center; gap: var(--fh-space-1); padding: 0 1.2rem; border-left: var(--fh-border-width) solid var(--fh-border); font-size: var(--fh-text-sm); font-weight: var(--fh-weight-semibold); }
+.voice .vr .ico { color: var(--fh-hud-radio); }
+.voice.tx .vr { background: var(--fh-hud-radio); color: var(--fh-bg-elevated); border-left-color: transparent; }
+.voice.tx .vr .ico { color: var(--fh-bg-elevated); }
+.voice.tx .vm .ico { color: var(--fh-hud-radio); }
+.voice.norx .vr { color: var(--fh-text-muted); }
+.voice.norx .vr .ico { color: var(--fh-text-muted); }
+.voice.off { background: var(--fh-bg-elevated); --tc: var(--fh-danger); }
+.voice.off .vm, .voice.off .vm .ico { color: var(--fh-danger); }
+.money { display: flex; flex-direction: column; align-items: flex-end; gap: var(--fh-space-2); }
+.mchip { display: flex; align-items: center; gap: var(--fh-space-3); padding: 0.8rem 1.4rem; }
+.mchip .ico { width: 2rem; height: 2rem; color: var(--fh-text-secondary); }
+.mchip .num { font-size: var(--fh-text-lg); }
+.delta { font: var(--fh-weight-bold) var(--fh-text-sm)/1 var(--fh-font-display); padding: 0.4rem 1rem; border-radius: var(--fh-radius-sm); background: var(--fh-material-thick); box-shadow: var(--fh-shadow-1); }
+.compass { position: relative; display: flex; justify-content: space-between; align-items: center; height: 3.2rem; padding: 0 1.4rem; overflow: hidden; font: var(--fh-weight-semibold) var(--fh-text-xs)/1 var(--fh-font-display); color: var(--fh-text-secondary); }
+.compass .hd { position: absolute; left: 50%; top: 0; transform: translateX(-50%); height: 100%; display: grid; place-items: center; padding: 0 0.8rem; background: var(--fh-text-primary); color: var(--fh-bg-elevated); font-size: var(--fh-text-sm); }
+.mapframe { width: 30rem; height: 20rem; border-radius: var(--fh-radius-lg); padding: 0.4rem; background: var(--fh-material-thin); box-shadow: var(--fh-shadow-1); position: relative; }
+.mapframe .map { width: 100%; height: 100%; border-radius: var(--fh-radius-md); overflow: hidden; position: relative; }
+.mapframe .hb { position: absolute; left: 0.4rem; right: 0.4rem; height: 0.6rem; background: var(--fh-border); }
+.mapframe .hb > i { display: block; height: 100%; width: var(--v); background: var(--c); }
+.ammo { display: flex; align-items: baseline; gap: var(--fh-space-2); padding: 0.8rem 1.4rem; }
+.ammo .mag { font-size: var(--fh-text-2xl); line-height: 1; }
+.veh { display: flex; flex-direction: column; align-items: center; gap: var(--fh-space-2); }
+.speedo { position: relative; width: 22rem; height: 22rem; }
+.speedo > svg { width: 100%; height: 100%; display: block; }
+.speedo .read { position: absolute; left: 0; right: 0; top: 7.4rem; text-align: center; }
+.speedo .read .num { font-size: var(--fh-text-3xl); line-height: 1; display: block; }
+.speedo .gear { position: absolute; left: 50%; bottom: 3.6rem; transform: translateX(-50%); font: var(--fh-weight-bold) var(--fh-text-md)/1 var(--fh-font-display); padding: 0.4rem 0.9rem; border-radius: var(--fh-radius-sm); background: var(--fh-text-primary); color: var(--fh-bg-elevated); }
+.vstat { display: flex; gap: var(--fh-space-1); }
+.vs { display: flex; align-items: center; gap: var(--fh-space-1); height: 4rem; padding: 0 1rem; color: var(--fh-text-muted); font-size: var(--fh-text-sm); font-weight: var(--fh-weight-semibold); }
+.vs .ico { width: 2rem; height: 2rem; }
+.vs.on { color: var(--fh-text-primary); }
+.vs.blink-ok { color: var(--fh-success); }
+.vs.blink-ok .ico { animation: blink 1s steps(1) infinite; }
+.vs.warn { color: var(--fh-warning); }
+.vs.crit { background: var(--fh-danger); color: var(--fh-bg-elevated); }
+.vs.crit .ico { animation: blink 1s steps(1) infinite; }
+.prog { width: 48rem; padding: 1rem 1.4rem 1.2rem; display: grid; gap: 0.8rem; }
+.prog .track { height: 0.6rem; border-radius: var(--fh-radius-pill); background: var(--fh-border); overflow: hidden; }
+.prog .track > i { display: block; height: 100%; width: var(--v); background: var(--c, var(--fh-text-primary)); }
+.hint { display: inline-flex; align-items: center; gap: var(--fh-space-2); padding: 0.6rem 1.4rem 0.6rem 0.6rem; font-weight: var(--fh-weight-medium); white-space: nowrap; }
+.hint .key { min-width: 3.2rem; height: 3.2rem; font-size: var(--fh-text-md); }
+.hint.dim { color: var(--fh-text-muted); }
+.hint.held .key { box-shadow: var(--fh-glow-accent); }
+.holdring { position: relative; }
+.holdring svg { position: absolute; inset: -0.5rem; width: calc(100% + 1rem); height: calc(100% + 1rem); }
+
+/* chat */
+.chat { width: 56rem; display: flex; flex-direction: column; }
+.chat .lines { padding: var(--fh-space-2) var(--fh-space-3); display: grid; gap: 0.5rem; font-size: var(--fh-text-sm); }
+.chat .ln { display: flex; gap: var(--fh-space-2); align-items: baseline; line-height: 1.35; }
+.chat .ln .badge { flex: none; transform: translateY(-0.1rem); }
+.chat .ln time { margin-left: auto; color: var(--fh-text-secondary); font-size: var(--fh-text-xs); flex: none; }
+.chat.idle { background: var(--fh-material-regular); }
+.chatin { display: flex; align-items: center; gap: var(--fh-space-2); height: 4.4rem; padding: 0 var(--fh-space-2); border-top: var(--fh-border-width) solid var(--fh-border); background: var(--fh-bg-elevated); }
+.sugg { margin-top: 0.4rem; background: var(--fh-bg-elevated); border-radius: var(--fh-radius-md); box-shadow: var(--fh-shadow-2); overflow: hidden; }
+
+/* radial */
+.radial { position: relative; width: 44rem; height: 44rem; }
+.radial > svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.radial .seglab { position: absolute; width: 10rem; margin-left: -5rem; margin-top: -2.8rem; display: grid; justify-items: center; gap: 0.4rem; font: var(--fh-weight-semibold) var(--fh-text-xs)/1.1 var(--fh-font-sans); text-align: center; }
+.radial .seglab.dis { opacity: 0.4; }
+.radial .hub { position: absolute; left: 50%; top: 50%; width: 14.4rem; height: 14.4rem; margin: -7.2rem 0 0 -7.2rem; border-radius: 50%; background: var(--fh-bg-elevated); box-shadow: var(--fh-shadow-2); display: grid; place-content: center; text-align: center; gap: 0.2rem; padding: 1.6rem; }
+
+/* inventory */
+.grid { display: grid; grid-template-columns: repeat(5, 9.6rem); gap: 0.8rem; }
+.slot { position: relative; width: 9.6rem; height: 9.6rem; background: var(--fh-bg-elevated); border: var(--fh-border-width) solid var(--fh-border); border-radius: var(--fh-radius-sm); display: grid; place-items: center; }
+.slot.empty { background: var(--fh-bg-base); border-style: dashed; }
+.slot .n { position: absolute; left: 0.6rem; top: 0.4rem; font: var(--fh-weight-semibold) var(--fh-text-2xs)/1 var(--fh-font-mono); color: var(--fh-text-secondary); }
+.slot .q { position: absolute; right: 0.6rem; bottom: 0.7rem; font: var(--fh-weight-bold) var(--fh-text-sm)/1 var(--fh-font-display); font-variant-numeric: tabular-nums; }
+.slot .w { position: absolute; left: 0.6rem; bottom: 0.7rem; font-size: 1.1rem; color: var(--fh-text-muted); }
+.slot .dur { position: absolute; left: 0; right: 0; bottom: 0; height: 0.3rem; background: var(--fh-border); }
+.slot .dur > i { display: block; height: 100%; width: var(--v); background: var(--c); }
+.slot .ico { width: 4rem; height: 4rem; stroke-width: 1.4; color: var(--fh-text-secondary); }
+.slot.sel { border: var(--fh-border-width-strong) solid var(--fh-accent-secondary); }
+.slot.target { border: var(--fh-border-width-strong) dashed var(--fh-accent-secondary); --ta: 0.08; }
+.slot.bad { border: var(--fh-border-width-strong) dashed var(--fh-danger); --tc: var(--fh-danger); --ta: 0.08; }
+.slot.ghost { opacity: 0.35; }
+.slot.lift { box-shadow: var(--fh-shadow-2); transform: rotate(-3deg); }
+.tooltip { background: var(--fh-bg-elevated); border-radius: var(--fh-radius-md); box-shadow: var(--fh-shadow-2); padding: var(--fh-space-3) var(--fh-space-4); width: 28rem; display: grid; gap: 0.4rem; }
+
+/* phone */
+.phone { width: 38rem; height: 76rem; border-radius: 4.4rem; background: var(--fh-text-primary); padding: 0.8rem; box-shadow: var(--fh-shadow-3); }
+.phone .scr { width: 100%; height: 100%; border-radius: 3.6rem; background: var(--fh-bg-surface); overflow: hidden; position: relative; display: flex; flex-direction: column; }
+.phone .sbar { display: flex; justify-content: space-between; align-items: center; padding: 1.4rem 2.6rem 0.6rem; font: var(--fh-weight-semibold) var(--fh-text-sm)/1 var(--fh-font-display); }
+.phone .apps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem 0.8rem; padding: 2.4rem 1.6rem; }
+.app { display: grid; justify-items: center; gap: 0.6rem; font-size: var(--fh-text-xs); font-weight: var(--fh-weight-medium); }
+.app i { width: 6.4rem; height: 6.4rem; border-radius: var(--fh-radius-lg); display: grid; place-items: center; background: var(--c); color: var(--fh-bg-elevated); }
+.app i .ico { width: 3rem; height: 3rem; }
+.app.y i { background: var(--fh-accent-primary); color: var(--fh-text-on-accent); }
+.dock { margin: auto 1.2rem 1.2rem; padding: 1.2rem; border-radius: 2.8rem; background: var(--fh-material-regular); display: grid; grid-template-columns: repeat(4, 1fr); justify-items: center; }
+.bub { max-width: 80%; padding: 0.9rem 1.3rem; border-radius: 1.6rem; font-size: var(--fh-text-sm); line-height: 1.35; }
+.bub.in { background: var(--fh-bg-elevated); box-shadow: var(--fh-shadow-1); align-self: flex-start; border-bottom-left-radius: 0.4rem; }
+.bub.out { background: var(--fh-accent-secondary); color: var(--fh-bg-elevated); align-self: flex-end; border-bottom-right-radius: 0.4rem; }
+
+/* plate, id */
+.plate { align-self: flex-start; display: inline-flex; align-items: stretch; height: 3rem; border: var(--fh-border-width-strong) solid var(--fh-text-primary); border-radius: var(--fh-radius-sm); background: var(--fh-bg-elevated); overflow: hidden; font: var(--fh-weight-medium) var(--fh-text-md)/1 var(--fh-font-mono); white-space: nowrap; }
+.plate::before { content: ""; width: 0.9rem; background: var(--fh-info); }
+.plate span { display: flex; align-items: center; padding: 0 0.9rem; letter-spacing: 0.04em; }
+.plate.lg { height: 4.4rem; font-size: var(--fh-text-xl); }
+.plate.lg::before { width: 1.4rem; }
+.idcard { width: 54rem; height: 34rem; border-radius: var(--fh-radius-xl); background: var(--fh-bg-elevated); box-shadow: var(--fh-shadow-2); overflow: hidden; display: flex; flex-direction: column; }
+.idcard .ih { display: flex; align-items: center; gap: var(--fh-space-2); height: 4.4rem; padding: 0 var(--fh-space-4); background: var(--c, var(--fh-accent-secondary)); color: var(--fh-bg-elevated); }
+.idcard .ib { flex: 1; display: grid; grid-template-columns: 14rem 1fr; gap: var(--fh-space-4); padding: var(--fh-space-4); }
+.photo { width: 14rem; height: 18rem; border-radius: var(--fh-radius-sm); background: linear-gradient(180deg, var(--fh-bg-base), var(--fh-border)); overflow: hidden; position: relative; }
+.idf { display: grid; gap: 0.1rem; }
+.idf .label { font-size: 1.1rem; }
+.idf b { font-weight: var(--fh-weight-semibold); font-size: var(--fh-text-md); line-height: 1.2; }
+
+/* tablets */
+.tablet { position: absolute; left: 50%; top: 50%; width: 156rem; height: 86rem; transform: translate(-50%, -50%); border-radius: 2.4rem; background: var(--fh-text-primary); padding: 1.2rem; box-shadow: var(--fh-shadow-3); }
+.tablet .scr { width: 100%; height: 100%; border-radius: var(--fh-radius-xl); overflow: hidden; background: var(--fh-bg-base); display: grid; grid-template-rows: 6.4rem 1fr; grid-template-columns: 24rem 1fr; }
+.tablet .th { grid-column: 1 / 3; display: flex; align-items: center; gap: var(--fh-space-3); padding: 0 var(--fh-space-6); background: var(--c); color: var(--fh-bg-elevated); }
+.tablet .th .ttl { font: var(--fh-weight-semibold) var(--fh-text-xl)/1 var(--fh-font-display); }
+.tablet .nav { background: var(--fh-bg-surface); border-right: var(--fh-border-width) solid var(--fh-border); padding: var(--fh-space-4) var(--fh-space-3); display: flex; flex-direction: column; gap: 0.2rem; }
+.nv { display: flex; align-items: center; gap: var(--fh-space-3); height: 4.4rem; padding: 0 var(--fh-space-3); border-radius: var(--fh-radius-md); font-weight: var(--fh-weight-semibold); color: var(--fh-text-secondary); }
+.nv.on { color: var(--fh-text-primary); box-shadow: inset 0.3rem 0 0 var(--fh-accent-secondary); }
+.nv .cnt { margin-left: auto; font: var(--fh-weight-bold) var(--fh-text-xs)/1 var(--fh-font-display); padding: 0.3rem 0.7rem; border-radius: var(--fh-radius-pill); background: var(--fh-danger); color: var(--fh-bg-elevated); }
+.tablet .main { padding: var(--fh-space-5); overflow: hidden; display: grid; gap: var(--fh-space-4); align-content: start; }
+.card { background: var(--fh-bg-surface); border-radius: var(--fh-radius-lg); box-shadow: var(--fh-shadow-1); padding: var(--fh-space-4) var(--fh-space-5); }
+.card-h { display: flex; align-items: center; gap: var(--fh-space-2); margin-bottom: var(--fh-space-3); }
+.card-h h3 { font: var(--fh-weight-semibold) var(--fh-text-lg)/1.15 var(--fh-font-display); }
+.kv { display: grid; grid-template-columns: auto 1fr; gap: 0.6rem 1.6rem; font-size: var(--fh-text-sm); }
+.kv dt { color: var(--fh-text-secondary); }
+.kv dd { font-weight: var(--fh-weight-semibold); }
+.dialog { background: var(--fh-bg-elevated); border-radius: var(--fh-radius-lg); box-shadow: var(--fh-shadow-3); display: flex; flex-direction: column; overflow: hidden; }
+.dialog .dh { padding: var(--fh-space-6) var(--fh-space-6) 0; display: grid; gap: var(--fh-space-1); }
+.dialog .db { padding: var(--fh-space-5) var(--fh-space-6); display: grid; gap: var(--fh-space-4); }
+.dialog .df { display: flex; justify-content: flex-end; gap: var(--fh-space-2); padding: var(--fh-space-4) var(--fh-space-6); background: var(--fh-bg-surface); border-top: var(--fh-border-width) solid var(--fh-border); }
+.dtitle { font: var(--fh-weight-semibold) var(--fh-text-xl)/1.15 var(--fh-font-display); }
+.ctxmenu { width: 36rem; }
+.ctxmenu .row { min-height: 5.2rem; }
+.ctxmenu .row .ico.lead { width: 2rem; height: 2rem; color: var(--fh-text-secondary); }
+
+/* death */
+.deathbox { position: absolute; left: 50%; top: 30%; transform: translateX(-50%); display: grid; justify-items: center; gap: var(--fh-space-4); color: var(--fh-bg-elevated); text-align: center; width: 90rem; }
+.deathbox h1 { font: var(--fh-weight-bold) var(--fh-text-3xl)/1.05 var(--fh-font-display); letter-spacing: 0.01em; }
+.deathbox p { font-size: var(--fh-text-lg); opacity: 0.92; }
+.dchip { display: inline-flex; align-items: center; gap: var(--fh-space-2); padding: 0.9rem 1.6rem; border-radius: var(--fh-radius-md); background: var(--fh-bg-elevated); color: var(--fh-text-primary); font-weight: var(--fh-weight-semibold); }
+.dchip .num { font-size: var(--fh-text-lg); }
+.dact { display: inline-flex; align-items: center; gap: var(--fh-space-3); height: 5.2rem; padding: 0 2rem 0 0.8rem; border-radius: var(--fh-radius-md); background: var(--fh-bg-elevated); color: var(--fh-text-primary); font-weight: var(--fh-weight-semibold); font-size: var(--fh-text-md); }
+.dact .key { height: 3.6rem; min-width: 3.6rem; font-size: var(--fh-text-md); }
+.dact.done { padding-left: 1.6rem; }
+.dact.hold { position: relative; overflow: hidden; box-shadow: var(--fh-glow-accent); }
+.dact.hold::before { content: ""; position: absolute; inset: 0; width: var(--v); background: var(--fh-accent-primary); opacity: 0.5; }
+.dact.hold > * { position: relative; }
+
+/* loading screen */
+.ls-bottom { position: absolute; left: 0; right: 0; bottom: 0; height: 55%; background: linear-gradient(180deg, rgba(8, 28, 46, 0) 0%, rgba(8, 28, 46, 0.66) 70%); z-index: -1; }
+.ls-brand { position: absolute; left: 6.4rem; bottom: 6.4rem; color: var(--fh-bg-elevated); display: grid; gap: var(--fh-space-3); }
+.ls-brand h1 { font: var(--fh-weight-bold) var(--fh-text-4xl)/0.95 var(--fh-font-display); letter-spacing: 0.02em; text-transform: uppercase; }
+.ls-prog { width: 56rem; display: grid; gap: var(--fh-space-2); margin-top: var(--fh-space-5); font-size: var(--fh-text-sm); font-weight: var(--fh-weight-medium); }
+.ls-prog .track { height: 0.4rem; background: var(--fh-text-muted); border-radius: var(--fh-radius-pill); overflow: hidden; }
+.ls-prog .track > i { display: block; height: 100%; width: var(--v); background: var(--fh-accent-primary); }
+.ls-prog .track.indet > i { width: 30%; margin-left: 35%; }
+.ls-tip { position: absolute; right: 6.4rem; bottom: 6.4rem; width: 40rem; padding: var(--fh-space-4) var(--fh-space-5); display: grid; gap: var(--fh-space-1); }
+.dots { display: flex; gap: 0.4rem; margin-top: 0.6rem; }
+.dots i { width: 1.6rem; height: 0.3rem; border-radius: 0.2rem; background: var(--fh-border); }
+.dots i.on { background: var(--fh-text-primary); }
+
+/* charsel */
+.ccard { display: grid; grid-template-columns: 1fr auto; gap: 0.4rem var(--fh-space-3); padding: var(--fh-space-3) var(--fh-space-4); min-height: 8.8rem; align-content: center; border-radius: var(--fh-radius-md); background: var(--fh-bg-elevated); box-shadow: var(--fh-shadow-1); }
+.ccard.sel { box-shadow: var(--fh-shadow-1), inset 0.3rem 0 0 var(--fh-accent-secondary); }
+.ccard > .badge { justify-self: end; align-self: center; }
+.ccard > .sm, .ccard > .xs { grid-column: 1 / -1; }
+.ccard.free { background: transparent; box-shadow: none; border: var(--fh-border-width-strong) dashed var(--fh-border); color: var(--fh-text-secondary); display: flex; align-items: center; gap: var(--fh-space-2); font-weight: var(--fh-weight-semibold); }
+.ccard.locked { background: var(--fh-bg-base); box-shadow: none; color: var(--fh-text-muted); display: flex; align-items: center; gap: var(--fh-space-2); }
+.ccard .nm { font: var(--fh-weight-semibold) var(--fh-text-lg)/1.15 var(--fh-font-display); }
+
+/* chart (spawn) */
+.chart { position: relative; border-radius: var(--fh-radius-lg); overflow: hidden; box-shadow: var(--fh-shadow-2); }
+.pin { position: absolute; width: 3.2rem; height: 3.2rem; margin: -1.6rem 0 0 -1.6rem; border-radius: 50%; background: var(--fh-text-primary); color: var(--fh-bg-elevated); display: grid; place-items: center; box-shadow: 0 0 0 0.3rem var(--fh-bg-elevated), var(--fh-shadow-1); }
+.pin.on { background: var(--fh-accent-primary); color: var(--fh-text-on-accent); width: 4rem; height: 4rem; margin: -2rem 0 0 -2rem; }
+.pin.err { background: var(--fh-danger); }
+.pin .ico { width: 1.6rem; height: 1.6rem; }
+.pinlab { position: absolute; transform: translate(2.8rem, -50%); background: var(--fh-bg-elevated); padding: 0.4rem 1rem; border-radius: var(--fh-radius-sm); box-shadow: var(--fh-shadow-1); font-weight: var(--fh-weight-semibold); font-size: var(--fh-text-sm); white-space: nowrap; }
+
+/* product / recipe cards */
+.pgrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--fh-space-3); }
+.pcard { background: var(--fh-bg-elevated); border-radius: var(--fh-radius-md); box-shadow: var(--fh-shadow-1); padding: var(--fh-space-3); display: grid; gap: 0.4rem; }
+.pcard .img { height: 10rem; border-radius: var(--fh-radius-sm); background: var(--fh-bg-base); display: grid; place-items: center; color: var(--fh-text-secondary); position: relative; }
+.pcard .img .ico { width: 4.4rem; height: 4.4rem; stroke-width: 1.3; }
+.pcard.out .img { opacity: 0.4; }
+.pcard .price { font: var(--fh-weight-bold) var(--fh-text-lg)/1 var(--fh-font-display); font-variant-numeric: tabular-nums; }
+.pcard .add { width: 3.2rem; height: 3.2rem; border-radius: var(--fh-radius-md); display: grid; place-items: center; background: var(--fh-bg-base); }
+.gallery { position: absolute; inset: 7.2rem 3.2rem 3.2rem; display: grid; gap: var(--fh-space-4); }
+.gcell { display: flex; flex-direction: column; gap: var(--fh-space-1); min-width: 0; min-height: 0; }
+.gcell > .panel { flex: 1; }
+
+@keyframes blink { 50% { opacity: 0.35; } }
+@keyframes pulse { from { opacity: 0.6; } to { opacity: 1; } }
+@keyframes pulse-soft { from { opacity: 0.35; } to { opacity: 0.6; } }
+@keyframes spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) {
+  .vital.low .ico, .vs.blink-ok .ico, .vs.crit .ico, .sk, .spinner { animation: none; }
+}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-heart" viewBox="0 0 24 24"><path d="M19 14c1.5-1.5 3-3.2 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.8 0-3 .5-4.5 2-1.5-1.5-2.7-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4 3 5.5l7 7Z"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-8 9-4.5-1.5-8-4-8-9V5l8-3 8 3Z"/></symbol>
+    <symbol id="i-hunger" viewBox="0 0 24 24"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2M7 2v20M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/></symbol>
+    <symbol id="i-drop" viewBox="0 0 24 24"><path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5S5 13 5 15a7 7 0 0 0 7 7z"/></symbol>
+    <symbol id="i-zap" viewBox="0 0 24 24"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></symbol>
+    <symbol id="i-activity" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></symbol>
+    <symbol id="i-mic" viewBox="0 0 24 24"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3ZM19 10v2a7 7 0 0 1-14 0v-2M12 19v3"/></symbol>
+    <symbol id="i-mic-off" viewBox="0 0 24 24"><path d="M2 2l20 20M18.9 13.5A7 7 0 0 0 19 12v-2M5 10v2a7 7 0 0 0 12 5M15 9.3V5a3 3 0 0 0-5.7-1.3M9 9v3a3 3 0 0 0 5.1 2.1M12 19v3"/></symbol>
+    <symbol id="i-radio" viewBox="0 0 24 24"><path d="M4.9 19.1C1 15.2 1 8.8 4.9 4.9M7.8 16.2c-2.3-2.3-2.3-6.1 0-8.5M16.2 7.8c2.3 2.3 2.3 6.1 0 8.5M19.1 4.9C23 8.8 23 15.1 19.1 19"/><circle cx="12" cy="12" r="2"/></symbol>
+    <symbol id="i-cash" viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2"/><path d="M6 12h.01M18 12h.01"/></symbol>
+    <symbol id="i-bank" viewBox="0 0 24 24"><path d="M3 22h18M6 18v-7M10 18v-7M14 18v-7M18 18v-7M12 2l8 5H4z"/></symbol>
+    <symbol id="i-brief" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></symbol>
+    <symbol id="i-fuel" viewBox="0 0 24 24"><path d="M3 22h12M4 9h10M14 22V4a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v18M14 13h2a2 2 0 0 1 2 2v2a2 2 0 0 0 4 0V9.8a2 2 0 0 0-.6-1.4L18 5"/></symbol>
+    <symbol id="i-belt" viewBox="0 0 24 24"><circle cx="12" cy="4.5" r="2.2"/><path d="M6.5 22v-7a5.5 5.5 0 0 1 11 0v7M7.5 9.5l9.5 11"/></symbol>
+    <symbol id="i-engine" viewBox="0 0 24 24"><path d="M7 8h8l2 3h2v-2h2v8h-2v-2h-2l-2 3H8l-2-3H4v3H2V9h2v3h2zM10 5h5M12.5 5v3"/></symbol>
+    <symbol id="i-left" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></symbol>
+    <symbol id="i-right" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></symbol>
+    <symbol id="i-ok" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></symbol>
+    <symbol id="i-warn" viewBox="0 0 24 24"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0zM12 9v4M12 17h.01"/></symbol>
+    <symbol id="i-err" viewBox="0 0 24 24"><path d="M7.9 2h8.2L22 7.9v8.2L16.1 22H7.9L2 16.1V7.9zM15 9l-6 6M9 9l6 6"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+    <symbol id="i-chev" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></symbol>
+    <symbol id="i-chevl" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></symbol>
+    <symbol id="i-chevd" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-minus" viewBox="0 0 24 24"><path d="M5 12h14"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="7" r="4"/><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/></symbol>
+    <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="7" r="4"/><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M16 3.1a4 4 0 0 1 0 7.8M22 21v-2a4 4 0 0 0-3-3.9"/></symbol>
+    <symbol id="i-car" viewBox="0 0 24 24"><path d="M3 13l2-6h14l2 6v5H3zM7 18v2M17 18v2M3 13h18"/><circle cx="7" cy="15.5" r=".6"/><circle cx="17" cy="15.5" r=".6"/></symbol>
+    <symbol id="i-box" viewBox="0 0 24 24"><path d="M3 7l9-4 9 4v10l-9 4-9-4zM3 7l9 4 9-4M12 11v10"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></symbol>
+    <symbol id="i-msg" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></symbol>
+    <symbol id="i-ship" viewBox="0 0 24 24"><path d="M2 21c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1 .6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1M19.4 18 21 12H3l1.6 6M12 12V3M7 12V7h10v5"/></symbol>
+    <symbol id="i-lighthouse" viewBox="0 0 24 24"><path d="M9 22l1.4-13h3.2L15 22zM8.5 9h7M10 9V6l2-2 2 2v3M3 5l4 1.5M21 5l-4 1.5M6 22h12M9.6 15h4.8"/></symbol>
+    <symbol id="i-crane" viewBox="0 0 24 24"><path d="M5 22V3h16M5 7l4-4M17 3v6M15 9h4v3h-4zM2 22h7M5 12h3"/></symbol>
+    <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 10l9-7 9 7v11H3zM9 21v-6h6v6"/></symbol>
+    <symbol id="i-train" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="13" rx="2"/><path d="M5 10h14M8 20l1.5-4M16 20l-1.5-4M9 13h.01M15 13h.01"/></symbol>
+    <symbol id="i-fish" viewBox="0 0 24 24"><path d="M6.5 12c.94-3.46 4.94-6 8.5-6 3.56 0 6.06 2.54 7 6-.94 3.47-3.44 6-7 6s-7.56-2.53-8.5-6ZM18 12v.5M7 10.67C7 8 5.58 5.97 2.73 5.5c-1 1.5-1 5 .23 6.5-1.24 1.5-1.24 5-.23 6.5C5.58 18.03 7 16 7 13.33"/></symbol>
+    <symbol id="i-wrench" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.8-3.8a6 6 0 0 1-7.9 7.9l-6.9 6.9a2.1 2.1 0 0 1-3-3l6.9-6.9a6 6 0 0 1 7.9-7.9z"/></symbol>
+    <symbol id="i-shirt" viewBox="0 0 24 24"><path d="M20.4 3.5 16 2a4 4 0 0 1-8 0L3.6 3.5a2 2 0 0 0-1.3 2.2l.6 3.5a1 1 0 0 0 1 .8H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.2a1 1 0 0 0 1-.8l.6-3.5a2 2 0 0 0-1.4-2.2z"/></symbol>
+    <symbol id="i-card" viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></symbol>
+    <symbol id="i-file" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zM14 2v6h6M8 13h8M8 17h6"/></symbol>
+    <symbol id="i-id" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="8.5" cy="10.5" r="2"/><path d="M5.5 16c.5-1.5 1.7-2 3-2s2.5.5 3 2M14 9.5h4M14 13h4"/></symbol>
+    <symbol id="i-police" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-8 9-4.5-1.5-8-4-8-9V5l8-3 8 3ZM12 8l1.2 2.4 2.6.4-1.9 1.8.5 2.6-2.4-1.3-2.4 1.3.5-2.6-1.9-1.8 2.6-.4z"/></symbol>
+    <symbol id="i-med" viewBox="0 0 24 24"><path d="M9 3h6v6h6v6h-6v6H9v-6H3V9h6z"/></symbol>
+    <symbol id="i-cog" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.9 4.9 7 7M17 17l2.1 2.1M2 12h3M19 12h3M4.9 19.1 7 17M17 7l2.1-2.1"/></symbol>
+    <symbol id="i-cross" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M22 12h-4M6 12H2M12 6V2M12 22v-4"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol>
+    <symbol id="i-send" viewBox="0 0 24 24"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4z"/></symbol>
+    <symbol id="i-trash" viewBox="0 0 24 24"><path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></symbol>
+    <symbol id="i-edit" viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></symbol>
+    <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></symbol>
+    <symbol id="i-camera" viewBox="0 0 24 24"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3z"/><circle cx="12" cy="13" r="3"/></symbol>
+    <symbol id="i-map" viewBox="0 0 24 24"><path d="M3 6l6-3 6 3 6-3v15l-6 3-6-3-6 3zM9 3v15M15 6v15"/></symbol>
+    <symbol id="i-signal" viewBox="0 0 24 24"><path d="M2 20h.01M7 20v-4M12 20v-8M17 20V8"/></symbol>
+    <symbol id="i-battery" viewBox="0 0 24 24"><rect x="2" y="7" width="16" height="10" rx="2"/><path d="M22 11v2M5 10v4M8 10v4M11 10v4"/></symbol>
+    <symbol id="i-hand" viewBox="0 0 24 24"><path d="M18 11V6a2 2 0 0 0-4 0v5M14 10V4a2 2 0 0 0-4 0v6M10 10.5V6a2 2 0 0 0-4 0v8M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.9-6-2.4l-3.6-3.6a2 2 0 0 1 2.8-2.8L7 15"/></symbol>
+    <symbol id="i-split" viewBox="0 0 24 24"><path d="M16 3h5v5M8 3H3v5M12 22v-8.3a4 4 0 0 0-1.2-2.9L3 3M15 9l6-6"/></symbol>
+    <symbol id="i-hammer" viewBox="0 0 24 24"><path d="m15 12-8.5 8.5a2.1 2.1 0 0 1-3-3L12 9M17.6 15 22 10.6M20 8.5l-5.5-5.5a2 2 0 0 0-1.4-.6H10l3.5 3.5V9l2 2h2.6z"/></symbol>
+    <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9M10.3 21a1.9 1.9 0 0 0 3.4 0"/></symbol>
+    <symbol id="i-wallet" viewBox="0 0 24 24"><path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4"/></symbol>
+    <symbol id="i-cart" viewBox="0 0 24 24"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2 2h3l2.7 12.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></symbol>
+    <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></symbol>
+    <symbol id="i-gun" viewBox="0 0 24 24"><path d="M2 7h18v4h-6l-1 3h-3l-.5 5H5l1-8H2z M20 7V5"/></symbol>
+    <symbol id="i-ban" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m4.9 4.9 14.2 14.2"/></symbol>
+    <symbol id="i-door" viewBox="0 0 24 24"><path d="M13 4h3a2 2 0 0 1 2 2v14M2 20h3M13 20h9M10 12v.01M13 4.6v16.2a.8.8 0 0 1-1 .8l-6-1.6V5.6a2 2 0 0 1 1.4-1.9l4-1.3a1.2 1.2 0 0 1 1.6 1.1z"/></symbol>
+    <symbol id="i-flag" viewBox="0 0 24 24"><path d="M4 22V4M4 4h14l-3 4.5 3 4.5H4"/></symbol>
+    <symbol id="i-pkg-food" viewBox="0 0 24 24"><path d="M4 11h16v2a8 8 0 0 1-16 0zM8 7c0-2 2-2 2-4M12 7c0-2 2-2 2-4M16 7c0-2 2-2 2-4"/></symbol>
+    <symbol id="i-bottle" viewBox="0 0 24 24"><path d="M10 2h4v4l2 3v12a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1V9l2-3zM8 13h8"/></symbol>
+    <symbol id="i-key" viewBox="0 0 24 24"><circle cx="7.5" cy="15.5" r="5.5"/><path d="m21 2-9.6 9.6M15.5 7.5l3 3L22 7l-3-3"/></symbol>
+    <symbol id="i-bandage" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="10" rx="5" transform="rotate(-45 12 12)"/><path d="M10 10h.01M14 14h.01M10 14h.01M14 10h.01"/></symbol>
+    <symbol id="i-net" viewBox="0 0 24 24"><path d="M3 3h18v18H3zM3 9h18M3 15h18M9 3v18M15 3v18"/></symbol>
+    <symbol id="i-plate" viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="1"/><path d="M5 6v12"/></symbol>
+    <symbol id="i-back" viewBox="0 0 24 24"><path d="M9 14 4 9l5-5M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M6.3 17.7l-1.4 1.4M19.1 4.9l-1.4 1.4"/></symbol>
+    <symbol id="i-anchorless-dock" viewBox="0 0 24 24"><path d="M2 18h20M5 18v-6h14v6M8 12V8M16 12V8M6 8h12"/></symbol>
+  </defs>
+</svg>
+<main id="root"></main>
+<script>
+/* ===== helpers ===== */
+const I = (n, c = '') => `<svg class="ico ${c}" aria-hidden="true"><use href="#i-${n}"/></svg>`;
+const K = (k, c = '') => `<span class="key ${c}">${k}</span>`;
+const B = (txt, c = 'c-civil', job = true) => `<span class="badge ${job ? 'job' : 'st'} ${c}">${txt}</span>`;
+const frames = [];
+let fno = 0;
+function frame(label, scene, inner, opts = {}) {
+  fno++;
+  const n = String(fno).padStart(2, '0');
+  frames.push(`<section class="frame" id="f${n}" data-label="${label}">${sceneSvg(scene)}${opts.scrim ? `<div class="scrim ${opts.scrim}"></div>` : ''}<div class="frame-label">${n} · ${label}</div>${inner}</section>`);
+}
+const polar = (cx, cy, r, deg) => { const a = (deg - 90) * Math.PI / 180; return [cx + r * Math.cos(a), cy + r * Math.sin(a)]; };
+const arc = (cx, cy, r, a0, a1) => { const [x0, y0] = polar(cx, cy, r, a0), [x1, y1] = polar(cx, cy, r, a1); const large = a1 - a0 > 180 ? 1 : 0; return `M${x0.toFixed(2)} ${y0.toFixed(2)} A${r} ${r} 0 ${large} 1 ${x1.toFixed(2)} ${y1.toFixed(2)}`; };
+
+/* ===== stand-in game world ===== */
+function sceneSvg(kind) {
+  if (kind === 'none') return '';
+  if (kind === 'split') return `<div style="position:absolute;inset:0;z-index:-2;display:grid;grid-template-columns:1fr 1fr">${['day', 'night'].map(k => `<div style="position:relative;overflow:hidden">${sceneSvg(k)}</div>`).join('')}</div>`;
+  const D = kind === 'day';
+  const c = D ? {
+    sky0: '#6FBBE6', sky1: '#D6F0FA', sun: '#FFFFFF', shore: '#9DB8A6', sea0: '#3AA6CE', sea1: '#13668D', glint: '#FFFFFF', hull: '#F4F6F7', hullb: '#1E3550', house: '#B5543F', house2: '#E9E4DA', quay: '#D3CDC2', quay2: '#EFEBE3', crane: '#2F5E8E', crane2: '#E6EAED', lh: '#FFFFFF', lhb: '#C9343A', cont: ['#C0473A', '#2F6E9E', '#D9A52B', '#5E7C6B', '#F2F2F0', '#E07A2A', '#F5F5F3'], bollard: '#FFC21F', light: 'none'
+  } : {
+    sky0: '#040B15', sky1: '#132840', sun: '#9FB7CF', shore: '#0B1724', sea0: '#0C2236', sea1: '#050E18', glint: '#F2C46B', hull: '#3A4A58', hullb: '#0C1824', house: '#3B2A26', house2: '#2A2F35', quay: '#22282E', quay2: '#353B40', crane: '#1D2D3D', crane2: '#2B3947', lh: '#5C6670', lhb: '#4A2A2D', cont: ['#3A2422', '#1B2E40', '#4A3B1C', '#22302A', '#3E4246', '#4A2E1C', '#33373B'], bollard: '#6B5A2A', light: '#FFD27A'
+  };
+  let s = `<svg class="scene" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs>
+  <linearGradient id="sk${kind}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${c.sky0}"/><stop offset="1" stop-color="${c.sky1}"/></linearGradient>
+  <linearGradient id="se${kind}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${c.sea0}"/><stop offset="1" stop-color="${c.sea1}"/></linearGradient>
+  <radialGradient id="sn${kind}"><stop offset="0" stop-color="${c.sun}" stop-opacity="${D ? 1 : .5}"/><stop offset="1" stop-color="${c.sun}" stop-opacity="0"/></radialGradient>
+  <radialGradient id="lp${kind}"><stop offset="0" stop-color="#F2B65A" stop-opacity=".55"/><stop offset="1" stop-color="#F2B65A" stop-opacity="0"/></radialGradient></defs>
+  <rect width="1920" height="600" fill="url(#sk${kind})"/>
+  <circle cx="1480" cy="230" r="${D ? 420 : 60}" fill="url(#sn${kind})"/>
+  ${D ? '' : '<circle cx="1480" cy="230" r="26" fill="#DCE6EF"/>'}
+  <path d="M0 560 Q 300 520 620 548 T 1240 540 T 1920 552 V600 H0Z" fill="${c.shore}"/>
+  <rect y="580" width="1920" height="500" fill="url(#se${kind})"/>`;
+  for (let i = 0; i < 46; i++) { const x = (i * 397) % 1920, y = 600 + (i * 131) % 300, w = 30 + (i * 17) % 90; s += `<rect x="${x}" y="${y}" width="${w}" height="3" rx="1.5" fill="${c.glint}" opacity="${D ? .55 : .35}"/>`; }
+  // lighthouse on mole
+  s += `<rect x="150" y="560" width="360" height="26" fill="${c.quay}"/><path d="M300 560 L312 400 H348 L360 560Z" fill="${c.lh}"/><rect x="306" y="470" width="48" height="22" fill="${c.lhb}"/><rect x="310" y="420" width="40" height="18" fill="${c.lhb}"/><rect x="314" y="378" width="32" height="24" fill="${D ? '#1E3550' : '#FFE9A8'}"/><path d="M322 378 L330 362 L338 378Z" fill="${D ? '#1E3550' : '#FFE9A8'}"/>`;
+  if (!D) s += `<path d="M346 390 L900 300 L900 360Z" fill="#FFF3C8" opacity=".12"/>`;
+  // warehouses
+  for (let i = 0; i < 6; i++) { const x = 560 + i * 120; s += `<rect x="${x}" y="${470 - (i % 2) * 30}" width="110" height="${110 + (i % 2) * 30}" fill="${i % 3 === 1 ? c.house2 : c.house}"/><path d="M${x} ${470 - (i % 2) * 30} l55 -40 l55 40Z" fill="${i % 3 === 1 ? c.house2 : c.house}"/>`; if (!D) for (let w = 0; w < 4; w++) s += `<rect x="${x + 14 + w * 24}" y="${510 - (i % 2) * 30}" width="10" height="14" fill="${c.light}" opacity="${(i + w) % 3 ? .9 : .2}"/>`; }
+  // ship
+  s += `<path d="M980 610 H1560 L1520 700 H1010Z" fill="${c.hullb}"/><rect x="1000" y="560" width="520" height="52" fill="${c.hull}"/><rect x="1300" y="500" width="160" height="62" fill="${c.hull}"/><rect x="1320" y="514" width="120" height="14" fill="${D ? '#2C4660' : '#FFD27A'}" opacity="${D ? 1 : .8}"/><rect x="1400" y="470" width="18" height="32" fill="${c.hullb}"/>`;
+  // cranes
+  [[1600, 1], [1780, .85]].forEach(([x, sc]) => { s += `<g transform="translate(${x} 700) scale(${sc})"><rect x="-60" y="-420" width="14" height="420" fill="${c.crane}"/><rect x="40" y="-420" width="14" height="420" fill="${c.crane}"/><rect x="-140" y="-430" width="330" height="22" fill="${c.crane}"/><rect x="-70" y="-360" width="134" height="16" fill="${c.crane2}"/><path d="M-60 -430 L-7 -500 L54 -430" stroke="${c.crane}" stroke-width="8" fill="none"/><rect x="120" y="-408" width="6" height="150" fill="${c.crane2}"/><rect x="104" y="-260" width="40" height="22" fill="${c.cont[2]}"/>${D ? '' : `<circle cx="-7" cy="-500" r="5" fill="#FF5A4A"/>`}</g>`; });
+  // container stacks (bright and colourful backgrounds behind the vehicle HUD)
+  for (let r = 0; r < 4; r++) for (let i = 0; i < 9; i++) { const x = 1240 + i * 76, y = 860 - r * 40; if (r > 2 && i % 3 === 0) continue; s += `<rect x="${x}" y="${y}" width="72" height="38" fill="${c.cont[(i * 3 + r * 5) % 7]}"/><rect x="${x}" y="${y}" width="72" height="38" fill="none" stroke="${D ? '#00000022' : '#00000055'}"/>`; }
+  // quay foreground
+  s += `<path d="M0 900 L1920 880 V1080 H0Z" fill="${c.quay}"/><path d="M0 930 L760 920 L700 1080 H0Z" fill="${c.quay2}"/><rect y="896" width="1920" height="6" fill="${D ? '#FFFFFF' : '#000000'}" opacity=".18"/>`;
+  for (let i = 0; i < 7; i++) s += `<rect x="${120 + i * 270}" y="868" width="26" height="34" rx="6" fill="${c.bollard}"/>`;
+  if (!D) { [[300, 980], [980, 960], [1640, 990], [560, 650], [1250, 640]].forEach(([x, y]) => s += `<circle cx="${x}" cy="${y}" r="260" fill="url(#lp${kind})"/>`); for (let i = 0; i < 30; i++) s += `<circle cx="${(i * 263) % 1920}" cy="${560 + (i * 37) % 30}" r="2.5" fill="#FFD27A"/>`; }
+  return s + '</svg>';
+}
+
+/* ===== reusable HUD parts ===== */
+const vit = (cls, icon, label, v, extra = '') => `<div class="vital ${cls} ${extra}"><div class="dial ${v === 0 ? 'zero' : ''}" style="--v:${v}">${I(icon)}</div><span class="label">${label}</span></div>`;
+function vitals(o = {}) {
+  const v = Object.assign({ health: 82, armor: 40, hunger: 64, thirst: 71, stamina: 55, stress: 18 }, o);
+  return `<div class="chip vitals">${vit('c-health', 'heart', 'Leben', v.health, v.health <= 25 ? 'low' : '')}${vit('c-armor', 'shield', 'Panzer', v.armor, v.armor === 0 ? 'hide' : '')}${vit('c-hunger', 'hunger', 'Hunger', v.hunger, v.hunger <= 25 ? 'low' : '')}${vit('c-thirst', 'drop', 'Durst', v.thirst, v.thirst <= 25 ? 'low' : '')}${vit('c-stamina', 'zap', 'Ausdauer', v.stamina)}${vit('c-stress', 'activity', 'Stress', v.stress, v.stress >= 75 ? 'low' : '')}</div>`;
+}
+function voice(state = 'idle', range = 2, radio = true) {
+  const pips = [1, 2, 3].map(i => `<i class="pip ${i <= range ? 'on' : ''}"></i>`).join('');
+  const rl = ['', 'Flüstern', 'Normal', 'Rufen'][range];
+  const rtxt = state === 'tx' ? 'Funk 101,5 · Sendet' : state === 'norx' ? 'Funk 101,5 · kein Empfang' : 'Funk 101,5';
+  if (state === 'off') return `<div class="chip voice off"><div class="vm">${I('mic-off')}<span class="sm semi">Sprachchat getrennt</span></div></div>`;
+  return `<div class="chip voice ${state}"><div class="vm">${I('mic')}<span class="sm semi">${rl}</span><span class="pips">${pips}</span></div>${radio ? `<div class="vr">${I(state === 'norx' ? 'mic-off' : 'radio')}<span>${rtxt}</span></div>` : ''}</div>`;
+}
+function minimap(h = 82, a = 40) {
+  return `<div class="mapframe"><div class="map"><svg viewBox="0 0 300 200" width="100%" height="100%" preserveAspectRatio="xMidYMid slice"><rect width="300" height="200" fill="#B9C6B4"/><path d="M0 120 Q 80 100 140 140 T 300 120 V200 H0Z" fill="#5E9DC0"/><path d="M180 0 V200 M0 60 H300 M60 0 L120 200 M230 0 L260 120" stroke="#F4F2EC" stroke-width="7"/><path d="M180 0 V200 M0 60 H300" stroke="#8C949A" stroke-width="1"/><rect x="200" y="70" width="22" height="16" fill="#A4ADA0"/><rect x="100" y="20" width="30" height="24" fill="#A4ADA0"/><path d="M150 100 L180 60 L240 60" stroke="#FFC21F" stroke-width="4" fill="none" stroke-dasharray="1 0"/><g transform="translate(150 100)"><path d="M0 -11 L8 9 L0 5 L-8 9Z" fill="#FFFFFF" stroke="#0B2236" stroke-width="2"/></g></svg></div>
+  <div class="hb c-armor" style="bottom:1.2rem;--v:${a}%"><i></i></div><div class="hb c-health" style="bottom:0.4rem;--v:${h}%"><i></i></div></div>`;
+}
+const compass = (deg = 12) => { const d = ['N', 'NO', 'O', 'SO', 'S', 'SW', 'W', 'NW'], c = Math.round(deg / 45) % 8; const l = [-2, -1, 0, 1, 2].map(k => d[(c + k + 8) % 8]); return `<div class="chip compass" style="width:30rem"><span>${l[0]}</span><span>${l[1]}</span><span>${l[2]}</span><span>${l[3]}</span><span>${l[4]}</span><span class="hd">${d[c]} ${deg}°</span></div>`; };
+const street = (s = 'Kaistraße', d = 'Fischmarkt') => `<div class="chip hstack" style="padding:0.7rem 1.2rem;width:30rem">${I('pin', 'lg')}<span class="semi">${s}</span><span class="sec sm">${d}</span></div>`;
+function speedo(speed = 87, fuel = 62, gear = '3', unit = 'km/h') {
+  const cx = 110, cy = 110; let t = '';
+  const st = (k, v) => `style="${k}:var(--fh-${v})"`;
+  for (let v = 0; v <= 240; v += 10) { const a = -135 + v / 240 * 270, maj = v % 20 === 0; const [x0, y0] = polar(cx, cy, maj ? 76 : 80, a), [x1, y1] = polar(cx, cy, 86, a); t += `<line x1="${x0}" y1="${y0}" x2="${x1}" y2="${y1}" ${st('stroke', 'text-primary')} stroke-width="${maj ? 2 : 1}" opacity="${maj ? .9 : .5}"/>`; if (v % 40 === 0) { const [lx, ly] = polar(cx, cy, 64, a); t += `<text x="${lx}" y="${ly + 4}" text-anchor="middle" font-family="Barlow Semi Condensed" font-weight="600" font-size="11" ${st('fill', 'text-secondary')}>${v}</text>`; } }
+  const sa = -135 + Math.min(speed, 240) / 240 * 270;
+  const [n0x, n0y] = polar(cx, cy, 70, sa), [n1x, n1y] = polar(cx, cy, 92, sa);
+  const fa0 = 150, fa1 = 210, fv = fa0 + (fa1 - fa0) * fuel / 100;
+  const fuelTone = fuel <= 5 ? 'danger' : fuel <= 15 ? 'warning' : 'hud-fuel';
+  const [fx, fy] = polar(cx, cy, 101, 222);
+  return `<div class="speedo"><svg viewBox="0 0 220 220"><circle cx="110" cy="110" r="108" ${st('fill', 'material-thin')}/><circle cx="110" cy="110" r="94" ${st('fill', 'bg-elevated')}/>
+  <path d="${arc(cx, cy, 101, fa0, fa1)}" ${st('stroke', 'border')} stroke-width="5" fill="none" stroke-linecap="round"/><path d="${arc(cx, cy, 101, fa0, fv)}" ${st('stroke', fuelTone)} stroke-width="5" fill="none" stroke-linecap="round"/>
+  <path d="${arc(cx, cy, 89, -135, 135)}" ${st('stroke', 'bg-base')} stroke-width="5" fill="none"/><path d="${arc(cx, cy, 89, -135, sa)}" ${st('stroke', 'text-primary')} stroke-width="5" fill="none"/>${t}
+  <line x1="${n0x}" y1="${n0y}" x2="${n1x}" y2="${n1y}" ${st('stroke', 'text-primary')} stroke-width="7" stroke-linecap="round"/><line x1="${n0x}" y1="${n0y}" x2="${n1x}" y2="${n1y}" ${st('stroke', 'accent-primary')} stroke-width="4" stroke-linecap="round"/></svg>
+  <span style="position:absolute;left:${fx / 10 - 1}rem;top:${fy / 10 - 1}rem;color:var(--fh-${fuelTone})">${I('fuel')}</span>
+  <div class="read"><span class="num">${speed}</span><span class="label">${unit}</span></div><span class="gear">${gear}</span></div>`;
+}
+function vstatus(o = {}) {
+  const v = Object.assign({ left: 'off', right: 'off', belt: 'on', engine: 'on' }, o);
+  const ind = (d, st) => `<div class="chip vs ${st === 'on' ? 'blink-ok' : ''}">${I(d === 'l' ? 'left' : 'right', 'lg')}</div>`;
+  const belt = v.belt === 'on' ? `<div class="chip vs on">${I('belt', 'lg')}</div>` : v.belt === 'warn' ? `<div class="chip vs crit">${I('belt', 'lg')}<span>Gurt!</span></div>` : `<div class="chip vs">${I('belt', 'lg')}</div>`;
+  const eng = v.engine === 'on' ? `<div class="chip vs on">${I('engine', 'lg')}</div>` : v.engine === 'off' ? `<div class="chip vs">${I('engine', 'lg')}<span>Motor aus</span></div>` : v.engine === 'dmg' ? `<div class="chip vs warn">${I('engine', 'lg')}<span>Motor 34 %</span></div>` : `<div class="chip vs crit">${I('engine', 'lg')}<span>Motor 9 %</span></div>`;
+  return `<div class="vstat">${ind('l', v.left)}${belt}${eng}${ind('r', v.right)}</div>`;
+}
+const ammo = (mag = 24, res = 120, w = 'Pistole', st = '') => `<div class="chip ammo">${I('gun', 'lg')}<span class="sm sec semi">${w}</span><span class="num mag" style="color:${st === 'low' ? 'var(--fh-warning)' : st === 'empty' ? 'var(--fh-danger)' : 'inherit'}">${mag}</span><span class="num sec" style="font-size:var(--fh-text-md)">/ ${res}</span>${st === 'empty' ? `<span class="hstack sm semi" style="color:var(--fh-danger)">Nachladen ${K('R')}</span>` : ''}</div>`;
+const toast = (c, icon, title, text, t = '60%', meta = 'jetzt') => `<div class="toast ${c}" role="status">${I(icon)}<div class="tt"><span>${title}</span><span class="meta">${meta}</span></div><div class="tx">${text}</div><i class="timer" style="--t:${t}"></i></div>`;
+const toasts4 = () => `<div class="vstack" style="gap:0.8rem">${toast('c-info', 'info', 'Fähre legt ab', 'Abfahrt Anleger 3 in 2 Minuten.', '80%')}${toast('c-ok', 'ok', 'Gehalt erhalten', '+ 850 € auf dein Girokonto.', '55%')}${toast('c-warn', 'warn', 'Tank fast leer', 'Noch 8 % — nächste Tankstelle in 1,2 km.', '35%')}${toast('c-err', 'err', 'Zahlung abgelehnt', 'Nicht genug Guthaben auf dem Girokonto.', '70%')}</div>`;
+function moneyStack(o = {}) {
+  const v = Object.assign({ cash: '1.250', bank: '48.210', job: 'Hafenarbeiter · Kranführer', jc: 'c-civil', jb: 'Hafen', duty: true, delta: '' }, o);
+  return `<div class="money"><div class="chip mchip">${I('cash')}<span class="label">Bargeld</span><span class="num">${v.cash} €</span></div>${v.delta}<div class="chip mchip">${I('bank')}<span class="label">Bank</span><span class="num">${v.bank} €</span></div><div class="chip mchip">${B(v.jb, v.jc)}<span class="semi sm">${v.job}</span><span class="dot ${v.duty ? 'c-ok' : 'c-civil'}" title="${v.duty ? 'Im Dienst' : 'Außer Dienst'}"></span></div><div class="chip mchip" style="padding:0.5rem 1rem"><span class="label">ID</span><span class="num" style="font-size:var(--fh-text-md)">42</span></div></div>`;
+}
+const prog = (label, v, state = '') => `<div class="chip prog ${state}" style="--v:${v}%;${state === 'done' ? '--c:var(--fh-success)' : state === 'cancel' ? '--c:var(--fh-danger)' : ''}"><div class="between"><span class="semi">${label}</span><span class="num" style="font-size:var(--fh-text-md)">${state === 'cancel' ? '' : v + ' %'}</span></div><div class="track"><i></i></div></div>`;
+const hint = (k, txt, cls = '', keyc = 'a') => `<div class="chip hint ${cls}">${K(k, keyc)}<span>${txt}</span></div>`;
+const holdKey = (k, p) => { const r = 21, C = 2 * Math.PI * r; return `<span class="holdring" style="display:inline-grid">${K(k, 'a')}<svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="${r}" fill="none" style="stroke:var(--fh-border)" stroke-width="3"/><circle cx="24" cy="24" r="${r}" fill="none" style="stroke:var(--fh-text-primary)" stroke-width="3" stroke-dasharray="${C * p} ${C}" transform="rotate(-90 24 24)" stroke-linecap="round"/></svg></span>`; };
+function chat(o = {}) {
+  const lines = o.lines || [
+    ['c-info', 'System', '', 'Willkommen in Nordhafen. Regeln: /regeln', '20:58'],
+    ['c-teal', 'Me', 'Jonas Brandt', 'zieht die Arbeitshandschuhe an.', '21:02'],
+    ['c-civil', 'OOC', 'Mika (17)', 'bin gleich zurück, kurz afk', '21:03'],
+    ['c-radio', 'Funk', '101,5', 'Kran 2 ist frei, Container kann rüber.', '21:04'],
+    ['c-police', 'Polizei', 'POK Brandt', 'Streife 21/12 übernimmt Kaistraße.', '21:05'],
+  ];
+  return `<div class="chip chat ${o.idle ? 'idle' : ''}"><div class="lines">${lines.map(l => `<div class="ln">${B(l[1], l[0], false).replace('badge st', 'badge')}<span class="semi">${l[2]}</span><span class="grow">${l[3]}</span><time>${l[4]}</time></div>`).join('')}</div>${o.input || ''}</div>`;
+}
+
+/* ===== person stand-in ===== */
+const ped = (w = 34, col = '#26394B') => `<svg viewBox="0 0 120 300" style="width:${w}rem;height:auto;display:block" aria-hidden="true"><ellipse cx="60" cy="292" rx="44" ry="6" fill="#000" opacity=".22"/><circle cx="60" cy="34" r="20" fill="${col}"/><path d="M28 70 Q60 56 92 70 L98 160 L84 162 L80 110 L78 290 L64 290 L60 180 L56 290 L42 290 L40 110 L36 162 L22 160Z" fill="${col}"/><path d="M40 70 Q60 62 80 70 L78 150 H42Z" fill="#FFFFFF" opacity=".12"/></svg>`;
+/* ================= FRAMES ================= */
+
+/* 01 HUD day */
+frame('HUD · Tag · alle Elemente', 'day', `
+  <div class="abs" style="left:3.2rem;top:3.2rem">${chat({ idle: true })}</div>
+  <div class="abs" style="right:3.2rem;top:3.2rem">${moneyStack({ delta: '<span class="delta" style="color:var(--fh-success)">+ 850 €</span>' })}</div>
+  <div class="abs" style="right:3.2rem;top:30rem">${toasts4()}</div>
+  <div class="abs" style="left:3.2rem;bottom:3.2rem;display:flex;gap:1.2rem;align-items:flex-end">
+    <div class="vstack" style="gap:0.8rem">${voice('speaking', 2)}${compass()}${street()}${minimap()}</div>
+    ${vitals()}
+  </div>
+  <div class="abs" style="left:50%;bottom:8rem;transform:translateX(-50%)" >${prog('Netze flicken …', 42)}</div>
+  <div class="abs" style="left:calc(50% + 25.6rem);bottom:9.6rem" class="hstack"><div class="chip hint">${K('X')}<span class="sm">Abbrechen</span></div></div>
+  <div class="abs" style="left:104rem;top:54rem">${hint('E', 'Kiste öffnen')}</div>
+  <div class="abs" style="right:3.2rem;bottom:3.2rem" ><div class="veh">${ammo()}${speedo(87, 62, '3')}${vstatus({ left: 'on' })}</div></div>
+`);
+
+/* 02 HUD night with warning states */
+frame('HUD · Nacht · Warnzustände', 'night', `
+  <div class="abs" style="left:3.2rem;top:3.2rem">${chat({ idle: false })}</div>
+  <div class="abs" style="right:3.2rem;top:3.2rem">${moneyStack({ cash: '1.205', jb: 'Polizei', jc: 'c-police', job: 'Polizei · Kommissar', delta: '<span class="delta" style="color:var(--fh-danger)">− 45 €</span>' })}</div>
+  <div class="abs" style="right:3.2rem;top:30rem"><div class="vstack" style="gap:0.8rem">${toast('c-err', 'err', 'Fahrzeug beschädigt', 'Motor kritisch — fahr zur nächsten Werkstatt.', '90%')}${toast('c-warn', 'warn', 'Tank fast leer', 'Noch 4 % Kraftstoff.', '60%')}${toast('c-info', 'info', 'Funk 101,5', 'Leitstelle: Einsatz Speicherstadt, Prio 2.', '40%')}${toast('c-ok', 'ok', 'Gesichert', 'Fahrzeug abgeschlossen.', '20%')}<div class="chip toast more">+ 2 weitere</div></div></div>
+  <div class="abs" style="left:3.2rem;bottom:3.2rem;display:flex;gap:1.2rem;align-items:flex-end">
+    <div class="vstack" style="gap:0.8rem">${voice('tx', 3)}${compass(248)}${street('Speicherstraße', 'Speicherstadt')}${minimap(18, 0)}</div>
+    ${vitals({ health: 18, armor: 0, hunger: 22, thirst: 48, stamina: 30, stress: 82 })}
+  </div>
+  <div class="abs" style="left:50%;bottom:8rem;transform:translateX(-50%)">${prog('Schloss knacken …', 100, 'done').replace('100 %', 'Fertig')}</div>
+  <div class="abs" style="left:96rem;top:46rem"><div class="vstack" style="gap:0.6rem;align-items:flex-start"><div class="chip hint held">${holdKey('E', .62)}<span>Halten · Tür aufbrechen</span></div>${hint('G', 'Durchsuchen', '', '')}${hint('H', 'Abgeschlossen · Dietrich nötig', 'dim', 'off')}</div></div>
+  <div class="abs" style="right:3.2rem;bottom:3.2rem"><div class="veh">${ammo(3, 18, 'Dienstpistole', 'low')}${speedo(134, 4, '5')}${vstatus({ left: 'on', right: 'on', belt: 'warn', engine: 'crit' })}</div></div>
+`);
+
+/* 03 HUD state sheet split day/night */
+function stateRow(title, items) { return `<div class="hstack" style="gap:1.6rem;align-items:center"><span class="ann static" style="width:22rem">${title}</span>${items.map(([lab, el]) => `<div class="vstack" style="gap:0.5rem;align-items:flex-start">${el}<span class="ann static">${lab}</span></div>`).join('')}</div>`; }
+const sheet = () => `<div class="vstack" style="gap:2.4rem">
+  ${stateRow('Sprache / Funk', [['Leerlauf', voice('idle', 1)], ['Sprechen', voice('speaking', 2)], ['Funk sendet', voice('tx', 2)], ['kein Empfang', voice('norx', 2)], ['getrennt', voice('off')]])}
+  ${stateRow('Vitalwerte', [['normal', `<div class="chip vitals">${vit('c-health', 'heart', 'Leben', 82)}${vit('c-hunger', 'hunger', 'Hunger', 64)}</div>`], ['niedrig ≤ 25 %', `<div class="chip vitals">${vit('c-health', 'heart', 'Leben', 18, 'low')}${vit('c-thirst', 'drop', 'Durst', 12, 'low')}</div>`], ['leer 0 %', `<div class="chip vitals">${vit('c-hunger', 'hunger', 'Hunger', 0, 'low')}</div>`], ['Stress hoch', `<div class="chip vitals">${vit('c-stress', 'activity', 'Stress', 86, 'low')}</div>`]])}
+  ${stateRow('Fahrzeug', [['Blinker aus', `<div class="vstat">${vstatus().match(/<div class="chip vs ">.*?<\/div>/)[0]}</div>`], ['Blinker links', vstatus({ left: 'on' }).match(/<div class="chip vs blink-ok">.*?<\/div>/)[0]], ['Warnblinker', `<div class="vstat">${vstatus({ left: 'on', right: 'on' }).match(/<div class="chip vs blink-ok">.*?<\/div>/g).join('')}</div>`], ['Gurt an', `<div class="chip vs on">${I('belt', 'lg')}</div>`], ['Gurt fehlt (> 20 km/h)', `<div class="chip vs crit">${I('belt', 'lg')}<span>Gurt!</span></div>`], ['Motor aus', `<div class="chip vs">${I('engine', 'lg')}<span>Motor aus</span></div>`], ['beschädigt', `<div class="chip vs warn">${I('engine', 'lg')}<span>Motor 34 %</span></div>`], ['kritisch', `<div class="chip vs crit">${I('engine', 'lg')}<span>Motor 9 %</span></div>`]])}
+  ${stateRow('Fortschritt', [['läuft', prog('Netze flicken …', 42).replace('width:48rem', '')], ['fertig', prog('Netze flicken …', 100, 'done').replace('100 %', 'Fertig')], ['abgebrochen', prog('Abgebrochen', 63, 'cancel')]])}
+  ${stateRow('Interaktion', [['verfügbar', hint('E', 'Kiste öffnen')], ['gehalten', `<div class="chip hint held">${holdKey('E', .4)}<span>Halten · Aufbrechen</span></div>`], ['mehrere', `<div class="vstack" style="gap:0.5rem">${hint('E', 'Einsteigen')}${hint('G', 'Kofferraum', '', '')}</div>`], ['nicht verfügbar', hint('E', 'Abgeschlossen', 'dim', 'off')]])}
+  ${stateRow('Munition / Geld', [['normal', ammo()], ['knapp', ammo(3, 18, 'Pistole', 'low')], ['leer', ammo(0, 18, 'Pistole', 'empty')], ['Einnahme', '<span class="delta" style="color:var(--fh-success)">+ 850 €</span>'], ['Ausgabe', '<span class="delta" style="color:var(--fh-danger)">− 45 €</span>']])}
+  </div>`;
+frame('HUD-Zustände · über Tag', 'day', `<div class="abs" style="left:3.2rem;top:7.2rem">${sheet()}</div>`);
+frame('HUD-Zustände · über Nacht', 'night', `<div class="abs" style="left:3.2rem;top:7.2rem">${sheet()}</div>`);
+
+/* 05/06 Loading screen */
+function lsProg(mode) {
+  return mode === 'queue'
+    ? `<div class="ls-prog"><div class="between"><span>Warteschlange · Platz 7 von 23</span><span class="num">ca. 4 Min.</span></div><div class="track indet"><i></i></div></div>`
+    : `<div class="ls-prog"><div class="between"><span>Ressourcen laden · 214 / 386</span><span class="num" style="font-size:var(--fh-text-lg)">${mode === 'slow' ? 38 : 55} %</span></div><div class="track" style="--v:${mode === 'slow' ? 38 : 55}%"><i></i></div>${mode === 'slow' ? '<span style="opacity:.85">Das dauert länger als üblich. Große Downloads beim ersten Start sind normal.</span>' : ''}</div>`;
+}
+function loading(mode) {
+  const prog = lsProg(mode);
+  return `<div class="ls-bottom"></div>
+  <div class="abs hstack" style="right:6.4rem;top:4.8rem;gap:0.8rem"><div class="chip mchip">${I('users')}<span class="num" style="font-size:var(--fh-text-md)">128 / 200</span><span class="sm sec">Spieler</span></div>${mode === 'queue' ? `<div class="chip mchip">${I('clock')}<span class="sm semi">In der Warteschlange</span></div>` : ''}</div>
+  <div class="ls-brand"><span class="mark"></span><h1>Nordhafen</h1><span style="font-size:var(--fh-text-lg)">Roleplay in der Hafenstadt</span>${prog}</div>
+  <div class="chip ls-tip"><span class="label">Tipp 2 / 12</span><span class="lg semi" style="line-height:1.3">Die Fähre zum Leuchtturm fährt alle 15 Minuten von Anleger 3.</span><div class="dots">${Array.from({ length: 12 }, (_, i) => `<i class="${i === 1 ? 'on' : ''}"></i>`).join('')}</div></div>`;
+}
+frame('Ladebildschirm · lädt', 'day', loading('load'));
+frame('Ladebildschirm · Warteschlange · Einschub: Zustand „langsam“', 'day', loading('queue') + `<div class="abs" style="left:6.4rem;top:6.4rem"><span class="ann static">Zustand „langsam“ (ersetzt die Fortschrittszeile)</span><div style="margin-top:1rem;background:var(--fh-bg-overlay);padding:0.4rem 2rem 2rem;border-radius:var(--fh-radius-lg);color:#fff">${lsProg('slow')}</div></div>`);
+
+/* 07 Multi-character selection */
+const ccard = (name, jb, jc, job, cash, bank, last, sel) => `<div class="ccard ${sel ? 'sel' : ''}"><span class="nm">${name}</span>${B(jb, jc)}<span class="sm sec">Bargeld <b class="num" style="font-weight:600">${cash} €</b> · Bank <b class="num" style="font-weight:600">${bank} €</b></span><span class="xs sec">${last}</span></div>`;
+const charColHead = `<div class="hstack" style="gap:1.2rem;margin-bottom:0.8rem"><span class="mark sm"></span><span class="panel-title">Charakter wählen</span><span class="sm sec" style="margin-left:auto">2 / 5 Plätze</span></div>`;
+frame('Charakterauswahl · gefüllt', 'day', `
+  <div class="abs" style="left:50%;bottom:6rem;transform:translateX(-50%)">${ped(26)}</div>
+  <div class="abs panel glass" style="left:3.2rem;top:3.2rem;bottom:3.2rem;width:44rem;padding:2.4rem;gap:1.2rem">
+    ${charColHead}
+    ${ccard('Jonas Brandt', 'Polizei', 'c-police', '', '1.250', '48.210', 'Zuletzt gespielt: gestern, 22:14', true)}
+    ${ccard('Hanne Petersen', 'Hafen', 'c-civil', '', '320', '6.940', 'Zuletzt gespielt: 12.10., 19:40', false)}
+    <div class="ccard free">${I('plus', 'lg')}Freier Platz</div>
+    <div class="ccard free">${I('plus', 'lg')}Freier Platz</div>
+    <div class="ccard locked">${I('lock', 'lg')}<span class="sm">Platz gesperrt · Unterstützer-Slot</span></div>
+  </div>
+  <div class="abs panel glass" style="right:3.2rem;bottom:3.2rem;width:52rem;padding:2.4rem;gap:1.6rem">
+    <div class="vstack" style="gap:0.4rem"><span class="label">Ausgewählt</span><span style="font:700 var(--fh-text-2xl)/1.05 var(--fh-font-display)">Jonas Brandt</span><div class="hstack">${B('Polizei', 'c-police')}<span class="sm semi">Kommissar · Polizei Hafen</span></div></div>
+    <dl class="kv"><dt>Geboren</dt><dd>14.03.1991 in Nordhafen</dd><dt>Telefon</dt><dd class="mono">0151 4402 118</dd><dt>Bargeld</dt><dd class="num">1.250 €</dd><dt>Bank</dt><dd class="num">48.210 €</dd></dl>
+    <div class="between"><button class="btn btn-dq">${I('trash')}Löschen</button><button class="btn btn-p" style="min-width:20rem">Spielen ${K('Enter')}</button></div>
+  </div>`);
+
+/* 08 char selection: empty / loading / error */
+frame('Charakterauswahl · leer · lädt · Fehler', 'day', `
+  ${[['Leer', `<div class="empty" style="padding-top:12rem">${I('user')}<h4>Noch kein Charakter</h4><p>Erstelle deinen ersten Charakter, um in die Stadt zu kommen.</p><button class="btn btn-p">${I('plus')}Charakter erstellen</button></div>`],
+    ['Lädt', `${[1, 2, 3].map(() => `<div class="ccard"><div class="sk" style="height:2rem;width:60%"></div><div class="sk" style="height:2rem;width:7rem"></div><div class="sk" style="height:1.4rem;width:80%"></div></div>`).join('')}`],
+    ['Fehler', `<div class="banner">${I('warn')}<div><div class="bt">Charaktere konnten nicht geladen werden</div><div class="bx">Der Server antwortet nicht. Versuche es gleich noch einmal.</div></div><button class="btn btn-q btn-sm">Erneut versuchen</button></div>`]]
+    .map(([lab, body], i) => `<div class="abs" style="left:${3.2 + i * 47.2}rem;top:7.2rem;bottom:3.2rem;width:44rem;display:flex;flex-direction:column;gap:0.8rem"><span class="ann static">${lab}</span><div class="panel glass" style="flex:1;padding:2.4rem;gap:1.2rem">${charColHead.replace('2 / 5', i === 0 ? '0 / 5' : '– / 5')}${body}</div></div>`).join('')}
+  <div class="abs" style="right:12rem;bottom:6rem">${ped(22, '#5A6E80')}</div>`);
+
+/* 09 Character creator */
+const step = (n, t, st) => `<span class="tab ${st === 'on' ? 'on' : ''}" style="font-size:var(--fh-text-sm)">${st === 'done' ? `<span style="color:var(--fh-success)">${I('check')}</span>` : `<span class="num" style="font-size:var(--fh-text-sm)">${n}</span>`}${t}</span>`;
+frame('Charaktererstellung · Schritt 1 mit Feldfehler', 'day', `
+  <div class="abs" style="left:58%;bottom:6rem;transform:translateX(-50%)">${ped(28)}</div>
+  <div class="abs panel" style="left:3.2rem;top:3.2rem;bottom:3.2rem;width:52rem">
+    <div class="panel-head"><span class="panel-title">Neuer Charakter</span><span class="sm sec" style="margin-left:auto">Schritt 1 von 6</span></div>
+    <div style="padding:0 2.4rem"><div class="tabs" style="gap:1.6rem">${step(1, 'Herkunft', 'on')}${step(2, 'Gesicht')}${step(3, 'Haare')}${step(4, 'Merkmale')}${step(5, 'Kleidung')}${step(6, 'Fertig')}</div></div>
+    <div class="panel-body vstack" style="gap:1.8rem">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.6rem">
+        <div class="field"><span class="label">Vorname</span><div class="input">Hanne</div></div>
+        <div class="field"><span class="label">Nachname</span><div class="input focus">Petersen<span class="caret"></span></div></div>
+      </div>
+      <div class="field"><span class="label">Geburtsdatum</span><div class="input err">03.07.2011</div><span class="ferr">${I('warn')}Du musst mindestens 18 sein.</span></div>
+      <div class="field"><span class="label">Geschlecht</span><div class="seg"><span class="on">Weiblich</span><span>Männlich</span></div></div>
+      <div class="field"><div class="between"><span class="label">Größe</span><span class="num" style="font-size:var(--fh-text-md)">172 cm</span></div><div class="slider" style="--v:37%"><i></i></div></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.6rem">
+        <div class="field"><span class="label">Mutter</span><div class="stepper"><span class="sb">${I('chevl')}</span><span class="sv">Ida · 12 / 24</span><span class="sb">${I('chev')}</span></div></div>
+        <div class="field"><span class="label">Vater</span><div class="stepper"><span class="sb">${I('chevl')}</span><span class="sv">Ole · 3 / 24</span><span class="sb">${I('chev')}</span></div></div>
+      </div>
+      <div class="field"><div class="between"><span class="label">Ähnlichkeit</span><span class="sm sec">Mutter 60 %</span></div><div class="slider" style="--v:60%"><i></i></div></div>
+      <div class="field"><span class="label">Hautton</span><div class="hstack" style="gap:1rem">${['#F3D9C4', '#E6BE9C', '#D2A27C', '#B07D58', '#8A5A3B', '#5E3B26'].map((c, i) => `<span class="swatch ${i === 1 ? 'on' : ''}" style="--s:${c}"></span>`).join('')}</div></div>
+    </div>
+    <div class="panel-foot"><button class="btn btn-q">${I('chevl')}Zurück</button><button class="btn btn-p dis" title="Erst Fehler beheben">Weiter${I('chev')}</button></div>
+  </div>
+  <div class="abs" style="left:50%;bottom:3.2rem;transform:translateX(-10%)"><div class="chip hstack" style="padding:0.8rem 1.4rem;gap:1.2rem;font-size:var(--fh-text-sm)"><span class="hstack">${K('A')}${K('D')}Drehen</span><span class="hstack">${K('W')}${K('S')}Zoom</span><span class="hstack">${K('Q')}${K('E')}Kamera</span></div></div>`);
+
+/* 10 Spawn selector */
+const chartSvg = `<svg viewBox="0 0 1000 860" width="100%" height="100%" preserveAspectRatio="xMidYMid slice"><rect width="1000" height="860" style="fill:var(--fh-bg-base)"/>
+  <path d="M0 0 H1000 V300 Q 820 340 700 300 T 420 330 Q 300 350 250 470 T 0 520Z" style="fill:var(--fh-bg-elevated)"/><path d="M560 860 V620 Q 650 560 760 600 T 1000 560 V860Z" style="fill:var(--fh-bg-elevated)"/><path d="M60 600 h160 v40 h-160z" style="fill:var(--fh-bg-elevated)"/>
+  ${Array.from({ length: 11 }, (_, i) => `<line x1="${i * 100}" y1="0" x2="${i * 100}" y2="860" style="stroke:var(--fh-border)" stroke-width="1" opacity=".6"/>`).join('')}${Array.from({ length: 9 }, (_, i) => `<line x1="0" y1="${i * 100}" x2="1000" y2="${i * 100}" style="stroke:var(--fh-border)" stroke-width="1" opacity=".6"/>`).join('')}
+  <path d="M120 80 H900 M300 0 V300 M650 0 V320 M820 620 V860 M560 720 H1000" style="stroke:var(--fh-border)" opacity=".5" stroke-width="14"/>
+  <g font-family="Barlow Semi Condensed" font-weight="600" font-size="15" letter-spacing="2" style="fill:var(--fh-text-muted)"><text x="120" y="130">ALTSTADT</text><text x="690" y="200">SPEICHERSTADT</text><text x="380" y="170">HAUPTBAHNHOF</text><text x="600" y="770">CONTAINERHAFEN</text><text x="420" y="520">ELBE</text><text x="70" y="680">MOLE</text></g></svg>`;
+const srow = (icon, t, s, cls = '', badge = '') => `<div class="row ${cls}" style="min-height:5.6rem">${I(icon, 'lg')}<div class="grow"><div class="t">${t}</div><div class="s">${s}</div></div>${badge}</div>`;
+frame('Spawnauswahl · gefüllt · Fehler „belegt“', 'day', `
+  <div class="abs" style="left:3.2rem;top:7.2rem;bottom:3.2rem;right:57.6rem" class="chart"><div class="chart" style="width:100%;height:100%">${chartSvg}
+    <span class="pin" style="left:22%;top:68%">${I('lighthouse')}</span><span class="pin" style="left:42%;top:14%">${I('train')}</span><span class="pin on" style="left:64%;top:30%">${I('fish')}</span><span class="pinlab" style="left:64%;top:30%">Fischmarkt</span><span class="pin err" style="left:72%;top:78%">${I('ship')}</span><span class="pin" style="left:30%;top:22%">${I('home')}</span><span class="pin" style="left:85%;top:12%">${I('pin')}</span></div></div>
+  <div class="abs panel" style="right:3.2rem;top:7.2rem;bottom:3.2rem;width:51.2rem">
+    <div class="panel-head"><span class="panel-title">Wo möchtest du aufwachen?</span></div>
+    <div style="padding:1.6rem 2.4rem 0"><div class="banner">${I('warn')}<div><div class="bt">Ort gerade nicht verfügbar</div><div class="bx">Am Fähranleger ist kein Platz frei. Wähle einen anderen Ort.</div></div><span></span></div></div>
+    <div style="padding:0.8rem 1.2rem">
+      ${srow('pin', 'Letzter Standort', 'Speicherstadt · Kaistraße 12')}
+      ${srow('train', 'Hauptbahnhof', 'Altstadt')}
+      ${srow('fish', 'Fischmarkt', 'Speicherstadt · am Wasser', 'sel')}
+      ${srow('ship', 'Fähranleger', 'Containerhafen · Anleger 3', '', B('Belegt', 'c-err', false))}
+      ${srow('lighthouse', 'Leuchtturm', 'Mole')}
+      ${srow('home', 'Wohnung Speicherstraße 4', 'Altstadt · 2. OG')}
+      ${srow('police', 'Polizeiwache Hafen', 'nur im Dienst', '', B('Polizei', 'c-police'))}
+    </div>
+    <div class="panel-foot"><button class="btn btn-p btn-wide">Hier aufwachen ${K('Enter')}</button></div>
+  </div>`);
+
+/* 11 Unconscious */
+frame('Bewusstlos · Notruf gesendet · Rettung unterwegs', 'night', `<div class="deathbox">
+  <h1>Bewusstlos</h1><p>Rettungsdienst kann dich noch versorgen.</p>
+  <div class="hstack" style="gap:1.2rem"><span class="dchip">${I('clock', 'lg')}Ausbluten in <span class="num">04:12</span></span><span class="dchip">${B('Rettung', 'c-ems')}unterwegs · <span class="num">350 m</span></span></div>
+  <div class="hstack" style="gap:1.2rem;margin-top:1.6rem"><span class="dact done"><span class="dot c-ok"></span>Notruf gesendet · Rettung unterwegs</span><span class="dact" style="opacity:.45">${K('E', 'l')}Aufgeben · ab 01:00</span></div>
+  </div>
+  <div class="abs" style="left:50%;bottom:6.4rem;transform:translateX(-50%)"><span class="ann static">Vor dem Notruf: Aktion „[G] Notruf senden“ — ohne Rettungsdienst im Dienst: „Kein Rettungsdienst im Dienst.“ und Aufgeben sofort möglich</span></div>
+  <div class="abs" style="left:50%;bottom:11rem;transform:translateX(-50%)"><span class="dact">${K('G')}Notruf senden</span></div>`, { scrim: ' ' });
+
+/* 12 Dead */
+frame('Tot · Aufwachen halten (62 %)', 'day', `<div class="deathbox">
+  <h1>Du bist gestorben</h1><p>Du wachst im Krankenhaus auf. Erinnerungen an die letzten Minuten sind verloren.</p>
+  <span class="dchip">${I('clock', 'lg')}Aufwachen möglich</span>
+  <span class="dact hold" style="--v:62%;margin-top:1.6rem">${K('E')}<span>Halten · Im Krankenhaus aufwachen</span></span>
+  </div>`, { scrim: ' ' });
+
+/* 13 Radial + context menu */
+function radial(items, hov, hubT, hubS) {
+  const n = items.length, R = 220, r0 = 82, r1 = 214, gap = 1.2; let p = '', labs = '';
+  items.forEach((it, i) => {
+    const a0 = i * 360 / n - 180 / n + gap, a1 = (i + 1) * 360 / n - 180 / n - gap;
+    const [x0, y0] = polar(R, R, r1, a0), [x1, y1] = polar(R, R, r1, a1), [x2, y2] = polar(R, R, r0, a1), [x3, y3] = polar(R, R, r0, a0);
+    const on = i === hov;
+    p += `<path d="M${x0} ${y0} A${r1} ${r1} 0 0 1 ${x1} ${y1} L${x2} ${y2} A${r0} ${r0} 0 0 0 ${x3} ${y3}Z" style="fill:var(--fh-${on ? 'accent-primary' : 'material-thick'});stroke:var(--fh-border);stroke-width:1"/>`;
+    const [lx, ly] = polar(R, R, (r0 + r1) / 2, (a0 + a1) / 2);
+    labs += `<div class="seglab ${it[2] ? 'dis' : ''}" style="left:${lx / 44}rem;top:${ly / 44 * 1}rem;left:${lx / 10}rem;top:${ly / 10}rem">${I(it[0], 'xl')}<span>${it[1]}${it[3] ? ' ›' : ''}</span></div>`;
+  });
+  return `<div class="radial"><svg viewBox="0 0 440 440"><circle cx="220" cy="220" r="${r1 + 6}" style="fill:var(--fh-material-thin)"/>${p}</svg>${labs}<div class="hub"><span class="semi">${hubT}</span><span class="xs sec">${hubS}</span></div></div>`;
+}
+const radItems = [['car', 'Fahrzeug', 0, 1], ['id', 'Ausweis zeigen'], ['file', 'Rechnung'], ['users', 'Animationen', 0, 1], ['brief', 'Job', 0, 1], ['hand', 'Begleiten', 1], ['shirt', 'Kleidung', 0, 1], ['radio', 'Funk']];
+const ctxRow = (icon, t, s, tail, cls = '') => `<div class="row ${cls}">${I(icon, 'lead')}<div class="grow"><div class="t">${t}</div><div class="s">${s}</div></div>${tail}</div>`;
+frame('Radialmenü · Kontextmenü', 'day', `
+  <div class="abs" style="left:50%;top:50%;transform:translate(-50%,-50%)">${radial(radItems, 1, 'Ausweis zeigen', 'Loslassen zum Auswählen')}</div>
+  <div class="abs" style="left:3.2rem;bottom:3.2rem"><span class="ann static">Radial: halten ${'F1'} · loslassen wählt · Mitte = schließen · „Begleiten“ deaktiviert (niemand in der Nähe)</span></div>
+  <div class="abs panel glass ctxmenu" style="right:12rem;top:50%;transform:translateY(-50%)">
+    <div class="panel-head" style="min-height:5.6rem"><div class="vstack" style="gap:0"><span class="panel-title" style="font-size:var(--fh-text-lg)">Kiste · Lager 7</span><span class="xs sec">Containerhafen, Reihe C</span></div><span class="close">${I('x')}</span></div>
+    ${ctxRow('box', 'Öffnen', 'Inhalt ansehen', K('E'), 'sel')}
+    ${ctxRow('search', 'Durchsuchen', 'Dauert 8 Sekunden', I('chev'))}
+    ${ctxRow('hammer', 'Aufbrechen', 'Brecheisen benötigt', I('lock'), 'dis')}
+    ${ctxRow('flag', 'Markieren', 'Für deine Gruppe sichtbar', I('chev'))}
+    ${ctxRow('x', 'Schließen', 'Esc', '')}
+  </div>`);
+
+/* 14 Dialogs */
+frame('Eingabedialog (Fehler) · Bestätigungsdialog (destruktiv) · Eingabedialog lädt', 'day', `
+  <div class="abs dialog" style="left:8rem;top:50%;transform:translateY(-50%);width:48rem">
+    <div class="dh"><span class="dtitle">Überweisen</span><span class="sm sec">Vom Girokonto · verfügbar 48.210 €</span></div>
+    <div class="db">
+      <div class="field"><span class="label">Empfänger-Kontonummer</span><div class="input err mono">NH-0042-1187</div><span class="ferr">${I('warn')}Empfänger nicht gefunden.</span></div>
+      <div class="field"><span class="label">Betrag</span><div class="input focus"><span class="num" style="font-weight:600">250</span><span class="caret" style="margin-left:0"></span><span class="unit">€</span></div></div>
+      <div class="field"><span class="label">Verwendungszweck</span><div class="input"><span class="ph">optional</span></div></div>
+    </div>
+    <div class="df"><button class="btn btn-s">Abbrechen ${K('Esc', 'off')}</button><button class="btn btn-p">Überweisen ${K('Enter')}</button></div>
+  </div>
+  <div class="abs dialog" style="left:50%;top:50%;transform:translate(-50%,-50%);width:44rem">
+    <div class="dh"><span style="color:var(--fh-danger)">${I('warn', 'xxl')}</span><span class="dtitle">Fahrzeug verkaufen?</span><span class="sec">Du erhältst <b class="num">12.400 €</b>. Das kann nicht rückgängig gemacht werden.</span></div>
+    <div class="df" style="margin-top:2.4rem"><button class="btn btn-s focus">Abbrechen</button><button class="btn btn-d">Verkaufen</button></div>
+  </div>
+  <div class="abs dialog" style="right:8rem;top:50%;transform:translateY(-50%);width:48rem">
+    <div class="dh"><span class="dtitle">Rechnung stellen</span><span class="sm sec">An: Hanne Petersen (ID 17)</span></div>
+    <div class="db">
+      <div class="field"><span class="label">Leistung</span><div class="input ro">Abschleppen Kaistraße</div></div>
+      <div class="field"><span class="label">Betrag</span><div class="input ro"><span class="num" style="font-weight:600">450</span><span class="unit">€</span></div></div>
+    </div>
+    <div class="df"><button class="btn btn-s dis">Abbrechen</button><button class="btn btn-p"><span class="spinner"></span>Wird gesendet …</button></div>
+  </div>`, { scrim: ' ' });
+
+/* 15 Chat open + scoreboard */
+const sbRow = (id, n, jb, jc, ping, cls = '') => `<tr class="${cls}"><td class="mono">${id}</td><td class="semi">${n}</td><td>${jb ? B(jb, jc) : '<span class="mut">—</span>'}</td><td class="r num" style="color:${ping > 300 ? 'var(--fh-danger)' : ping > 150 ? 'var(--fh-warning)' : 'inherit'}">${ping} ms</td></tr>`;
+frame('Chat (offen, Befehlsvorschläge, Fehlerzeile) · Scoreboard', 'night', `
+  <div class="abs" style="left:3.2rem;top:3.2rem">${chat({
+    lines: [['c-info', 'System', '', 'Willkommen in Nordhafen. Regeln: /regeln', '20:58'], ['c-teal', 'Me', 'Jonas Brandt', 'zieht die Arbeitshandschuhe an.', '21:02'], ['c-teal', 'Do', 'Jonas Brandt', 'Der Container ist mit einer Plombe verschlossen.', '21:02'], ['c-civil', 'OOC', 'Mika (17)', 'bin gleich zurück, kurz afk', '21:03'], ['c-radio', 'Funk', '101,5', 'Kran 2 ist frei, Container kann rüber.', '21:04'], ['c-ems', 'Rettung', 'NotSan Ehlers', 'RTW 3 frei auf Wache.', '21:05'], ['c-err', 'Admin', 'Team', 'Server-Neustart um 06:00 Uhr.', '21:06'], ['c-err', 'System', '', 'Nachricht nicht gesendet: Du schreibst zu schnell. Warte 5 Sekunden.', '21:06']],
+    input: `<div class="chatin">${B('OOC', 'c-civil', false).replace('badge st', 'badge')}<span class="grow">/me<span class="caret" style="margin-left:0.2rem"></span></span><span class="xs sec">${K('Enter')} senden</span></div>`
+  })}<div class="sugg" style="width:56rem">${[['/me', '[Handlung]', 'Beschreibt, was dein Charakter tut', 'sel'], ['/mechanic', '', 'Ruft die Werkstatt', ''], ['/meldung', '[Text]', 'Meldung an das Team', '']].map(r => `<div class="row ${r[3]}" style="min-height:4rem"><span class="mono semi">${r[0]}</span><span class="mono mut sm">${r[1]}</span><span class="s grow r">${r[2]}</span></div>`).join('')}</div></div>
+  <div class="abs panel" style="left:50%;top:50%;transform:translate(-30%,-50%);width:88rem;height:72rem">
+    <div class="panel-head"><span class="mark sm"></span><span class="panel-title">Nordhafen</span><span class="sm sec" style="margin-left:auto"><b class="num">128 / 200</b> Spieler · online seit 6 Std.</span></div>
+    <div class="hstack" style="gap:1.2rem;padding:1.2rem 2.4rem;border-bottom:var(--fh-border-width) solid var(--fh-border)">${B('Polizei 6', 'c-police')}${B('Rettung 3', 'c-ems')}${B('Werkstatt 2', 'c-mech')}${B('Taxi 1', 'c-civil')}</div>
+    <div style="padding:0 1.2rem;overflow:hidden"><table class="tbl"><thead><tr><th>ID</th><th>Name</th><th>Job</th><th class="r">Ping</th></tr></thead><tbody>
+    ${sbRow(42, 'Jonas Brandt (du)', 'Polizei', 'c-police', 38, 'me')}${sbRow(3, 'Mika', '', '', 61)}${sbRow(7, 'Fiete', 'Werkstatt', 'c-mech', 44)}${sbRow(11, 'Lotte', 'Rettung', 'c-ems', 92)}${sbRow(17, 'Hanne', '', '', 51)}${sbRow(21, 'Kalle', 'Polizei', 'c-police', 188)}${sbRow(24, 'Smutje', '', '', 73)}${sbRow(29, 'Ole', 'Taxi', 'c-civil', 340)}${sbRow(31, 'Inke', '', '', 57)}${sbRow(36, 'Piet', 'Rettung', 'c-ems', 66)}${sbRow(40, 'Tjark', '', '', 49)}
+    </tbody></table></div>
+    <div class="panel-foot" style="justify-content:flex-start"><span class="xs sec hstack">${K('Pos1')} halten · Mausrad scrollt</span></div>
+  </div>`);
+
+/* 16 Inventory */
+const it = (icon, q, w, extra = '', dur) => ({ icon, q, w, extra, dur });
+function slots(items, total, hot = false) {
+  let h = '';
+  for (let i = 0; i < total; i++) {
+    const x = items[i];
+    if (!x) { h += `<div class="slot empty">${hot && i < 5 ? `<span class="n">${i + 1}</span>` : ''}</div>`; continue; }
+    h += `<div class="slot ${x.extra}">${hot && i < 5 ? `<span class="n">${i + 1}</span>` : ''}${I(x.icon)}${x.q ? `<span class="q">${x.q}</span>` : ''}<span class="w">${x.w}</span>${x.dur != null ? `<span class="dur" style="--v:${x.dur}%;--c:${x.dur > 50 ? 'var(--fh-success)' : x.dur > 20 ? 'var(--fh-warning)' : 'var(--fh-danger)'}"><i></i></span>` : ''}</div>`;
+  }
+  return h;
+}
+const pockets = { 0: it('phone', '', '0,2'), 1: it('gun', '', '1,1', '', 78), 2: it('bandage', '4', '0,4'), 3: it('bottle', '2', '1,0'), 4: it('pkg-food', '3', '0,6'), 5: it('key', '', '0,1'), 6: it('wallet', '', '0,2'), 7: it('id', '', '0,0'), 8: it('wrench', '', '1,4', 'sel', 34), 10: it('net', '1', '3,2', '', 12), 12: it('fish', '6', '4,8'), 13: it('cash', '1.250', '0,0') };
+const trunk = { 0: it('box', '2', '6,0'), 1: it('fuel', '1', '5,0', '', 100), 3: it('fish', '14', '11,2'), 6: it('net', '2', '6,4', 'target'), 7: it('fish', '', '', 'ghost') };
+const invPanel = (title, sub, w, max, grid, foot = '') => `<div class="panel" style="width:59.2rem"><div class="panel-head" style="min-height:5.6rem"><div class="vstack" style="gap:0"><span class="panel-title" style="font-size:var(--fh-text-lg)">${title}</span><span class="xs sec">${sub}</span></div><div style="margin-left:auto;width:20rem" class="vstack" style="gap:0.4rem"><div class="between xs"><span class="sec">Gewicht</span><span class="num" style="font-size:var(--fh-text-sm)">${w} / ${max} kg</span></div><div class="bar" style="--v:${parseFloat(w.replace(',', '.')) / max * 100}%;${parseFloat(w.replace(',', '.')) / max > .9 ? '--c:var(--fh-warning)' : ''}"><i></i></div></div></div><div class="panel-body"><div class="grid">${grid}</div>${foot}</div></div>`;
+frame('Inventar · Ziehen auf Kofferraum · Tooltip · ungültiges Ziel (Handschuhfach)', 'night', `
+  <div class="abs" style="left:50%;top:27rem;transform:translateX(-50%);display:flex;gap:1.6rem;align-items:flex-start">
+    <div style="position:relative">${invPanel('Taschen', 'Jonas Brandt', '18,4', 30, slots(pockets, 30, true))}
+      <div class="abs tooltip" style="left:33.6rem;top:29rem;z-index:5"><div class="between"><span class="semi">Schraubenschlüssel</span><span class="xs mut">1,4 kg</span></div><span class="sm sec">Für Reparaturen an Fahrzeugen und Kränen.</span><div class="between xs"><span class="sec">Zustand</span><span class="semi" style="color:var(--fh-warning)">34 %</span></div><span class="xs mono mut">Seriennr. WR-77120</span></div></div>
+    <div class="panel" style="width:22rem;padding:2rem;gap:1.2rem;align-self:center">
+      <div class="field"><span class="label">Menge</span><div class="input"><span class="num" style="font-weight:600">1</span><span class="unit">Stk.</span></div></div>
+      <button class="btn btn-p btn-wide">Benutzen</button><button class="btn btn-s btn-wide">${I('hand')}Geben</button><button class="btn btn-s btn-wide">${I('split')}Teilen</button>
+      <div class="divider"></div><span class="xs sec">Ziehen verschiebt · Shift halbiert · Doppelklick benutzt · ${K('1')}–${K('5')} Schnellzugriff</span>
+    </div>
+    <div style="position:relative">${invPanel('Kofferraum', 'Hafen-Transporter · <span class="mono">HH-AB 1234</span>', '28,6', 40, slots(trunk, 30))}
+      <div class="abs" style="left:32rem;top:21rem"><div class="slot lift">${I('fish')}<span class="q">6</span></div></div></div>
+  </div>
+  <div class="abs" style="left:50%;top:6.4rem;transform:translateX(-50%);display:flex;gap:1.6rem;align-items:center">
+    <div class="panel" style="flex-direction:row;align-items:center;gap:1.6rem;padding:1.2rem 1.6rem"><div class="vstack" style="gap:0"><span class="semi">Handschuhfach</span><span class="xs sec"><b class="num">1,8 / 2 kg</b></span></div><div class="grid" style="grid-template-columns:repeat(4,9.6rem)">${slots({ 0: it('id', '', '0,0'), 1: it('key', '', '0,1') }, 4).replace('<div class="slot empty"></div>', '<div class="slot bad"></div>')}</div></div>
+    <span class="ann static">Ungültiges Ziel: Zu schwer für das Handschuhfach</span>
+  </div>`);
+
+/* 17 Phone */
+const app = (icon, name, c, y = false) => `<div class="app ${y ? 'y' : ''}" style="--c:${c}"><i>${I(icon)}</i><span>${name}</span></div>`;
+const sbar = (net = true) => `<div class="sbar"><span class="num" style="font-size:var(--fh-text-sm)">21:06</span><span class="hstack" style="gap:0.6rem">${net ? I('signal') : `<span class="xs" style="color:var(--fh-danger)">Kein Netz</span>`}${I('battery')}</span></div>`;
+const phoneHome = `<div class="phone"><div class="scr" style="background:linear-gradient(180deg,#8FD0EE 0%,#CFEBF6 45%,#3AA6CE 46%,#13668D 100%)">${sbar()}
+  <div style="padding:2.4rem 2.4rem 0;color:var(--fh-text-primary)"><div class="num" style="font-size:6.4rem;line-height:1">21:06</div><div class="semi">Mittwoch, 15. Oktober</div></div>
+  <div class="apps" style="margin:2rem 1.2rem 0;background:var(--fh-material-regular);border-radius:2.8rem">${app('msg', 'Nachrichten', 'var(--fh-info)')}${app('users', 'Kontakte', 'var(--fh-job-civil)')}${app('bank', 'Bank', 'var(--fh-accent-secondary)')}${app('car', 'Garage', 'var(--fh-job-mechanic)')}${app('map', 'Karte', 'var(--fh-hud-thirst)')}${app('camera', 'Kamera', 'var(--fh-text-primary)')}${app('bell', 'Dienste', '', true)}${app('cog', 'Einstellungen', 'var(--fh-job-civil)')}</div>
+  <div class="dock">${app('phone', '', 'var(--fh-success)')}${app('msg', '', 'var(--fh-info)')}${app('bank', '', 'var(--fh-accent-secondary)')}${app('map', '', 'var(--fh-hud-thirst)')}</div></div></div>`;
+const phoneMsg = `<div class="phone"><div class="scr">${sbar(false)}
+  <div class="hstack" style="padding:0.8rem 1.6rem;border-bottom:var(--fh-border-width) solid var(--fh-border)">${I('chevl', 'lg')}<div class="vstack" style="gap:0"><span class="semi">Hanne Petersen</span><span class="xs sec mono">0160 2288 413</span></div><span style="margin-left:auto">${I('phone', 'lg')}</span></div>
+  <div class="banner" style="margin:1rem 1.2rem 0;min-height:4.4rem">${I('signal')}<div><div class="bx" style="color:var(--fh-text-primary)">Kein Netz — du bist außerhalb der Abdeckung.</div></div><span></span></div>
+  <div class="vstack" style="padding:1.6rem;gap:0.8rem;flex:1"><span class="xs mut" style="align-self:center">Heute</span><div class="bub in">Bist du noch am Fischmarkt?</div><div class="bub out">Ja, Stand 4. Komm rum.</div><div class="bub in">Bring die Netze mit, Fiete braucht sie.</div><div class="bub out" style="opacity:.75">Mach ich, bin in 10 Min. da</div><span class="xs semi hstack" style="align-self:flex-end;color:var(--fh-danger)">${I('warn')}Nicht zugestellt · Erneut senden</span></div>
+  <div class="hstack" style="padding:1.2rem;border-top:var(--fh-border-width) solid var(--fh-border);background:var(--fh-bg-elevated)"><div class="input grow" style="border-radius:var(--fh-radius-pill);border-bottom-width:var(--fh-border-width);height:4rem"><span class="ph">Nachricht</span></div><span class="btn btn-t" style="width:4rem;padding:0;border-radius:50%">${I('send')}</span></div></div></div>`;
+const phoneLoad = `<div class="phone"><div class="scr">${sbar()}<div class="hstack" style="padding:0.8rem 1.6rem;border-bottom:var(--fh-border-width) solid var(--fh-border)">${I('chevl', 'lg')}<span class="semi">Garage</span></div>
+  <div class="vstack" style="padding:1.6rem;gap:1.2rem">${[1, 2, 3, 4].map(() => `<div class="hstack" style="gap:1.2rem"><div class="sk" style="width:4.4rem;height:4.4rem;border-radius:var(--fh-radius-md)"></div><div class="vstack grow" style="gap:0.6rem"><div class="sk" style="height:1.6rem;width:70%"></div><div class="sk" style="height:1.2rem;width:45%"></div></div></div>`).join('')}</div>
+  <div class="empty" style="margin-top:4rem;border-top:var(--fh-border-width) dashed var(--fh-border)"><span class="ann static">Leer-Zustand Nachrichten-App</span>${I('msg')}<h4>Keine Nachrichten</h4><p>Schreib jemandem aus deinen Kontakten.</p><button class="btn btn-s">${I('plus')}Neue Nachricht</button></div></div></div>`;
+frame('Handy · Start · Nachrichten (kein Netz, nicht zugestellt) · App lädt / leer', 'day', `
+  <div class="abs" style="right:3.2rem;bottom:3.2rem">${phoneHome}</div>
+  <div class="abs" style="right:45.6rem;bottom:3.2rem">${phoneMsg}</div>
+  <div class="abs" style="right:88rem;bottom:3.2rem">${phoneLoad}</div>
+  <div class="abs" style="left:3.2rem;top:7.2rem;width:44rem"><span class="ann static" style="white-space:normal;line-height:1.4">Reale Position: unten rechts (Start-Ansicht). Die beiden linken Geräte zeigen weitere Zustände desselben Handys.</span></div>`);
+
+/* 18 Bank + ATM */
+const tx = (d, t, a, inc) => `<tr><td class="sec">${d}</td><td>${t}</td><td class="r num" style="color:${inc ? 'var(--fh-success)' : 'inherit'}">${inc ? '+ ' : '− '}${a} €</td></tr>`;
+const pinKey = k => `<div style="height:6.4rem;border-radius:var(--fh-radius-md);background:var(--fh-bg-elevated);box-shadow:var(--fh-shadow-1);display:grid;place-items:center;font:500 var(--fh-text-xl)/1 var(--fh-font-mono)">${k}</div>`;
+frame('Bank (Schalter) · Geldautomat mit PIN-Fehler', 'day', `
+  <div class="abs panel" style="left:3.2rem;top:7.2rem;width:116rem;height:84rem">
+    <div class="panel-head">${I('bank', 'xl')}<span class="panel-title">Nordhafener Sparkasse</span><span class="close">${I('x')}</span></div>
+    <div style="display:grid;grid-template-columns:34rem 1fr;flex:1;min-height:0">
+      <div style="border-right:var(--fh-border-width) solid var(--fh-border);padding:1.2rem">
+        ${[['Girokonto', '48.210', 'sel'], ['Sparkonto', '12.000', ''], ['Firmenkonto · Hafenbetrieb', '212.940', ''], ['Gemeinschaftskonto', '880', '']].map(([n, b, c]) => `<div class="row ${c}" style="min-height:6.4rem"><div class="grow"><div class="t">${n}</div><div class="s mono">NH-0042-${(n.length * 137) % 9000 + 1000}</div></div><span class="num">${b} €</span></div>`).join('')}
+        <button class="btn btn-q" style="margin-top:1.2rem">${I('plus')}Konto eröffnen</button>
+      </div>
+      <div style="padding:2.4rem;display:flex;flex-direction:column;gap:2rem;min-height:0">
+        <div class="between"><div class="vstack" style="gap:0.2rem"><span class="label">Girokonto · <span class="mono" style="letter-spacing:0">NH-0042-2233</span></span><span class="num" style="font-size:var(--fh-text-2xl)">48.210,00 €</span></div><div class="hstack"><button class="btn btn-s">${I('plus')}Einzahlen</button><button class="btn btn-s">${I('minus')}Abheben</button><button class="btn btn-p">${I('send')}Überweisen</button></div></div>
+        <div class="tabs"><span class="tab on">Umsätze</span><span class="tab">Daueraufträge</span><span class="tab">Rechnungen ${B('2', 'c-warn', false)}</span></div>
+        <table class="tbl"><thead><tr><th>Datum</th><th>Text</th><th class="r">Betrag</th></tr></thead><tbody>
+        ${tx('15.10.', 'Gehalt · Hafenbetrieb Nord', '850,00', 1)}${tx('15.10.', 'Hafenkiosk Elbblick', '37,50')}${tx('14.10.', 'Abschlepphof · Auslöse HH-AB 1234', '450,00')}${tx('14.10.', 'Überweisung von Hanne Petersen · Netze', '120,00', 1)}${tx('13.10.', 'Tankstelle Kaistraße', '96,20')}${tx('12.10.', 'Miete Speicherstraße 4', '1.200,00')}${tx('11.10.', 'Fischmarkt Stand 4', '64,00', 1)}
+        </tbody></table>
+      </div>
+    </div>
+  </div>
+  <div class="abs panel" style="right:3.2rem;top:7.2rem;width:52rem;height:84rem">
+    <div class="panel-head">${I('card', 'xl')}<span class="panel-title">Geldautomat</span><span class="close">${I('x')}</span></div>
+    <div class="panel-body vstack" style="gap:1.6rem">
+      <span class="sec">Karte: Girokonto · <span class="mono">NH-0042-2233</span></span>
+      <div class="field"><span class="label">PIN</span><div class="input err" style="justify-content:center;gap:1.6rem;height:5.6rem">${'<span style="width:1.4rem;height:1.4rem;border-radius:50%;background:var(--fh-text-primary)"></span>'.repeat(4)}</div><span class="ferr">${I('warn')}PIN falsch · noch 2 Versuche.</span></div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0.8rem">${['1', '2', '3', '4', '5', '6', '7', '8', '9', '⌫', '0', 'OK'].map(pinKey).join('')}</div>
+      <span class="label" style="margin-top:0.8rem">Nach der PIN: Schnellbeträge</span>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:0.8rem;opacity:.45">${['50 €', '100 €', '200 €', '500 €'].map(a => `<button class="btn btn-s">${a}</button>`).join('')}</div>
+    </div>
+  </div>`);
+
+/* 19 Shop */
+const pc = (icon, n, p, stock, cls = '', badge = '') => `<div class="pcard ${cls}"><div class="img">${I(icon)}${badge ? `<span style="position:absolute;left:0.8rem;top:0.8rem">${badge}</span>` : ''}</div><span class="semi">${n}</span><div class="between"><span class="price">${p} €</span><span class="add" style="${cls === 'out' ? 'opacity:.4' : ''}">${I('plus')}</span></div><span class="xs ${stock.startsWith('Nur') ? '' : 'sec'}" style="${stock.startsWith('Nur') ? 'color:var(--fh-warning);font-weight:600' : ''}">${stock}</span></div>`;
+const cl = (n, q, p) => `<div class="row" style="padding:0.8rem 0"><div class="grow"><div class="t">${n}</div><div class="s num" style="font-weight:500">${p} €</div></div><div class="stepper" style="height:3.2rem;width:11rem"><span class="sb" style="width:2.4rem;height:2.4rem">${I('minus')}</span><span class="sv">${q}</span><span class="sb" style="width:2.4rem;height:2.4rem">${I('plus')}</span></div></div>`;
+frame('Laden · ausverkauft · Restbestand · nicht genug Bargeld', 'day', `
+  <div class="abs panel" style="left:50%;top:50%;transform:translate(-50%,-50%);width:140rem;height:84rem">
+    <div class="panel-head">${I('cart', 'xl')}<span class="panel-title">Hafenkiosk Elbblick</span><span class="close">${I('x')}</span></div>
+    <div style="display:grid;grid-template-columns:1fr 42rem;flex:1;min-height:0">
+      <div style="padding:1.6rem 2.4rem;display:flex;flex-direction:column;gap:1.6rem">
+        <div class="between"><div class="tabs" style="border:0"><span class="tab on">Alles</span><span class="tab">Essen</span><span class="tab">Getränke</span><span class="tab">Werkzeug</span><span class="tab">Elektronik</span></div><div class="search" style="width:28rem">${I('search')}<span class="ph" style="color:var(--fh-text-muted)">Suchen</span></div></div>
+        <div class="pgrid">
+          ${pc('fish', 'Fischbrötchen', '4,50', 'Auf Lager')}${pc('bottle', 'Wasser 0,5 l', '1,20', 'Auf Lager')}${pc('pkg-food', 'Labskaus (Dose)', '6,90', 'Nur noch 3')}${pc('bottle', 'Kaffee to go', '2,80', 'Auf Lager')}
+          ${pc('net', 'Fischernetz', '35,00', 'Auf Lager')}${pc('wrench', 'Werkzeugkasten', '89,00', 'Ausverkauft', 'out', B('Ausverkauft', 'c-err', false))}${pc('phone', 'Prepaid-Handy', '149,00', 'Auf Lager')}${pc('bandage', 'Verbandskasten', '24,00', 'Auf Lager')}
+        </div>
+      </div>
+      <div style="border-left:var(--fh-border-width) solid var(--fh-border);padding:2rem 2.4rem;display:flex;flex-direction:column;gap:1.2rem;background:var(--fh-bg-elevated)">
+        <span class="panel-title" style="font-size:var(--fh-text-lg)">Warenkorb</span>
+        ${cl('Fischbrötchen', 2, '9,00')}${cl('Fischernetz', 1, '35,00')}${cl('Kaffee to go', 1, '2,80')}
+        <div class="between" style="margin-top:auto"><span class="sec">Summe</span><span class="num" style="font-size:var(--fh-text-xl)">46,80 €</span></div>
+        <div class="field"><span class="label">Bezahlen mit</span><div class="seg"><span class="on">Bar · 32,00 €</span><span>Karte · 48.210 €</span></div><span class="ferr">${I('warn')}Nicht genug Bargeld. Wähle Karte oder entferne Artikel.</span></div>
+        <button class="btn btn-p btn-wide dis">Bezahlen · 46,80 €</button>
+      </div>
+    </div>
+  </div>`);
+
+/* 20 Garage */
+const cond = (l, v) => `<div class="vstack" style="gap:0.3rem;width:12rem"><div class="between xs"><span class="sec">${l}</span><span class="num" style="font-size:var(--fh-text-xs)">${v} %</span></div><div class="bar" style="--v:${v}%;--c:${v > 50 ? 'var(--fh-success)' : v > 20 ? 'var(--fh-warning)' : 'var(--fh-danger)'}"><i></i></div></div>`;
+const gRow = (n, plate, st, sc, f, m, k, cls = '') => `<div class="row ${cls}" style="min-height:8.8rem;padding:1.2rem 2rem;gap:2rem">${I('car', 'xl')}<div class="vstack grow" style="gap:0.6rem"><span class="t lg">${n}</span><span class="plate"><span>${plate}</span></span></div>${B(st, sc, false)}${cond('Tank', f)}${cond('Motor', m)}${cond('Karosserie', k)}</div>`;
+frame('Garage · Status · Abgeschleppt · Fehler', 'night', `
+  <div class="abs panel" style="left:50%;top:50%;transform:translate(-50%,-50%);width:150rem;height:80rem">
+    <div class="panel-head">${I('car', 'xl')}<span class="panel-title">Garage Speicherstadt</span><span class="sm sec">5 Fahrzeuge</span><span class="close">${I('x')}</span></div>
+    <div style="display:grid;grid-template-columns:1fr 46rem;flex:1;min-height:0">
+      <div style="padding:1.2rem 0">
+        <div style="padding:0 2rem 1.2rem"><div class="banner">${I('warn')}<div><div class="bt">Ausparken nicht möglich</div><div class="bx">Der Stellplatz ist blockiert. Warte kurz oder nimm eine andere Garage.</div></div><button class="btn btn-q btn-sm">Erneut versuchen</button></div></div>
+        ${gRow('Hafen-Transporter', 'HH-AB 1234', 'Eingeparkt', 'c-ok', 62, 88, 74, 'sel')}${gRow('Fischmarkt-Kombi', 'NH-FM 77', 'Unterwegs', 'c-info', 31, 70, 55)}${gRow('Kran-Pickup', 'NH-KP 410', 'Abgeschleppt', 'c-warn', 12, 34, 18)}${gRow('Werkstatt-Bulli', 'NH-WB 3', 'Beschlagnahmt', 'c-err', 80, 92, 96)}${gRow('Lastenrad', '—', 'Eingeparkt', 'c-ok', 100, 100, 90)}
+      </div>
+      <div style="border-left:var(--fh-border-width) solid var(--fh-border);padding:2.4rem;display:flex;flex-direction:column;gap:2rem;background:var(--fh-bg-elevated)">
+        <span class="label">Ausgewählt</span><span style="font:700 var(--fh-text-2xl)/1 var(--fh-font-display)">Hafen-Transporter</span><span class="plate lg"><span>HH-AB 1234</span></span>
+        <dl class="kv"><dt>Kilometerstand</dt><dd class="num">48.392 km</dd><dt>Zuletzt geparkt</dt><dd>Speicherstadt, Platz 14</dd><dt>Versicherung</dt><dd>${B('Gültig', 'c-ok', false)}</dd></dl>
+        <div class="vstack" style="margin-top:auto"><button class="btn btn-p btn-wide">Ausparken ${K('Enter')}</button><button class="btn btn-s btn-wide">${I('edit')}Umbenennen</button><span class="xs sec">Abgeschleppte Fahrzeuge: „Auslösen · 450 €“ am Abschlepphof.</span></div>
+      </div>
+    </div>
+  </div>`);
+
+/* 21 Clothing store */
+frame('Kleidungsladen · Kategorie · Varianten · Warenkorb', 'day', `
+  <div class="abs" style="left:58%;bottom:6rem;transform:translateX(-50%)">${ped(28, '#2F4A5E')}</div>
+  <div class="abs panel" style="left:3.2rem;top:3.2rem;bottom:3.2rem;width:48rem">
+    <div class="panel-head">${I('shirt', 'xl')}<span class="panel-title">Kleiderkammer Hafen</span><span class="close">${I('x')}</span></div>
+    <div style="padding:1.2rem">
+      ${[['shirt', 'Oberteile', '', 'sel'], ['shirt', 'Jacken', '1 Änderung'], ['user', 'Unterteile'], ['hand', 'Handschuhe'], ['user', 'Schuhe'], ['eye', 'Brillen'], ['user', 'Hüte'], ['box', 'Taschen']].map(([ic, n, s, c]) => `<div class="row ${c || ''}" style="min-height:4.8rem">${I(ic, 'lg')}<span class="t grow">${n}</span><span class="xs" style="color:var(--fh-accent-secondary);font-weight:600">${s || ''}</span>${I('chev')}</div>`).join('')}
+    </div>
+    <div class="panel-body vstack" style="gap:1.6rem;padding-top:0.8rem">
+      <div class="field"><span class="label">Modell</span><div class="stepper"><span class="sb">${I('chevl')}</span><span class="sv">Friesennerz · 12 / 48</span><span class="sb">${I('chev')}</span></div></div>
+      <div class="field"><span class="label">Variante</span><div class="stepper"><span class="sb">${I('chevl')}</span><span class="sv">Gelb · 3 / 8</span><span class="sb">${I('chev')}</span></div></div>
+      <div class="between"><span class="sec">Preis</span><span class="num lg">89 €</span></div>
+    </div>
+    <div class="panel-foot" style="flex-direction:column;align-items:stretch"><div class="between"><span class="sec">2 Teile im Warenkorb</span><span class="num" style="font-size:var(--fh-text-xl)">214 €</span></div><div class="hstack"><button class="btn btn-s grow">${I('plus')}Outfit speichern</button><button class="btn btn-p grow">Bezahlen · 214 €</button></div></div>
+  </div>
+  <div class="abs panel" style="right:3.2rem;top:3.2rem;width:40rem"><div class="panel-head" style="min-height:5.6rem"><span class="panel-title" style="font-size:var(--fh-text-lg)">Gespeicherte Outfits</span></div><div class="empty" style="padding:3.2rem 2.4rem">${I('shirt')}<h4>Noch keine Outfits gespeichert</h4><p>Stell dir ein Outfit zusammen und speichere es für später.</p></div></div>
+  <div class="abs" style="left:50%;bottom:3.2rem;transform:translateX(-10%)"><div class="chip hstack" style="padding:0.8rem 1.4rem;gap:1.2rem;font-size:var(--fh-text-sm)"><span class="hstack">${K('A')}${K('D')}Drehen</span><span class="hstack">${K('W')}${K('S')}Zoom</span><span class="hstack">${K('H')}Hände hoch</span></div></div>
+  <div class="abs" style="right:3.2rem;top:30rem">${toast('c-err', 'err', 'Passt nicht', 'Dieses Teil passt nicht zu deinem Modell — übersprungen.', '50%')}</div>`);
+
+/* 22 Crafting */
+const rec = (icon, n, t, cls = '', lock = '') => `<div class="row ${cls}" style="min-height:5.6rem">${I(icon, 'lg')}<div class="grow"><div class="t">${n}</div><div class="s">${lock || t}</div></div>${lock ? I('lock') : ''}</div>`;
+const mat = (icon, n, have, need) => `<div class="row" style="min-height:5.2rem">${I(icon, 'lg')}<span class="t grow">${n}</span><span class="num" style="color:${have < need ? 'var(--fh-danger)' : 'inherit'}">${have} / ${need}</span>${have < need ? `<span class="xs semi" style="color:var(--fh-danger);width:6rem">fehlt ${need - have}</span>` : `<span style="color:var(--fh-success);width:6rem">${I('check')}</span>`}</div>`;
+frame('Herstellung · fehlendes Material · Warteschlange', 'day', `
+  <div class="abs panel" style="left:50%;top:50%;transform:translate(-50%,-50%);width:140rem;height:84rem">
+    <div class="panel-head">${I('hammer', 'xl')}<span class="panel-title">Werkbank · Werft 2</span><span class="close">${I('x')}</span></div>
+    <div style="display:grid;grid-template-columns:52rem 1fr;flex:1;min-height:0">
+      <div style="border-right:var(--fh-border-width) solid var(--fh-border);padding:1.6rem;display:flex;flex-direction:column;gap:1.2rem">
+        <div class="search">${I('search')}<span class="mut">Rezept suchen</span></div>
+        <div class="chips"><span class="fchip on">Alle</span><span class="fchip">Werkzeug</span><span class="fchip">Fischerei</span><span class="fchip">Elektronik</span><span class="fchip">Medizin</span></div>
+        <div>${rec('net', 'Fischernetz', '2:00 Min.', 'sel')}${rec('wrench', 'Schraubenschlüssel', '1:30 Min.')}${rec('bandage', 'Verband', '0:20 Min.')}${rec('radio', 'Funkgerät', '', '', 'Stufe 3 nötig')}${rec('key', 'Dietrich', '0:45 Min.')}${rec('box', 'Transportkiste', '3:00 Min.')}</div>
+      </div>
+      <div style="padding:2.4rem;display:flex;flex-direction:column;gap:2rem">
+        <div class="hstack" style="gap:2rem"><div class="slot" style="width:12rem;height:12rem">${I('net')}</div><div class="vstack" style="gap:0.4rem"><span style="font:700 var(--fh-text-2xl)/1 var(--fh-font-display)">Fischernetz</span><span class="sec">Robustes Netz für Kutter und Hafenbecken. 3,2 kg.</span><span class="hstack sm sec">${I('clock')}2:00 Min. pro Stück</span></div></div>
+        <div><span class="label">Material</span>${mat('net', 'Tauwerk', 6, 4)}${mat('box', 'Schwimmer', 2, 3)}${mat('wrench', 'Stahlring', 8, 8)}</div>
+        <div class="between" style="margin-top:auto"><div class="field" style="width:22rem"><span class="label">Menge</span><div class="stepper"><span class="sb">${I('minus')}</span><span class="sv">2</span><span class="sb">${I('plus')}</span></div></div><div class="vstack" style="align-items:flex-end;gap:0.6rem"><span class="ferr">${I('warn')}Es fehlt 1 Schwimmer.</span><button class="btn btn-p dis" style="min-width:24rem">Herstellen · 4:00 Min.</button></div></div>
+      </div>
+    </div>
+    <div class="hstack" style="gap:1.2rem;padding:1.2rem 2.4rem;border-top:var(--fh-border-width) solid var(--fh-border);background:var(--fh-bg-base)"><span class="label">Warteschlange</span>
+      <div class="chip hstack" style="padding:0.8rem 1.2rem;gap:1.2rem;width:36rem">${I('bandage')}<div class="vstack grow" style="gap:0.4rem"><div class="between sm"><span class="semi">Verband × 3</span><span class="num" style="font-size:var(--fh-text-sm)">68 %</span></div><div class="bar" style="--v:68%"><i></i></div></div><span class="sec">${I('x')}</span></div>
+      <div class="chip hstack" style="padding:0.8rem 1.2rem;gap:1.2rem;width:36rem">${I('key')}<div class="vstack grow" style="gap:0.4rem"><div class="between sm"><span class="semi">Dietrich × 1</span><span class="sm sec">wartet</span></div><div class="bar" style="--v:0%"><i></i></div></div><span class="sec">${I('x')}</span></div>
+    </div>
+  </div>`);
+
+/* 23 Invoice + ID cards */
+const idcard = (head, c, rows, num, extra = '') => `<div class="idcard" style="--c:${c}"><div class="ih"><span class="mark sm" style="width:2.4rem;height:2.4rem"></span><span class="label" style="color:#fff;letter-spacing:.12em">${head}</span>${extra}</div><div class="ib"><div class="photo">${ped(14, '#7E93A4').replace('display:block', 'display:block;margin:1.6rem auto 0')}</div><div class="vstack" style="gap:0.9rem">${rows.map(([l, v]) => `<div class="idf"><span class="label">${l}</span><b>${v}</b></div>`).join('')}<div class="between" style="margin-top:auto"><span class="mono" style="font-size:var(--fh-text-md)">${num}</span><span style="font-family:var(--fh-font-display);font-style:italic;color:var(--fh-text-secondary);border-bottom:var(--fh-border-width) solid var(--fh-border);padding:0 1rem">J. Brandt</span></div></div></div></div>`;
+frame('Rechnung (offen) · Personalausweis · Führerschein · Dienstausweis (abgelaufen)', 'night', `
+  <div class="abs dialog" style="left:3.2rem;top:50%;transform:translateY(-50%);width:56rem">
+    <div class="dh"><div class="between"><span class="hstack">${B('Rettungsdienst', 'c-ems')}</span>${B('Offen', 'c-warn', false)}</div><span class="dtitle">Rechnung</span><span class="sm sec">Nr. <span class="mono">RE-2026-00412</span> · 15.10.2026 · fällig bis 22.10.2026</span></div>
+    <div class="db"><dl class="kv"><dt>Von</dt><dd>Rettungsdienst Nordhafen · NotSan Ehlers</dd><dt>An</dt><dd>Jonas Brandt</dd></dl>
+      <table class="tbl"><thead><tr><th>Leistung</th><th class="r">Menge</th><th class="r">Betrag</th></tr></thead><tbody><tr><td>Notfallversorgung vor Ort</td><td class="r num">1</td><td class="r num">900,00 €</td></tr><tr><td>Transport Klinikum</td><td class="r num">1</td><td class="r num">350,00 €</td></tr></tbody></table>
+      <div class="between"><span class="sec">Gesamt</span><span class="num" style="font-size:var(--fh-text-2xl)">1.250,00 €</span></div>
+      <div class="field"><span class="label">Bezahlen von</span><div class="seg"><span class="on">Girokonto · 48.210 €</span><span>Bar · 1.205 €</span></div></div></div>
+    <div class="df"><button class="btn btn-q">Ablehnen</button><button class="btn btn-p">Bezahlen · 1.250 €</button></div>
+  </div>
+  <div class="abs vstack" style="right:3.2rem;top:7.2rem;gap:2rem">
+    ${idcard('Personalausweis', 'var(--fh-accent-secondary)', [['Name', 'Brandt'], ['Vorname', 'Jonas'], ['Geboren', '14.03.1991 · Nordhafen'], ['Größe', '184 cm']], 'L01X00T47')}
+    <div class="hstack" style="gap:2rem;align-items:flex-start">
+      <div style="transform:scale(.8);transform-origin:top left;width:43.2rem">${idcard('Führerschein', 'var(--fh-info)', [['Name', 'Jonas Brandt'], ['Gültig bis', '03.2034'], ['Klassen', `<span class="hstack" style="gap:0.4rem">${['B', 'BE', 'C1', 'A'].map(k => B(k, 'c-info', false)).join('')}</span>`]], 'F-882-1174')}</div>
+      <div style="transform:scale(.8);transform-origin:top left;width:43.2rem">${idcard('Dienstausweis', 'var(--fh-job-police)', [['Name', 'Jonas Brandt'], ['Dienstgrad', 'Kommissar'], ['Dienststelle', 'Polizei Hafen']], 'P-21-12', `<span class="badge" style="margin-left:auto;background:var(--fh-bg-elevated);color:var(--fh-danger)">Abgelaufen</span>`)}</div>
+    </div>
+  </div>`);
+
+/* 24 Police MDT */
+const nav = (items, on) => items.map(([ic, n, cnt], i) => `<div class="nv ${i === on ? 'on' : ''}">${I(ic, 'lg')}<span>${n}</span>${cnt ? `<span class="cnt">${cnt}</span>` : ''}</div>`).join('');
+const tablet = (c, title, user, status, navHtml, main) => `<div class="tablet"><div class="scr"><div class="th" style="--c:${c}">${title}<span style="margin-left:auto" class="hstack">${status}<span class="semi">${user}</span></span></div><div class="nav">${navHtml}</div><div class="main">${main}</div></div></div>`;
+frame('Polizei-MDT · Personenakte · Leitstelle', 'night', tablet('var(--fh-job-police)', `${I('police', 'xl')}<span class="ttl">Einsatzleitrechner · Polizei Hafen</span>`, 'POK Brandt · 21/12',
+  `<span class="hstack" style="background:rgba(255,255,255,.16);border-radius:var(--fh-radius-md);padding:0.6rem 1.2rem;gap:0.8rem"><span class="label" style="color:#fff">FMS</span><span class="num" style="font-size:var(--fh-text-lg)">3</span><span class="sm semi">Einsatz übernommen</span>${I('chevd')}</span>`,
+  nav([['grid', 'Übersicht'], ['user', 'Personen'], ['car', 'Fahrzeuge'], ['file', 'Vorgänge'], ['warn', 'Haftbefehle', 4], ['brief', 'Strafkatalog'], ['radio', 'Leitstelle', 2]], 1),
+  `<div class="between"><div class="search" style="width:64rem;border-color:var(--fh-text-primary)">${I('search')}<span style="color:var(--fh-text-primary)" class="semi">Petersen</span><span class="xs mut" style="margin-left:auto">${K('Enter')} suchen</span></div><button class="btn btn-s">${I('plus')}Vorgang anlegen</button></div>
+  <div style="display:grid;grid-template-columns:32rem minmax(0,1fr) 36rem;gap:1.6rem;align-items:start">
+    <div class="card" style="padding:0.8rem"><span class="label" style="padding:0.8rem">3 Treffer</span>${[['Hanne Petersen', 'CID 17 · *02.07.1996', 'sel'], ['Ole Petersen', 'CID 88 · *11.11.1971', ''], ['Inke Petersen-Rauh', 'CID 231 · *30.01.2001', '']].map(([n, s, c]) => `<div class="row ${c}">${I('user', 'lg')}<div class="grow"><div class="t">${n}</div><div class="s mono">${s}</div></div></div>`).join('')}</div>
+    <div class="card"><div class="hstack" style="gap:2rem;align-items:flex-start"><div class="photo" style="width:12rem;height:15rem">${ped(12, '#7E93A4').replace('display:block', 'display:block;margin:1.2rem auto 0')}</div><div class="vstack" style="gap:0.8rem"><span style="font:700 var(--fh-text-2xl)/1 var(--fh-font-display)">Hanne Petersen</span><div class="hstack">${B('Gesucht', 'c-err', false)}${B('Bewaffnet', 'c-warn', false)}</div><dl class="kv"><dt>Bürger-ID</dt><dd class="mono">CID 17</dd><dt>Geboren</dt><dd>02.07.1996, Nordhafen</dd><dt>Telefon</dt><dd class="mono">0160 2288 413</dd><dt>Lizenzen</dt><dd>Führerschein B · Bootsschein</dd><dt>Fahrzeuge</dt><dd class="hstack"><span class="plate"><span>NH-FM 77</span></span></dd></dl></div></div>
+      <div class="tabs" style="margin:1.6rem 0 0.4rem"><span class="tab on">Einträge</span><span class="tab">Haftbefehle ${B('1', 'c-err')}</span><span class="tab">Notizen</span></div>
+      <table class="tbl"><thead><tr><th>Datum</th><th>Vorgang</th><th>Delikte</th><th class="r">Strafe</th><th>Beamter</th></tr></thead><tbody><tr><td class="sec">14.10.</td><td class="mono">V-2026-0981</td><td>Schmuggel § 372</td><td class="r num">4.500 €</td><td>PK Hansen</td></tr><tr><td class="sec">02.10.</td><td class="mono">V-2026-0877</td><td>Fahren ohne Gurt</td><td class="r num">60 €</td><td>POK Brandt</td></tr><tr><td class="sec">18.09.</td><td class="mono">V-2026-0712</td><td>Hausfriedensbruch, Lager 7</td><td class="r num">1.200 €</td><td>PK Thiele</td></tr></tbody></table>
+      <div class="hstack" style="justify-content:flex-end;margin-top:1.6rem"><button class="btn btn-s">${I('edit')}Notiz</button><button class="btn btn-s btn-dq" style="border-color:var(--fh-danger)">${I('warn')}Haftbefehl ausstellen</button></div></div>
+    <div class="card" style="padding:0.8rem"><span class="label" style="padding:0.8rem">Leitstelle · offene Einsätze</span>
+      ${[['Prio 1', 'c-err', 'Schüsse gemeldet', 'Containerhafen C', 'Übernehmen'], ['Prio 2', 'c-warn', 'Einbruch Lager 7', 'Speicherstadt', ''], ['Prio 3', 'c-info', 'Ruhestörung', 'Kaistraße 12', '']].map(([p, c, t, s, a]) => `<div class="row"><div class="grow"><div class="hstack">${B(p, c, false)}<span class="t">${t}</span></div><div class="s">${s}</div></div>${a ? `<button class="btn btn-s btn-sm">${a}</button>` : ''}</div>`).join('')}
+      <span class="label" style="padding:1.6rem 0.8rem 0.8rem;display:block">Einheiten</span>
+      ${[['21/12', '3', 'c-warn'], ['21/14', '2', 'c-ok'], ['21/20', '1', 'c-ok'], ['21/31', '6', 'c-civil']].map(([u, s, c]) => `<div class="row" style="min-height:3.6rem"><span class="mono semi grow">${u}</span><span class="badge ${c}">FMS ${s}</span></div>`).join('')}</div>
+  </div>`));
+
+/* 25 EMS tablet */
+frame('Rettungsdienst-Tablet · Patientenakte · Sichtung', 'day', tablet('var(--fh-job-ems)', `${I('med', 'xl')}<span class="ttl">Rettungsdienst · Leitstelle Hafen</span>`, 'NotSan Ehlers · RTW 3', `<span class="hstack sm semi" style="gap:0.6rem"><span class="dot" style="--c:var(--fh-bg-elevated)"></span>Im Einsatz</span>`,
+  nav([['users', 'Patienten', 2], ['bell', 'Einsätze', 1], ['file', 'Behandlungen'], ['bandage', 'Medikamente']], 0),
+  `<div style="display:grid;grid-template-columns:44rem 1fr;gap:1.6rem;align-items:start">
+    <div class="card" style="padding:0.8rem"><span class="label" style="padding:0.8rem">Offene Patienten</span>
+      ${[['SK1', 'c-err', 'Jonas Brandt', 'Containerhafen C · 4 Min.', 'sel'], ['SK2', 'sk2', 'Ole Petersen', 'Fischmarkt · 9 Min.', ''], ['SK3', 'c-ok', 'Mika', 'Kaistraße · 14 Min.', '']].map(([k, c, n, s, sel]) => `<div class="row ${sel}"><span class="badge ${c === 'sk2' ? 'sk2' : c}" style="width:5.2rem;justify-content:center">${k}</span><div class="grow"><div class="t">${n}</div><div class="s">${s}</div></div></div>`).join('')}</div>
+    <div class="card"><div class="between"><div class="vstack" style="gap:0.4rem"><span style="font:700 var(--fh-text-2xl)/1 var(--fh-font-display)">Jonas Brandt</span><span class="sm sec">CID 42 · 35 J. · Blutgruppe A+</span></div><div class="hstack"><span class="label">Sichtung</span><span class="badge c-err">SK1 · rot</span></div></div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem;margin:2rem 0">${[['Puls', '132', '/min', 1], ['Blutdruck', '90/60', 'mmHg', 1], ['SpO₂', '91', '%', 1], ['Bewusstsein', 'GCS 9', '', 0]].map(([l, v, u, w]) => `<div class="vstack" style="gap:0.2rem;padding:1.2rem 1.6rem;background:var(--fh-bg-base);border-radius:var(--fh-radius-md)"><span class="label">${l}</span><span class="num" style="font-size:var(--fh-text-2xl);color:${w ? 'var(--fh-danger)' : 'inherit'}">${v}<span class="sm sec" style="font-weight:500"> ${u}</span></span></div>`).join('')}</div>
+      <div style="display:grid;grid-template-columns:26rem 1fr;gap:2.4rem">
+        <svg viewBox="0 0 200 260" style="width:26rem"><g style="fill:var(--fh-bg-base);stroke:var(--fh-border)" stroke-width="2"><circle cx="100" cy="30" r="20"/><path d="M70 56 H130 L140 140 L126 142 L122 100 L120 250 H104 L100 160 L96 250 H80 L78 100 L74 142 L60 140Z"/></g><path d="M126 70 L138 72 L141 104 L129 106Z" style="fill:var(--fh-danger);stroke:var(--fh-danger)" fill-opacity=".45"/><path d="M82 170 L96 170 L96 196 L82 196Z" style="fill:var(--fh-danger);stroke:var(--fh-danger)" fill-opacity=".45"/></svg>
+        <div class="vstack" style="gap:1.2rem"><span class="label">Verletzungen</span><div class="row" style="padding-left:0"><span class="dot c-err"></span><span class="grow">Schusswunde linker Oberarm</span><span class="xs sec">stark blutend</span></div><div class="row" style="padding-left:0"><span class="dot c-err"></span><span class="grow">Prellung rechter Oberschenkel</span><span class="xs sec">Sturz</span></div>
+          <span class="label" style="margin-top:0.8rem">Behandlung</span><table class="tbl"><tbody><tr><td class="num sec">21:12</td><td>Druckverband Oberarm</td><td class="sec">Ehlers</td></tr><tr><td class="num sec">21:14</td><td>Zugang gelegt, NaCl 500 ml</td><td class="sec">Ehlers</td></tr></tbody></table>
+          <div class="hstack" style="justify-content:flex-end;margin-top:0.8rem"><button class="btn btn-s">${I('car')}In Klinik einliefern</button><button class="btn btn-p">${I('plus')}Behandlung eintragen</button></div></div>
+      </div></div>
+  </div>`));
+
+/* 26 Boss menu */
+const emp = (n, r, s, duty, since, cls = '') => `<tr class="${cls}"><td class="semi">${n}</td><td><div class="input select" style="height:3.2rem;width:20rem;font-size:var(--fh-text-sm)">${r}${I('chevd')}</div></td><td class="r num">${s} €</td><td><span class="hstack sm"><span class="dot ${duty ? 'c-ok' : 'c-civil'}"></span>${duty ? 'Im Dienst' : 'Außer Dienst'}</span></td><td class="sec">${since}</td><td class="r"><span class="hstack" style="justify-content:flex-end"><button class="btn btn-q btn-sm">Befördern</button><button class="btn btn-q btn-sm btn-dq">Entlassen</button></span></td></tr>`;
+frame('Chefmenü · Firmenkonto · Mitarbeitende · Einstellen', 'day', `
+  <div class="abs panel" style="left:50%;top:50%;transform:translate(-50%,-50%);width:148rem;height:84rem">
+    <div class="panel-head">${I('brief', 'xl')}<span class="panel-title">Hafenbetrieb Nord</span>${B('Hafen', 'c-civil')}<span class="sm sec">Du: Betriebsleitung</span><span class="close">${I('x')}</span></div>
+    <div style="display:grid;grid-template-columns:1fr 40rem;flex:1;min-height:0">
+      <div style="padding:2.4rem;display:flex;flex-direction:column;gap:2rem">
+        <div style="display:grid;grid-template-columns:2fr 1fr 1fr;gap:1.6rem">
+          <div class="card"><span class="label">Firmenkonto</span><div class="between" style="margin-top:0.6rem"><span class="num" style="font-size:var(--fh-text-2xl)">212.940 €</span><span class="hstack"><button class="btn btn-s btn-sm">Einzahlen</button><button class="btn btn-s btn-sm">Abheben</button></span></div></div>
+          <div class="card"><span class="label">Mitarbeitende</span><div class="num" style="font-size:var(--fh-text-2xl);margin-top:0.6rem">14</div></div>
+          <div class="card"><span class="label">Im Dienst</span><div class="num" style="font-size:var(--fh-text-2xl);margin-top:0.6rem;color:var(--fh-success)">5</div></div>
+        </div>
+        <table class="tbl"><thead><tr><th>Name</th><th>Rang</th><th class="r">Gehalt / Std.</th><th>Status</th><th>Seit</th><th></th></tr></thead><tbody>
+        ${emp('Hanne Petersen', 'Kranführerin', '42', 1, '03.2026', 'sel')}${emp('Fiete Lorenzen', 'Vorarbeiter', '48', 1, '11.2025')}${emp('Ole Petersen', 'Hafenarbeiter', '32', 0, '07.2026')}${emp('Smutje', 'Aushilfe', '24', 1, '10.2026')}${emp('Tjark Ahrens', 'Hafenarbeiter', '32', 0, '08.2026')}
+        </tbody></table>
+      </div>
+      <div style="border-left:var(--fh-border-width) solid var(--fh-border);padding:2.4rem;background:var(--fh-bg-elevated);display:flex;flex-direction:column;gap:1.2rem">
+        <span class="panel-title" style="font-size:var(--fh-text-lg)">Einstellen</span><span class="sm sec">Spieler in deiner Nähe</span>
+        ${[['Mika', 'ID 3 · 4 m'], ['Inke', 'ID 31 · 9 m']].map(([n, s]) => `<div class="row"><div class="grow"><div class="t">${n}</div><div class="s">${s}</div></div><button class="btn btn-s btn-sm">Einladen</button></div>`).join('')}
+        <div class="banner" style="--c:var(--fh-success);margin-top:auto">${I('ok')}<div><div class="bt">Einladung gesendet</div><div class="bx">Inke muss die Einladung annehmen.</div></div><span></span></div>
+      </div>
+    </div>
+  </div>`);
+
+/* 27 Admin panel */
+frame('Adminpanel · Spieler · Aktionen · Meldungen', 'night', tablet('var(--fh-text-primary)', `${I('shield', 'xl')}<span class="ttl">Team · Verwaltung</span><span class="badge c-err" style="margin-left:1.2rem">Admin</span>`, 'Moderator Kai', '',
+  nav([['users', 'Spieler'], ['flag', 'Meldungen', 3], ['cog', 'Server'], ['file', 'Protokoll']], 0),
+  `<div style="display:grid;grid-template-columns:1fr 48rem;gap:1.6rem;align-items:start">
+    <div class="card" style="padding:0.8rem 0.8rem 1.6rem"><div class="between" style="padding:0.8rem"><div class="search" style="width:40rem">${I('search')}<span class="mut">Name, ID oder Kennung</span></div><span class="sm sec"><b class="num">128</b> online</span></div>
+      <table class="tbl"><thead><tr><th>ID</th><th>Name</th><th>Kennung</th><th class="r">Ping</th><th class="r">Spielzeit</th><th>Hinweise</th></tr></thead><tbody>
+      ${[[3, 'Mika', 'discord:4471…', 61, '212 Std.', ''], [7, 'Fiete', 'license:9f2a…', 44, '1.024 Std.', ''], [17, 'Hanne', 'license:77c1…', 51, '388 Std.', B('2 Verwarnungen', 'c-warn', false)], [29, 'Ole', 'discord:1290…', 340, '41 Std.', B('Neu', 'c-info', false)], [33, 'xXHafenhaiXx', 'license:aa04…', 77, '3 Std.', B('Gemeldet', 'c-err', false)], [36, 'Piet', 'license:51be…', 66, '702 Std.', '']].map(([id, n, k, p, t, f]) => `<tr class="${id === 33 ? 'sel' : ''}"><td class="mono">${id}</td><td class="semi">${n}</td><td class="mono sec xs">${k}</td><td class="r num" style="color:${p > 300 ? 'var(--fh-danger)' : 'inherit'}">${p} ms</td><td class="r num">${t}</td><td>${f}</td></tr>`).join('')}
+      </tbody></table></div>
+    <div class="vstack" style="gap:1.6rem">
+      <div class="card"><div class="card-h"><h3>xXHafenhaiXx</h3><span class="mono sec">ID 33</span></div>
+        <span class="label">Navigation</span><div class="hstack" style="margin:0.6rem 0 1.4rem"><button class="btn btn-s btn-sm">Hinteleportieren</button><button class="btn btn-s btn-sm">Herholen</button><button class="btn btn-s btn-sm">${I('eye')}Zuschauen</button></div>
+        <span class="label">Hilfe</span><div class="hstack" style="margin:0.6rem 0 1.4rem"><button class="btn btn-s btn-sm">Wiederbeleben</button><button class="btn btn-s btn-sm">Heilen</button><button class="btn btn-s btn-sm">Einfrieren</button></div>
+        <span class="label">Sanktion</span><div class="hstack" style="margin-top:0.6rem"><button class="btn btn-s btn-sm">Verwarnen</button><button class="btn btn-s btn-sm btn-dq">Kicken</button><button class="btn btn-d btn-sm">${I('ban')}Bannen</button><button class="btn btn-s btn-sm dis" title="Nur ab Rang Admin">${I('lock')}Löschen</button></div>
+        <span class="xs sec" style="display:block;margin-top:0.8rem">„Löschen“: nur ab Rang Admin.</span></div>
+      <div class="card" style="padding:0.8rem"><span class="label" style="padding:0.8rem;display:block">Meldungen</span>
+        ${[['Offen', 'c-warn', 'Fahrzeug im Wasser festgesteckt', 'Mika · vor 2 Min.', 'Übernehmen'], ['In Bearbeitung', 'c-info', 'Beleidigung im OOC', 'Hanne · Kai', ''], ['Erledigt', 'c-ok', 'Bug: Garage leer', 'Piet · gestern', '']].map(([s, c, t, m, a]) => `<div class="row"><div class="grow"><div class="hstack">${B(s, c, false)}<span class="t">${t}</span></div><div class="s">${m}</div></div>${a ? `<button class="btn btn-s btn-sm">${a}</button>` : ''}</div>`).join('')}</div>
+    </div>
+  </div>`));
+
+/* 28-30 state galleries */
+const cell = (label, title, icon, body) => `<div class="gcell"><span class="ann static">${label}</span><div class="panel"><div class="panel-head" style="min-height:5.2rem;padding:1rem 2rem">${I(icon, 'lg')}<span class="panel-title" style="font-size:var(--fh-text-lg)">${title}</span></div><div style="padding:1.6rem 2rem;flex:1;overflow:hidden;display:flex;flex-direction:column;gap:1rem">${body}</div></div></div>`;
+const skRows = (n, icon = true) => Array.from({ length: n }, (_, i) => `<div class="hstack" style="gap:1.2rem">${icon ? '<div class="sk" style="width:3.2rem;height:3.2rem"></div>' : ''}<div class="vstack grow" style="gap:0.5rem"><div class="sk" style="height:1.5rem;width:${70 - i * 8}%"></div><div class="sk" style="height:1.1rem;width:${45 - i * 4}%"></div></div></div>`).join('');
+const emptyC = (icon, t, p, btn = '') => `<div class="empty" style="padding:1.2rem 0">${I(icon)}<h4>${t}</h4><p>${p}</p>${btn}</div>`;
+const errB = (t, p, retry = true) => `<div class="banner">${I('warn')}<div><div class="bt">${t}</div><div class="bx">${p}</div></div>${retry ? '<button class="btn btn-q btn-sm">Erneut versuchen</button>' : '<span></span>'}</div>`;
+const gallery = (title, scene, cells) => frame(title, scene, `<div class="gallery" style="grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(3,1fr)">${cells.join('')}</div>`, { scrim: ' ' });
+
+gallery('Zustände I · Sitzung und Interaktion', 'day', [
+  cell('Charaktererstellung · lädt', 'Neuer Charakter', 'user', `<span class="chip hstack sm semi" style="align-self:flex-start;padding:0.6rem 1.2rem"><span class="spinner"></span>Modell lädt …</span>${skRows(3, false)}<button class="btn btn-p dis" style="align-self:flex-end">Weiter</button>`),
+  cell('Spawnauswahl · leer', 'Wo möchtest du aufwachen?', 'pin', `${srow('pin', 'Letzter Standort', 'Speicherstadt · Kaistraße 12', 'sel')}<p class="sm sec">Weitere Orte schaltest du durch Wohnung und Job frei.</p>`),
+  cell('Spawnauswahl · lädt', 'Wo möchtest du aufwachen?', 'pin', skRows(4)),
+  cell('Radialmenü · leer (gefesselt)', 'Radialmenü', 'grid', `<div style="align-self:center;width:14.4rem;height:14.4rem;border-radius:50%;background:var(--fh-bg-elevated);box-shadow:var(--fh-shadow-2);display:grid;place-content:center;text-align:center;padding:1.6rem"><span class="semi sm">Keine Aktionen verfügbar</span><span class="xs sec">Du bist gefesselt.</span></div>`),
+  cell('Kontextmenü · lädt', 'Kiste · Lager 7', 'box', skRows(3)),
+  cell('Kontextmenü · leer', 'Laterne', 'box', emptyC('box', 'Hier gibt es nichts zu tun.', 'Schau dich nach einem anderen Objekt um.')),
+  cell('Kontextmenü · Fehler', 'Kiste · Lager 7', 'box', `${errB('Aktion fehlgeschlagen', 'Jemand durchsucht die Kiste bereits.', false)}${ctxRow('box', 'Öffnen', 'Inhalt ansehen', K('E'))}`),
+  cell('Bestätigung · lädt / Fehler', 'Fahrzeug verkaufen?', 'warn', `${errB('Verkauf fehlgeschlagen', 'Das Fahrzeug ist gerade nicht in der Garage.', false)}<div class="hstack" style="justify-content:flex-end;margin-top:auto"><button class="btn btn-s">Abbrechen</button><button class="btn btn-d"><span class="spinner"></span>Verkaufen</button></div>`),
+  cell('Chat · leer', 'Chat', 'msg', emptyC('msg', 'Noch keine Nachrichten', 'Mit /ooc schreibst du außerhalb der Rolle.')),
+  cell('Scoreboard · lädt', 'Nordhafen', 'users', skRows(4, false)),
+  cell('Scoreboard · leer', 'Nordhafen', 'users', emptyC('users', 'Du bist gerade allein in der Stadt.', 'Andere Spieler erscheinen hier, sobald sie verbunden sind.')),
+  cell('Scoreboard · Fehler', 'Nordhafen', 'users', errB('Spielerliste nicht verfügbar', 'Der Server antwortet nicht.')),
+]);
+
+gallery('Zustände II · Gegenstände und Geld', 'night', [
+  cell('Inventar · Kofferraum lädt', 'Kofferraum', 'box', `<span class="sm sec">Kofferraum wird geöffnet …</span><div style="display:grid;grid-template-columns:repeat(5,1fr);gap:0.6rem">${'<div class="sk" style="aspect-ratio:1"></div>'.repeat(10)}</div>`),
+  cell('Inventar · Kofferraum leer', 'Kofferraum', 'box', `<div style="display:grid;grid-template-columns:repeat(5,1fr);gap:0.6rem;opacity:.6">${'<div class="slot empty" style="width:auto;height:auto;aspect-ratio:1"></div>'.repeat(5)}</div>${emptyC('box', 'Kofferraum ist leer', 'Zieh Gegenstände aus deinen Taschen hierher.')}`.replace('padding:1.2rem 0', 'padding:0.4rem 0')),
+  cell('Inventar · Verschieben abgelehnt', 'Taschen', 'box', `${toast('c-err', 'err', 'Zu schwer', 'Der Kofferraum ist voll (40 / 40 kg). Gegenstand zurückgelegt.', '70%').replace('width: 40rem', '')}`),
+  cell('Bank · lädt', 'Girokonto', 'bank', `<div class="sk" style="height:3.2rem;width:50%"></div>${skRows(3, false)}`),
+  cell('Bank · keine Umsätze', 'Sparkonto', 'bank', emptyC('file', 'Noch keine Buchungen', 'Auf diesem Konto wurde noch nichts gebucht.')),
+  cell('Geldautomat · außer Betrieb', 'Geldautomat', 'card', `${errB('Automat außer Betrieb', 'Nächster Automat: Hauptbahnhof, 400 m.', false)}`),
+  cell('Laden · Warenkorb leer', 'Warenkorb', 'cart', `${emptyC('cart', 'Dein Warenkorb ist leer.', 'Tippe auf + bei einem Artikel.')}<button class="btn btn-p btn-wide dis">Bezahlen</button>`),
+  cell('Laden · lädt', 'Hafenkiosk Elbblick', 'cart', `<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0.8rem">${'<div class="vstack" style="gap:0.5rem"><div class="sk" style="height:7rem"></div><div class="sk" style="height:1.4rem;width:70%"></div></div>'.repeat(3)}</div>`),
+  cell('Garage · leer', 'Garage Speicherstadt', 'car', emptyC('car', 'Hier steht kein Fahrzeug von dir.', 'Fahrzeuge parkst du an jeder Garage mit [E] ein.')),
+  cell('Garage · lädt', 'Garage Speicherstadt', 'car', skRows(3)),
+  cell('Kleidungsladen · Teil lädt', 'Oberteile', 'shirt', `<div class="field"><span class="label">Modell</span><div class="stepper"><span class="sb">${I('chevl')}</span><span class="sv mut">… · 13 / 48</span><span class="sb">${I('chev')}</span></div></div><div class="field"><span class="label">Variante</span><div class="stepper" style="opacity:.45"><span class="sb">${I('chevl')}</span><span class="sv">–</span><span class="sb">${I('chev')}</span></div></div>`),
+  cell('Herstellung · keine Rezepte', 'Werkbank · Werft 2', 'hammer', emptyC('hammer', 'Du kennst noch keine Rezepte.', 'Bauanleitungen findest du bei Händlern im Hafen.')),
+]);
+
+gallery('Zustände III · Rechnung, Ausweis, Dienstgeräte', 'day', [
+  cell('Rechnung · Zahlung läuft', 'Rechnung RE-2026-00412', 'file', `<div class="between"><span class="sec">Gesamt</span><span class="num" style="font-size:var(--fh-text-xl)">1.250,00 €</span></div><button class="btn btn-p btn-wide" style="margin-top:auto"><span class="spinner"></span>Wird bezahlt …</button>`),
+  cell('Rechnungen · leer', 'Rechnungen', 'file', emptyC('file', 'Keine offenen Rechnungen.', 'Neue Rechnungen erscheinen hier und als Meldung.')),
+  cell('Rechnung · Fehler', 'Rechnung RE-2026-00412', 'file', `<div class="field"><span class="label">Bezahlen von</span><div class="seg"><span class="on">Girokonto · 820 €</span><span>Bar · 1.205 €</span></div><span class="ferr">${I('warn')}Nicht genug Guthaben auf dem Girokonto.</span></div><button class="btn btn-p btn-wide dis" style="margin-top:auto">Bezahlen · 1.250 €</button>`),
+  cell('Ausweis · Foto lädt', 'Personalausweis', 'id', `<div class="hstack" style="gap:1.6rem;align-items:flex-start"><div class="sk" style="width:9rem;height:11.6rem"></div><div class="vstack grow" style="gap:0.8rem"><div class="idf"><span class="label">Name</span><b>Brandt</b></div><div class="idf"><span class="label">Vorname</span><b>Jonas</b></div><div class="idf"><span class="label">Geboren</span><b>14.03.1991</b></div></div></div>`),
+  cell('MDT · keine Treffer', 'Personen', 'police', `<div class="search" style="border-color:var(--fh-text-primary)">${I('search')}<span class="semi">Petersem</span></div>${emptyC('search', 'Keine Treffer für „Petersem“.', 'Suche nach Vorname, Nachname oder Bürger-ID.')}`.replace('padding:1.2rem 0', 'padding:0.4rem 0')),
+  cell('MDT · lädt', 'Personen', 'police', skRows(4)),
+  cell('MDT · Fehler', 'Vorgang V-2026-0990', 'police', `${errB('Speichern fehlgeschlagen', 'Verbindung zur Datenbank unterbrochen. Dein Entwurf bleibt erhalten.')}<div class="field"><span class="label">Sachverhalt</span><div class="input area">Kontrolle am Containerhafen C, Fahrer ohne…</div></div>`),
+  cell('Rettungsdienst · keine Patienten', 'Patienten', 'med', emptyC('med', 'Keine offenen Patienten.', 'Ruhige Schicht. Neue Notrufe erscheinen hier.')),
+  cell('Rettungsdienst · Fehler', 'Patientenakte', 'med', errB('Patientendaten nicht verfügbar', 'Die Akte konnte nicht geladen werden.')),
+  cell('Chefmenü · keine Mitarbeitenden', 'Hafenbetrieb Nord', 'brief', emptyC('users', 'Noch keine Mitarbeitenden.', 'Lade Spieler in deiner Nähe ein.', '<button class="btn btn-s">Einstellen</button>')),
+  cell('Chefmenü · keine Berechtigung', 'Hafenbetrieb Nord', 'brief', emptyC('lock', 'Keine Berechtigung', 'Das Chefmenü ist ab Rang „Vorarbeiter“ verfügbar.')),
+  cell('Adminpanel · leer / Fehler', 'Meldungen', 'flag', `${errB('Spieler nicht mehr online', 'ID 33 hat den Server verlassen. Aktion nicht ausgeführt.', false)}${emptyC('flag', 'Keine offenen Meldungen.', '')}`.replace('padding:1.2rem 0', 'padding:0.4rem 0')),
+]);
+
+/* 31 Palette and type sheet */
+const sw = (n, v, fg = '#FFFFFF') => `<div style="display:grid;gap:0.4rem"><div style="height:6.4rem;border-radius:var(--fh-radius-md);background:var(--fh-${n});box-shadow:inset 0 0 0 1px rgba(11,34,54,.12);display:flex;align-items:flex-end;padding:0.6rem 0.8rem;color:${fg};font:600 var(--fh-text-xs)/1 var(--fh-font-mono)">${v}</div><span class="mono xs">${n}</span></div>`;
+frame('Palette · Typografie · Tokens', 'none', `<div class="abs" style="inset:0;background:var(--fh-bg-base);z-index:-1"></div>
+  <div class="abs" style="left:4.8rem;top:7.2rem;right:4.8rem;display:grid;grid-template-columns:1.3fr 1fr;gap:4.8rem">
+    <div class="vstack" style="gap:1.6rem">
+      <span class="label">Flächen und Text</span><div style="display:grid;grid-template-columns:repeat(9,1fr);gap:1rem">${sw('bg-base', '#E7F1F5', '#0B2236')}${sw('bg-surface', '#F7FAFB', '#0B2236')}${sw('bg-elevated', '#FFFFFF', '#0B2236')}${sw('bg-overlay', 'α .66')}${sw('border', '#B9C8D3', '#0B2236')}${sw('text-primary', '#0B2236')}${sw('text-secondary', '#3A5469')}${sw('text-muted', '#5A6F81')}${sw('text-on-accent', '#0B2236')}</div>
+      <span class="label">Akzente und Semantik</span><div style="display:grid;grid-template-columns:repeat(9,1fr);gap:1rem">${sw('accent-primary', '#FFC21F', '#0B2236')}${sw('accent-secondary', '#0A7896')}${sw('success', '#16815A')}${sw('warning', '#A95F00')}${sw('danger', '#C42F3D')}${sw('info', '#1F64C4')}</div>
+      <span class="label">Jobs</span><div style="display:grid;grid-template-columns:repeat(9,1fr);gap:1rem">${sw('job-police', '#1E4B9B')}${sw('job-ems', '#C83A24')}${sw('job-mechanic', '#6553B0')}${sw('job-civil', '#5A6E80')}</div>
+      <span class="label">HUD</span><div style="display:grid;grid-template-columns:repeat(9,1fr);gap:1rem">${sw('hud-health', '#D3334A')}${sw('hud-armor', '#2A68D4')}${sw('hud-hunger', '#C27812')}${sw('hud-thirst', '#138BBE')}${sw('hud-stamina', '#4F8E1A')}${sw('hud-stress', '#8655C9')}${sw('hud-voice', '#0F9775')}${sw('hud-radio', '#C43C86')}${sw('hud-fuel', '#C9600E')}</div>
+      <div class="hstack" style="gap:1.6rem;margin-top:1.6rem"><span class="mark"></span><span class="sm sec" style="max-width:60rem">Hafenmarke: nur Ladebildschirm und Charakterauswahl. Ein gelbes Element pro Ansicht. Auswahl immer Sonnenwasser-Türkis.</span></div>
+    </div>
+    <div class="vstack" style="gap:1.2rem">
+      <span class="label">Schrift · Barlow / Barlow Semi Condensed / JetBrains Mono</span>
+      ${[['4xl', 'Nordhafen', 'display', 700], ['3xl', '87 km/h', 'display', 700], ['2xl', '48.210,00 €', 'display', 700], ['xl', 'Garage Speicherstadt', 'display', 600], ['lg', 'Gehalt erhalten', 'sans', 600], ['md', 'Fahrzeuge parkst du an jeder Garage ein.', 'sans', 500], ['sm', 'Abfahrt Anleger 3 in 2 Minuten.', 'sans', 400], ['xs', '21:06 · vor 2 Min.', 'sans', 400], ['2xs', 'LEBEN · PANZER · KM/H', 'display', 600]].map(([s, t, f, w]) => `<div class="hstack" style="gap:2rem;align-items:baseline"><span class="mono xs mut" style="width:5rem">${s}</span><span style="font:${w} var(--fh-text-${s})/1.1 var(--fh-font-${f});${s === '2xs' ? 'letter-spacing:.08em' : ''}">${t}</span></div>`).join('')}
+      <div class="hstack" style="gap:2rem;align-items:baseline"><span class="mono xs mut" style="width:5rem">mono</span><span class="plate"><span>HH-AB 1234</span></span><span class="mono">CID 17 · 101,5</span></div>
+      <div class="hstack" style="gap:1.2rem;margin-top:1.6rem"><button class="btn btn-p">Primär</button><button class="btn btn-s">Sekundär</button><button class="btn btn-t">Türkis</button><button class="btn btn-q">Leise</button><button class="btn btn-d">Löschen</button><button class="btn btn-s focus">Fokus</button></div>
+    </div>
+  </div>`);
+
+document.getElementById('root').innerHTML = frames.join('');
+</script>
+</body>
+</html>

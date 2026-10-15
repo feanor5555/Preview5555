@@ -1,0 +1,66 @@
+/* design-systems/fivem-harbour-maritim/tokens.css
+ * Shared-schema token bindings for FiveM Harbour — Maritim.
+ * Bright, clean harbour-instrument UI: foam-white surfaces, deep harbour navy,
+ * signal yellow for the one primary action, sunny-water teal for selection.
+ * Values are the 1920x1080 reference (1rem = 10px in the NUI root rule).
+ * The FiveM NUI namespace (--fh-*) is specified in DESIGN.md.
+ */
+
+:root {
+  --bg: #E7F1F5;
+  --surface: #F7FAFB;
+  --surface-warm: #FFFFFF;
+  --fg: #0B2236;
+  --fg-2: #3A5469;
+  --muted: #5A6F81;
+  --meta: #3A5469;
+  --border: #B9C8D3;
+  --border-soft: #D6E0E7;
+  --accent: #FFC21F;
+  --accent-on: #0B2236;
+  --accent-hover: #F0B400;
+  --accent-active: #DDA300;
+  --success: #16815A;
+  --warn: #A95F00;
+  --danger: #C42F3D;
+  --font-display: "Barlow Semi Condensed", "Barlow", system-ui, sans-serif;
+  --font-body: "Barlow", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+  --text-xs: 12px;
+  --text-sm: 14px;
+  --text-base: 16px;
+  --text-lg: 19px;
+  --text-xl: 24px;
+  --text-2xl: 32px;
+  --text-3xl: 44px;
+  --text-4xl: 64px;
+  --leading-body: 1.45;
+  --leading-tight: 1.05;
+  --tracking-display: 0.01em;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+  --section-y-desktop: 96px;
+  --section-y-tablet: 64px;
+  --section-y-phone: 48px;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-pill: 9999px;
+  --elev-flat: none;
+  --elev-ring: 0 0 0 1px var(--border);
+  --elev-raised: 0 2px 6px rgba(11, 34, 54, 0.14), 0 8px 24px rgba(11, 34, 54, 0.14);
+  --focus-ring: 0 0 0 2px #FFFFFF, 0 0 0 4px #0B2236;
+  --motion-fast: 120ms;
+  --motion-base: 200ms;
+  --ease-standard: cubic-bezier(0.23, 1, 0.32, 1);
+  --container-max: 1560px;
+  --container-gutter-desktop: 48px;
+  --container-gutter-tablet: 32px;
+  --container-gutter-phone: 16px;
+}

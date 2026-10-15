@@ -1,0 +1,1556 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>fivem-harbour-ui · Variante B „Plattenbau“ · Vorschau</title>
+<style>
+/* ── Self-hosted fonts (NUI runs offline: no CDN) ─────────────────────── */
+@font-face{font-family:"Barlow Condensed";font-style:normal;font-weight:500;font-display:block;src:url("fonts/barlow-condensed-latin-500-normal.woff2") format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Barlow Condensed";font-style:normal;font-weight:600;font-display:block;src:url("fonts/barlow-condensed-latin-600-normal.woff2") format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Barlow Condensed";font-style:normal;font-weight:700;font-display:block;src:url("fonts/barlow-condensed-latin-700-normal.woff2") format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Barlow Condensed";font-style:normal;font-weight:500;font-display:block;src:url("fonts/barlow-condensed-latin-ext-500-normal.woff2") format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:"Barlow Condensed";font-style:normal;font-weight:600;font-display:block;src:url("fonts/barlow-condensed-latin-ext-600-normal.woff2") format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:"Barlow Condensed";font-style:normal;font-weight:700;font-display:block;src:url("fonts/barlow-condensed-latin-ext-700-normal.woff2") format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:"Inter";font-style:normal;font-weight:100 900;font-display:block;src:url("fonts/inter-latin-wght-normal.woff2") format("woff2-variations");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Inter";font-style:normal;font-weight:100 900;font-display:block;src:url("fonts/inter-latin-ext-wght-normal.woff2") format("woff2-variations");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:"JetBrains Mono";font-style:normal;font-weight:400;font-display:block;src:url("fonts/jetbrains-mono-latin-400-normal.woff2") format("woff2")}
+@font-face{font-family:"JetBrains Mono";font-style:normal;font-weight:500;font-display:block;src:url("fonts/jetbrains-mono-latin-500-normal.woff2") format("woff2")}
+@font-face{font-family:"JetBrains Mono";font-style:normal;font-weight:700;font-display:block;src:url("fonts/jetbrains-mono-latin-700-normal.woff2") format("woff2")}
+
+/* ── Tokens: fivem-harbour-ui shared schema, variant B „Plattenbau“ ───── */
+:root{
+  --fh-bg-base:#111315;
+  --fh-bg-surface:#1A1D20;
+  --fh-bg-elevated:#24282C;
+  --fh-bg-overlay:rgba(13,15,17,0.88);
+  --fh-border:#3B4045;
+  --fh-text-primary:#ECE9E2;
+  --fh-text-secondary:#B3B5B2;
+  --fh-text-muted:#989D9F;
+  --fh-text-on-accent:#14130F;
+  --fh-accent-primary:#F2B53A;
+  --fh-accent-secondary:#2C68A0;
+  --fh-success:#6CC08B;
+  --fh-warning:#EE8A34;
+  --fh-danger:#EA5D47;
+  --fh-info:#6AAEE8;
+  --fh-job-police:#5C9AE6;
+  --fh-job-ems:#EF6476;
+  --fh-job-mechanic:#3FBFAE;
+  --fh-job-civil:#A9AEB2;
+  --fh-hud-health:#EE6A5E;
+  --fh-hud-armor:#5DA2E8;
+  --fh-hud-hunger:#E39A3B;
+  --fh-hud-thirst:#46C0DB;
+  --fh-hud-stamina:#8BCB6A;
+  --fh-hud-stress:#B596E3;
+  --fh-hud-voice:#F5C64C;
+  --fh-hud-radio:#4FD3B5;
+  --fh-hud-fuel:#A9BFCF;
+
+  --fh-font-sans:"Inter","Segoe UI",Arial,sans-serif;
+  --fh-font-display:"Barlow Condensed","Arial Narrow","Inter",sans-serif;
+  --fh-font-mono:"JetBrains Mono",Consolas,"Courier New",monospace;
+  --fh-text-2xs:1.1rem;
+  --fh-text-xs:1.2rem;
+  --fh-text-sm:1.4rem;
+  --fh-text-md:1.6rem;
+  --fh-text-lg:2rem;
+  --fh-text-xl:2.6rem;
+  --fh-text-2xl:3.4rem;
+  --fh-text-3xl:4.8rem;
+  --fh-text-4xl:7.2rem;
+  --fh-weight-regular:400;
+  --fh-weight-medium:500;
+  --fh-weight-semibold:600;
+  --fh-weight-bold:700;
+  --fh-space-0_5:0.2rem;
+  --fh-space-1:0.4rem;
+  --fh-space-2:0.8rem;
+  --fh-space-3:1.2rem;
+  --fh-space-4:1.6rem;
+  --fh-space-5:2rem;
+  --fh-space-6:2.4rem;
+  --fh-space-8:3.2rem;
+  --fh-space-10:4rem;
+  --fh-space-12:4.8rem;
+  --fh-space-16:6.4rem;
+  --fh-radius-xs:0;
+  --fh-radius-sm:0.2rem;
+  --fh-radius-md:0.3rem;
+  --fh-radius-lg:0.4rem;
+  --fh-radius-xl:0.8rem;
+  --fh-radius-pill:999rem;
+  --fh-border-width:max(1px,0.1rem);
+  --fh-border-width-strong:max(2px,0.2rem);
+  --fh-shadow-1:0 0.1rem 0.2rem rgba(0,0,0,0.7);
+  --fh-shadow-2:0 0.1rem 0 rgba(0,0,0,0.6),0 0.6rem 1.6rem rgba(0,0,0,0.45);
+  --fh-shadow-3:0 0.2rem 0 rgba(0,0,0,0.5),0 2.4rem 6.4rem rgba(0,0,0,0.6);
+  --fh-glow-accent:0 0 2.4rem rgba(242,181,58,0.3);
+  --fh-blur-thin:0px;
+  --fh-blur-regular:0px;
+  --fh-blur-thick:0px;
+  --fh-material-thin:rgba(13,15,17,0.72);
+  --fh-material-regular:rgba(13,15,17,0.88);
+  --fh-material-thick:rgba(17,19,21,0.96);
+  --fh-duration-fast:100ms;
+  --fh-duration-enter:200ms;
+  --fh-duration-exit:140ms;
+  --fh-duration-slow:320ms;
+  --fh-ease-standard:cubic-bezier(0.23,1,0.32,1);
+  --fh-ease-spring:cubic-bezier(0.3,1.15,0.5,1);
+  --fh-focus-ring:0 0 0 max(2px,0.2rem) var(--fh-bg-base),0 0 0 max(4px,0.4rem) var(--fh-accent-primary);
+}
+
+/* One root scaling rule for the whole series: 1rem = 10px at 1080p. */
+html{font-size:clamp(8px,calc(100vh / 108),16px)}
+
+/* ── Base ─────────────────────────────────────────────────────────────── */
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:#000;color:var(--fh-text-primary);font-family:var(--fh-font-sans);font-size:var(--fh-text-md);line-height:1.45;-webkit-font-smoothing:antialiased;font-feature-settings:"tnum" 0}
+button{font:inherit;color:inherit}
+.num{font-variant-numeric:tabular-nums lining-nums}
+.mono{font-family:var(--fh-font-mono)}
+.disp{font-family:var(--fh-font-display)}
+.label{font-family:var(--fh-font-display);font-weight:var(--fh-weight-semibold);font-size:var(--fh-text-xs);letter-spacing:0.08em;text-transform:uppercase;color:var(--fh-text-secondary);line-height:1.2}
+.muted{color:var(--fh-text-muted)}
+.sec{color:var(--fh-text-secondary)}
+.sm{font-size:var(--fh-text-sm)}
+.xs{font-size:var(--fh-text-xs)}
+svg.i{width:2rem;height:2rem;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:square;stroke-linejoin:miter;vertical-align:middle}
+svg.i.s16{width:1.6rem;height:1.6rem}
+svg.i.s24{width:2.4rem;height:2.4rem}
+svg.i.s32{width:3.2rem;height:3.2rem}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+
+/* ── Preview scaffolding (not part of the system) ─────────────────────── */
+.frame{position:relative;width:100vw;height:100vh;overflow:hidden;background:var(--fh-bg-base)}
+.frame+.frame{border-top:4px solid #000}
+.world{position:absolute;inset:0}
+.world svg{width:100%;height:100%;display:block}
+.dim{position:absolute;inset:0;background:rgba(5,6,8,0.45)}
+.tag{position:absolute;left:50%;top:0.8rem;transform:translateX(-50%);z-index:50;font:500 1.1rem/1 var(--fh-font-mono);color:#fff;background:rgba(0,0,0,0.62);padding:0.5rem 0.9rem;letter-spacing:0.04em;white-space:nowrap}
+.center{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;gap:var(--fh-space-8)}
+
+/* ── Textures: hints only ─────────────────────────────────────────────── */
+.tex-concrete{position:relative;isolation:isolate}
+.tex-concrete::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:0.06;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.9 0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E")}
+.tex-facade{background-image:linear-gradient(rgba(236,233,226,0.035) 1px,transparent 1px),linear-gradient(90deg,rgba(236,233,226,0.035) 1px,transparent 1px);background-size:24rem 13.5rem}
+.tex-fence{background-image:repeating-linear-gradient(45deg,rgba(236,233,226,0.045) 0 1px,transparent 1px 2.6rem),repeating-linear-gradient(-45deg,rgba(236,233,226,0.045) 0 1px,transparent 1px 2.6rem)}
+.tex-ribs{background-image:repeating-linear-gradient(90deg,rgba(236,233,226,0.05) 0 0.3rem,transparent 0.3rem 1rem)}
+.tex-hazard{background-image:repeating-linear-gradient(-45deg,var(--fh-accent-primary) 0 0.7rem,var(--fh-bg-base) 0.7rem 1.4rem)}
+
+/* ── Primitives ───────────────────────────────────────────────────────── */
+.plate{background:var(--fh-material-regular);border:var(--fh-border-width) solid rgba(0,0,0,0.6);box-shadow:var(--fh-shadow-1);border-radius:var(--fh-radius-xs)}
+.panel{background:var(--fh-bg-surface);border:var(--fh-border-width) solid var(--fh-border);border-top:var(--fh-border-width-strong) solid var(--fh-accent-primary);border-radius:var(--fh-radius-md);box-shadow:var(--fh-shadow-3);color:var(--fh-text-primary);display:flex;flex-direction:column;overflow:hidden}
+.panel__head{display:flex;align-items:center;gap:var(--fh-space-3);padding:var(--fh-space-4) var(--fh-space-5);border-bottom:var(--fh-border-width) solid var(--fh-border);flex:none}
+.panel__title{font:var(--fh-weight-semibold) var(--fh-text-xl)/1 var(--fh-font-display);letter-spacing:0.04em;text-transform:uppercase;margin:0}
+.panel__sub{font-size:var(--fh-text-sm);color:var(--fh-text-muted);margin-top:0.3rem}
+.panel__head .grow{flex:1;min-width:0}
+.panel__body{padding:var(--fh-space-5);flex:1;min-height:0}
+.panel__foot{display:flex;align-items:center;gap:var(--fh-space-3);padding:var(--fh-space-3) var(--fh-space-5);border-top:var(--fh-border-width) solid var(--fh-border);background:var(--fh-bg-base);flex:none}
+.panel__foot .grow{flex:1}
+.code{display:inline-flex;align-items:center;justify-content:center;min-width:3.4rem;height:3.4rem;padding:0 0.6rem;border:var(--fh-border-width-strong) solid var(--fh-accent-primary);color:var(--fh-accent-primary);font:var(--fh-weight-bold) var(--fh-text-lg)/1 var(--fh-font-display);letter-spacing:0.02em;flex:none}
+.code--sm{min-width:2.6rem;height:2.6rem;font-size:var(--fh-text-md)}
+.code--police{border-color:var(--fh-job-police);color:var(--fh-job-police)}
+.code--ems{border-color:var(--fh-job-ems);color:var(--fh-job-ems)}
+.code--danger{border-color:var(--fh-danger);color:var(--fh-danger)}
+.code--mech{border-color:var(--fh-job-mechanic);color:var(--fh-job-mechanic)}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:var(--fh-space-2);height:4rem;padding:0 var(--fh-space-5);border:var(--fh-border-width) solid transparent;border-radius:var(--fh-radius-sm);font:var(--fh-weight-semibold) var(--fh-text-md)/1 var(--fh-font-display);letter-spacing:0.06em;text-transform:uppercase;cursor:pointer;white-space:nowrap;transition:background-color var(--fh-duration-fast) var(--fh-ease-standard),border-color var(--fh-duration-fast) var(--fh-ease-standard),transform var(--fh-duration-fast) var(--fh-ease-standard)}
+.btn:focus-visible,.btn.is-focus{outline:none;box-shadow:var(--fh-focus-ring)}
+.btn:active,.btn.is-active{transform:translateY(0.1rem)}
+.btn--primary{background:var(--fh-accent-primary);color:var(--fh-text-on-accent)}
+.btn--primary:hover,.btn--primary.is-hover{background:#F4BF56}
+.btn--secondary{background:var(--fh-accent-secondary);color:var(--fh-text-primary)}
+.btn--secondary:hover,.btn--secondary.is-hover{background:#4177AA}
+.btn--ghost{background:transparent;border-color:var(--fh-text-muted);color:var(--fh-text-primary)}
+.btn--ghost:hover,.btn--ghost.is-hover{background:var(--fh-bg-elevated);border-color:var(--fh-text-secondary)}
+.btn--danger{background:var(--fh-danger);color:var(--fh-text-on-accent)}
+.btn--danger:hover,.btn--danger.is-hover{background:#ED705D}
+.btn--danger-ghost{background:transparent;border-color:var(--fh-danger);color:var(--fh-danger)}
+.btn[disabled],.btn.is-disabled{background:var(--fh-bg-elevated);border-color:transparent;color:var(--fh-text-muted);cursor:not-allowed;transform:none}
+.btn--sm{height:3.2rem;padding:0 var(--fh-space-3);font-size:var(--fh-text-sm)}
+.btn--icon{width:4rem;padding:0}
+.btn--sm.btn--icon{width:3.2rem}
+.btn--block{width:100%}
+.btn .key{height:2rem;min-width:2rem;font-size:var(--fh-text-2xs);background:transparent;border:var(--fh-border-width) solid currentColor;color:inherit;box-shadow:none;opacity:0.8}
+
+.key{display:inline-flex;align-items:center;justify-content:center;min-width:2.8rem;height:2.8rem;padding:0 0.6rem;background:var(--fh-accent-primary);color:var(--fh-text-on-accent);font:var(--fh-weight-bold) var(--fh-text-md)/1 var(--fh-font-display);letter-spacing:0.02em;border-radius:var(--fh-radius-sm);box-shadow:inset 0 -0.2rem 0 rgba(0,0,0,0.25);flex:none}
+.key--ghost{background:transparent;color:var(--fh-text-secondary);border:var(--fh-border-width) solid var(--fh-text-muted);box-shadow:none;font-weight:var(--fh-weight-semibold)}
+.key--sm{min-width:2.2rem;height:2.2rem;font-size:var(--fh-text-xs);padding:0 0.4rem}
+
+.field{display:flex;flex-direction:column;gap:var(--fh-space-1);min-width:0}
+.input{height:4rem;width:100%;background:var(--fh-bg-base);border:var(--fh-border-width) solid var(--fh-text-muted);border-radius:var(--fh-radius-sm);color:var(--fh-text-primary);padding:0 var(--fh-space-3);font:var(--fh-weight-regular) var(--fh-text-md)/1 var(--fh-font-sans);display:flex;align-items:center;gap:var(--fh-space-2)}
+.input::placeholder,.input .ph{color:var(--fh-text-muted)}
+.input.is-focus{border-color:var(--fh-accent-primary);box-shadow:var(--fh-focus-ring)}
+.input.is-error{border-color:var(--fh-danger)}
+.input.is-disabled{background:var(--fh-bg-elevated);border-color:var(--fh-border);color:var(--fh-text-muted)}
+.input.mono{font-family:var(--fh-font-mono)}
+.input .suffix{margin-left:auto;color:var(--fh-text-muted);font-family:var(--fh-font-display);font-weight:600}
+.caret{display:inline-block;width:0.15rem;height:1.8rem;background:var(--fh-accent-primary);margin-left:-0.3rem}
+.msg{font-size:var(--fh-text-sm);display:flex;gap:0.6rem;align-items:center}
+.msg--error{color:var(--fh-danger)}
+.msg--hint{color:var(--fh-text-muted)}
+textarea.input{height:auto;padding:var(--fh-space-2) var(--fh-space-3);resize:none}
+
+.tabs{display:flex;gap:var(--fh-space-1);border-bottom:var(--fh-border-width) solid var(--fh-border)}
+.tab{display:inline-flex;align-items:center;gap:var(--fh-space-2);padding:var(--fh-space-3) var(--fh-space-4);font:var(--fh-weight-semibold) var(--fh-text-md)/1 var(--fh-font-display);letter-spacing:0.06em;text-transform:uppercase;color:var(--fh-text-secondary);border-bottom:var(--fh-border-width-strong) solid transparent;margin-bottom:calc(-1 * var(--fh-border-width))}
+.tab.is-active{color:var(--fh-text-primary);border-bottom-color:var(--fh-accent-primary)}
+.tab .count{font-size:var(--fh-text-xs);color:var(--fh-text-muted)}
+
+.chip{display:inline-flex;align-items:center;gap:0.6rem;height:2.4rem;padding:0 0.8rem;background:var(--fh-bg-elevated);border-radius:var(--fh-radius-sm);font:var(--fh-weight-semibold) var(--fh-text-sm)/1 var(--fh-font-display);letter-spacing:0.04em;text-transform:uppercase;color:var(--fh-text-primary);white-space:nowrap}
+.chip::before{content:"";width:0.8rem;height:0.8rem;background:var(--c,var(--fh-text-muted));flex:none}
+.chip--plain::before{display:none}
+.chip--status{position:relative;isolation:isolate;background:transparent;color:var(--c)}
+.chip--status::after{content:"";position:absolute;inset:0;background:var(--c);opacity:0.14;z-index:-1;border-radius:inherit}
+.chip--status::before{display:none}
+.c-police{--c:var(--fh-job-police)}.c-ems{--c:var(--fh-job-ems)}.c-mech{--c:var(--fh-job-mechanic)}.c-civil{--c:var(--fh-job-civil)}
+.c-success{--c:var(--fh-success)}.c-warning{--c:var(--fh-warning)}.c-danger{--c:var(--fh-danger)}.c-info{--c:var(--fh-info)}.c-accent{--c:var(--fh-accent-primary)}
+
+.bar{position:relative;height:0.8rem;background:rgba(236,233,226,0.12);overflow:hidden}
+.bar>i{position:absolute;inset:0 auto 0 0;width:var(--v,50%);background:var(--c,var(--fh-accent-primary))}
+.bar--seg{-webkit-mask:repeating-linear-gradient(90deg,#000 0 calc(10% - 0.2rem),transparent calc(10% - 0.2rem) 10%);mask:repeating-linear-gradient(90deg,#000 0 calc(10% - 0.2rem),transparent calc(10% - 0.2rem) 10%)}
+.bar--thin{height:0.4rem}
+.bar--lg{height:1.2rem}
+.is-low .bar>i,.bar.is-low>i{background:repeating-linear-gradient(-45deg,transparent 0 0.5rem,rgba(0,0,0,0.45) 0.5rem 1rem),var(--c)}
+
+.row{display:grid;align-items:center;gap:var(--fh-space-3);padding:var(--fh-space-2) var(--fh-space-3);border-bottom:var(--fh-border-width) solid var(--fh-border);min-height:4.4rem}
+.row.is-hover{background:var(--fh-bg-elevated)}
+.row.is-selected{background:var(--fh-bg-elevated);box-shadow:inset var(--fh-border-width-strong) 0 0 var(--fh-accent-primary)}
+.row.is-disabled{color:var(--fh-text-muted)}
+.th{font:var(--fh-weight-semibold) var(--fh-text-xs)/1 var(--fh-font-display);letter-spacing:0.08em;text-transform:uppercase;color:var(--fh-text-muted);min-height:3.2rem;border-bottom-color:var(--fh-text-muted)}
+
+.skel{display:block;height:1.2rem;background:linear-gradient(90deg,var(--fh-bg-elevated) 0 40%,#2e3338 50%,var(--fh-bg-elevated) 60% 100%);background-size:300% 100%;animation:skel 1.4s linear infinite}
+@keyframes skel{from{background-position:100% 0}to{background-position:0 0}}
+.empty{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:var(--fh-space-2);text-align:center;color:var(--fh-text-secondary);padding:var(--fh-space-8) var(--fh-space-5);border:var(--fh-border-width) dashed var(--fh-border)}
+.empty svg.i{color:var(--fh-text-muted);width:3.2rem;height:3.2rem}
+.empty b{font:var(--fh-weight-semibold) var(--fh-text-lg)/1.1 var(--fh-font-display);text-transform:uppercase;letter-spacing:0.04em;color:var(--fh-text-primary)}
+.errbox{display:flex;gap:var(--fh-space-3);align-items:flex-start;padding:var(--fh-space-3) var(--fh-space-4);background:rgba(234,93,71,0.12);border-left:var(--fh-border-width-strong) solid var(--fh-danger);font-size:var(--fh-text-sm)}
+.errbox svg.i{color:var(--fh-danger)}
+
+.stepper{display:inline-flex;align-items:center;border:var(--fh-border-width) solid var(--fh-text-muted);border-radius:var(--fh-radius-sm);height:3.2rem}
+.stepper button{width:3.2rem;height:100%;background:transparent;border:0;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--fh-text-primary)}
+.stepper span{min-width:6rem;text-align:center;font:var(--fh-weight-semibold) var(--fh-text-md)/1 var(--fh-font-display);font-variant-numeric:tabular-nums}
+.slider{position:relative;height:2.4rem;display:flex;align-items:center}
+.slider::before{content:"";position:absolute;left:0;right:0;height:0.4rem;background:rgba(236,233,226,0.14)}
+.slider>i{position:absolute;left:0;height:0.4rem;width:var(--v);background:var(--fh-accent-primary)}
+.slider>b{position:absolute;left:var(--v);width:1.6rem;height:1.6rem;margin-left:-0.8rem;background:var(--fh-text-primary);border:var(--fh-border-width-strong) solid var(--fh-bg-base);box-shadow:0 0 0 1px var(--fh-text-muted)}
+.slider.is-focus>b{box-shadow:var(--fh-focus-ring)}
+.toggle{width:4.4rem;height:2.4rem;background:var(--fh-bg-elevated);border:var(--fh-border-width) solid var(--fh-text-muted);position:relative;flex:none}
+.toggle::after{content:"";position:absolute;top:0.3rem;left:0.3rem;width:1.6rem;height:1.6rem;background:var(--fh-text-muted)}
+.toggle.is-on{background:var(--fh-accent-primary);border-color:var(--fh-accent-primary)}
+.toggle.is-on::after{left:auto;right:0.3rem;background:var(--fh-text-on-accent)}
+.seg-ctl{display:inline-flex;border:var(--fh-border-width) solid var(--fh-text-muted);border-radius:var(--fh-radius-sm);overflow:hidden}
+.seg-ctl span{padding:0 var(--fh-space-4);height:3.6rem;display:flex;align-items:center;gap:0.6rem;font:var(--fh-weight-semibold) var(--fh-text-sm)/1 var(--fh-font-display);letter-spacing:0.06em;text-transform:uppercase;color:var(--fh-text-secondary)}
+.seg-ctl span+span{border-left:var(--fh-border-width) solid var(--fh-text-muted)}
+.seg-ctl span.is-active{background:var(--fh-accent-secondary);color:var(--fh-text-primary)}
+.dot{display:inline-block;width:0.8rem;height:0.8rem;background:var(--c,var(--fh-text-muted));flex:none}
+.money{font-family:var(--fh-font-display);font-weight:var(--fh-weight-semibold);font-variant-numeric:tabular-nums}
+.pos{color:var(--fh-success)}.neg{color:var(--fh-danger)}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:var(--fh-space-1) var(--fh-space-4);font-size:var(--fh-text-sm)}
+.kv dt{color:var(--fh-text-muted)}.kv dd{margin:0;color:var(--fh-text-primary)}
+.divider{height:var(--fh-border-width);background:var(--fh-border);margin:var(--fh-space-4) 0}
+.scroll-fade{mask-image:linear-gradient(#000 85%,transparent);-webkit-mask-image:linear-gradient(#000 85%,transparent)}
+.plate-de{display:inline-flex;align-items:stretch;height:2.6rem;background:#F1EFE8;color:#121212;border:max(1px,0.15rem) solid #121212;border-radius:var(--fh-radius-sm);font:var(--fh-weight-bold) var(--fh-text-md)/1 var(--fh-font-display);letter-spacing:0.08em;overflow:hidden;white-space:nowrap}
+.plate-de::before{content:"D";display:flex;align-items:flex-end;padding:0 0.4rem 0.3rem;background:#2C68A0;color:#F1EFE8;font-size:var(--fh-text-2xs)}
+.plate-de span{display:flex;align-items:center;padding:0 0.7rem}
+.avatar{display:flex;align-items:flex-end;justify-content:center;background:linear-gradient(#2a2f34,#1b1e21);overflow:hidden;color:#3e454c;flex:none}
+.avatar svg{width:80%;height:85%}
+
+/* ── HUD ──────────────────────────────────────────────────────────────── */
+.hud{position:absolute;inset:0;pointer-events:none;font-family:var(--fh-font-display);text-shadow:0 0.1rem 0.2rem rgba(0,0,0,0.5)}
+.hud .tl{position:absolute;left:3.2rem;top:3.2rem;display:flex;flex-direction:column;gap:var(--fh-space-2)}
+.hud .tr{position:absolute;right:3.2rem;top:3.2rem;display:flex;flex-direction:column;align-items:flex-end;gap:var(--fh-space-2);width:38rem}
+.hud .bl{position:absolute;left:3.2rem;bottom:3.2rem;display:flex;align-items:flex-end;gap:var(--fh-space-3)}
+.hud .br{position:absolute;right:3.2rem;bottom:3.2rem;display:flex;flex-direction:column;align-items:flex-end;gap:var(--fh-space-3)}
+.hud .bc{position:absolute;left:50%;bottom:9.6rem;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:var(--fh-space-3)}
+.voice{display:flex;align-items:center;gap:var(--fh-space-3);padding:var(--fh-space-2) var(--fh-space-3)}
+.voice .ic{color:var(--fh-text-secondary)}
+.voice.is-talking .ic{color:var(--fh-hud-voice)}
+.voice .pips{display:flex;gap:0.3rem;align-items:flex-end}
+.voice .pips i{width:0.6rem;background:rgba(236,233,226,0.22)}
+.voice .pips i:nth-child(1){height:0.8rem}.voice .pips i:nth-child(2){height:1.3rem}.voice .pips i:nth-child(3){height:1.8rem}
+.voice .pips i.on{background:var(--fh-text-primary)}
+.voice.is-talking .pips i.on{background:var(--fh-hud-voice)}
+.voice .lbl{font-weight:600;font-size:var(--fh-text-md);letter-spacing:0.04em;text-transform:uppercase}
+.radio{display:flex;align-items:center;gap:var(--fh-space-3);padding:var(--fh-space-2) var(--fh-space-3)}
+.radio .ic{color:var(--fh-text-secondary)}
+.radio.is-tx .ic,.radio.is-tx .freq{color:var(--fh-hud-radio)}
+.radio .freq{font-weight:700;font-size:var(--fh-text-lg);font-variant-numeric:tabular-nums}
+.radio .tx{font-size:var(--fh-text-2xs);font-weight:700;letter-spacing:0.1em;padding:0.2rem 0.5rem;background:var(--fh-hud-radio);color:var(--fh-text-on-accent)}
+.radio .rx{font-size:var(--fh-text-xs);color:var(--fh-text-secondary);font-family:var(--fh-font-sans);text-shadow:none}
+.wallet{display:flex;flex-direction:column;align-items:stretch;min-width:24rem}
+.wallet .line{display:flex;align-items:center;gap:var(--fh-space-3);padding:0.6rem var(--fh-space-3)}
+.wallet .line+.line{border-top:var(--fh-border-width) solid rgba(236,233,226,0.08)}
+.wallet .ic{color:var(--fh-text-secondary)}
+.wallet .amt{margin-left:auto;font-size:var(--fh-text-xl);font-weight:600;font-variant-numeric:tabular-nums;line-height:1}
+.wallet .delta{font-size:var(--fh-text-md);font-weight:700;color:var(--fh-success);margin-left:var(--fh-space-2)}
+.jobplate{display:flex;align-items:center;gap:var(--fh-space-3);padding:0.6rem var(--fh-space-3)}
+.jobplate .dot{width:1rem;height:1rem}
+.jobplate b{font-size:var(--fh-text-md);font-weight:700;text-transform:uppercase;letter-spacing:0.04em}
+.jobplate span{font-size:var(--fh-text-md);color:var(--fh-text-secondary)}
+.jobplate .duty{font-size:var(--fh-text-2xs);letter-spacing:0.1em;color:var(--fh-success);font-weight:700}
+.toasts{display:flex;flex-direction:column;gap:var(--fh-space-2);width:38rem;margin-top:var(--fh-space-2)}
+.toast{display:grid;grid-template-columns:auto 1fr auto;gap:var(--fh-space-1) var(--fh-space-3);padding:var(--fh-space-3) var(--fh-space-4) var(--fh-space-3) var(--fh-space-3);background:var(--fh-material-regular);border-left:0.4rem solid var(--c);box-shadow:var(--fh-shadow-2);position:relative;text-shadow:none}
+.toast svg.i{color:var(--c);grid-row:span 2}
+.toast b{font:700 var(--fh-text-md)/1.15 var(--fh-font-display);text-transform:uppercase;letter-spacing:0.04em}
+.toast p{margin:0;grid-column:2/4;font:400 var(--fh-text-sm)/1.4 var(--fh-font-sans);color:var(--fh-text-secondary)}
+.toast time{font:500 var(--fh-text-xs)/1.15 var(--fh-font-mono);color:var(--fh-text-muted)}
+.toast::after{content:"";position:absolute;left:0;bottom:0;height:0.2rem;width:var(--t,60%);background:var(--c);opacity:0.7}
+.toast.is-enter{animation:toastIn var(--fh-duration-enter) var(--fh-ease-standard) both}
+@keyframes toastIn{from{opacity:0;transform:translateX(2.4rem)}to{opacity:1;transform:none}}
+.vitals{display:flex;flex-direction:column;gap:0.4rem;width:21rem}
+.vital{display:grid;grid-template-columns:2rem 1fr 3.4rem;align-items:center;gap:var(--fh-space-2);padding:0.5rem var(--fh-space-2);height:3rem}
+.vital svg.i{width:1.8rem;height:1.8rem;color:var(--c)}
+.vital .bar{height:0.8rem}
+.vital .v{text-align:right;font-size:var(--fh-text-md);font-weight:600;font-variant-numeric:tabular-nums;color:var(--fh-text-primary)}
+.vital.is-low{box-shadow:inset 0.3rem 0 0 var(--fh-danger),var(--fh-shadow-1)}
+.vital.is-low .v{color:var(--fh-danger)}
+.vital.is-low svg.i{animation:pulse 1s steps(2,jump-none) infinite}
+@keyframes pulse{50%{opacity:0.35}}
+.nav{display:flex;flex-direction:column;gap:0.4rem;width:31rem}
+.compass{position:relative;height:3.2rem;overflow:hidden;display:flex;align-items:center}
+.compass .ticks{position:absolute;inset:0;background:repeating-linear-gradient(90deg,rgba(236,233,226,0.35) 0 1px,transparent 1px 1.2rem);background-position:0.6rem 0;-webkit-mask:linear-gradient(90deg,transparent,#000 20%,#000 80%,transparent);mask:linear-gradient(90deg,transparent,#000 20%,#000 80%,transparent);height:0.8rem;top:auto;bottom:0}
+.compass .letters{position:absolute;inset:0;display:flex;justify-content:space-around;align-items:center;font-weight:600;font-size:var(--fh-text-md);color:var(--fh-text-secondary);padding-bottom:0.6rem;-webkit-mask:linear-gradient(90deg,transparent,#000 20%,#000 80%,transparent);mask:linear-gradient(90deg,transparent,#000 20%,#000 80%,transparent)}
+.compass .hd{position:relative;z-index:1;margin:0 auto;background:var(--fh-accent-primary);color:var(--fh-text-on-accent);font-weight:700;font-size:var(--fh-text-md);padding:0.2rem 0.8rem;text-shadow:none;font-variant-numeric:tabular-nums}
+.street{padding:0.6rem var(--fh-space-3);display:flex;align-items:baseline;gap:var(--fh-space-2);white-space:nowrap}
+.street b{font-size:var(--fh-text-lg);font-weight:700;letter-spacing:0.02em}
+.street span{font-size:var(--fh-text-md);color:var(--fh-text-secondary)}
+.minimap{position:relative;width:31rem;height:19.5rem;border:var(--fh-border-width-strong) solid var(--fh-bg-base);box-shadow:0 0 0 var(--fh-border-width) rgba(236,233,226,0.45),var(--fh-shadow-1);background:#1f262c;overflow:hidden}
+.minimap svg{position:absolute;inset:0;width:100%;height:100%}
+.minimap .corner{position:absolute;width:1.4rem;height:1.4rem;border-color:var(--fh-accent-primary);border-style:solid;border-width:0}
+.minimap .c1{left:-0.2rem;top:-0.2rem;border-left-width:0.3rem;border-top-width:0.3rem}
+.minimap .c2{right:-0.2rem;top:-0.2rem;border-right-width:0.3rem;border-top-width:0.3rem}
+.minimap .c3{left:-0.2rem;bottom:-0.2rem;border-left-width:0.3rem;border-bottom-width:0.3rem}
+.minimap .c4{right:-0.2rem;bottom:-0.2rem;border-right-width:0.3rem;border-bottom-width:0.3rem}
+.minimap .note{position:absolute;right:0.6rem;bottom:0.4rem;font:500 1rem/1 var(--fh-font-mono);color:rgba(236,233,226,0.5);text-shadow:none}
+.ammo{display:flex;align-items:center;gap:var(--fh-space-3);padding:var(--fh-space-2) var(--fh-space-4)}
+.ammo .wpn{display:flex;flex-direction:column;align-items:flex-end;gap:0.2rem}
+.ammo .wpn b{font-size:var(--fh-text-md);font-weight:700;text-transform:uppercase;letter-spacing:0.04em}
+.ammo .wpn span{font-size:var(--fh-text-xs);color:var(--fh-text-muted);letter-spacing:0.08em;text-transform:uppercase}
+.ammo .mag{font-size:var(--fh-text-3xl);font-weight:700;line-height:0.9;font-variant-numeric:tabular-nums}
+.ammo .res{font-size:var(--fh-text-lg);color:var(--fh-text-secondary);font-weight:600;font-variant-numeric:tabular-nums}
+.ammo.is-low .mag{color:var(--fh-warning)}
+.veh{display:grid;grid-template-columns:auto auto;gap:var(--fh-space-1) var(--fh-space-4);padding:var(--fh-space-3) var(--fh-space-4);width:39rem}
+.veh .ind{grid-column:1/-1;display:flex;justify-content:space-between;align-items:center}
+.veh .ind svg.i{width:2.2rem;height:2.2rem;color:rgba(236,233,226,0.22)}
+.veh .ind svg.i.on{color:var(--fh-success);animation:blink 667ms steps(1,end) infinite}
+@keyframes blink{50%{opacity:0.15}}
+.veh .ind .gear{font-size:var(--fh-text-md);font-weight:700;color:var(--fh-text-secondary);letter-spacing:0.1em}
+.veh .speed{display:flex;align-items:baseline;gap:var(--fh-space-2)}
+.veh .speed b{font-size:var(--fh-text-4xl);font-weight:700;line-height:0.85;font-variant-numeric:tabular-nums;min-width:12rem;text-align:right}
+.veh .speed span{font-size:var(--fh-text-md);font-weight:600;color:var(--fh-text-secondary);letter-spacing:0.08em}
+.veh .stat{display:grid;grid-template-columns:repeat(2,auto);gap:var(--fh-space-2) var(--fh-space-3);align-content:center}
+.veh .st{display:flex;align-items:center;gap:0.6rem;white-space:nowrap;font-size:var(--fh-text-sm);font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--fh-text-secondary)}
+.veh .st svg.i{width:1.8rem;height:1.8rem}
+.veh .st.ok svg.i{color:var(--fh-success)}
+.veh .st.warn{color:var(--fh-warning)}
+.veh .st.warn svg.i{animation:blink 667ms steps(1,end) infinite}
+.veh .st.off{color:var(--fh-text-muted)}
+.veh .st.bad{color:var(--fh-danger)}
+.veh .spbar{grid-column:1/-1}
+.veh .fuel{grid-column:1/-1;display:grid;grid-template-columns:2rem 1fr 4rem;gap:var(--fh-space-2);align-items:center}
+.veh .fuel svg.i{width:1.8rem;height:1.8rem;color:var(--fh-hud-fuel)}
+.veh .fuel .v{text-align:right;font-weight:600;font-variant-numeric:tabular-nums}
+.progress{width:46rem;padding:var(--fh-space-3) var(--fh-space-4);display:flex;flex-direction:column;gap:var(--fh-space-2)}
+.progress .top{display:flex;align-items:baseline;gap:var(--fh-space-3)}
+.progress .top b{font-size:var(--fh-text-lg);font-weight:600;letter-spacing:0.02em}
+.progress .top span{margin-left:auto;font-weight:700;font-size:var(--fh-text-lg);font-variant-numeric:tabular-nums;color:var(--fh-accent-primary)}
+.progress .bot{display:flex;align-items:center;gap:var(--fh-space-2);font:400 var(--fh-text-xs)/1 var(--fh-font-sans);color:var(--fh-text-muted);text-shadow:none}
+.hint{font-family:var(--fh-font-display);display:inline-flex;align-items:center;gap:var(--fh-space-3);padding:0.6rem var(--fh-space-4) 0.6rem 0.6rem;font-size:var(--fh-text-lg);font-weight:600;letter-spacing:0.02em}
+.hint .key{position:relative}
+.hint.is-hold .key::after{content:"";position:absolute;inset:-0.5rem;border:0.25rem solid rgba(242,181,58,0.25);border-top-color:var(--fh-accent-primary);border-right-color:var(--fh-accent-primary)}
+.hint small{font-size:var(--fh-text-sm);color:var(--fh-text-secondary);font-weight:500}
+
+/* ── Death screen ─────────────────────────────────────────────────────── */
+.death{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:var(--fh-space-5);background:radial-gradient(ellipse at center,rgba(10,10,12,0.55) 0%,rgba(6,6,8,0.92) 70%)}
+.death h1{margin:0;font:700 var(--fh-text-4xl)/0.9 var(--fh-font-display);letter-spacing:0.12em;text-transform:uppercase}
+.death .timer{font:500 var(--fh-text-3xl)/1 var(--fh-font-mono);color:var(--fh-text-primary)}
+
+/* ── Radial menu ──────────────────────────────────────────────────────── */
+.radial{position:relative;width:46rem;height:46rem}
+.radial svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.radial .seg{fill:rgba(13,15,17,0.9);stroke:rgba(0,0,0,0.6);stroke-width:1}
+.radial .seg.is-active{fill:var(--fh-accent-primary)}
+.radial .seg.is-disabled{fill:rgba(13,15,17,0.7)}
+.radial .item{position:absolute;width:10rem;margin-left:-5rem;margin-top:-3rem;display:flex;flex-direction:column;align-items:center;gap:0.4rem;font:600 var(--fh-text-sm)/1.1 var(--fh-font-display);letter-spacing:0.05em;text-transform:uppercase;text-align:center;color:var(--fh-text-primary)}
+.radial .item svg.i{position:static;width:2.6rem;height:2.6rem}
+.radial .item.is-active{color:var(--fh-text-on-accent)}
+.radial .item.is-disabled{color:var(--fh-text-muted)}
+.radial .hub{position:absolute;left:50%;top:50%;width:15rem;height:15rem;margin:-7.5rem;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.4rem;text-align:center}
+.radial .hub b{font:700 var(--fh-text-lg)/1.05 var(--fh-font-display);text-transform:uppercase;letter-spacing:0.04em}
+.radial .hub span{font-size:var(--fh-text-xs);color:var(--fh-text-muted)}
+
+/* ── Context menu ─────────────────────────────────────────────────────── */
+.ctx{width:30rem;background:var(--fh-bg-surface);border:var(--fh-border-width) solid var(--fh-border);box-shadow:var(--fh-shadow-2);padding:0.4rem 0}
+.ctx .hd{display:flex;align-items:center;gap:var(--fh-space-2);padding:var(--fh-space-2) var(--fh-space-3) var(--fh-space-3);border-bottom:var(--fh-border-width) solid var(--fh-border);margin-bottom:0.4rem}
+.ctx .it{display:flex;align-items:center;gap:var(--fh-space-3);height:3.8rem;padding:0 var(--fh-space-3);font-size:var(--fh-text-md)}
+.ctx .it svg.i{color:var(--fh-text-secondary);width:1.8rem;height:1.8rem}
+.ctx .it .sc{margin-left:auto}
+.ctx .it.is-hover{background:var(--fh-bg-elevated);box-shadow:inset var(--fh-border-width-strong) 0 0 var(--fh-accent-primary)}
+.ctx .it.is-disabled{color:var(--fh-text-muted)}
+.ctx .it.is-disabled svg.i{color:var(--fh-text-muted)}
+.ctx .it .why{margin-left:auto;font-size:var(--fh-text-xs);color:var(--fh-text-muted)}
+.ctx .it.is-danger{color:var(--fh-danger)}.ctx .it.is-danger svg.i{color:var(--fh-danger)}
+.ctx .sep{height:var(--fh-border-width);background:var(--fh-border);margin:0.4rem 0}
+
+/* ── Chat ─────────────────────────────────────────────────────────────── */
+.chat{width:62rem;display:flex;flex-direction:column;gap:var(--fh-space-2)}
+.chat .log{display:flex;flex-direction:column;gap:0.3rem;padding:var(--fh-space-3);background:var(--fh-material-regular)}
+.chat .msg-l{display:flex;gap:var(--fh-space-2);align-items:baseline;font:400 var(--fh-text-md)/1.4 var(--fh-font-sans);text-shadow:0 0.1rem 0.2rem rgba(0,0,0,0.8)}
+.chat .ch{font:700 var(--fh-text-xs)/1 var(--fh-font-display);letter-spacing:0.08em;text-transform:uppercase;padding:0.3rem 0.5rem;background:var(--c,var(--fh-bg-elevated));color:var(--fh-text-on-accent);flex:none;text-shadow:none;position:relative;top:-0.1rem}
+.chat .ch--plain{background:var(--fh-bg-elevated);color:var(--fh-text-secondary)}
+.chat .who{font-weight:600;flex:none}
+.chat .me{font-style:italic;color:var(--fh-text-secondary)}
+.chat .sys{color:var(--fh-text-muted)}
+.chat .inputline{display:flex;align-items:center;gap:var(--fh-space-2);height:4.4rem;padding:0 var(--fh-space-3);background:var(--fh-bg-surface);border:var(--fh-border-width) solid var(--fh-accent-primary);box-shadow:var(--fh-shadow-2)}
+.chat .sugg{background:var(--fh-bg-surface);border:var(--fh-border-width) solid var(--fh-border);box-shadow:var(--fh-shadow-2)}
+.chat .sugg div{display:flex;gap:var(--fh-space-3);padding:0.8rem var(--fh-space-3);font-size:var(--fh-text-sm)}
+.chat .sugg div.is-hover{background:var(--fh-bg-elevated)}
+.chat .sugg code{font-family:var(--fh-font-mono);color:var(--fh-accent-primary)}
+
+/* ── Inventory ────────────────────────────────────────────────────────── */
+.inv-grid{display:grid;grid-template-columns:repeat(5,8.8rem);gap:0.6rem}
+.slot{position:relative;width:8.8rem;height:8.8rem;background:var(--fh-bg-base);border:var(--fh-border-width) solid var(--fh-border);display:flex;flex-direction:column;align-items:center;justify-content:center}
+.slot .n{position:absolute;left:0.5rem;top:0.4rem;font:600 var(--fh-text-2xs)/1 var(--fh-font-display);color:var(--fh-text-muted)}
+.slot .q{position:absolute;right:0.5rem;top:0.4rem;font:600 var(--fh-text-xs)/1 var(--fh-font-display);color:var(--fh-text-secondary);font-variant-numeric:tabular-nums}
+.slot .nm{position:absolute;left:0;right:0;bottom:0;padding:0.3rem 0.4rem;font:500 var(--fh-text-2xs)/1.1 var(--fh-font-sans);color:var(--fh-text-secondary);text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;background:rgba(0,0,0,0.25)}
+.slot svg.i{width:3.4rem;height:3.4rem;color:var(--fh-text-primary);margin-bottom:1.2rem;stroke-width:1.6}
+.slot .dur{position:absolute;left:0.5rem;right:0.5rem;bottom:2.1rem;height:0.3rem;background:rgba(236,233,226,0.12)}
+.slot .dur i{display:block;height:100%;background:var(--c,var(--fh-success))}
+.slot.is-filled{background:var(--fh-bg-elevated)}
+.slot.is-hot .n{color:var(--fh-accent-primary);font-size:var(--fh-text-xs)}
+.slot.is-selected{border-color:var(--fh-accent-primary);box-shadow:inset 0 0 0 1px var(--fh-accent-primary)}
+.slot.is-drop{border:var(--fh-border-width-strong) dashed var(--fh-accent-primary);background:rgba(242,181,58,0.08)}
+.slot.is-dragging{opacity:0.35}
+.slot.is-ghost{position:absolute;z-index:5;opacity:0.95;box-shadow:var(--fh-shadow-2);border-color:var(--fh-accent-primary);transform:rotate(-2deg)}
+.slot.is-locked{background:repeating-linear-gradient(-45deg,var(--fh-bg-base) 0 0.6rem,#16191b 0.6rem 1.2rem)}
+.slot.is-locked svg.i{color:var(--fh-text-muted);width:2rem;height:2rem;margin:0}
+.wt{display:grid;grid-template-columns:auto 1fr auto;gap:var(--fh-space-3);align-items:center;font-size:var(--fh-text-sm)}
+
+/* ── Devices (phone / tablet) ─────────────────────────────────────────── */
+.phone{width:36rem;height:74rem;background:#0b0c0d;border:0.3rem solid #2c3136;border-radius:var(--fh-radius-xl);padding:0.8rem;box-shadow:var(--fh-shadow-3);position:relative}
+.phone .scr{width:100%;height:100%;background:var(--fh-bg-base);border-radius:var(--fh-radius-lg);overflow:hidden;display:flex;flex-direction:column;position:relative}
+.phone .sb{display:flex;justify-content:space-between;align-items:center;padding:1rem 1.6rem 0.6rem;font:600 var(--fh-text-sm)/1 var(--fh-font-display);letter-spacing:0.04em}
+.apps{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--fh-space-4) var(--fh-space-2);padding:var(--fh-space-4) var(--fh-space-4)}
+.app{display:flex;flex-direction:column;align-items:center;gap:0.6rem;font:500 var(--fh-text-2xs)/1.1 var(--fh-font-sans);color:var(--fh-text-secondary);position:relative}
+.app i{width:5.6rem;height:5.6rem;background:var(--fh-bg-elevated);display:flex;align-items:center;justify-content:center;border-radius:var(--fh-radius-md);color:var(--fh-text-primary);box-shadow:inset 0 -0.3rem 0 var(--c,var(--fh-border))}
+.app i svg.i{width:2.6rem;height:2.6rem}
+.app .badge{position:absolute;top:-0.4rem;right:0.4rem;min-width:2rem;height:2rem;background:var(--fh-danger);color:var(--fh-text-on-accent);font:700 var(--fh-text-xs)/2rem var(--fh-font-display);text-align:center;padding:0 0.4rem}
+.dock{margin-top:auto;display:grid;grid-template-columns:repeat(4,1fr);padding:var(--fh-space-3) var(--fh-space-4) var(--fh-space-5);background:var(--fh-bg-surface);border-top:var(--fh-border-width) solid var(--fh-border)}
+.tablet{width:150rem;height:84rem;background:#0b0c0d;border:0.3rem solid #2c3136;border-radius:var(--fh-radius-xl);padding:1.2rem;box-shadow:var(--fh-shadow-3)}
+.tablet .scr{width:100%;height:100%;background:var(--fh-bg-base);border-radius:var(--fh-radius-md);overflow:hidden;display:grid;grid-template-columns:22rem 1fr;grid-template-rows:5.6rem 1fr}
+.tb-top{grid-column:1/-1;display:flex;align-items:center;gap:var(--fh-space-4);padding:0 var(--fh-space-5);background:var(--fh-bg-surface);border-bottom:var(--fh-border-width) solid var(--fh-border)}
+.tb-top .ttl{font:700 var(--fh-text-lg)/1 var(--fh-font-display);letter-spacing:0.06em;text-transform:uppercase}
+.tb-nav{background:var(--fh-bg-surface);border-right:var(--fh-border-width) solid var(--fh-border);padding:var(--fh-space-3) 0;display:flex;flex-direction:column}
+.tb-nav a{display:flex;align-items:center;gap:var(--fh-space-3);height:4.4rem;padding:0 var(--fh-space-4);font:600 var(--fh-text-md)/1 var(--fh-font-display);letter-spacing:0.04em;text-transform:uppercase;color:var(--fh-text-secondary);text-decoration:none}
+.tb-nav a svg.i{width:1.8rem;height:1.8rem}
+.tb-nav a.is-active{color:var(--fh-text-primary);background:var(--fh-bg-elevated);box-shadow:inset var(--fh-border-width-strong) 0 0 var(--c,var(--fh-accent-primary))}
+.tb-nav a .cnt{margin-left:auto;font-size:var(--fh-text-xs);background:var(--fh-danger);color:var(--fh-text-on-accent);padding:0.3rem 0.5rem}
+.tb-main{padding:var(--fh-space-5);display:grid;gap:var(--fh-space-4);min-height:0;overflow:hidden}
+.card{background:var(--fh-bg-surface);border:var(--fh-border-width) solid var(--fh-border);display:flex;flex-direction:column;min-height:0}
+.card .ch{display:flex;align-items:center;gap:var(--fh-space-2);padding:var(--fh-space-3) var(--fh-space-4);border-bottom:var(--fh-border-width) solid var(--fh-border)}
+.card .ch h3{margin:0;font:600 var(--fh-text-md)/1 var(--fh-font-display);letter-spacing:0.08em;text-transform:uppercase}
+.card .ch .act{margin-left:auto;display:flex;gap:var(--fh-space-2)}
+.card .cb{padding:var(--fh-space-4);min-height:0}
+.stat-big{font:700 var(--fh-text-2xl)/1 var(--fh-font-display);font-variant-numeric:tabular-nums}
+
+/* ── Reduced motion ───────────────────────────────────────────────────── */
+@media (prefers-reduced-motion:reduce){
+  .toast.is-enter{animation:none}
+  .vital.is-low svg.i{animation:none}
+  .skel{animation:none}
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20 4.2 12.2a4.6 4.6 0 0 1 7.8-5.4 4.6 4.6 0 0 1 7.8 5.4z"/></symbol>
+<symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3 4 6v6c0 4.5 3.4 7.6 8 9 4.6-1.4 8-4.5 8-9V6z"/></symbol>
+<symbol id="i-food" viewBox="0 0 24 24"><path d="M6 3v6a2 2 0 0 0 4 0V3M8 11v10M17 21V3c-2.5 1.5-3 5-3 9h3"/></symbol>
+<symbol id="i-drop" viewBox="0 0 24 24"><path d="M12 3 6.3 11.2a6.6 6.6 0 1 0 11.4 0z"/></symbol>
+<symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2 5 14h6l-1 8 8-12h-6z"/></symbol>
+<symbol id="i-pulse" viewBox="0 0 24 24"><path d="M2 12h4l2.5-6 5 12 2.5-6h6"/></symbol>
+<symbol id="i-mic" viewBox="0 0 24 24"><path d="M9 3h6v10H9zM5 11v1a7 7 0 0 0 14 0v-1M12 19v3M8 22h8"/></symbol>
+<symbol id="i-radio" viewBox="0 0 24 24"><path d="M6 9h12v13H6zM8 9V2M9 13h6M9 17h3"/></symbol>
+<symbol id="i-cash" viewBox="0 0 24 24"><path d="M2 6h20v12H2zM12 9.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M5 9v.01M19 15v.01"/></symbol>
+<symbol id="i-bank" viewBox="0 0 24 24"><path d="M3 9l9-5 9 5zM5 9v9M10 9v9M14 9v9M19 9v9M3 21h18"/></symbol>
+<symbol id="i-case" viewBox="0 0 24 24"><path d="M3 7h18v13H3zM9 7V4h6v3M3 13h18"/></symbol>
+<symbol id="i-ammo" viewBox="0 0 24 24"><path d="M9 21V10l1.5-6h3L15 10v11zM9 15h6"/></symbol>
+<symbol id="i-gun" viewBox="0 0 24 24"><path d="M2 7h19v5h-9l-1.5 2.5H8L7 20H3.5L5 12H2z"/></symbol>
+<symbol id="i-fuel" viewBox="0 0 24 24"><path d="M4 21V4h9v17M4 10h9M13 8h3l2 2v8a1.5 1.5 0 0 1-3 0v-4h-2M2 21h13"/></symbol>
+<symbol id="i-belt" viewBox="0 0 24 24"><path d="M12 2.5a2 2 0 1 0 0 4 2 2 0 0 0 0-4M6 21v-8a6 6 0 0 1 12 0v8M7.5 9.5l9 10"/></symbol>
+<symbol id="i-engine" viewBox="0 0 24 24"><path d="M2 10h3V8h3V5h6v3h3l2 3h2v6h-2l-2 3H8l-3-3H2zM10 5V3h4"/></symbol>
+<symbol id="i-light" viewBox="0 0 24 24"><path d="M11 5C6 5 4 8.5 4 12s2 7 7 7zM14 7h7M14 12h7M14 17h7"/></symbol>
+<symbol id="i-left" viewBox="0 0 24 24"><path d="M10 4 2 12l8 8v-5h12V9H10z"/></symbol>
+<symbol id="i-right" viewBox="0 0 24 24"><path d="M14 4l8 8-8 8v-5H2V9h12z"/></symbol>
+<symbol id="i-check" viewBox="0 0 24 24"><path d="M3 3h18v18H3zM7 12l3.5 3.5L17 9"/></symbol>
+<symbol id="i-tick" viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/></symbol>
+<symbol id="i-info" viewBox="0 0 24 24"><path d="M3 3h18v18H3zM12 10.5V17M12 7v.01"/></symbol>
+<symbol id="i-warn" viewBox="0 0 24 24"><path d="M12 3 2 20.5h20zM12 9.5v5M12 17.5v.01"/></symbol>
+<symbol id="i-error" viewBox="0 0 24 24"><path d="M8 2.5h8L21.5 8v8L16 21.5H8L2.5 16V8zM9 9l6 6M15 9l-6 6"/></symbol>
+<symbol id="i-x" viewBox="0 0 24 24"><path d="M5 5l14 14M19 5 5 19"/></symbol>
+<symbol id="i-search" viewBox="0 0 24 24"><path d="M10 3.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13M15 15l6 6"/></symbol>
+<symbol id="i-user" viewBox="0 0 24 24"><path d="M12 3.5a4 4 0 1 0 0 8 4 4 0 0 0 0-8M4 21c.8-4.2 3.8-6.5 8-6.5s7.2 2.3 8 6.5"/></symbol>
+<symbol id="i-users" viewBox="0 0 24 24"><path d="M9 4a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7M2 20.5c.7-3.7 3.2-5.5 7-5.5s6.3 1.8 7 5.5M16 4.3a3.5 3.5 0 0 1 0 6.6M18 15.3c2 .6 3.5 2.3 4 5.2"/></symbol>
+<symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21.5s-7-6.6-7-11.5a7 7 0 0 1 14 0c0 4.9-7 11.5-7 11.5zM12 7.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5"/></symbol>
+<symbol id="i-map" viewBox="0 0 24 24"><path d="M3 6l6-3 6 3 6-3v15l-6 3-6-3-6 3zM9 3v15M15 6v15"/></symbol>
+<symbol id="i-sliders" viewBox="0 0 24 24"><path d="M3 6h11M18 6h3M3 12h3M10 12h11M3 18h13M20 18h1M14 4v4M6 10v4M16 16v4"/></symbol>
+<symbol id="i-phone" viewBox="0 0 24 24"><path d="M6 2h12v20H6zM10.5 18.5h3"/></symbol>
+<symbol id="i-call" viewBox="0 0 24 24"><path d="M5 3h4l2 5-2.5 1.5a11 11 0 0 0 6 6L16 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2z"/></symbol>
+<symbol id="i-chat" viewBox="0 0 24 24"><path d="M3 4h18v13H9l-6 4z"/></symbol>
+<symbol id="i-car" viewBox="0 0 24 24"><path d="M2 16v-4l2.5-5.5h15L22 12v4zM2 16v3h3.5v-3M18.5 16v3H22v-3M5.5 12h13M6 14h.01M18 14h.01"/></symbol>
+<symbol id="i-boat" viewBox="0 0 24 24"><path d="M2 15h20l-3 5H5zM6 15V9h9l3 6M11 9V4"/></symbol>
+<symbol id="i-box" viewBox="0 0 24 24"><path d="M3 7l9-4 9 4v10l-9 4-9-4zM3 7l9 4 9-4M12 11v10"/></symbol>
+<symbol id="i-wrench" viewBox="0 0 24 24"><path d="M15 3a5 5 0 0 0-4.6 6.9L3 17.3 6.7 21l7.4-7.4A5 5 0 0 0 21 9l-3 3-3-3 3-3a5 5 0 0 0-3-3z"/></symbol>
+<symbol id="i-shirt" viewBox="0 0 24 24"><path d="M8.5 3 3 6l2 5 3-1.2V21h8V9.8l3 1.2 2-5-5.5-3c0 1.8-1.5 3-3.5 3S8.5 4.8 8.5 3z"/></symbol>
+<symbol id="i-doc" viewBox="0 0 24 24"><path d="M5 2h10l4 4v16H5zM15 2v4h4M8 11h8M8 15h8M8 19h5"/></symbol>
+<symbol id="i-id" viewBox="0 0 24 24"><path d="M2 5h20v14H2zM5 9h5v6H5zM13 10h6M13 14h4"/></symbol>
+<symbol id="i-lock" viewBox="0 0 24 24"><path d="M5 11h14v10H5zM8 11V7.5a4 4 0 0 1 8 0V11M12 15v2"/></symbol>
+<symbol id="i-unlock" viewBox="0 0 24 24"><path d="M5 11h14v10H5zM8 11V7.5a4 4 0 0 1 7.7-1.5"/></symbol>
+<symbol id="i-chev-r" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></symbol>
+<symbol id="i-chev-l" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></symbol>
+<symbol id="i-chev-d" viewBox="0 0 24 24"><path d="M5 9l7 7 7-7"/></symbol>
+<symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 4v16M4 12h16"/></symbol>
+<symbol id="i-minus" viewBox="0 0 24 24"><path d="M4 12h16"/></symbol>
+<symbol id="i-door" viewBox="0 0 24 24"><path d="M6 21V3h12v18M3 21h18M14.5 12v.01"/></symbol>
+<symbol id="i-cross" viewBox="0 0 24 24"><path d="M9 3h6v6h6v6h-6v6H9v-6H3V9h6z"/></symbol>
+<symbol id="i-star" viewBox="0 0 24 24"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5-4.8-4.6 6.6-.9z"/></symbol>
+<symbol id="i-key" viewBox="0 0 24 24"><path d="M8 8.5a4 4 0 1 0 0 8 4 4 0 0 0 0-8M11.5 12.5H21v3M17.5 12.5v3"/></symbol>
+<symbol id="i-trash" viewBox="0 0 24 24"><path d="M3 6h18M9 6V3h6v3M5.5 6l1 15h11l1-15M10 10v7M14 10v7"/></symbol>
+<symbol id="i-rotate" viewBox="0 0 24 24"><path d="M4 12a8 8 0 0 1 14-5.3M20 12a8 8 0 0 1-14 5.3M18 2.5V7h-4.5M6 21.5V17h4.5"/></symbol>
+<symbol id="i-clock" viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18M12 7v5l3.5 3.5"/></symbol>
+<symbol id="i-bag" viewBox="0 0 24 24"><path d="M4 8h16l-1 13H5zM9 8V6a3 3 0 0 1 6 0v2"/></symbol>
+<symbol id="i-ban" viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18M5.6 5.6l12.8 12.8"/></symbol>
+<symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s3.6-6.5 10-6.5S22 12 22 12s-3.6 6.5-10 6.5S2 12 2 12zM12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6"/></symbol>
+<symbol id="i-tp" viewBox="0 0 24 24"><path d="M6 18 18 6M8 6h10v10"/></symbol>
+<symbol id="i-pull" viewBox="0 0 24 24"><path d="M18 6 6 18M16 18H6V8"/></symbol>
+<symbol id="i-freeze" viewBox="0 0 24 24"><path d="M12 2v20M3.3 7l17.4 10M20.7 7 3.3 17M9 4l3 2 3-2M9 20l3-2 3 2"/></symbol>
+<symbol id="i-gavel" viewBox="0 0 24 24"><path d="M13 3l6 6-3 3-6-6zM11.5 10.5 3 19l2 2 8.5-8.5M14 21h7"/></symbol>
+<symbol id="i-home" viewBox="0 0 24 24"><path d="M3 11 12 3l9 8M5 9.5V21h14V9.5M10 21v-6h4v6"/></symbol>
+<symbol id="i-block" viewBox="0 0 24 24"><path d="M4 21V3h16v18M8 7h2M14 7h2M8 11h2M14 11h2M8 15h2M14 15h2M2 21h20"/></symbol>
+<symbol id="i-train" viewBox="0 0 24 24"><path d="M6 3h12v13H6zM6 10h12M9 13.5h.01M15 13.5h.01M8 16l-3 5M16 16l3 5"/></symbol>
+<symbol id="i-anchor" viewBox="0 0 24 24"><path d="M12 3a2 2 0 1 0 0 4 2 2 0 0 0 0-4M12 7v14M7 10h10M4 14a8 8 0 0 0 16 0"/></symbol>
+<symbol id="i-fish" viewBox="0 0 24 24"><path d="M2 12c3-4 7-6 11-6s7 3 8 6c-1 3-4 6-8 6s-8-2-11-6zM2 12 0 9M2 12l-2 3M16 10.5v.01"/></symbol>
+<symbol id="i-send" viewBox="0 0 24 24"><path d="M3 11 21 3l-8 18-2-8z"/></symbol>
+<symbol id="i-camera" viewBox="0 0 24 24"><path d="M2 7h5l2-3h6l2 3h5v13H2zM12 10a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7"/></symbol>
+<symbol id="i-gear" viewBox="0 0 24 24"><path d="M10 2h4l.6 3 2.2 1.3 2.9-1 2 3.4-2.3 2v2.6l2.3 2-2 3.4-2.9-1-2.2 1.3-.6 3h-4l-.6-3-2.2-1.3-2.9 1-2-3.4 2.3-2v-2.6l-2.3-2 2-3.4 2.9 1L9.4 5zM12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6"/></symbol>
+<symbol id="i-music" viewBox="0 0 24 24"><path d="M9 18V4l11-2v14M9 18a3 3 0 1 1-6 0 3 3 0 0 1 6 0zM20 16a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/></symbol>
+<symbol id="i-note" viewBox="0 0 24 24"><path d="M4 3h16v18H4zM8 8h8M8 12h8M8 16h5"/></symbol>
+<symbol id="i-cart" viewBox="0 0 24 24"><path d="M2 3h3l2.5 12h12L22 7H6.5M9 19.5h.01M18 19.5h.01"/></symbol>
+<symbol id="i-hammer" viewBox="0 0 24 24"><path d="M14 3l7 7-2.5 2.5-7-7zM12.5 8.5 3 18l3 3 9.5-9.5M9 3h6"/></symbol>
+<symbol id="i-dash" viewBox="0 0 24 24"><path d="M3 3h8v8H3zM13 3h8v5h-8zM13 10h8v11h-8zM3 13h8v8H3z"/></symbol>
+<symbol id="i-file" viewBox="0 0 24 24"><path d="M3 5h7l2 2h9v13H3z"/></symbol>
+<symbol id="i-siren" viewBox="0 0 24 24"><path d="M6 20v-7a6 6 0 0 1 12 0v7M3 20h18M12 3V1M4.2 5.2 3 4M19.8 5.2 21 4M12 10v5"/></symbol>
+<symbol id="i-bed" viewBox="0 0 24 24"><path d="M2 5v15M2 15h20v5M22 15v-3a3 3 0 0 0-3-3H10v6M6 9.5a2 2 0 1 0 0 4 2 2 0 0 0 0-4"/></symbol>
+<symbol id="i-grip" viewBox="0 0 24 24"><path d="M9 5h.01M15 5h.01M9 12h.01M15 12h.01M9 19h.01M15 19h.01"/></symbol>
+<symbol id="i-up" viewBox="0 0 24 24"><path d="M12 20V4M5 11l7-7 7 7"/></symbol>
+<symbol id="i-down" viewBox="0 0 24 24"><path d="M12 4v16M5 13l7 7 7-7"/></symbol>
+<symbol id="i-person" viewBox="0 0 100 200"><path d="M50 8a17 17 0 1 0 0 34 17 17 0 0 0 0-34M28 50h44l10 6 8 56-10 2-8-44v54l4 76H62l-6-68h-12l-6 68H24l4-76V70l-8 44-10-2 8-56z" fill="currentColor" stroke="none"/></symbol>
+</svg>
+<script>
+/* ic → inline svg (preview helper) */
+function icons(root){(root||document).querySelectorAll('ic').forEach(function(el){var s=document.createElementNS('http://www.w3.org/2000/svg','svg');s.setAttribute('class',('i '+(el.getAttribute('class')||'')).trim());s.setAttribute('aria-hidden','true');var u=document.createElementNS('http://www.w3.org/2000/svg','use');u.setAttribute('href','#i-'+el.getAttribute('n'));s.appendChild(u);if(el.getAttribute('style'))s.setAttribute('style',el.getAttribute('style'));el.replaceWith(s);});}
+</script>
+
+<!-- ═══ 00 · Palette ═══════════════════════════════════════════════════ -->
+<section class="frame tex-concrete tex-facade" id="f00">
+  <div class="tag">00 · Palette · Kontrast gemessen gegen den angegebenen Untergrund</div>
+  <div style="position:absolute;inset:4.8rem 4.8rem 3.2rem;display:grid;grid-template-columns:44rem 1fr;gap:4.8rem">
+    <div style="display:flex;flex-direction:column;gap:2.4rem">
+      <div style="display:flex;gap:1.6rem;align-items:center"><span class="code" style="height:6.4rem;min-width:6.4rem;font-size:4rem">B</span><div><div class="label">fivem-harbour-ui · Variante B</div><div class="disp" style="font-size:var(--fh-text-4xl);font-weight:700;line-height:0.85;letter-spacing:0.02em;text-transform:uppercase">Plattenbau</div></div></div>
+      <p class="sec" style="margin:0;font-size:var(--fh-text-lg);line-height:1.4">Beton, Container, Rost und Natriumlicht. Nachts am Hafen, zwischen Wohnblock und Kai. Klar und ruhig: Die Härte kommt aus Farbe, Fugen und Kanten, nicht aus Dekor.</p>
+      <div class="divider"></div>
+      <div class="label">Leitfarben</div>
+      <div id="core" style="display:grid;grid-template-columns:repeat(4,1fr);gap:0.8rem"></div>
+      <div class="divider"></div>
+      <div class="label">Lesbarkeit über der Spielwelt</div>
+      <p class="sm sec" style="margin:0">HUD-Farben werden gegen <span class="mono">bg-overlay</span> gemessen, das über reinem Weiß liegt (schlechtester Fall, helle Szene). Panels sind deckend; Unschärfe hinter Panels gibt es nicht.</p>
+      <div style="display:flex;gap:0.8rem">
+        <div class="plate" style="flex:1;padding:1.2rem;background:var(--fh-bg-overlay);outline:1px solid #ddd;outline-offset:-1px;position:relative"><div style="position:absolute;inset:0;background:#fff;z-index:-1"></div><span class="label">über Weiß</span><div class="disp" style="font-size:var(--fh-text-xl);font-weight:700">4.250 €</div></div>
+        <div class="plate" style="flex:1;padding:1.2rem;background:var(--fh-bg-overlay)"><span class="label">über Schwarz</span><div class="disp" style="font-size:var(--fh-text-xl);font-weight:700">4.250 €</div></div>
+      </div>
+    </div>
+    <div id="palette" style="display:grid;grid-template-columns:repeat(4,1fr);gap:1rem 1.2rem;align-content:start"></div>
+  </div>
+</section>
+
+<!-- ═══ 01 · Type, space, radii, motion, icons, textures ═══════════════ -->
+<section class="frame tex-concrete" id="f01">
+  <div class="tag">01 · Schrift · Abstände · Radien · Rahmen · Schatten · Bewegung · Icons · Texturen</div>
+  <div style="position:absolute;inset:4.8rem;display:grid;grid-template-columns:1.25fr 1fr;gap:4rem">
+    <div style="display:flex;flex-direction:column;gap:1.4rem">
+      <div class="label">Schriften · selbst gehostet (woff2, OFL)</div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem">
+        <div class="card"><div class="cb"><div class="disp" style="font-size:4rem;font-weight:700;line-height:1">Aa 0123</div><div class="label" style="margin-top:0.8rem">Display · Barlow Condensed</div><div class="xs muted">500 · 600 · 700 — Titel, Labels, Zahlen im HUD</div></div></div>
+        <div class="card"><div class="cb"><div style="font-size:4rem;font-weight:500;line-height:1">Aa 0123</div><div class="label" style="margin-top:0.8rem">Sans · Inter</div><div class="xs muted">400 · 500 · 600 — Fließtext, Formulare, Chat</div></div></div>
+        <div class="card"><div class="cb"><div class="mono" style="font-size:3.4rem;font-weight:500;line-height:1.1">Aa 0123</div><div class="label" style="margin-top:0.8rem">Mono · JetBrains Mono</div><div class="xs muted">400 · 500 · 700 — Kennzeichen, IDs, Akten, Timer</div></div></div>
+      </div>
+      <div id="typescale" style="display:flex;flex-direction:column;gap:0.2rem"></div>
+      <div class="label" style="margin-top:0.6rem">Abstände · 1rem = 10px bei 1080p</div>
+      <div id="spacescale" style="display:flex;align-items:flex-end;gap:1.2rem"></div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:1.4rem">
+      <div class="label">Radien · harte Kanten</div>
+      <div style="display:flex;gap:1.2rem" id="radii"></div>
+      <div class="label">Rahmen · Schatten · Glühen</div>
+      <div style="display:flex;gap:1.6rem;align-items:center">
+        <div style="width:9rem;height:6rem;background:var(--fh-bg-surface);border:var(--fh-border-width) solid var(--fh-border);display:flex;align-items:flex-end;padding:0.6rem" class="xs mono muted">border</div>
+        <div style="width:9rem;height:6rem;background:var(--fh-bg-surface);border:var(--fh-border-width-strong) solid var(--fh-accent-primary);display:flex;align-items:flex-end;padding:0.6rem" class="xs mono muted">strong</div>
+        <div style="width:9rem;height:6rem;background:var(--fh-bg-elevated);box-shadow:var(--fh-shadow-1);display:flex;align-items:flex-end;padding:0.6rem" class="xs mono muted">shadow-1</div>
+        <div style="width:9rem;height:6rem;background:var(--fh-bg-elevated);box-shadow:var(--fh-shadow-2);display:flex;align-items:flex-end;padding:0.6rem" class="xs mono muted">shadow-2</div>
+        <div style="width:9rem;height:6rem;background:var(--fh-bg-elevated);box-shadow:var(--fh-shadow-3);display:flex;align-items:flex-end;padding:0.6rem" class="xs mono muted">shadow-3</div>
+        <div style="width:9rem;height:6rem;background:var(--fh-accent-primary);box-shadow:var(--fh-glow-accent);display:flex;align-items:flex-end;padding:0.6rem;color:var(--fh-text-on-accent)" class="xs mono">glow</div>
+      </div>
+      <div class="label">Bewegung</div>
+      <div class="kv mono" style="font-size:var(--fh-text-sm)">
+        <dt>fast · 100ms</dt><dd>Hover, Druck, Toggle</dd>
+        <dt>enter · 200ms</dt><dd>Einblenden: Toasts, Menüs, Panels (ease-standard)</dd>
+        <dt>exit · 140ms</dt><dd>Ausblenden, immer kürzer als enter</dd>
+        <dt>slow · 320ms</dt><dd>Vollbild-Wechsel, Ladebildschirm, Tod</dd>
+        <dt>ease-standard</dt><dd>cubic-bezier(0.23, 1, 0.32, 1) — starkes Ausrollen</dd>
+        <dt>ease-spring</dt><dd>cubic-bezier(0.3, 1.15, 0.5, 1) — nur Einrasten (Radial, Hotbar)</dd>
+        <dt>Blinker · 667ms</dt><dd>Schritt-Blinken 1,5 Hz (Blinker, Gurt-Warnung)</dd>
+      </div>
+      <div class="label">Icons · 24er Raster · 2px Strich · eckige Enden · currentColor</div>
+      <div id="iconset" style="display:grid;grid-template-columns:repeat(14,1fr);gap:0.8rem 0.4rem;color:var(--fh-text-primary)"></div>
+      <div class="label">Texturen · nur als Andeutung</div>
+      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:0.8rem">
+        <div class="tex-concrete" style="height:6.4rem;background-color:var(--fh-bg-surface);border:1px solid var(--fh-border)"><span class="xs muted" style="display:block;padding:0.6rem">Beton­korn 6 %</span></div>
+        <div class="tex-facade" style="height:6.4rem;background-color:var(--fh-bg-surface);background-size:4.8rem 2.7rem;border:1px solid var(--fh-border)"><span class="xs muted" style="display:block;padding:0.6rem">Plattenfugen</span></div>
+        <div class="tex-fence" style="height:6.4rem;background-color:var(--fh-bg-surface);border:1px solid var(--fh-border)"><span class="xs muted" style="display:block;padding:0.6rem">Maschendraht</span></div>
+        <div class="tex-ribs" style="height:6.4rem;background-color:var(--fh-bg-surface);border:1px solid var(--fh-border)"><span class="xs muted" style="display:block;padding:0.6rem">Container­sicke</span></div>
+        <div style="height:6.4rem;background-color:var(--fh-bg-surface);border:1px solid var(--fh-border);position:relative"><div class="tex-hazard" style="position:absolute;left:0;right:0;bottom:0;height:0.8rem"></div><span class="xs muted" style="display:block;padding:0.6rem">Warnband</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 02 · Component states ══════════════════════════════════════════ -->
+<section class="frame tex-concrete" id="f02">
+  <div class="tag">02 · Zustände · Buttons · Eingaben · Listen (leer / lädt / Fehler / gefüllt) · Slots</div>
+  <div style="position:absolute;inset:4.8rem;display:grid;grid-template-columns:1fr 1fr;gap:4rem">
+    <div style="display:flex;flex-direction:column;gap:2rem">
+      <div class="label">Buttons · Standard · Hover · Fokus · Gedrückt · Deaktiviert</div>
+      <div style="display:grid;grid-template-columns:12rem repeat(5,auto);gap:1rem 1.2rem;align-items:center;justify-content:start">
+        <span class="xs muted mono">primary</span><button class="btn btn--primary">Bestätigen</button><button class="btn btn--primary is-hover">Bestätigen</button><button class="btn btn--primary is-focus">Bestätigen</button><button class="btn btn--primary is-active">Bestätigen</button><button class="btn btn--primary" disabled>Bestätigen</button>
+        <span class="xs muted mono">secondary</span><button class="btn btn--secondary">Auswählen</button><button class="btn btn--secondary is-hover">Auswählen</button><button class="btn btn--secondary is-focus">Auswählen</button><button class="btn btn--secondary is-active">Auswählen</button><button class="btn btn--secondary" disabled>Auswählen</button>
+        <span class="xs muted mono">ghost</span><button class="btn btn--ghost">Abbrechen</button><button class="btn btn--ghost is-hover">Abbrechen</button><button class="btn btn--ghost is-focus">Abbrechen</button><button class="btn btn--ghost is-active">Abbrechen</button><button class="btn btn--ghost" disabled>Abbrechen</button>
+        <span class="xs muted mono">danger</span><button class="btn btn--danger">Löschen</button><button class="btn btn--danger is-hover">Löschen</button><button class="btn btn--danger is-focus">Löschen</button><button class="btn btn--danger is-active">Löschen</button><button class="btn btn--danger" disabled>Löschen</button>
+      </div>
+      <div class="label">Tasten · Hinweise</div>
+      <div style="display:flex;gap:1.2rem;align-items:center"><span class="key">E</span><span class="key">Enter</span><span class="key key--ghost">Esc</span><span class="key key--ghost">Tab</span><span class="key key--sm">G</span><button class="btn btn--primary">Kaufen <span class="key">Enter</span></button><button class="btn btn--ghost">Schließen <span class="key">Esc</span></button></div>
+      <div class="label">Eingaben · Standard · Fokus · Fehler · Deaktiviert</div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem">
+        <div class="field"><span class="label">Betrag</span><div class="input"><span class="ph">0</span><span class="suffix">€</span></div><span class="msg msg--hint">Max. 10.000 €</span></div>
+        <div class="field"><span class="label">Betrag</span><div class="input is-focus">250<span class="caret"></span><span class="suffix">€</span></div><span class="msg msg--hint">Max. 10.000 €</span></div>
+        <div class="field"><span class="label">Betrag</span><div class="input is-error">12.000<span class="suffix">€</span></div><span class="msg msg--error"><ic n="error" class="s16"></ic>Zu hoch – max. 10.000 €</span></div>
+        <div class="field"><span class="label">Betrag</span><div class="input is-disabled">—<span class="suffix">€</span></div><span class="msg msg--hint">Nur im Dienst</span></div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem">
+        <div class="field"><span class="label">Regler · Fokus</span><div class="slider is-focus" style="--v:62%"><i></i><b></b></div></div>
+        <div style="display:flex;gap:2rem;align-items:flex-end">
+          <div class="field"><span class="label">Schalter</span><div style="display:flex;gap:0.8rem"><span class="toggle"></span><span class="toggle is-on"></span></div></div>
+          <div class="field"><span class="label">Menge</span><div class="stepper"><button><ic n="minus" class="s16"></ic></button><span>2</span><button><ic n="plus" class="s16"></ic></button></div></div>
+        </div>
+      </div>
+      <div class="field"><span class="label">Segment-Auswahl · Tabs</span><div style="display:flex;gap:2rem;align-items:center"><div class="seg-ctl"><span class="is-active"><ic n="cash" class="s16"></ic>Bar</span><span><ic n="bank" class="s16"></ic>Karte</span></div><div class="tabs" style="flex:1"><span class="tab is-active">Eigene <span class="count">4</span></span><span class="tab">Job <span class="count">2</span></span><span class="tab">Abschlepphof <span class="count">1</span></span></div></div></div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:2rem">
+      <div class="label">Listen-Zustände · jede Ansicht zeigt genau einen davon</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.6rem">
+        <div class="card"><div class="ch"><h3>Leer</h3></div><div class="cb"><div class="empty"><ic n="box"></ic><b>Keine Fahrzeuge</b><span class="sm">Hier parkst du, sobald du eins besitzt.</span></div></div></div>
+        <div class="card"><div class="ch"><h3>Lädt</h3></div><div class="cb" style="display:flex;flex-direction:column;gap:1.4rem;padding-top:2rem">
+          <div style="display:flex;gap:1.2rem;align-items:center"><span class="skel" style="width:3.2rem;height:3.2rem"></span><div style="flex:1;display:flex;flex-direction:column;gap:0.6rem"><span class="skel" style="width:70%"></span><span class="skel" style="width:40%"></span></div></div>
+          <div style="display:flex;gap:1.2rem;align-items:center"><span class="skel" style="width:3.2rem;height:3.2rem"></span><div style="flex:1;display:flex;flex-direction:column;gap:0.6rem"><span class="skel" style="width:55%"></span><span class="skel" style="width:30%"></span></div></div>
+          <div style="display:flex;gap:1.2rem;align-items:center"><span class="skel" style="width:3.2rem;height:3.2rem"></span><div style="flex:1;display:flex;flex-direction:column;gap:0.6rem"><span class="skel" style="width:62%"></span><span class="skel" style="width:45%"></span></div></div>
+        </div></div>
+        <div class="card"><div class="ch"><h3>Fehler</h3></div><div class="cb" style="display:flex;flex-direction:column;gap:1.2rem"><div class="errbox"><ic n="error"></ic><div><b>Garage nicht erreichbar.</b><div class="sec">Server antwortet nicht (Zeitüberschreitung nach 8 s).</div></div></div><button class="btn btn--ghost btn--sm" style="align-self:flex-start"><ic n="rotate" class="s16"></ic>Erneut versuchen</button></div></div>
+        <div class="card"><div class="ch"><h3>Gefüllt</h3></div><div class="cb" style="padding:0">
+          <div class="row is-selected" style="grid-template-columns:auto 1fr auto"><ic n="car"></ic><div><div>Kombi „Ostkai“</div><div class="xs muted">Block 7 · Tiefgarage</div></div><span class="chip chip--status c-success">Eingeparkt</span></div>
+          <div class="row is-hover" style="grid-template-columns:auto 1fr auto"><ic n="car"></ic><div><div>Transporter</div><div class="xs muted">Containerhof Süd</div></div><span class="chip chip--status c-info">Draußen</span></div>
+          <div class="row is-disabled" style="grid-template-columns:auto 1fr auto;border-bottom:0"><ic n="car"></ic><div><div>Limousine</div><div class="xs muted">Abschlepphof</div></div><span class="chip chip--status c-danger">Abgeschleppt</span></div>
+        </div></div>
+      </div>
+      <div class="label">Inventar-Slots · leer · gefüllt · Hotbar · gewählt · Ziel beim Ziehen · gezogen · gesperrt</div>
+      <div style="display:flex;gap:0.8rem">
+        <div class="slot"><span class="n">7</span></div>
+        <div class="slot is-filled"><span class="n">8</span><span class="q">×12</span><ic n="food"></ic><span class="nm">Fischbrötchen</span></div>
+        <div class="slot is-filled is-hot"><span class="n">1</span><span class="q">×1</span><ic n="gun"></ic><span class="dur" style="--c:var(--fh-warning)"><i style="width:34%"></i></span><span class="nm">Pistole</span></div>
+        <div class="slot is-filled is-selected"><span class="n">9</span><span class="q">×3</span><ic n="cross"></ic><span class="nm">Verband</span></div>
+        <div class="slot is-drop"><span class="n">10</span></div>
+        <div class="slot is-filled is-dragging"><span class="n">11</span><span class="q">×5</span><ic n="wrench"></ic><span class="nm">Werkzeug</span></div>
+        <div class="slot is-locked"><ic n="lock"></ic></div>
+      </div>
+      <div class="label">Status-Chips · Berufe</div>
+      <div style="display:flex;gap:0.8rem;flex-wrap:wrap"><span class="chip chip--status c-success">Bezahlt</span><span class="chip chip--status c-info">Offen</span><span class="chip chip--status c-warning">Fällig</span><span class="chip chip--status c-danger">Haftbefehl</span><span class="chip c-police">Polizei</span><span class="chip c-ems">Rettungsdienst</span><span class="chip c-mech">Werkstatt</span><span class="chip c-civil">Zivil</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 03 · Loading screen ════════════════════════════════════════════ -->
+<section class="frame" id="f03">
+  <div class="world" data-scene="night"></div>
+  <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(8,9,11,0.94) 0%,rgba(8,9,11,0.8) 45%,rgba(8,9,11,0.35) 100%)"></div>
+  <div class="tex-fence" style="position:absolute;inset:0"></div>
+  <div class="tag">03 · Ladebildschirm · nicht interaktiv · Zustand: lädt (Stufe 3 von 5)</div>
+  <div style="position:absolute;left:9.6rem;top:14rem;display:flex;flex-direction:column;gap:2rem;width:72rem">
+    <div style="display:flex;align-items:center;gap:1.6rem"><span class="code" style="min-width:5.6rem;height:5.6rem;font-size:3.2rem">7</span><span class="label" style="font-size:var(--fh-text-md)">Block 7 · Ostkai · Hafenstadt Roleplay</span></div>
+    <h1 class="disp" style="margin:0;font-size:12rem;font-weight:700;line-height:0.82;letter-spacing:0.01em;text-transform:uppercase">Hafen&shy;stadt</h1>
+    <p style="margin:0;font-size:var(--fh-text-xl);color:var(--fh-text-secondary);font-family:var(--fh-font-display);font-weight:500;letter-spacing:0.02em">Zwischen Kai und Wohnblock. Nachts wird hier entschieden.</p>
+  </div>
+  <div style="position:absolute;left:9.6rem;bottom:9.6rem;width:72rem;display:flex;flex-direction:column;gap:1.6rem">
+    <div style="display:flex;gap:2.4rem" class="sm">
+      <span style="display:flex;gap:0.6rem;align-items:center;color:var(--fh-success)"><ic n="tick" class="s16"></ic>Verbindung</span>
+      <span style="display:flex;gap:0.6rem;align-items:center;color:var(--fh-success)"><ic n="tick" class="s16"></ic>Ressourcen</span>
+      <span style="display:flex;gap:0.6rem;align-items:center;color:var(--fh-text-primary);font-weight:600"><span class="dot" style="--c:var(--fh-accent-primary);animation:pulse 1s steps(2,jump-none) infinite"></span>Kartendaten</span>
+      <span class="muted" style="display:flex;gap:0.6rem;align-items:center"><span class="dot" style="--c:var(--fh-border)"></span>Fahrzeuge</span>
+      <span class="muted" style="display:flex;gap:0.6rem;align-items:center"><span class="dot" style="--c:var(--fh-border)"></span>Charaktere</span>
+    </div>
+    <div style="display:flex;align-items:baseline;gap:1.2rem"><span class="disp" style="font-size:var(--fh-text-lg);font-weight:600">Lade Kartendaten …</span><span class="mono xs muted">streaming/harbour_ostkai.ymap</span><span class="disp num" style="margin-left:auto;font-size:var(--fh-text-2xl);font-weight:700;color:var(--fh-accent-primary)">64 %</span></div>
+    <div class="bar bar--seg bar--lg" style="--v:64%;height:1.6rem"><i></i></div>
+  </div>
+  <div style="position:absolute;right:9.6rem;bottom:9.6rem;width:46rem;display:flex;flex-direction:column;gap:1.6rem">
+    <div class="plate" style="padding:2rem 2.4rem;border-left:0.4rem solid var(--fh-accent-primary)">
+      <div class="label" style="color:var(--fh-accent-primary)">Tipp 3 / 12</div>
+      <p style="margin:0.8rem 0 0;font-size:var(--fh-text-lg);line-height:1.4">Mit <span class="key key--sm">F1</span> öffnest du das Handy. Notrufe gehen über <b>112</b>, die Polizei erreichst du über <b>110</b>.</p>
+    </div>
+    <div style="display:flex;gap:2.4rem" class="sm sec"><span><span class="disp" style="font-size:var(--fh-text-lg);color:var(--fh-text-primary);font-weight:600">48</span> / 64 Spieler</span><span>Discord: hafenstadt</span><span class="mono xs muted" style="margin-left:auto">v2.4.1 · build 0193</span></div>
+  </div>
+  <div style="position:absolute;right:9.6rem;top:9.6rem" class="plate">
+    <div style="padding:1.2rem 1.6rem;display:flex;gap:1.2rem;align-items:center"><ic n="warn" style="color:var(--fh-warning)"></ic><div><div class="disp" style="font-weight:600;font-size:var(--fh-text-md);text-transform:uppercase;letter-spacing:0.04em">Zustand: hängt</div><div class="xs sec">ab 60 s ohne Fortschritt: „Dauert länger als üblich – Stufe Kartendaten“</div></div></div>
+  </div>
+</section>
+
+<!-- ═══ 04 · Multi-character selection ═════════════════════════════════ -->
+<section class="frame" id="f04">
+  <div class="world" data-scene="night"></div>
+  <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(8,9,11,0.92) 0%,rgba(8,9,11,0.55) 38%,rgba(8,9,11,0) 60%)"></div>
+  <div class="tag">04 · Charakterauswahl · Zustand: gefüllt (3 Charaktere, 1 freier Slot, 1 gesperrt)</div>
+  <div style="position:absolute;left:4.8rem;top:4.8rem;bottom:4.8rem;width:50rem;display:flex;flex-direction:column;gap:1.2rem">
+    <div style="display:flex;align-items:center;gap:1.2rem;margin-bottom:0.8rem"><span class="code">7</span><div><div class="panel__title">Wer bist du heute?</div><div class="panel__sub">Wähle einen Charakter · <span class="key key--sm">↑</span> <span class="key key--sm">↓</span> wechseln</div></div></div>
+    <div class="panel" style="border-top-color:var(--fh-accent-primary)">
+      <div style="display:grid;grid-template-columns:8rem 1fr;gap:1.6rem;padding:1.6rem">
+        <div class="avatar" style="width:8rem;height:10rem"><svg viewBox="0 0 100 200"><use href="#i-person"/></svg></div>
+        <div style="display:flex;flex-direction:column;gap:0.6rem">
+          <div style="display:flex;align-items:center;gap:1rem"><span class="disp" style="font-size:var(--fh-text-xl);font-weight:700;text-transform:uppercase;letter-spacing:0.02em">Jonas Krüger</span><span class="chip c-mech" style="margin-left:auto">Werkstatt</span></div>
+          <div class="sm sec">Mechaniker · Werkstatt Ostkai · Rang 2</div>
+          <dl class="kv" style="margin:0.6rem 0 0"><dt>Bargeld</dt><dd class="money">1.320 €</dd><dt>Bank</dt><dd class="money">18.730 €</dd><dt>Wohnung</dt><dd>Block 7, Aufgang B, 4. OG</dd><dt>Zuletzt</dt><dd>gestern, 23:41 · Ostkai 12</dd></dl>
+        </div>
+      </div>
+      <div class="panel__foot"><button class="btn btn--primary grow">Spielen <span class="key">Enter</span></button><button class="btn btn--danger-ghost btn--icon" aria-label="Charakter löschen"><ic n="trash"></ic></button></div>
+    </div>
+    <div class="panel" style="border-top-color:var(--fh-border)"><div class="row is-hover" style="grid-template-columns:auto 1fr auto;border:0;padding:1.2rem 1.6rem"><div class="avatar" style="width:4.4rem;height:4.4rem"><svg viewBox="0 0 100 200"><use href="#i-person"/></svg></div><div><div class="disp" style="font-size:var(--fh-text-lg);font-weight:600;text-transform:uppercase">Mira Hansen</div><div class="xs muted">Rettungsdienst · zuletzt vor 3 Tagen</div></div><span class="chip c-ems">RD</span></div></div>
+    <div class="panel" style="border-top-color:var(--fh-border)"><div class="row" style="grid-template-columns:auto 1fr auto;border:0;padding:1.2rem 1.6rem"><div class="avatar" style="width:4.4rem;height:4.4rem"><svg viewBox="0 0 100 200"><use href="#i-person"/></svg></div><div><div class="disp" style="font-size:var(--fh-text-lg);font-weight:600;text-transform:uppercase">Ole Petersen</div><div class="xs muted">Zivil · zuletzt vor 12 Tagen</div></div><span class="chip c-civil">Zivil</span></div></div>
+    <button class="btn btn--ghost" style="background:var(--fh-bg-surface);height:7.2rem;border-style:dashed;justify-content:flex-start;padding:0 1.6rem;gap:1.6rem"><span class="code code--sm"><ic n="plus" class="s16"></ic></span><span style="text-align:left"><span style="display:block">Neuen Charakter anlegen</span><span class="xs muted" style="font-family:var(--fh-font-sans);text-transform:none;letter-spacing:0;font-weight:400">Slot 4 von 5 frei</span></span></button>
+    <div class="slot is-locked" style="width:100%;height:5.6rem;flex-direction:row;gap:1.2rem;justify-content:flex-start;padding:0 1.6rem"><ic n="lock"></ic><span class="sm muted">Slot 5 gesperrt · freigeschaltet mit Unterstützer-Status</span></div>
+    <div style="margin-top:auto;display:grid;grid-template-columns:1fr 1fr;gap:1.2rem">
+      <div class="card"><div class="ch"><h3>Lädt</h3></div><div class="cb" style="display:flex;gap:1.2rem;align-items:center"><span class="skel" style="width:4.4rem;height:4.4rem"></span><div style="flex:1;display:flex;flex-direction:column;gap:0.6rem"><span class="skel" style="width:70%"></span><span class="skel" style="width:40%"></span></div></div></div>
+      <div class="card"><div class="ch"><h3>Fehler</h3></div><div class="cb sm"><span style="color:var(--fh-danger)">Charaktere nicht geladen.</span> <span class="sec">Erneut mit</span> <span class="key key--sm">R</span></div></div>
+    </div>
+  </div>
+  <div class="avatar" style="position:absolute;left:52%;top:14%;width:28rem;height:74%;background:none;color:rgba(160,170,180,0.55)"><svg viewBox="0 0 100 200" style="width:100%;height:100%"><use href="#i-person"/></svg></div>
+  <div style="position:absolute;left:50%;bottom:4.8rem;transform:translateX(-10%);display:flex;gap:1.2rem" class="plate"><div style="padding:0.8rem 1.6rem;display:flex;gap:1.6rem;align-items:center" class="sm sec"><span><span class="key key--ghost key--sm">A</span> <span class="key key--ghost key--sm">D</span> drehen</span><span><span class="key key--ghost key--sm">Mausrad</span> Zoom</span></div></div>
+</section>
+
+<!-- ═══ 05 · Character creator ═════════════════════════════════════════ -->
+<section class="frame" id="f05">
+  <div class="world" data-scene="night"></div>
+  <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(8,9,11,0.9) 0%,rgba(8,9,11,0.4) 40%,rgba(8,9,11,0) 55%)"></div>
+  <div class="tag">05 · Charaktererstellung · Schritt 3 von 6 · Zustand: gefüllt, Fokus auf Regler</div>
+  <div class="panel" style="position:absolute;left:4.8rem;top:4.8rem;bottom:4.8rem;width:54rem">
+    <div class="panel__head"><span class="code">3</span><div class="grow"><h2 class="panel__title">Gesicht</h2><div class="panel__sub">Neuer Charakter · Schritt 3 von 6</div></div></div>
+    <div style="display:flex;padding:0 2rem;gap:0.4rem;border-bottom:var(--fh-border-width) solid var(--fh-border)">
+      <div style="flex:1;padding:1.2rem 0 1rem;border-bottom:var(--fh-border-width-strong) solid var(--fh-success)" class="xs"><span style="color:var(--fh-success)">1</span> <span class="sec">Herkunft</span></div>
+      <div style="flex:1;padding:1.2rem 0 1rem;border-bottom:var(--fh-border-width-strong) solid var(--fh-success)" class="xs"><span style="color:var(--fh-success)">2</span> <span class="sec">Merkmale</span></div>
+      <div style="flex:1;padding:1.2rem 0 1rem;border-bottom:var(--fh-border-width-strong) solid var(--fh-accent-primary)" class="xs"><b>3 Gesicht</b></div>
+      <div style="flex:1;padding:1.2rem 0 1rem;border-bottom:var(--fh-border-width-strong) solid var(--fh-border)" class="xs muted">4 Haare</div>
+      <div style="flex:1;padding:1.2rem 0 1rem;border-bottom:var(--fh-border-width-strong) solid var(--fh-border)" class="xs muted">5 Kleidung</div>
+      <div style="flex:1;padding:1.2rem 0 1rem;border-bottom:var(--fh-border-width-strong) solid var(--fh-border)" class="xs muted">6 Daten</div>
+    </div>
+    <div class="panel__body" style="display:flex;flex-direction:column;gap:1.8rem;overflow:hidden">
+      <div class="tabs"><span class="tab is-active">Nase</span><span class="tab">Augen</span><span class="tab">Kiefer</span><span class="tab">Lippen</span><span class="tab">Wangen</span></div>
+      <div id="sliders" style="display:flex;flex-direction:column;gap:1.6rem"></div>
+      <div class="divider" style="margin:0.4rem 0"></div>
+      <div class="field"><span class="label">Augenfarbe</span><div style="display:flex;gap:0.8rem" id="eyecols"></div></div>
+      <div class="field"><span class="label">Gesichtsvorlage</span><div style="display:flex;gap:0.8rem;align-items:center"><div class="stepper"><button><ic n="chev-l" class="s16"></ic></button><span>14 / 46</span><button><ic n="chev-r" class="s16"></ic></button></div><button class="btn btn--ghost btn--sm"><ic n="rotate" class="s16"></ic>Zufällig</button><button class="btn btn--ghost btn--sm">Zurücksetzen</button></div></div>
+    </div>
+    <div class="panel__foot"><button class="btn btn--ghost"><ic n="chev-l" class="s16"></ic>Zurück <span class="key">Q</span></button><span class="grow"></span><button class="btn btn--primary">Weiter <span class="key">E</span></button></div>
+  </div>
+  <div class="avatar" style="position:absolute;left:62%;top:12%;width:30rem;height:76%;background:none;color:rgba(160,170,180,0.55)"><svg viewBox="0 0 100 200" style="width:100%;height:100%"><use href="#i-person"/></svg></div>
+  <div style="position:absolute;right:4.8rem;top:4.8rem;width:36rem;display:flex;flex-direction:column;gap:1.2rem">
+    <div class="panel"><div class="panel__head" style="padding:1.2rem 1.6rem"><div class="grow"><div class="label">Kamera</div></div></div>
+      <div style="padding:1.2rem 1.6rem;display:grid;grid-template-columns:repeat(4,1fr);gap:0.6rem"><button class="btn btn--secondary btn--sm">Kopf</button><button class="btn btn--ghost btn--sm">Körper</button><button class="btn btn--ghost btn--sm">Beine</button><button class="btn btn--ghost btn--sm">Ganz</button></div>
+      <div style="padding:0 1.6rem 1.4rem;display:flex;gap:1.6rem" class="xs sec"><span><span class="key key--ghost key--sm">A</span> <span class="key key--ghost key--sm">D</span> drehen</span><span><span class="key key--ghost key--sm">W</span> <span class="key key--ghost key--sm">S</span> Höhe</span><span><span class="key key--ghost key--sm">Mausrad</span> Zoom</span></div></div>
+    <div class="panel"><div class="panel__head" style="padding:1.2rem 1.6rem"><div class="grow"><div class="label">Schritt 6 · Daten · Validierung</div></div></div>
+      <div style="padding:1.6rem;display:grid;grid-template-columns:1fr 1fr;gap:1.2rem">
+        <div class="field"><span class="label">Vorname</span><div class="input">Jonas</div></div>
+        <div class="field"><span class="label">Nachname</span><div class="input">Krüger</div></div>
+        <div class="field" style="grid-column:1/-1"><span class="label">Geburtsdatum</span><div class="input is-error mono">31.02.1994</div><span class="msg msg--error"><ic n="error" class="s16"></ic>Dieses Datum gibt es nicht.</span></div>
+      </div></div>
+  </div>
+</section>
+
+<!-- ═══ 06 · Spawn selector ════════════════════════════════════════════ -->
+<section class="frame" id="f06">
+  <div class="world" data-scene="night"></div><div class="dim"></div>
+  <div class="tag">06 · Spawn-Auswahl · Zustand: gefüllt, „Wohnung“ gewählt, „Polizeiwache“ gesperrt</div>
+  <div class="panel" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:150rem;height:82rem">
+    <div class="panel__head"><span class="code">7</span><div class="grow"><h2 class="panel__title">Wo wachst du auf?</h2><div class="panel__sub">Jonas Krüger · Kamera fährt zum gewählten Ort</div></div><span class="sm muted">22:47 · Nieselregen · 9 °C</span></div>
+    <div style="display:grid;grid-template-columns:46rem 1fr;flex:1;min-height:0">
+      <div style="border-right:var(--fh-border-width) solid var(--fh-border);display:flex;flex-direction:column">
+        <div class="row" style="grid-template-columns:auto 1fr;padding:1.4rem 2rem"><span class="code code--sm" style="border-color:var(--fh-text-muted);color:var(--fh-text-secondary)">0</span><div><div>Letzter Ort</div><div class="xs muted">Ostkai 12 · vor der Werkstatt</div></div></div>
+        <div class="row is-selected" style="grid-template-columns:auto 1fr auto;padding:1.4rem 2rem"><span class="code code--sm">1</span><div><div>Wohnung</div><div class="xs muted">Block 7, Aufgang B · 4. OG</div></div><ic n="home" style="color:var(--fh-accent-primary)"></ic></div>
+        <div class="row" style="grid-template-columns:auto 1fr;padding:1.4rem 2rem"><span class="code code--sm" style="border-color:var(--fh-text-muted);color:var(--fh-text-secondary)">2</span><div><div>Hauptbahnhof</div><div class="xs muted">Bahnhofsvorplatz</div></div></div>
+        <div class="row" style="grid-template-columns:auto 1fr;padding:1.4rem 2rem"><span class="code code--sm" style="border-color:var(--fh-text-muted);color:var(--fh-text-secondary)">3</span><div><div>Fischmarkt</div><div class="xs muted">Halle 2 · Kai</div></div></div>
+        <div class="row" style="grid-template-columns:auto 1fr;padding:1.4rem 2rem"><span class="code code--sm" style="border-color:var(--fh-text-muted);color:var(--fh-text-secondary)">4</span><div><div>Containerhof Süd</div><div class="xs muted">Tor 3</div></div></div>
+        <div class="row is-disabled" style="grid-template-columns:auto 1fr auto;padding:1.4rem 2rem"><span class="code code--sm" style="border-color:var(--fh-border);color:var(--fh-text-muted)">5</span><div><div>Polizeiwache Hafen</div><div class="xs">nur im Dienst</div></div><ic n="lock"></ic></div>
+        <div style="margin-top:auto;padding:2rem;display:flex;flex-direction:column;gap:1.2rem">
+          <div class="xs muted">Spawnpunkte laden: Liste zeigt 6 Platzhalterzeilen · Fehler: „Orte nicht geladen“ + Letzter Ort bleibt wählbar</div>
+          <button class="btn btn--primary btn--block" style="height:5.6rem;font-size:var(--fh-text-lg)">Hier aufwachen <span class="key">Enter</span></button>
+        </div>
+      </div>
+      <div style="position:relative;background:#16202a;overflow:hidden" id="spawnmap"></div>
+    </div>
+  </div>
+</section>
+
+<template id="hud-tpl">
+<div class="hud">
+  <!-- top-left: voice + radio -->
+  <div class="tl">
+    <div class="plate voice" data-k="voice"><ic n="mic" class="ic"></ic><span class="pips"><i class="on"></i><i class="on"></i><i></i></span><span class="lbl">Normal</span></div>
+    <div class="plate radio" data-k="radio"><ic n="radio" class="ic"></ic><span class="freq">101.5</span><span class="rx">Funk · 4 im Kanal</span></div>
+  </div>
+  <!-- top-right: wallet, job, notifications -->
+  <div class="tr">
+    <div class="plate wallet"><div class="line"><ic n="cash" class="ic"></ic><span class="label">Bar</span><span class="amt">4.250 €</span><span class="delta" data-k="delta">+250</span></div><div class="line"><ic n="bank" class="ic"></ic><span class="label">Bank</span><span class="amt">18.730 €</span></div></div>
+    <div class="plate jobplate"><span class="dot" style="--c:var(--fh-job-mechanic)"></span><b>Werkstatt Ostkai</b><span>Mechaniker</span><span class="duty">Im Dienst</span></div>
+    <div class="toasts">
+      <div class="toast is-enter c-success" style="--t:82%"><ic n="check"></ic><b>Zahlung erhalten</b><time>jetzt</time><p>+250 € von Mira Hansen · Rechnung RE-0193</p></div>
+      <div class="toast c-info" style="--t:60%"><ic n="info"></ic><b>Neue Nachricht</b><time>0:12</time><p>Ole: „Komm runter zum Tor 3.“</p></div>
+      <div class="toast c-warning" style="--t:40%"><ic n="warn"></ic><b>Tank fast leer</b><time>0:30</time><p>Noch etwa 6 km. Tankstelle Hafenstraße 400 m.</p></div>
+      <div class="toast c-danger" style="--t:20%"><ic n="error"></ic><b>Kein Platz</b><time>0:41</time><p>Inventar voll (39,6 / 40 kg). Lege erst etwas ab.</p></div>
+    </div>
+  </div>
+  <!-- bottom-left: nav + minimap + vitals -->
+  <div class="bl">
+    <div class="nav">
+      <div class="plate street"><b>Kaistraße</b><span>Ostkai · Block 7</span></div>
+      <div class="plate compass"><div class="ticks"></div><div class="letters"><span>W</span><span>NW</span><span>N</span><span>NO</span><span>O</span></div><span class="hd">NO 042°</span></div>
+      <div class="minimap"><svg data-k="map"></svg><span class="corner c1"></span><span class="corner c2"></span><span class="corner c3"></span><span class="corner c4"></span><span class="note">Spiel-Minimap</span></div>
+    </div>
+    <div class="vitals">
+      <div class="plate vital c-h" data-k="health" style="--c:var(--fh-hud-health)"><ic n="heart"></ic><div class="bar bar--seg" style="--v:84%"><i></i></div><span class="v">84</span></div>
+      <div class="plate vital" data-k="armor" style="--c:var(--fh-hud-armor)"><ic n="shield"></ic><div class="bar bar--seg" style="--v:50%"><i></i></div><span class="v">50</span></div>
+      <div class="plate vital" data-k="hunger" style="--c:var(--fh-hud-hunger)"><ic n="food"></ic><div class="bar bar--seg" style="--v:66%"><i></i></div><span class="v">66</span></div>
+      <div class="plate vital" data-k="thirst" style="--c:var(--fh-hud-thirst)"><ic n="drop"></ic><div class="bar bar--seg" style="--v:72%"><i></i></div><span class="v">72</span></div>
+      <div class="plate vital" data-k="stamina" style="--c:var(--fh-hud-stamina)"><ic n="bolt"></ic><div class="bar bar--seg" style="--v:100%"><i></i></div><span class="v">100</span></div>
+      <div class="plate vital" data-k="stress" style="--c:var(--fh-hud-stress)"><ic n="pulse"></ic><div class="bar bar--seg" style="--v:22%"><i></i></div><span class="v">22</span></div>
+    </div>
+  </div>
+  <!-- bottom-centre: progress + interaction hint -->
+  <div class="bc">
+    <div class="plate hint" data-k="hint"><span class="key">E</span>Rolltor öffnen</div>
+    <div class="plate progress" data-k="progress"><div class="top"><b>Motor reparieren</b><span>64 %</span></div><div class="bar bar--seg bar--lg" style="--v:64%"><i></i></div><div class="bot"><span class="key key--ghost key--sm">X</span>Abbrechen · noch 0:07</div></div>
+  </div>
+  <!-- bottom-right: ammo + vehicle -->
+  <div class="br">
+    <div class="plate ammo" data-k="ammo"><div class="wpn"><b>Pistole</b><span>Halbautomatik</span></div><span class="mag">12</span><span class="res">/ 48</span></div>
+    <div class="plate veh" data-k="veh">
+      <div class="ind"><ic n="left" class="on" data-k="indl"></ic><span class="gear">GANG 3</span><ic n="right" data-k="indr"></ic></div>
+      <div class="speed"><b data-k="spd">87</b><span>KM/H</span></div>
+      <div class="stat">
+        <span class="st ok" data-k="belt"><ic n="belt"></ic>Gurt</span>
+        <span class="st ok" data-k="eng"><ic n="engine"></ic>Motor</span>
+        <span class="st ok"><ic n="light"></ic>Licht</span>
+        <span class="st off"><ic n="lock"></ic>Offen</span>
+      </div>
+      <div class="bar bar--seg spbar" style="--v:36%;--c:var(--fh-text-primary)"><i></i></div>
+      <div class="fuel" data-k="fuel" style="--c:var(--fh-hud-fuel)"><ic n="fuel"></ic><div class="bar bar--seg" style="--v:58%"><i></i></div><span class="v">58 %</span></div>
+    </div>
+  </div>
+</div>
+</template>
+
+<!-- ═══ 07 · HUD over bright day scene ═════════════════════════════════ -->
+<section class="frame" id="f07">
+  <div class="world" data-scene="day"></div>
+  <div class="tag">07 · HUD · helle Tagesszene · im Fahrzeug, Blinker links, Gurt an, 4 Benachrichtigungen</div>
+  <div class="hudmount" data-state="day"></div>
+</section>
+
+<!-- ═══ 08 · HUD over dark night scene ═════════════════════════════════ -->
+<section class="frame" id="f08">
+  <div class="world" data-scene="night"></div>
+  <div class="tag">08 · HUD · Nachtszene · Leben kritisch, Sprechen „Rufen“, Funk sendet, Gurt aus, Motor beschädigt, Tank &amp; Munition knapp</div>
+  <div class="hudmount" data-state="night"></div>
+</section>
+
+<!-- ═══ 09 · Death / unconscious ═══════════════════════════════════════ -->
+<section class="frame" id="f09">
+  <div class="world" data-scene="night" style="filter:grayscale(0.85) brightness(0.7)"></div>
+  <div class="death">
+    <div class="label" style="color:var(--fh-hud-health);font-size:var(--fh-text-md)">Schwer verletzt</div>
+    <h1>Bewusstlos</h1>
+    <p class="sec" style="margin:0;font-size:var(--fh-text-lg);text-align:center;max-width:64rem">Du liegst am Containerhof Süd. Ein Sanitäter kann dich wiederbeleben.</p>
+    <div style="display:flex;gap:4.8rem;align-items:flex-end;margin-top:1.6rem">
+      <div style="text-align:center"><div class="label">Wiederbelebung im Krankenhaus in</div><div class="timer num" style="margin-top:0.6rem">02:41</div></div>
+      <div style="text-align:center"><div class="label">Rettungsdienst</div><div class="disp" style="font-size:var(--fh-text-2xl);font-weight:700;margin-top:0.6rem;color:var(--fh-job-ems)">2 im Dienst</div></div>
+    </div>
+    <div style="display:flex;gap:1.6rem;margin-top:2.4rem">
+      <div class="plate hint" style="opacity:1"><span class="key" style="background:var(--fh-success)">G</span>Notruf gesendet <small>· 0:48 her · erneut ab 1:12</small></div>
+      <div class="plate hint" style="opacity:0.55"><span class="key key--ghost">E</span>Halten: im Krankenhaus aufwachen <small>· ab 00:00</small></div>
+    </div>
+    <div class="xs muted" style="margin-top:1.6rem;text-align:center;max-width:80rem">Zustände: <b class="sec">Notruf offen</b> ([G] Notruf senden, gelbe Taste) → <b class="sec">Notruf gesendet</b> (grün, Sperrzeit) → <b class="sec">Respawn verfügbar</b> ([E] halten, Taste gelb, Ring füllt sich 3 s) · Wiederbelebt: Bildschirm blendet in 320 ms aus</div>
+  </div>
+  <div class="tag">09 · Bewusstlos · Zustand: Notruf gesendet, Respawn noch gesperrt</div>
+</section>
+
+<!-- ═══ 10 · Radial menu · context menu · interaction hint ═════════════ -->
+<section class="frame" id="f10">
+  <div class="world" data-scene="day"></div>
+  <div class="tag">10 · Radialmenü (Fokus: Fahrzeug, 1 gesperrt) · Kontextmenü (Hover, deaktiviert, Untermenü, Gefahr) · Interaktion</div>
+  <div style="position:absolute;inset:0;background:radial-gradient(circle at 30% 50%,rgba(6,7,9,0.55),rgba(6,7,9,0.15) 45%)"></div>
+  <div class="radial" id="radial" style="position:absolute;left:30%;top:50%;transform:translate(-50%,-50%)"></div>
+  <div style="position:absolute;left:30%;top:calc(50% + 26rem);transform:translateX(-50%)" class="plate"><div style="padding:0.8rem 1.6rem;display:flex;gap:1.6rem" class="sm sec"><span><span class="key key--ghost key--sm">Maus</span> zielen</span><span><span class="key key--ghost key--sm">Klick</span> wählen</span><span><span class="key key--ghost key--sm">Rechts</span> zurück</span><span><span class="key key--ghost key--sm">F3</span> loslassen schließt</span></div></div>
+  <div style="position:absolute;left:62%;top:22%;display:flex;gap:0.4rem;align-items:flex-start">
+    <div class="ctx">
+      <div class="hd"><ic n="car" style="color:var(--fh-accent-primary)"></ic><div><div class="disp" style="font-weight:700;text-transform:uppercase;letter-spacing:0.04em">Fahrzeug</div><span class="plate-de" style="height:2.2rem;font-size:var(--fh-text-sm);margin-top:0.4rem"><span>HH · PB 704</span></span></div></div>
+      <div class="it"><ic n="box"></ic>Kofferraum öffnen<span class="sc key key--ghost key--sm">K</span></div>
+      <div class="it is-hover"><ic n="lock"></ic>Abschließen<span class="sc key key--ghost key--sm">L</span></div>
+      <div class="it"><ic n="door"></ic>Türen<ic n="chev-r" class="s16" style="margin-left:auto"></ic></div>
+      <div class="it is-disabled"><ic n="wrench"></ic>Reparieren<span class="why">Werkzeugkasten fehlt</span></div>
+      <div class="sep"></div>
+      <div class="it is-danger"><ic n="trash"></ic>Abschleppen lassen</div>
+    </div>
+    <div class="ctx" style="width:22rem;margin-top:10.6rem"><div class="it is-hover"><ic n="door"></ic>Fahrertür</div><div class="it"><ic n="door"></ic>Beifahrertür</div><div class="it"><ic n="door"></ic>Alle Türen</div></div>
+  </div>
+  <div style="position:absolute;left:62%;top:66%;display:flex;flex-direction:column;gap:1.6rem;align-items:flex-start">
+    <div class="label" style="color:#111;text-shadow:none;background:rgba(255,255,255,0.7);padding:0.3rem 0.6rem">Interaktionshinweis · kurz · halten · gesperrt</div>
+    <div class="plate hint"><span class="key">E</span>Tür öffnen</div>
+    <div class="plate hint is-hold"><span class="key">E</span>Halten: Container aufbrechen <small>· 40 %</small></div>
+    <div class="plate hint" style="color:var(--fh-text-muted)"><span class="key key--ghost">E</span>Abgeschlossen <small>· Schlüssel fehlt</small></div>
+  </div>
+</section>
+
+<!-- ═══ 11 · Input dialog · confirm dialog ═════════════════════════════ -->
+<section class="frame" id="f11">
+  <div class="world" data-scene="night"></div><div class="dim"></div>
+  <div class="tag">11 · Eingabedialog (Fehler im Feld Betrag) · Bestätigungsdialog (Gefahr, Fokus auf Abbrechen) · Lädt-Zustand</div>
+  <div class="center" style="align-items:flex-start;padding-top:12rem">
+    <div class="panel" style="width:56rem">
+      <div class="panel__head"><span class="code"><ic n="cash"></ic></span><div class="grow"><h2 class="panel__title">Geld geben</h2><div class="panel__sub">an Mira Hansen · ID 23 · 1,4 m entfernt</div></div><button class="btn btn--ghost btn--sm btn--icon" aria-label="Schließen"><ic n="x" class="s16"></ic></button></div>
+      <div class="panel__body" style="display:flex;flex-direction:column;gap:1.6rem">
+        <div class="field"><span class="label">Betrag</span><div class="input is-error is-focus">5.000<span class="caret"></span><span class="suffix">€</span></div><span class="msg msg--error"><ic n="error" class="s16"></ic>Du hast nur 4.250 € Bargeld.</span></div>
+        <div class="field"><span class="label">Aus</span><div class="seg-ctl"><span class="is-active"><ic n="cash" class="s16"></ic>Bargeld · 4.250 €</span><span><ic n="bank" class="s16"></ic>Konto · 18.730 €</span></div></div>
+        <div class="field"><span class="label">Notiz <span class="muted" style="text-transform:none;letter-spacing:0">(optional)</span></span><textarea class="input" rows="2" placeholder="Wofür?">Für die Reifen</textarea><span class="msg msg--hint" style="justify-content:flex-end">14 / 80</span></div>
+      </div>
+      <div class="panel__foot"><span class="xs muted grow">Eingabe prüft live · Enter sendet nur ohne Fehler</span><button class="btn btn--ghost">Abbrechen <span class="key">Esc</span></button><button class="btn btn--primary" disabled>Geben <span class="key">Enter</span></button></div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:2.4rem">
+      <div class="panel" style="width:52rem;border-top-color:var(--fh-danger)">
+        <div class="panel__head"><span class="code code--danger"><ic n="warn"></ic></span><div class="grow"><h2 class="panel__title">Fahrzeug verschrotten?</h2></div></div>
+        <div class="panel__body"><p style="margin:0;line-height:1.5">Der Transporter <span class="plate-de" style="height:2.2rem;font-size:var(--fh-text-sm);vertical-align:middle"><span>HH · OK 1182</span></span> wird endgültig gelöscht. Du erhältst <b class="money">420 €</b> Schrottwert. Das lässt sich nicht rückgängig machen.</p></div>
+        <div class="panel__foot"><span class="grow"></span><button class="btn btn--ghost is-focus">Abbrechen <span class="key">Esc</span></button><button class="btn btn--danger">Verschrotten</button></div>
+      </div>
+      <div class="panel" style="width:52rem">
+        <div class="panel__head"><span class="code"><ic n="send"></ic></span><div class="grow"><h2 class="panel__title">Wird gesendet …</h2><div class="panel__sub">Zustand: lädt · Buttons gesperrt, Esc bleibt aktiv</div></div></div>
+        <div class="panel__body"><div class="bar bar--thin" style="--v:100%;background:none;overflow:hidden"><i style="width:30%;animation:indet 1.2s linear infinite"></i></div></div>
+        <div class="panel__foot"><span class="grow"></span><button class="btn btn--ghost">Abbrechen <span class="key">Esc</span></button><button class="btn btn--primary" disabled>Geben</button></div>
+      </div>
+    </div>
+  </div>
+  <style>@keyframes indet{from{transform:translateX(-100%)}to{transform:translateX(340%)}}</style>
+</section>
+
+<!-- ═══ 12 · Chat · scoreboard ═════════════════════════════════════════ -->
+<section class="frame" id="f12">
+  <div class="world" data-scene="day"></div>
+  <div class="tag">12 · Chat (Eingabe offen, Befehlsvorschlag) · Scoreboard (Tab gehalten, eigener Eintrag markiert)</div>
+  <div class="chat" style="position:absolute;left:3.2rem;top:3.2rem">
+    <div class="log">
+      <div class="msg-l"><span class="ch" style="--c:var(--fh-text-muted)">OOC</span><span class="who">Ole_P</span><span>bin gleich wieder da, Tür klingelt</span></div>
+      <div class="msg-l"><span class="me">* Jonas Krüger wischt sich das Öl von den Händen.</span></div>
+      <div class="msg-l"><span class="ch" style="--c:var(--fh-hud-radio)">Funk 101.5</span><span class="who">Mira H.</span><span>Brauche einen Abschlepper am Tor 3.</span></div>
+      <div class="msg-l"><span class="ch" style="--c:var(--fh-job-police)">Polizei</span><span class="who">Leitstelle</span><span>Verkehrskontrolle Kaistraße ab 23:00.</span></div>
+      <div class="msg-l"><span class="ch ch--plain">DO</span><span class="sec">Die Rolltür ist mit einem neuen Schloss gesichert.</span></div>
+      <div class="msg-l"><span class="ch" style="--c:var(--fh-danger)">System</span><span class="sys">Befehl unbekannt: /abschlep</span></div>
+    </div>
+    <div class="sugg"><div class="is-hover"><code>/me</code><span class="sec">[Handlung] · beschreibt, was dein Charakter tut</span></div><div><code>/meld</code><span class="sec">[Text] · Meldung an die Leitstelle</span></div></div>
+    <div class="inputline"><span class="ch" style="--c:var(--fh-accent-primary);font:700 var(--fh-text-xs)/1 var(--fh-font-display);padding:0.4rem 0.6rem;color:var(--fh-text-on-accent);letter-spacing:0.08em">LOKAL</span><span>/me<span class="caret" style="margin-left:0.1rem"></span></span><span class="xs muted" style="margin-left:auto"><span class="key key--ghost key--sm">Tab</span> Kanal · <span class="key key--ghost key--sm">↑</span> Verlauf</span></div>
+  </div>
+  <div class="panel" style="position:absolute;right:6.4rem;top:50%;transform:translateY(-50%);width:78rem;height:80rem">
+    <div class="panel__head"><span class="code">48</span><div class="grow"><h2 class="panel__title">Hafenstadt</h2><div class="panel__sub">48 / 64 Spieler · Uptime 6 h 12 min</div></div><span class="key key--ghost">Tab</span></div>
+    <div style="display:flex;gap:0.8rem;padding:1.2rem 2rem;border-bottom:var(--fh-border-width) solid var(--fh-border)"><span class="chip c-police">Polizei 6</span><span class="chip c-ems">Rettung 3</span><span class="chip c-mech">Werkstatt 2</span><span class="chip c-civil">Zivil 37</span></div>
+    <div style="padding:0 2rem;flex:1;min-height:0;overflow:hidden" class="scroll-fade" id="scoreboard"></div>
+  </div>
+</section>
+
+<!-- ═══ 13 · Inventory ═════════════════════════════════════════════════ -->
+<section class="frame" id="f13">
+  <div class="world" data-scene="day"></div><div class="dim" style="background:rgba(5,6,8,0.6)"></div>
+  <div class="tag">13 · Inventar · Ziehen von Slot 4 nach Kofferraum 7 · Tooltip · Hotbar 1–5 · Gewicht</div>
+  <div class="center" style="gap:3.2rem">
+    <div class="panel" style="width:51rem">
+      <div class="panel__head"><span class="code"><ic n="user"></ic></span><div class="grow"><h2 class="panel__title">Taschen</h2><div class="panel__sub">Jonas Krüger</div></div></div>
+      <div style="padding:1.6rem 2rem 0"><div class="wt"><span class="label">Gewicht</span><div class="bar bar--seg" style="--v:58%"><i></i></div><span class="num">23,4 / 40 kg</span></div></div>
+      <div class="panel__body"><div class="inv-grid" id="inv-player"></div></div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:1.6rem;align-self:center;width:30rem">
+      <div class="card" style="box-shadow:var(--fh-shadow-2)"><div class="ch"><ic n="wrench" style="color:var(--fh-accent-primary)"></ic><h3>Werkzeugkasten</h3><span class="act xs muted">Slot 4</span></div><div class="cb" style="display:flex;flex-direction:column;gap:1rem"><p class="sm sec" style="margin:0">Zum Reparieren von Fahrzeugen. Hält 5 Einsätze.</p><dl class="kv" style="margin:0"><dt>Gewicht</dt><dd>2,5 kg</dd><dt>Haltbar</dt><dd>3 / 5</dd></dl><div style="display:grid;grid-template-columns:1fr 1fr;gap:0.6rem"><button class="btn btn--secondary btn--sm">Benutzen</button><button class="btn btn--ghost btn--sm">Geben</button><button class="btn btn--ghost btn--sm">Teilen</button><button class="btn btn--ghost btn--sm">Ablegen</button></div></div></div>
+      <div class="field"><span class="label">Menge zum Verschieben</span><div style="display:flex;gap:0.8rem"><div class="stepper"><button><ic n="minus" class="s16"></ic></button><span>1</span><button><ic n="plus" class="s16"></ic></button></div><button class="btn btn--ghost btn--sm">Alle</button><button class="btn btn--ghost btn--sm">Hälfte</button></div></div>
+      <div class="xs muted">Ziehen mit linker Maustaste · <span class="key key--ghost key--sm">Shift</span>+Klick verschiebt alles · Rechtsklick öffnet Aktionen · Rot umrandet: Ziel zu schwer</div>
+    </div>
+    <div class="panel" style="width:51rem;position:relative">
+      <div class="panel__head tex-ribs"><span class="code"><ic n="car"></ic></span><div class="grow"><h2 class="panel__title">Kofferraum</h2><div class="panel__sub"><span class="plate-de" style="height:2rem;font-size:var(--fh-text-xs)"><span>HH · PB 704</span></span></div></div></div>
+      <div style="padding:1.6rem 2rem 0"><div class="wt"><span class="label">Gewicht</span><div class="bar bar--seg" style="--v:91%;--c:var(--fh-warning)"><i></i></div><span class="num" style="color:var(--fh-warning)">54,5 / 60 kg</span></div></div>
+      <div class="panel__body"><div class="inv-grid" id="inv-trunk"></div></div>
+    </div>
+  </div>
+  <div style="position:absolute;left:50%;bottom:3.2rem;transform:translateX(-50%);display:flex;gap:0.6rem" id="hotbar"></div>
+</section>
+
+<!-- ═══ 14 · Phone · bank · ATM ════════════════════════════════════════ -->
+<section class="frame" id="f14">
+  <div class="world" data-scene="night"></div><div class="dim" style="background:rgba(5,6,8,0.55)"></div>
+  <div class="tag">14 · Bank (Überweisen, Feldfehler) · Geldautomat (PIN falsch) · Handy (Startbildschirm, eingehender Anruf)</div>
+  <div class="panel" style="position:absolute;left:4.8rem;top:50%;transform:translateY(-50%);width:84rem;height:76rem">
+    <div class="panel__head"><span class="code"><ic n="bank"></ic></span><div class="grow"><h2 class="panel__title">Hafensparkasse</h2><div class="panel__sub">Filiale Ostkai · Jonas Krüger</div></div><button class="btn btn--ghost btn--sm">Schließen <span class="key">Esc</span></button></div>
+    <div style="display:grid;grid-template-columns:30rem 1fr;flex:1;min-height:0">
+      <div style="border-right:var(--fh-border-width) solid var(--fh-border);padding:2rem;display:flex;flex-direction:column;gap:1.6rem">
+        <div class="card" style="border-color:var(--fh-accent-secondary)"><div class="cb"><div class="label">Girokonto</div><div class="stat-big" style="margin-top:0.6rem">18.730 €</div><div class="mono xs muted" style="margin-top:0.4rem">DE00 HAFN 0000 0712 2B</div></div></div>
+        <div class="card"><div class="cb"><div class="label">Bargeld</div><div class="disp num" style="font-size:var(--fh-text-xl);font-weight:700;margin-top:0.4rem">4.250 €</div></div></div>
+        <div class="card"><div class="cb"><div class="label">Firmenkonto · Werkstatt</div><div class="disp num" style="font-size:var(--fh-text-xl);font-weight:700;margin-top:0.4rem">128.450 €</div><div class="xs muted">nur Lesen (Rang 2)</div></div></div>
+        <div style="margin-top:auto;display:grid;grid-template-columns:1fr 1fr;gap:0.8rem"><button class="btn btn--secondary btn--sm">Einzahlen</button><button class="btn btn--secondary btn--sm">Abheben</button></div>
+      </div>
+      <div style="display:flex;flex-direction:column;min-height:0">
+        <div class="tabs" style="padding:0 2rem"><span class="tab">Übersicht</span><span class="tab is-active">Überweisen</span><span class="tab">Verlauf</span></div>
+        <div style="padding:2rem;display:grid;grid-template-columns:1fr 1fr;gap:1.6rem">
+          <div class="field" style="grid-column:1/-1"><span class="label">Empfänger · Kontonummer oder Name</span><div class="input is-error mono">DE00 HAFN 0000 0991<span class="suffix" style="font-family:var(--fh-font-sans)"><ic n="error" class="s16" style="color:var(--fh-danger)"></ic></span></div><span class="msg msg--error">Konto nicht gefunden. Prüfe die letzten 4 Stellen.</span></div>
+          <div class="field"><span class="label">Betrag</span><div class="input">640<span class="suffix">€</span></div></div>
+          <div class="field"><span class="label">Verwendungszweck</span><div class="input">Reparatur Transporter</div></div>
+          <div style="grid-column:1/-1;display:flex;justify-content:flex-end;gap:1rem"><span class="xs muted" style="margin-right:auto;align-self:center">Gebühr 0 € · sofort</span><button class="btn btn--primary" disabled>Überweisen</button></div>
+        </div>
+        <div style="padding:0 2rem;flex:1;min-height:0;overflow:hidden" class="scroll-fade">
+          <div class="label" style="margin-bottom:0.6rem">Letzte Buchungen</div>
+          <div class="row th" style="grid-template-columns:9rem 1fr 11rem"><span>Datum</span><span>Text</span><span style="text-align:right">Betrag</span></div>
+          <div class="row" style="grid-template-columns:9rem 1fr 11rem"><span class="mono xs sec">heute</span><span>Gehalt · Werkstatt Ostkai</span><span class="money pos" style="text-align:right">+850 €</span></div>
+          <div class="row" style="grid-template-columns:9rem 1fr 11rem"><span class="mono xs sec">heute</span><span>Tankstelle Hafenstraße</span><span class="money neg" style="text-align:right">−74 €</span></div>
+          <div class="row" style="grid-template-columns:9rem 1fr 11rem"><span class="mono xs sec">gestern</span><span>Miete · Block 7 B</span><span class="money neg" style="text-align:right">−420 €</span></div>
+          <div class="row" style="grid-template-columns:9rem 1fr 11rem"><span class="mono xs sec">gestern</span><span>Rechnung RE-0181 · M. Hansen</span><span class="money pos" style="text-align:right">+310 €</span></div>
+          <div class="row" style="grid-template-columns:9rem 1fr 11rem"><span class="mono xs sec">12.10.</span><span>Kiosk Block 7</span><span class="money neg" style="text-align:right">−12 €</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="panel" style="position:absolute;left:92rem;top:50%;transform:translateY(-50%);width:40rem">
+    <div class="panel__head"><span class="code"><ic n="cash"></ic></span><div class="grow"><h2 class="panel__title">Geldautomat</h2><div class="panel__sub">Hafensparkasse · Kaistraße</div></div></div>
+    <div class="panel__body" style="display:flex;flex-direction:column;gap:1.6rem">
+      <div class="label">PIN eingeben</div>
+      <div style="display:flex;gap:1rem;justify-content:center"><span class="input is-error" style="width:5.6rem;height:6.4rem;justify-content:center;font-size:var(--fh-text-2xl)">•</span><span class="input is-error" style="width:5.6rem;height:6.4rem;justify-content:center;font-size:var(--fh-text-2xl)">•</span><span class="input is-error" style="width:5.6rem;height:6.4rem;justify-content:center;font-size:var(--fh-text-2xl)">•</span><span class="input is-error" style="width:5.6rem;height:6.4rem;justify-content:center;font-size:var(--fh-text-2xl)">•</span></div>
+      <div class="msg msg--error" style="justify-content:center"><ic n="error" class="s16"></ic>PIN falsch · noch 2 Versuche</div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0.8rem" id="pinpad"></div>
+      <div class="xs muted" style="text-align:center">Nach PIN: Schnellbeträge 50 · 100 · 200 · 500 € und „Anderer Betrag“</div>
+    </div>
+  </div>
+  <div class="phone" style="position:absolute;right:6.4rem;top:50%;transform:translateY(-50%)">
+    <div class="scr">
+      <div class="sb"><span>22:47</span><span class="xs sec" style="font-family:var(--fh-font-sans);font-weight:500;letter-spacing:0">HafenNetz · 4G</span><span>78 %</span></div>
+      <div style="margin:0.8rem 1.2rem 0;padding:1.2rem 1.4rem;background:var(--fh-bg-elevated);border-left:0.4rem solid var(--fh-success);display:flex;gap:1.2rem;align-items:center">
+        <div class="avatar" style="width:4.4rem;height:4.4rem"><svg viewBox="0 0 100 200"><use href="#i-person"/></svg></div>
+        <div style="flex:1"><div class="xs muted">Eingehender Anruf</div><div class="disp" style="font-weight:700;font-size:var(--fh-text-lg)">Ole Petersen</div></div>
+        <button class="btn btn--danger btn--sm btn--icon" aria-label="Ablehnen"><ic n="x" class="s16"></ic></button><button class="btn btn--sm btn--icon" style="background:var(--fh-success);color:var(--fh-text-on-accent)" aria-label="Annehmen"><ic n="call" class="s16"></ic></button>
+      </div>
+      <div style="padding:2.4rem 1.6rem 0.8rem"><div class="disp" style="font-size:7.2rem;font-weight:700;line-height:0.9">22:47</div><div class="sm sec">Donnerstag, 15. Oktober · 9 °C Niesel</div></div>
+      <div class="apps" id="apps"></div>
+      <div class="dock" id="dock"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 15 · Shop ══════════════════════════════════════════════════════ -->
+<section class="frame" id="f15">
+  <div class="world" data-scene="night"></div><div class="dim"></div>
+  <div class="tag">15 · Laden „Kiosk Block 7“ · Warenkorb mit 3 Posten · 1 Artikel ausverkauft · Zahlung Bar</div>
+  <div class="panel" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:146rem;height:80rem">
+    <div class="panel__head tex-ribs"><span class="code">7</span><div class="grow"><h2 class="panel__title">Kiosk Block 7</h2><div class="panel__sub">Späti · geöffnet bis 04:00</div></div><div class="input" style="width:34rem;height:3.6rem"><ic n="search" class="s16" style="color:var(--fh-text-muted)"></ic><span class="ph">Suchen …</span></div><button class="btn btn--ghost btn--sm">Schließen <span class="key">Esc</span></button></div>
+    <div style="display:grid;grid-template-columns:1fr 46rem;flex:1;min-height:0">
+      <div style="display:flex;flex-direction:column;min-height:0">
+        <div class="tabs" style="padding:0 2rem"><span class="tab is-active">Alles <span class="count">18</span></span><span class="tab">Essen</span><span class="tab">Trinken</span><span class="tab">Tabak</span><span class="tab">Werkzeug</span><span class="tab">Elektronik</span></div>
+        <div id="shopgrid" style="padding:2rem;display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem;align-content:start;overflow:hidden"></div>
+      </div>
+      <div style="border-left:var(--fh-border-width) solid var(--fh-border);display:flex;flex-direction:column;background:var(--fh-bg-base)">
+        <div style="padding:1.6rem 2rem" class="label">Warenkorb · 3 Posten</div>
+        <div id="cart" style="padding:0 2rem"></div>
+        <div style="margin-top:auto;padding:2rem;display:flex;flex-direction:column;gap:1.4rem;border-top:var(--fh-border-width) solid var(--fh-border)">
+          <div class="field"><span class="label">Zahlung</span><div class="seg-ctl" style="width:100%"><span class="is-active" style="flex:1;justify-content:center"><ic n="cash" class="s16"></ic>Bar · 4.250 €</span><span style="flex:1;justify-content:center"><ic n="bank" class="s16"></ic>Karte · 18.730 €</span></div></div>
+          <div style="display:flex;align-items:baseline"><span class="sec">Summe</span><span class="stat-big" style="margin-left:auto">17,50 €</span></div>
+          <button class="btn btn--primary btn--block" style="height:5.6rem;font-size:var(--fh-text-lg)">Bezahlen <span class="key">Enter</span></button>
+          <div class="xs muted">Leer: „Noch nichts im Korb“ + Kaufen gesperrt · Fehler: „Zu wenig Bargeld“ unter der Zahlart</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 16 · Garage ════════════════════════════════════════════════════ -->
+<section class="frame" id="f16">
+  <div class="world" data-scene="day"></div><div class="dim" style="background:rgba(5,6,8,0.5)"></div>
+  <div class="tag">16 · Garage „Tiefgarage Block 7“ · Liste + Detail · Abgeschleppt-Zustand mit Gebühr</div>
+  <div class="panel" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:140rem;height:78rem">
+    <div class="panel__head tex-ribs"><span class="code">P1</span><div class="grow"><h2 class="panel__title">Tiefgarage Block 7</h2><div class="panel__sub">6 / 10 Stellplätze belegt</div></div><button class="btn btn--ghost btn--sm">Schließen <span class="key">Esc</span></button></div>
+    <div style="display:grid;grid-template-columns:58rem 1fr;flex:1;min-height:0">
+      <div style="border-right:var(--fh-border-width) solid var(--fh-border);display:flex;flex-direction:column;min-height:0">
+        <div class="tabs" style="padding:0 2rem"><span class="tab is-active">Eigene <span class="count">4</span></span><span class="tab">Job <span class="count">2</span></span><span class="tab">Boote <span class="count">1</span></span><span class="tab">Abschlepphof <span class="count">1</span></span></div>
+        <div style="padding:1.6rem 2rem;display:flex;gap:1rem"><div class="input" style="height:3.6rem"><ic n="search" class="s16" style="color:var(--fh-text-muted)"></ic><span class="ph">Name oder Kennzeichen</span></div><button class="btn btn--ghost btn--sm">Status <ic n="chev-d" class="s16"></ic></button></div>
+        <div id="garagelist" style="padding:0 2rem;flex:1;min-height:0;overflow:hidden"></div>
+      </div>
+      <div style="padding:2.4rem;display:flex;flex-direction:column;gap:2rem">
+        <div style="height:24rem;background:linear-gradient(180deg,#1d2125,#121416);border:var(--fh-border-width) solid var(--fh-border);position:relative;display:flex;align-items:center;justify-content:center" class="tex-facade">
+          <svg viewBox="0 0 400 140" style="width:60%;color:#59616a"><path d="M20 105v-30l30-38h220l50 38h40l20 15v15z" fill="currentColor"/><circle cx="90" cy="108" r="22" fill="#0e1012" stroke="#59616a" stroke-width="6"/><circle cx="310" cy="108" r="22" fill="#0e1012" stroke="#59616a" stroke-width="6"/><path d="M60 72l25-30h70v30zM165 72V42h95l35 30z" fill="#2a3036"/></svg>
+          <span class="chip chip--status c-danger" style="position:absolute;left:1.6rem;top:1.6rem">Abgeschleppt</span>
+          <span class="xs muted" style="position:absolute;right:1.2rem;bottom:1rem">Spiel rendert das Fahrzeug · NUI zeigt nur den Rahmen</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:1.6rem"><div><div class="disp" style="font-size:var(--fh-text-2xl);font-weight:700;text-transform:uppercase;line-height:1">Limousine „Kiez“</div><div class="sm muted" style="margin-top:0.4rem">Abschlepphof Süd · seit gestern 02:14 · Falschparken Kaistraße</div></div><span class="plate-de" style="margin-left:auto;height:3.4rem;font-size:var(--fh-text-lg)"><span>HH · JK 77</span></span></div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2rem">
+          <div class="field"><div style="display:flex"><span class="label">Tank</span><span class="num sm" style="margin-left:auto">34 %</span></div><div class="bar bar--seg" style="--v:34%;--c:var(--fh-hud-fuel)"><i></i></div></div>
+          <div class="field"><div style="display:flex"><span class="label">Motor</span><span class="num sm" style="margin-left:auto">91 %</span></div><div class="bar bar--seg" style="--v:91%;--c:var(--fh-success)"><i></i></div></div>
+          <div class="field is-low"><div style="display:flex"><span class="label">Karosserie</span><span class="num sm" style="margin-left:auto;color:var(--fh-warning)">22 %</span></div><div class="bar bar--seg" style="--v:22%;--c:var(--fh-warning)"><i></i></div></div>
+        </div>
+        <div class="errbox" style="background:rgba(238,138,52,0.12);border-left-color:var(--fh-warning)"><ic n="warn" style="color:var(--fh-warning)"></ic><div>Auslösen kostet <b class="money">450 €</b>. Danach steht das Fahrzeug am Abschlepphof Süd zur Abholung.</div></div>
+        <div style="margin-top:auto;display:flex;gap:1.2rem"><button class="btn btn--primary" style="height:5.6rem;flex:1;font-size:var(--fh-text-lg)">450 € zahlen &amp; auslösen <span class="key">Enter</span></button><button class="btn btn--ghost" style="height:5.6rem" disabled>Ausparken</button><button class="btn btn--ghost" style="height:5.6rem"><ic n="pin" class="s16"></ic>Markieren</button></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 17 · Clothing store ════════════════════════════════════════════ -->
+<section class="frame" id="f17">
+  <div class="world" data-scene="night"></div>
+  <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(8,9,11,0.9) 0%,rgba(8,9,11,0.35) 42%,rgba(8,9,11,0) 60%)"></div>
+  <div class="tag">17 · Kleidungsladen · Kategorie Oberteil gewählt · Warenkorb 2 Teile · Kamera „Körper“</div>
+  <div class="panel" style="position:absolute;left:4.8rem;top:4.8rem;bottom:4.8rem;width:56rem">
+    <div class="panel__head"><span class="code"><ic n="shirt"></ic></span><div class="grow"><h2 class="panel__title">Klamottenladen</h2><div class="panel__sub">Einkaufszeile Block 3</div></div></div>
+    <div style="display:grid;grid-template-columns:17rem 1fr;flex:1;min-height:0">
+      <div style="border-right:var(--fh-border-width) solid var(--fh-border);padding:0.8rem 0" id="clothcats"></div>
+      <div style="padding:2rem;display:flex;flex-direction:column;gap:2rem">
+        <div class="field"><span class="label">Modell</span><div style="display:flex;align-items:center;gap:1.2rem"><div class="stepper" style="height:4rem"><button><ic n="chev-l" class="s16"></ic></button><span>14 / 212</span><button><ic n="chev-r" class="s16"></ic></button></div><span class="sm sec">Arbeitsjacke, gefüttert</span></div></div>
+        <div class="field"><span class="label">Farbe / Textur</span><div style="display:flex;gap:0.8rem" id="cloth-tex"></div></div>
+        <div class="field"><span class="label">Preis</span><div class="stat-big">69 €</div></div>
+        <div style="display:flex;gap:1rem"><button class="btn btn--secondary" style="flex:1"><ic n="plus" class="s16"></ic>In den Korb</button><button class="btn btn--ghost">Anprobe zurücksetzen</button></div>
+        <div class="divider" style="margin:0"></div>
+        <div class="label">Korb</div>
+        <div><div class="row" style="grid-template-columns:auto 1fr auto auto"><ic n="shirt" class="s16"></ic><span>Arbeitsjacke #14 · Textur 2</span><span class="money">69 €</span><button class="btn btn--ghost btn--sm btn--icon" aria-label="Entfernen"><ic n="x" class="s16"></ic></button></div><div class="row" style="grid-template-columns:auto 1fr auto auto"><ic n="shirt" class="s16"></ic><span>Cargohose #7 · Textur 1</span><span class="money">48 €</span><button class="btn btn--ghost btn--sm btn--icon" aria-label="Entfernen"><ic n="x" class="s16"></ic></button></div></div>
+      </div>
+    </div>
+    <div class="panel__foot"><button class="btn btn--ghost">Outfit speichern</button><span class="grow"></span><span class="sec" style="margin-right:1.2rem">Summe <b class="money" style="font-size:var(--fh-text-lg);color:var(--fh-text-primary)">117 €</b></span><button class="btn btn--primary">Kaufen <span class="key">Enter</span></button></div>
+  </div>
+  <div class="avatar" style="position:absolute;left:62%;top:10%;width:30rem;height:80%;background:none;color:rgba(160,170,180,0.55)"><svg viewBox="0 0 100 200" style="width:100%;height:100%"><use href="#i-person"/></svg></div>
+  <div class="plate" style="position:absolute;left:50%;bottom:4.8rem;transform:translateX(-50%) translateX(12rem)"><div style="padding:0.8rem 1.2rem;display:flex;gap:0.8rem;align-items:center"><button class="btn btn--ghost btn--sm">Kopf</button><button class="btn btn--secondary btn--sm">Körper</button><button class="btn btn--ghost btn--sm">Beine</button><button class="btn btn--ghost btn--sm">Füße</button><span class="xs sec" style="margin-left:0.8rem"><span class="key key--ghost key--sm">A</span> <span class="key key--ghost key--sm">D</span> drehen · <span class="key key--ghost key--sm">H</span> Hände hoch</span></div></div>
+</section>
+
+<!-- ═══ 18 · Crafting ══════════════════════════════════════════════════ -->
+<section class="frame" id="f18">
+  <div class="world" data-scene="night"></div><div class="dim" style="background:rgba(5,6,8,0.6)"></div>
+  <div class="tag">18 · Werkbank · Rezept gewählt · 1 Material fehlt → Herstellen gesperrt mit Grund · Warteschlange</div>
+  <div class="panel" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:132rem;height:74rem">
+    <div class="panel__head"><span class="code">K1</span><div class="grow"><h2 class="panel__title">Werkbank</h2><div class="panel__sub">Keller Block 7 · Fertigkeit Schlosser 3</div></div><button class="btn btn--ghost btn--sm">Schließen <span class="key">Esc</span></button></div>
+    <div style="display:grid;grid-template-columns:40rem 1fr 34rem;flex:1;min-height:0">
+      <div style="border-right:var(--fh-border-width) solid var(--fh-border);min-height:0;overflow:hidden" id="recipes"></div>
+      <div style="padding:2.4rem;display:flex;flex-direction:column;gap:2rem">
+        <div style="display:flex;gap:2rem;align-items:center"><div class="slot is-filled" style="width:12rem;height:12rem"><ic n="lock" style="width:5rem;height:5rem;margin:0"></ic></div><div><div class="label">Ergebnis</div><div class="disp" style="font-size:var(--fh-text-2xl);font-weight:700;text-transform:uppercase;line-height:1.05">Dietrich-Set</div><div class="sm muted">1 Stück · 0,2 kg · Dauer 0:20</div></div></div>
+        <div class="label">Benötigt</div>
+        <div>
+          <div class="row" style="grid-template-columns:auto 1fr auto auto"><ic n="box" class="s16"></ic><span>Metallschrott</span><span class="num">12 / 8</span><ic n="tick" class="s16" style="color:var(--fh-success)"></ic></div>
+          <div class="row" style="grid-template-columns:auto 1fr auto auto"><ic n="wrench" class="s16"></ic><span>Feile</span><span class="num">1 / 1</span><ic n="tick" class="s16" style="color:var(--fh-success)"></ic></div>
+          <div class="row" style="grid-template-columns:auto 1fr auto auto"><ic n="box" class="s16"></ic><span style="color:var(--fh-danger)">Klebeband</span><span class="num" style="color:var(--fh-danger)">1 / 2</span><ic n="x" class="s16" style="color:var(--fh-danger)"></ic></div>
+        </div>
+        <div style="display:flex;gap:1.2rem;align-items:center"><span class="label">Menge</span><div class="stepper"><button><ic n="minus" class="s16"></ic></button><span>1</span><button><ic n="plus" class="s16"></ic></button></div><span class="xs muted">max. 0 mit aktuellem Material</span></div>
+        <div style="margin-top:auto;display:flex;flex-direction:column;gap:0.8rem"><button class="btn btn--primary btn--block" style="height:5.6rem" disabled>Herstellen</button><span class="msg msg--error" style="justify-content:center"><ic n="error" class="s16"></ic>Es fehlt 1× Klebeband.</span></div>
+      </div>
+      <div style="border-left:var(--fh-border-width) solid var(--fh-border);background:var(--fh-bg-base);padding:2rem;display:flex;flex-direction:column;gap:1.4rem">
+        <div class="label">Warteschlange · 2</div>
+        <div class="card"><div class="cb" style="display:flex;flex-direction:column;gap:0.8rem"><div style="display:flex"><span>Brecheisen</span><span class="num sm" style="margin-left:auto;color:var(--fh-accent-primary)">0:06</span></div><div class="bar bar--seg" style="--v:70%"><i></i></div></div></div>
+        <div class="card"><div class="cb" style="display:flex;flex-direction:column;gap:0.8rem"><div style="display:flex"><span class="sec">Feile ×2</span><span class="num sm muted" style="margin-left:auto">wartet</span></div><div class="bar bar--seg" style="--v:0%"><i></i></div></div></div>
+        <div class="card" style="border-color:var(--fh-success)"><div class="cb" style="display:flex;align-items:center;gap:1rem"><ic n="check" style="color:var(--fh-success)"></ic><span>Brecheisen fertig</span><button class="btn btn--secondary btn--sm" style="margin-left:auto">Nehmen</button></div></div>
+        <div class="xs muted" style="margin-top:auto">Schließen bricht nichts ab: die Warteschlange läuft weiter, solange du in der Nähe bleibst (15 m).</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 19 · Invoice · ID card ═════════════════════════════════════════ -->
+<section class="frame" id="f19">
+  <div class="world" data-scene="day"></div><div class="dim" style="background:rgba(5,6,8,0.55)"></div>
+  <div class="tag">19 · Rechnung (erhalten, offen) · Rechnung ausstellen (Formular) · Ausweis &amp; Führerschein (gezeigt von ID 23)</div>
+  <div class="center" style="gap:3.2rem;align-items:center">
+    <div style="display:flex;flex-direction:column;gap:2.4rem">
+      <div class="panel" style="width:54rem">
+        <div class="panel__head"><span class="code code--mech"><ic n="doc"></ic></span><div class="grow"><h2 class="panel__title">Rechnung</h2><div class="panel__sub mono">RE-2025-0193 · 15.10. 22:41</div></div><span class="chip chip--status c-info">Offen</span></div>
+        <div class="panel__body" style="display:flex;flex-direction:column;gap:1.4rem">
+          <dl class="kv" style="margin:0"><dt>Von</dt><dd><span class="chip c-mech" style="height:2.2rem">Werkstatt</span> Werkstatt Ostkai · M. Hansen</dd><dt>An</dt><dd>Jonas Krüger</dd><dt>Fällig</dt><dd>in 3 Tagen · danach +10 % Mahngebühr</dd></dl>
+          <div><div class="row th" style="grid-template-columns:1fr auto"><span>Posten</span><span>Betrag</span></div><div class="row" style="grid-template-columns:1fr auto"><span>Motorreparatur Transporter</span><span class="money">480 €</span></div><div class="row" style="grid-template-columns:1fr auto"><span>Abschleppen Tor 3 → Ostkai</span><span class="money">160 €</span></div><div class="row" style="grid-template-columns:1fr auto;border-bottom:0"><b class="disp" style="text-transform:uppercase;letter-spacing:0.06em">Summe</b><span class="stat-big">640 €</span></div></div>
+        </div>
+        <div class="panel__foot"><button class="btn btn--ghost">Ablehnen</button><span class="grow"></span><button class="btn btn--primary">Vom Konto zahlen <span class="key">Enter</span></button></div>
+      </div>
+      <div class="panel" style="width:54rem">
+        <div class="panel__head" style="padding:1.2rem 2rem"><div class="grow"><div class="label">Rechnung ausstellen · Werkstatt</div></div></div>
+        <div style="padding:1.6rem 2rem;display:grid;grid-template-columns:1fr 14rem;gap:1.2rem">
+          <div class="field"><span class="label">Empfänger</span><div class="input">ID 23 · Mira Hansen<span class="suffix"><ic n="chev-d" class="s16"></ic></span></div></div>
+          <div class="field"><span class="label">Betrag</span><div class="input">640<span class="suffix">€</span></div></div>
+          <div class="field" style="grid-column:1/-1"><span class="label">Grund</span><div class="input">Motorreparatur + Abschleppen</div></div>
+          <div style="grid-column:1/-1;display:flex;justify-content:flex-end;gap:1rem"><span class="xs muted" style="margin-right:auto;align-self:center">Empfänger muss in 5 m Nähe sein</span><button class="btn btn--secondary">Senden</button></div>
+        </div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:2.4rem">
+      <div style="width:64rem;height:40.4rem;background:linear-gradient(160deg,#e9e6de,#d9d6cc);color:#1a1c1e;border-radius:var(--fh-radius-lg);box-shadow:var(--fh-shadow-3);overflow:hidden;display:flex;flex-direction:column;position:relative">
+        <div style="height:6rem;background:#2C68A0;color:#F1EFE8;display:flex;align-items:center;gap:1.4rem;padding:0 2.4rem"><span style="border:0.25rem solid #F2B53A;color:#F2B53A;font:700 2rem/1 var(--fh-font-display);min-width:3.6rem;height:3.6rem;display:flex;align-items:center;justify-content:center">H</span><span class="disp" style="font-size:var(--fh-text-xl);font-weight:700;letter-spacing:0.1em;text-transform:uppercase">Hafenstadt · Ausweis</span><span class="mono xs" style="margin-left:auto;opacity:0.85">Identity Card</span></div>
+        <div style="display:grid;grid-template-columns:16rem 1fr;gap:2.4rem;padding:2.4rem;flex:1">
+          <div class="avatar" style="width:16rem;height:20rem;background:linear-gradient(#c9c6bd,#b6b3aa);color:#8d8a82;border:1px solid #a9a69d"><svg viewBox="0 0 100 200"><use href="#i-person"/></svg></div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.2rem 2rem;align-content:start">
+            <div><div style="font:600 1.1rem/1 var(--fh-font-display);letter-spacing:0.1em;text-transform:uppercase;color:#5a5d60">Name</div><div class="disp" style="font-size:var(--fh-text-xl);font-weight:700;text-transform:uppercase">Hansen</div></div>
+            <div><div style="font:600 1.1rem/1 var(--fh-font-display);letter-spacing:0.1em;text-transform:uppercase;color:#5a5d60">Vorname</div><div class="disp" style="font-size:var(--fh-text-xl);font-weight:700;text-transform:uppercase">Mira</div></div>
+            <div><div style="font:600 1.1rem/1 var(--fh-font-display);letter-spacing:0.1em;text-transform:uppercase;color:#5a5d60">Geburtsdatum</div><div class="mono" style="font-size:var(--fh-text-md);font-weight:500">04.07.1996</div></div>
+            <div><div style="font:600 1.1rem/1 var(--fh-font-display);letter-spacing:0.1em;text-transform:uppercase;color:#5a5d60">Geschlecht</div><div class="mono" style="font-size:var(--fh-text-md);font-weight:500">W</div></div>
+            <div><div style="font:600 1.1rem/1 var(--fh-font-display);letter-spacing:0.1em;text-transform:uppercase;color:#5a5d60">Wohnort</div><div style="font-size:var(--fh-text-sm);font-weight:500">Block 4, Aufgang A</div></div>
+            <div><div style="font:600 1.1rem/1 var(--fh-font-display);letter-spacing:0.1em;text-transform:uppercase;color:#5a5d60">Gültig bis</div><div class="mono" style="font-size:var(--fh-text-md);font-weight:500">10.2035</div></div>
+            <div style="grid-column:1/-1;font-family:'Segoe Script','Brush Script MT',cursive;font-size:2.8rem;color:#2C68A0;border-bottom:1px solid #8d8a82;padding-bottom:0.2rem">M. Hansen</div>
+          </div>
+        </div>
+        <div class="mono" style="padding:0.8rem 2.4rem;background:#cfccc2;font-size:var(--fh-text-sm);letter-spacing:0.12em;font-weight:500">HSA&lt;&lt;L01X00T47&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;9607041W3510</div>
+      </div>
+      <div style="display:flex;gap:2.4rem;align-items:center">
+        <div style="width:40rem;background:linear-gradient(160deg,#ece3cf,#ddd2b8);color:#1a1c1e;border-radius:var(--fh-radius-lg);box-shadow:var(--fh-shadow-2);padding:1.6rem 2rem;display:flex;flex-direction:column;gap:0.8rem">
+          <div style="display:flex;align-items:center"><span class="disp" style="font-weight:700;letter-spacing:0.1em;text-transform:uppercase">Führerschein</span><span class="mono xs" style="margin-left:auto">F-0712-HSA</span></div>
+          <div style="display:flex;gap:0.6rem"><span style="border:0.2rem solid #1a1c1e;padding:0.2rem 0.8rem;font:700 1.4rem/1.2 var(--fh-font-display)">B</span><span style="border:0.2rem solid #1a1c1e;padding:0.2rem 0.8rem;font:700 1.4rem/1.2 var(--fh-font-display)">A</span><span style="border:0.2rem dashed #8d8a82;color:#7c7972;padding:0.2rem 0.8rem;font:700 1.4rem/1.2 var(--fh-font-display)">C</span><span style="border:0.2rem dashed #8d8a82;color:#7c7972;padding:0.2rem 0.8rem;font:700 1.4rem/1.2 var(--fh-font-display)">Boot</span></div>
+          <div class="xs" style="color:#5a5d60">Punkte: 2 · gestrichelt = Klasse nicht erteilt</div>
+        </div>
+        <div class="plate hint"><span class="key key--ghost">Esc</span>Schließen <small>· gezeigt von ID 23 · schließt in 0:12</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 20 · Police MDT ════════════════════════════════════════════════ -->
+<section class="frame" id="f20">
+  <div class="world" data-scene="night"></div><div class="dim" style="background:rgba(5,6,8,0.6)"></div>
+  <div class="tag">20 · Polizei-MDT · Personensuche mit Treffer · Akte mit aktivem Haftbefehl · Einheiten · Einsatzmeldung</div>
+  <div class="tablet" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%)">
+    <div class="scr" style="--c:var(--fh-job-police)">
+      <div class="tb-top"><span class="code code--police code--sm"><ic n="star" class="s16"></ic></span><span class="ttl">MDT · Polizei Hafenstadt</span><span class="chip chip--status c-success">Im Dienst</span><span class="sm sec">PK K. Brandt · 3214 · Streife Hafen 12</span><span style="margin-left:auto" class="mono sm sec">22:47</span><button class="btn btn--ghost btn--sm btn--icon" aria-label="Schließen"><ic n="x" class="s16"></ic></button></div>
+      <nav class="tb-nav"><a><ic n="dash"></ic>Übersicht</a><a class="is-active"><ic n="user"></ic>Personen</a><a><ic n="car"></ic>Fahrzeuge</a><a><ic n="file"></ic>Akten</a><a><ic n="gavel"></ic>Haftbefehle <span class="cnt">3</span></a><a><ic n="siren"></ic>Einsätze <span class="cnt">2</span></a><a><ic n="users"></ic>Einheiten</a><a style="margin-top:auto"><ic n="doc"></ic>Bußgeldkatalog</a></nav>
+      <div class="tb-main" style="grid-template-columns:38rem minmax(0,1fr) 30rem">
+        <div class="card"><div class="ch"><h3>Personensuche</h3></div><div class="cb" style="display:flex;flex-direction:column;gap:1.2rem">
+          <div class="input is-focus"><ic n="search" class="s16" style="color:var(--fh-text-muted)"></ic>Krüger<span class="caret" style="margin-left:0"></span></div>
+          <div class="xs muted">3 Treffer</div>
+          <div><div class="row is-selected" style="grid-template-columns:auto 1fr auto"><div class="avatar" style="width:3.6rem;height:3.6rem"><svg viewBox="0 0 100 200"><use href="#i-person"/></svg></div><div><div>Jonas Krüger</div><div class="xs muted mono">*12.03.1994 · L07X9K21</div></div><span class="chip chip--status c-danger">HB</span></div>
+          <div class="row" style="grid-template-columns:auto 1fr auto"><div class="avatar" style="width:3.6rem;height:3.6rem"><svg viewBox="0 0 100 200"><use href="#i-person"/></svg></div><div><div>Heike Krüger</div><div class="xs muted mono">*02.11.1971 · L02M4T88</div></div><span></span></div>
+          <div class="row" style="grid-template-columns:auto 1fr auto"><div class="avatar" style="width:3.6rem;height:3.6rem"><svg viewBox="0 0 100 200"><use href="#i-person"/></svg></div><div><div>Kai Krüger-Lenz</div><div class="xs muted mono">*19.08.2001 · L11P0Q63</div></div><span></span></div>
+          <div class="row" style="grid-template-columns:auto 1fr;border:0"><span class="skel" style="width:3.6rem;height:3.6rem"></span><div style="display:flex;flex-direction:column;gap:0.6rem"><span class="skel" style="width:60%"></span><span class="skel" style="width:40%"></span></div></div></div>
+          <div class="xs muted">Leer: „Keine Person gefunden – Schreibweise prüfen“ · Fehler: „Datenbank nicht erreichbar“ + erneut</div>
+        </div></div>
+        <div class="card" style="min-width:0"><div class="ch"><h3 style="white-space:nowrap">Akte · J. Krüger</h3><div class="act"><button class="btn btn--ghost btn--sm btn--icon" aria-label="Eintrag anlegen"><ic n="plus" class="s16"></ic></button><button class="btn btn--secondary btn--sm"><ic n="cash" class="s16"></ic>Bußgeld</button><button class="btn btn--danger-ghost btn--sm"><ic n="gavel" class="s16"></ic>Haftbefehl</button></div></div><div class="cb" style="display:flex;flex-direction:column;gap:1.6rem">
+          <div style="display:grid;grid-template-columns:12rem 1fr;gap:2rem"><div class="avatar" style="width:12rem;height:15rem"><svg viewBox="0 0 100 200"><use href="#i-person"/></svg></div><dl class="kv" style="margin:0;align-content:start"><dt>Geboren</dt><dd class="mono">12.03.1994</dd><dt>Ausweis</dt><dd class="mono">L07X9K21</dd><dt>Wohnort</dt><dd>Block 7, Aufgang B, 4. OG</dd><dt>Beruf</dt><dd>Mechaniker · Werkstatt Ostkai</dd><dt>Führerschein</dt><dd>B, A · 2 Punkte</dd><dt>Waffenschein</dt><dd class="muted">keiner</dd></dl></div>
+          <div class="errbox"><ic n="gavel"></ic><div><b>Haftbefehl aktiv</b> · Hehlerei, Widerstand · ausgestellt von POK Brandt, 14.10. · <span class="sec">Kaution 6.000 €</span></div></div>
+          <div><div class="row th" style="grid-template-columns:9rem 1fr 9rem 10rem"><span>Datum</span><span>Tatvorwurf</span><span>Strafe</span><span>Beamter</span></div>
+          <div class="row" style="grid-template-columns:9rem 1fr 9rem 10rem"><span class="mono xs sec">14.10.</span><span>§ 259 Hehlerei · Container Tor 3</span><span class="money">offen</span><span class="sm sec">Brandt</span></div>
+          <div class="row" style="grid-template-columns:9rem 1fr 9rem 10rem"><span class="mono xs sec">02.10.</span><span>Geschwindigkeit · Kaistraße +31</span><span class="money">320 €</span><span class="sm sec">Yilmaz</span></div>
+          <div class="row" style="grid-template-columns:9rem 1fr 9rem 10rem"><span class="mono xs sec">21.09.</span><span>Ruhestörung · Block 7</span><span class="money">80 €</span><span class="sm sec">Brandt</span></div></div>
+        </div></div>
+        <div style="display:flex;flex-direction:column;gap:1.6rem;min-height:0">
+          <div class="card" style="border-color:var(--fh-danger)"><div class="ch"><ic n="siren" style="color:var(--fh-danger)"></ic><h3>Einsatz · Code 3</h3><span class="act mono xs muted">vor 0:40</span></div><div class="cb sm" style="display:flex;flex-direction:column;gap:1rem"><div>Schüsse gemeldet · Containerhof Süd, Tor 3</div><div style="display:flex;gap:0.8rem"><button class="btn btn--primary btn--sm" style="flex:1">Annehmen</button><button class="btn btn--ghost btn--sm"><ic n="pin" class="s16"></ic>GPS</button></div></div></div>
+          <div class="card" style="flex:1"><div class="ch"><h3>Einheiten · 6</h3></div><div class="cb" style="padding:0 1.6rem" id="units"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 21 · EMS tablet ════════════════════════════════════════════════ -->
+<section class="frame" id="f21">
+  <div class="world" data-scene="day"></div><div class="dim" style="background:rgba(5,6,8,0.6)"></div>
+  <div class="tag">21 · Rettungsdienst-Tablet · Patientenliste nach Dringlichkeit · Patient gewählt · Verletzungen · Behandlung</div>
+  <div class="tablet" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%)">
+    <div class="scr" style="--c:var(--fh-job-ems)">
+      <div class="tb-top"><span class="code code--ems code--sm"><ic n="cross" class="s16"></ic></span><span class="ttl">Rettungsdienst · Leitstelle Hafen</span><span class="chip chip--status c-success">Im Dienst</span><span class="sm sec">NotSan M. Hansen · RTW 2</span><span style="margin-left:auto" class="mono sm sec">13:12</span><button class="btn btn--ghost btn--sm btn--icon" aria-label="Schließen"><ic n="x" class="s16"></ic></button></div>
+      <nav class="tb-nav"><a class="is-active"><ic n="pulse"></ic>Patienten <span class="cnt">3</span></a><a><ic n="siren"></ic>Notrufe <span class="cnt">1</span></a><a><ic n="bed"></ic>Krankenhaus</a><a><ic n="doc"></ic>Berichte</a><a><ic n="users"></ic>Kollegen</a><a><ic n="box"></ic>Bestand</a></nav>
+      <div class="tb-main" style="grid-template-columns:40rem minmax(0,1fr)">
+        <div class="card"><div class="ch"><h3>Patienten · 3</h3></div><div class="cb" style="padding:0">
+          <div class="row is-selected" style="grid-template-columns:0.6rem 1fr auto;padding:1.4rem 1.6rem"><span style="align-self:stretch;background:var(--fh-danger)"></span><div><div>Jonas Krüger</div><div class="xs muted">bewusstlos · Containerhof Süd · 0,6 km</div></div><span class="chip chip--status c-danger">Rot</span></div>
+          <div class="row" style="grid-template-columns:0.6rem 1fr auto;padding:1.4rem 1.6rem"><span style="align-self:stretch;background:var(--fh-warning)"></span><div><div>Unbekannt, männlich</div><div class="xs muted">Schnittwunde · Fischmarkt · 1,8 km</div></div><span class="chip chip--status c-warning">Gelb</span></div>
+          <div class="row" style="grid-template-columns:0.6rem 1fr auto;padding:1.4rem 1.6rem"><span style="align-self:stretch;background:var(--fh-success)"></span><div><div>Ole Petersen</div><div class="xs muted">Prellung · im Krankenhaus</div></div><span class="chip chip--status c-success">Grün</span></div>
+          <div style="padding:1.6rem" class="xs muted">Leer: „Keine Patienten – ruhige Schicht“ · Fehler: Liste veraltet, Zeitstempel rot</div>
+        </div></div>
+        <div class="card"><div class="ch"><h3>Jonas Krüger · 31 J.</h3><span class="chip chip--status c-danger" style="margin-left:1rem">Bewusstlos</span><div class="act"><button class="btn btn--ghost btn--sm"><ic n="pin" class="s16"></ic>Route</button><button class="btn btn--secondary btn--sm">Transport ins KH</button></div></div>
+          <div class="cb" style="display:grid;grid-template-columns:24rem 1fr;gap:2.4rem">
+            <div style="position:relative;height:48rem;color:#3a4148"><svg viewBox="0 0 100 200" style="width:100%;height:100%"><use href="#i-person"/></svg>
+              <span style="position:absolute;left:44%;top:27%;width:2.4rem;height:2.4rem;border:0.3rem solid var(--fh-danger);background:rgba(234,93,71,0.3)"></span>
+              <span style="position:absolute;left:58%;top:55%;width:2rem;height:2rem;border:0.3rem solid var(--fh-warning);background:rgba(238,138,52,0.3)"></span>
+              <span style="position:absolute;left:31%;top:6%;width:2rem;height:2rem;border:0.3rem solid var(--fh-warning);background:rgba(238,138,52,0.3)"></span>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:1.6rem">
+              <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem">
+                <div class="card"><div class="cb"><div class="label">Puls</div><div class="stat-big" style="color:var(--fh-warning)">132</div><div class="xs muted">/min</div></div></div>
+                <div class="card"><div class="cb"><div class="label">Blutdruck</div><div class="stat-big">90/60</div><div class="xs muted">mmHg</div></div></div>
+                <div class="card"><div class="cb"><div class="label">SpO₂</div><div class="stat-big" style="color:var(--fh-danger)">88</div><div class="xs muted">%</div></div></div>
+              </div>
+              <div><div class="label" style="margin-bottom:0.6rem">Verletzungen</div>
+                <div class="row" style="grid-template-columns:auto 1fr auto"><span class="dot" style="--c:var(--fh-danger)"></span><span>Schussverletzung · Brust links</span><span class="chip chip--status c-danger">blutet</span></div>
+                <div class="row" style="grid-template-columns:auto 1fr auto"><span class="dot" style="--c:var(--fh-warning)"></span><span>Platzwunde · Kopf</span><span class="chip chip--status c-warning">versorgt</span></div>
+                <div class="row" style="grid-template-columns:auto 1fr auto"><span class="dot" style="--c:var(--fh-warning)"></span><span>Prellung · Oberschenkel rechts</span><span class="chip chip--status c-info">offen</span></div></div>
+              <div><div class="label" style="margin-bottom:0.8rem">Behandlung</div><div style="display:grid;grid-template-columns:repeat(4,1fr);gap:0.8rem"><button class="btn btn--secondary btn--sm">Druckverband</button><button class="btn btn--ghost btn--sm">Schmerzmittel</button><button class="btn btn--ghost btn--sm">Infusion</button><button class="btn btn--primary btn--sm">Wiederbeleben</button></div></div>
+              <div class="mono xs sec" style="display:flex;flex-direction:column;gap:0.4rem"><span>13:10 · Notruf eingegangen (G-Taste)</span><span>13:11 · RTW 2 übernimmt · Hansen</span><span style="color:var(--fh-text-primary)">13:12 · Druckverband Brust · läuft 0:04</span></div>
+            </div>
+          </div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 22 · Boss menu ═════════════════════════════════════════════════ -->
+<section class="frame" id="f22">
+  <div class="world" data-scene="night"></div><div class="dim" style="background:rgba(5,6,8,0.55)"></div>
+  <div class="tag">22 · Chefmenü · Firmenkonto · Mitarbeiter mit Aktionen · Einstellen · Ränge &amp; Gehälter</div>
+  <div class="panel" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:146rem;height:80rem">
+    <div class="panel__head tex-ribs"><span class="code code--mech"><ic n="wrench"></ic></span><div class="grow"><h2 class="panel__title">Werkstatt Ostkai · Chefmenü</h2><div class="panel__sub">Inhaberin M. Hansen · Rang 4 · 7 Mitarbeiter, 3 im Dienst</div></div><button class="btn btn--ghost btn--sm">Schließen <span class="key">Esc</span></button></div>
+    <div style="display:grid;grid-template-columns:44rem 1fr;flex:1;min-height:0">
+      <div style="border-right:var(--fh-border-width) solid var(--fh-border);padding:2rem;display:flex;flex-direction:column;gap:1.6rem">
+        <div class="card"><div class="cb"><div class="label">Firmenkonto</div><div class="stat-big" style="margin-top:0.6rem;font-size:var(--fh-text-3xl)">128.450 €</div><div class="xs muted">+4.120 € diese Woche</div></div></div>
+        <div class="field"><span class="label">Betrag</span><div class="input">5.000<span class="suffix">€</span></div></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.8rem"><button class="btn btn--secondary">Einzahlen</button><button class="btn btn--ghost">Abheben</button></div>
+        <div class="divider" style="margin:0.4rem 0"></div>
+        <div class="label">Ränge &amp; Gehalt / Std.</div>
+        <div>
+          <div class="row" style="grid-template-columns:3rem 1fr auto"><span class="code code--sm" style="border-color:var(--fh-text-muted);color:var(--fh-text-secondary);min-width:2.6rem">0</span><span>Azubi</span><span class="money">120 €</span></div>
+          <div class="row" style="grid-template-columns:3rem 1fr auto"><span class="code code--sm" style="border-color:var(--fh-text-muted);color:var(--fh-text-secondary);min-width:2.6rem">1</span><span>Geselle</span><span class="money">180 €</span></div>
+          <div class="row is-selected" style="grid-template-columns:3rem 1fr auto"><span class="code code--sm" style="min-width:2.6rem">2</span><span>Mechaniker</span><div class="input" style="width:10rem;height:3.2rem">240<span class="suffix">€</span></div></div>
+          <div class="row" style="grid-template-columns:3rem 1fr auto"><span class="code code--sm" style="border-color:var(--fh-text-muted);color:var(--fh-text-secondary);min-width:2.6rem">3</span><span>Meister</span><span class="money">320 €</span></div>
+          <div class="row" style="grid-template-columns:3rem 1fr auto"><span class="code code--sm" style="border-color:var(--fh-text-muted);color:var(--fh-text-secondary);min-width:2.6rem">4</span><span>Inhaber</span><span class="money">400 €</span></div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;min-height:0">
+        <div class="tabs" style="padding:0 2rem"><span class="tab is-active">Mitarbeiter <span class="count">7</span></span><span class="tab">Einstellen</span><span class="tab">Protokoll</span></div>
+        <div style="padding:1.6rem 2rem;display:flex;gap:1rem;align-items:center"><div class="input" style="height:3.6rem;width:36rem"><ic n="search" class="s16" style="color:var(--fh-text-muted)"></ic><span class="ph">Mitarbeiter suchen</span></div><span class="xs muted" style="margin-left:auto">Einstellen: nur Spieler in 10 m · Liste lädt beim Öffnen</span><button class="btn btn--primary btn--sm"><ic n="plus" class="s16"></ic>Einstellen</button></div>
+        <div style="padding:0 2rem;flex:1;min-height:0;overflow:hidden" id="staff"></div>
+        <div style="padding:1.6rem 2rem;border-top:var(--fh-border-width) solid var(--fh-border)" class="xs muted">Kündigen und Herabstufen fragen immer per Bestätigungsdialog (Gefahr) nach. Eigener Eintrag hat keine Aktionen.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 23 · Admin panel ═══════════════════════════════════════════════ -->
+<section class="frame" id="f23">
+  <div class="world" data-scene="day"></div><div class="dim" style="background:rgba(5,6,8,0.65)"></div>
+  <div class="tag">23 · Admin-Panel · Spieler gewählt · Aktionen (Bann = Gefahr, gesperrt ohne Grund) · Meldungen · Serverstatus</div>
+  <div class="panel" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:150rem;height:82rem;border-top-color:var(--fh-danger)">
+    <div class="panel__head" style="position:relative"><div class="tex-hazard" style="position:absolute;left:0;right:0;top:0;height:0.4rem;opacity:0.85"></div><span class="code code--danger">A</span><div class="grow"><h2 class="panel__title">Admin</h2><div class="panel__sub">feanor · Rolle Superadmin · Aktionen werden protokolliert</div></div><span class="chip chip--status c-success">Server ok</span><span class="mono sm sec">48/64 · 212 Ressourcen · 6 h 12 min · Tick 3,1 ms</span><button class="btn btn--ghost btn--sm">Schließen <span class="key">Esc</span></button></div>
+    <div style="display:grid;grid-template-columns:46rem 1fr 40rem;flex:1;min-height:0">
+      <div style="border-right:var(--fh-border-width) solid var(--fh-border);display:flex;flex-direction:column;min-height:0">
+        <div style="padding:1.6rem 2rem"><div class="input" style="height:3.6rem"><ic n="search" class="s16" style="color:var(--fh-text-muted)"></ic><span class="ph">ID, Name oder Lizenz</span></div></div>
+        <div style="padding:0 2rem;flex:1;min-height:0;overflow:hidden" id="adminplayers"></div>
+      </div>
+      <div style="padding:2rem;display:flex;flex-direction:column;gap:1.8rem">
+        <div style="display:flex;gap:1.6rem;align-items:center"><span class="code" style="min-width:5.6rem;height:5.6rem;font-size:2.6rem">23</span><div><div class="disp" style="font-size:var(--fh-text-2xl);font-weight:700;text-transform:uppercase;line-height:1">Mira Hansen</div><div class="sm muted">OOC: mira_hh · Spielzeit 412 h · 2 Verwarnungen</div></div><span class="chip c-ems" style="margin-left:auto">Rettungsdienst</span></div>
+        <dl class="kv" style="margin:0"><dt>Lizenz</dt><dd class="mono">license:••••••••3f9a</dd><dt>Discord</dt><dd class="mono">discord:••••••2210</dd><dt>Ping</dt><dd>38 ms</dd><dt>Ort</dt><dd>Fischmarkt · Halle 2</dd></dl>
+        <div class="label">Aktionen</div>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:0.8rem">
+          <button class="btn btn--ghost btn--sm"><ic n="tp" class="s16"></ic>Zu ihm</button><button class="btn btn--ghost btn--sm"><ic n="pull" class="s16"></ic>Holen</button><button class="btn btn--ghost btn--sm"><ic n="eye" class="s16"></ic>Zuschauen</button><button class="btn btn--ghost btn--sm"><ic n="freeze" class="s16"></ic>Einfrieren</button>
+          <button class="btn btn--ghost btn--sm"><ic n="heart" class="s16"></ic>Heilen</button><button class="btn btn--ghost btn--sm"><ic n="box" class="s16"></ic>Inventar</button><button class="btn btn--ghost btn--sm"><ic n="chat" class="s16"></ic>Nachricht</button><button class="btn btn--ghost btn--sm"><ic n="warn" class="s16"></ic>Verwarnen</button>
+        </div>
+        <div class="card" style="border-color:var(--fh-danger)"><div class="ch"><ic n="ban" style="color:var(--fh-danger)"></ic><h3>Kick / Bann</h3></div><div class="cb" style="display:grid;grid-template-columns:1fr 16rem;gap:1.2rem">
+          <div class="field" style="grid-column:1/-1"><span class="label">Grund (Pflicht)</span><div class="input is-focus"><span class="ph">z. B. RDM am Fischmarkt, Meldung #412</span><span class="caret" style="margin-left:0"></span></div></div>
+          <div class="field"><span class="label">Dauer</span><div class="seg-ctl"><span>1 h</span><span class="is-active">24 h</span><span>7 T</span><span>Dauerhaft</span></div></div>
+          <div style="display:flex;gap:0.8rem;align-items:flex-end;justify-content:flex-end"><button class="btn btn--danger-ghost btn--sm">Kick</button><button class="btn btn--danger btn--sm" disabled>Bannen</button></div>
+        </div></div>
+      </div>
+      <div style="border-left:var(--fh-border-width) solid var(--fh-border);background:var(--fh-bg-base);display:flex;flex-direction:column;min-height:0">
+        <div class="tabs" style="padding:0 1.6rem"><span class="tab is-active">Meldungen <span class="count">4</span></span><span class="tab">Log</span></div>
+        <div style="padding:1.2rem 1.6rem;display:flex;flex-direction:column;gap:1rem;overflow:hidden">
+          <div class="card" style="border-left:0.4rem solid var(--fh-danger)"><div class="cb sm"><div style="display:flex"><b>#412 · RDM Fischmarkt</b><span class="mono xs muted" style="margin-left:auto">2 min</span></div><div class="sec">von Ole_P gegen ID 31</div><div style="display:flex;gap:0.6rem;margin-top:0.8rem"><button class="btn btn--secondary btn--sm">Übernehmen</button><button class="btn btn--ghost btn--sm">Zu ID 31</button></div></div></div>
+          <div class="card" style="border-left:0.4rem solid var(--fh-warning)"><div class="cb sm"><div style="display:flex"><b>#411 · Fahrzeug weg</b><span class="mono xs muted" style="margin-left:auto">9 min</span></div><div class="sec">von Mira H. · übernommen: kat</div></div></div>
+          <div class="card" style="border-left:0.4rem solid var(--fh-info)"><div class="cb sm"><div style="display:flex"><b>#410 · Frage Regeln</b><span class="mono xs muted" style="margin-left:auto">14 min</span></div><div class="sec">von jonas_k</div></div></div>
+          <div class="card" style="border-left:0.4rem solid var(--fh-success)"><div class="cb sm"><div style="display:flex"><b>#409 · Bug Garage</b><span class="mono xs muted" style="margin-left:auto">31 min</span></div><div class="sec">erledigt · feanor</div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+(function(){
+var $=function(s,r){return (r||document).querySelector(s)};
+var $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+function rnd(seed){var s=seed;return function(){s=(s*16807)%2147483647;return (s-1)/2147483646}}
+
+/* ── Stand-in game world ─────────────────────────────────────────────── */
+function windows(x0,y0,w,h,cw,ch,ww,wh,lit,seed,dark,colors){var r=rnd(seed),o='';for(var y=y0+30;y<y0+h-40;y+=ch){for(var x=x0+24;x<x0+w-30;x+=cw){var v=r(),f=dark;if(v<lit[0])f=colors[0];else if(v<lit[0]+lit[1])f=colors[1];o+='<rect x="'+x+'" y="'+y+'" width="'+ww+'" height="'+wh+'" fill="'+f+'"/>';}}return o}
+function containers(x0,y0,cols,rows,cols2,seed){var r=rnd(seed),o='';for(var j=0;j<rows;j++)for(var i=0;i<cols;i++){var c=cols2[Math.floor(r()*cols2.length)];var x=x0+i*212,y=y0-j*74;o+='<rect x="'+x+'" y="'+y+'" width="206" height="70" fill="'+c+'"/>';for(var k=8;k<206;k+=14)o+='<rect x="'+(x+k)+'" y="'+(y+4)+'" width="3" height="62" fill="rgba(0,0,0,0.12)"/>';}return o}
+function sceneDay(){return '<svg viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="skyD" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#A9CDE8"/><stop offset="0.55" stop-color="#E9F1F6"/><stop offset="1" stop-color="#FAFBFC"/></linearGradient><radialGradient id="sunD" cx="0.84" cy="0.1" r="0.4"><stop offset="0" stop-color="#FFFFFF"/><stop offset="0.5" stop-color="#FFFFFF" stop-opacity="0.6"/><stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/></radialGradient><linearGradient id="watD" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8CC0DA"/><stop offset="1" stop-color="#4F8DB0"/></linearGradient><pattern id="fenceD" width="26" height="26" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><path d="M0 0H26M0 0V26" stroke="#5E666D" stroke-width="2" opacity="0.55"/></pattern></defs>'
+ +'<rect width="1920" height="1080" fill="url(#skyD)"/><rect width="1920" height="1080" fill="url(#sunD)"/>'
+ +'<rect x="640" y="300" width="400" height="520" fill="#D2CFC7"/>'+windows(640,300,400,520,50,46,28,20,[0.1,0.05],7,'#93A3AF',['#C7D6E0','#7E8F9C'])
+ +'<rect x="30" y="160" width="600" height="660" fill="#E7E4DD"/>'+windows(30,160,600,660,58,50,32,22,[0.12,0.08],3,'#8FA2B0',['#D3DEE6','#73879A'])
+ +'<rect x="88" y="160" width="20" height="660" fill="#D9B44C" opacity="0.85"/><rect x="320" y="160" width="20" height="660" fill="#6D8FB0" opacity="0.8"/><rect x="552" y="160" width="20" height="660" fill="#D9B44C" opacity="0.85"/>'
+ +'<g fill="#E1B23B"><rect x="1420" y="120" width="26" height="620"/><rect x="1180" y="140" width="640" height="22"/><rect x="1540" y="70" width="18" height="90"/><rect x="1690" y="180" width="26" height="560"/></g><g stroke="#E1B23B" stroke-width="5" fill="none"><path d="M1446 160 1549 75 1820 150M1180 160 1446 130"/></g>'
+ +containers(1040,760,4,3,['#C2602F','#2D5E8E','#8A9298','#A33B2F','#3F6E52','#C9A13C'],11)
+ +'<rect x="0" y="830" width="1920" height="90" fill="url(#watD)"/>'+'<g stroke="#FFFFFF" stroke-width="3" opacity="0.65"><path d="M120 850h160M520 872h240M980 858h120M1380 880h300M1700 848h140"/></g>'
+ +'<rect x="0" y="910" width="1920" height="170" fill="#D3CFC6"/><g stroke="#BEBAB1" stroke-width="3"><path d="M0 912h1920M240 912v168M560 912v168M880 912v168M1200 912v168M1520 912v168M1840 912v168"/></g><g fill="#5A6066"><rect x="400" y="884" width="34" height="30"/><rect x="1100" y="884" width="34" height="30"/><rect x="1660" y="884" width="34" height="30"/></g>'
+ +'<rect x="0" y="700" width="760" height="380" fill="url(#fenceD)"/><rect x="0" y="696" width="760" height="6" fill="#6B737A"/></svg>'}
+function sceneNight(){return '<svg viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="skyN" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#05080F"/><stop offset="0.6" stop-color="#121A27"/><stop offset="1" stop-color="#25282B"/></linearGradient><radialGradient id="lamp"><stop offset="0" stop-color="#FFC266" stop-opacity="0.95"/><stop offset="0.25" stop-color="#FFA640" stop-opacity="0.55"/><stop offset="1" stop-color="#FF9A2E" stop-opacity="0"/></radialGradient><radialGradient id="refl"><stop offset="0" stop-color="#FFB24A" stop-opacity="0.5"/><stop offset="1" stop-color="#FFB24A" stop-opacity="0"/></radialGradient><pattern id="fenceN" width="26" height="26" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><path d="M0 0H26M0 0V26" stroke="#7D858C" stroke-width="2" opacity="0.4"/></pattern></defs>'
+ +'<rect width="1920" height="1080" fill="url(#skyN)"/>'
+ +'<rect x="1000" y="260" width="460" height="620" fill="#14181D"/>'+windows(1000,260,460,620,52,48,28,20,[0.18,0.06],5,'#0C0F13',['#E9B96E','#7FA6CC'])
+ +'<rect x="0" y="110" width="940" height="790" fill="#191D23"/>'+windows(0,110,940,790,60,52,34,24,[0.22,0.07],9,'#0E1116',['#F3C77A','#8FB6DA'])
+ +'<rect x="60" y="110" width="18" height="790" fill="#2B2F25"/><rect x="420" y="110" width="18" height="790" fill="#24303B"/><rect x="800" y="110" width="18" height="790" fill="#2B2F25"/>'
+ +containers(1460,800,2,3,['#2B2F35','#3A2B24','#23303D','#33291F'],4)
+ +'<rect x="0" y="880" width="1920" height="200" fill="#111316"/>'
+ +'<rect x="1730" y="150" width="10" height="740" fill="#2A2D31"/><rect x="1690" y="146" width="60" height="10" fill="#2A2D31"/><circle cx="1696" cy="160" r="300" fill="url(#lamp)"/><ellipse cx="1700" cy="980" rx="320" ry="60" fill="url(#refl)"/>'
+ +'<rect x="470" y="520" width="10" height="370" fill="#2A2D31"/><circle cx="476" cy="525" r="260" fill="url(#lamp)"/><ellipse cx="476" cy="990" rx="280" ry="50" fill="url(#refl)"/>'
+ +'<rect x="1100" y="720" width="820" height="360" fill="url(#fenceN)"/><rect x="1100" y="716" width="820" height="5" fill="#3A3F44"/></svg>'}
+$$('.world').forEach(function(w){w.innerHTML=w.getAttribute('data-scene')==='day'?sceneDay():sceneNight()});
+
+/* ── HUD instances ───────────────────────────────────────────────────── */
+var tpl=$('#hud-tpl');
+var mapSvg='<rect width="310" height="195" fill="#222a30"/><path d="M0 140 Q120 120 310 150 V195 H0Z" fill="#1d3a4f"/><g stroke="#3d4953" stroke-width="9" fill="none"><path d="M-10 60H320M120 -10V140M240 -10 200 140M0 105h310"/></g><g stroke="#4b5862" stroke-width="3" fill="none"><path d="M60 -10v120M180 0v110M0 30h310"/></g><path d="M155 98 L230 60 L300 62" stroke="#F2B53A" stroke-width="4" fill="none"/><path d="M155 86l9 20-9-5-9 5z" fill="#FFFFFF"/>';
+$$('.hudmount').forEach(function(m){m.appendChild(tpl.content.cloneNode(true));$('[data-k=map]',m).setAttribute('viewBox','0 0 310 195');$('[data-k=map]',m).innerHTML=mapSvg;});
+var night=$('.hudmount[data-state=night]');
+(function(n){
+  var h=$('[data-k=health]',n);h.classList.add('is-low');$('.bar',h).style.setProperty('--v','18%');$('.v',h).textContent='18';
+  var st=$('[data-k=stamina]',n);$('.bar',st).style.setProperty('--v','35%');$('.v',st).textContent='35';
+  var v=$('[data-k=voice]',n);v.classList.add('is-talking');$$('.pips i',v).forEach(function(i){i.classList.add('on')});$('.lbl',v).textContent='Rufen';
+  var r=$('[data-k=radio]',n);r.classList.add('is-tx');$('.rx',r).outerHTML='<span class="tx">Sendet</span>';
+  $('[data-k=delta]',n).remove();
+  var b=$('[data-k=belt]',n);b.className='st warn';b.lastChild.textContent='Gurt!';
+  var e=$('[data-k=eng]',n);e.className='st bad';e.lastChild.textContent='Motor 31%';
+  var f=$('[data-k=fuel]',n);f.classList.add('is-low');f.style.setProperty('--c','var(--fh-warning)');$('.bar',f).style.setProperty('--v','9%');$('.v',f).textContent='9 %';$('.v',f).style.color='var(--fh-warning)';
+  $('[data-k=indl]',n).classList.add('on');$('[data-k=indr]',n).classList.add('on');
+  $('[data-k=spd]',n).textContent='42';
+  var a=$('[data-k=ammo]',n);a.classList.add('is-low');$('.mag',a).textContent='3';
+  var hi=$('[data-k=hint]',n);hi.classList.add('is-hold');hi.innerHTML='<span class="key">E</span>Halten: Container aufbrechen <small>· 40 %</small>';
+  var p=$('[data-k=progress]',n);$('.top b',p).textContent='Container aufbrechen';$('.top span',p).textContent='40 %';$('.bar',p).style.setProperty('--v','40%');$('.bot',p).innerHTML='<span class="key key--ghost key--sm">X</span>Abbrechen · Bewegung bricht ab';
+})(night);
+
+/* ── Palette sheet ───────────────────────────────────────────────────── */
+function lin(c){c/=255;return c<=0.04045?c/12.92:Math.pow((c+0.055)/1.055,2.4)}
+function rgb(h){h=h.replace('#','');return [0,2,4].map(function(i){return parseInt(h.substr(i,2),16)})}
+function L(h){var c=rgb(h);return 0.2126*lin(c[0])+0.7152*lin(c[1])+0.0722*lin(c[2])}
+function cr(a,b){var x=L(a),y=L(b);return (Math.max(x,y)+0.05)/(Math.min(x,y)+0.05)}
+function mix(fg,a,bg){var f=rgb(fg),b=rgb(bg);return '#'+f.map(function(v,i){return ('0'+Math.round(v*a+b[i]*(1-a)).toString(16)).slice(-2)}).join('')}
+var OVW=mix('#0D0F11',0.88,'#FFFFFF'),SURF='#1A1D20',TP='#ECE9E2',ACC='#F2B53A';
+var P=[
+ ['bg-base','#111315','Vollbild-Hintergründe, Eingabefelder, Fußleisten','tp'],
+ ['bg-surface','#1A1D20','Panels, Karten, Dialoge, Menüs','tp'],
+ ['bg-elevated','#24282C','Hover, gewählte Zeile, Kacheln, Chips','tp'],
+ ['bg-overlay','rgba(13,15,17,.88)','HUD-Platten über der Spielwelt','ovl'],
+ ['border','#3B4045','Fugen: Trennlinien, Panelrand (dekorativ)','surf'],
+ ['text-primary','#ECE9E2','Text, Werte, Zahlen','surf'],
+ ['text-secondary','#B3B5B2','Beschreibungen, Labels, sekundäre Werte','surf'],
+ ['text-muted','#989D9F','Meta, Platzhalter, Rand von Eingaben','surf'],
+ ['text-on-accent','#14130F','Text auf Gelb und farbigen Flächen','acc'],
+ ['accent-primary','#F2B53A','Natriumgelb: Haupt-Aktion, Fokus, Taste','surf'],
+ ['accent-secondary','#2C68A0','Containerblau: gewählte Fläche, 2. Aktion','fill'],
+ ['success','#6CC08B','Treppenhausgrün: bezahlt, fertig, im Dienst','surf'],
+ ['warning','#EE8A34','Rostorange: knapp, fällig, Achtung','surf'],
+ ['danger','#EA5D47','Signalrot: Fehler, Löschen, Haftbefehl','surf'],
+ ['info','#6AAEE8','Hinweis, offen, neu','surf'],
+ ['job-police','#5C9AE6','Polizei: Chip, MDT-Kennung','surf'],
+ ['job-ems','#EF6476','Rettungsdienst: Chip, Tablet-Kennung','surf'],
+ ['job-mechanic','#3FBFAE','Werkstatt: Chip, Firmenkennung','surf'],
+ ['job-civil','#A9AEB2','Zivil / arbeitslos','surf'],
+ ['hud-health','#EE6A5E','Leben','hud'],['hud-armor','#5DA2E8','Panzerung','hud'],['hud-hunger','#E39A3B','Hunger','hud'],['hud-thirst','#46C0DB','Durst','hud'],
+ ['hud-stamina','#8BCB6A','Ausdauer','hud'],['hud-stress','#B596E3','Stress','hud'],['hud-voice','#F5C64C','Sprechen aktiv','hud'],['hud-radio','#4FD3B5','Funk sendet','hud'],['hud-fuel','#A9BFCF','Tank','hud']
+];
+var pal=$('#palette');
+P.forEach(function(p){var hex=p[1],c,lbl;
+  if(p[3]==='tp'){c=cr(TP,hex);lbl='text-primary darauf'}
+  else if(p[3]==='ovl'){c=cr(TP,OVW);lbl='text-primary, über Weiß'}
+  else if(p[3]==='surf'){c=cr(hex,SURF);lbl='auf bg-surface'}
+  else if(p[3]==='acc'){c=cr(hex,ACC);lbl='auf accent-primary'}
+  else if(p[3]==='fill'){c=cr(TP,hex);lbl='text-primary darauf'}
+  else {c=cr(hex,OVW);lbl='auf overlay über Weiß'}
+  var ok=c>=4.5?'var(--fh-success)':c>=3?'var(--fh-warning)':'var(--fh-text-muted)';
+  var sw=p[3]==='ovl'?'background:linear-gradient(90deg,#fff 50%,#000 50%);position:relative':'background:'+hex;
+  var inner=p[3]==='ovl'?'<span style="position:absolute;inset:0;background:var(--fh-bg-overlay)"></span>':'';
+  pal.insertAdjacentHTML('beforeend','<div><div style="height:3.6rem;'+sw+';border:1px solid rgba(255,255,255,0.08)">'+inner+'</div><div style="display:flex;gap:0.8rem;align-items:baseline;margin-top:0.5rem"><span class="mono" style="font-size:1.2rem;font-weight:500">'+p[0]+'</span><span class="mono xs muted" style="margin-left:auto">'+hex.toUpperCase().replace('RGBA','rgba')+'</span></div><div class="xs" style="color:'+ok+';font-weight:600">'+c.toFixed(2)+':1 <span class="muted" style="font-weight:400">'+lbl+'</span></div><div class="xs sec" style="line-height:1.3">'+p[2]+'</div></div>');
+});
+[['bg-base','#111315'],['bg-surface','#1A1D20'],['border','#3B4045'],['text-primary','#ECE9E2'],['accent-primary','#F2B53A'],['accent-secondary','#2C68A0'],['warning','#EE8A34'],['danger','#EA5D47']].forEach(function(c){$('#core').insertAdjacentHTML('beforeend','<div><div style="height:6.4rem;background:'+c[1]+';border:1px solid rgba(255,255,255,0.08)"></div><div class="mono xs" style="margin-top:0.4rem">'+c[1]+'</div><div class="xs muted">'+c[0]+'</div></div>')});
+
+/* ── Type, space, radii, icons ───────────────────────────────────────── */
+[['4xl','7.2rem · 72px','disp',700,'87 km/h'],['3xl','4.8rem · 48px','disp',700,'Bewusstlos'],['2xl','3.4rem · 34px','disp',700,'18.730 €'],['xl','2.6rem · 26px','disp',600,'Panel-Titel'],['lg','2.0rem · 20px','disp',600,'HUD-Wert · Straße'],['md','1.6rem · 16px','sans',400,'Fließtext, Formulare, Chat – gut lesbar über der Welt.'],['sm','1.4rem · 14px','sans',400,'Beschreibung, Toast-Text, Tabellenzellen'],['xs','1.2rem · 12px','sans',500,'Meta, Zeitstempel, Hilfetext'],['2xs','1.1rem · 11px','disp',600,'NUR GROSS · LABEL · TASTE']].forEach(function(t){
+  $('#typescale').insertAdjacentHTML('beforeend','<div style="display:grid;grid-template-columns:14rem 1fr;align-items:baseline;gap:1.2rem;border-bottom:1px solid var(--fh-border);padding:0.3rem 0"><span class="mono xs muted">text-'+t[0]+' · '+t[1]+'</span><span style="font-family:var(--fh-font-'+(t[2]==='disp'?'display':'sans')+');font-size:var(--fh-text-'+t[0]+');font-weight:'+t[3]+';line-height:1.1;'+(t[2]==='disp'?'text-transform:uppercase;letter-spacing:0.02em;':'')+'white-space:nowrap;overflow:hidden">'+t[4]+'</span></div>')});
+['0_5','1','2','3','4','5','6','8','10','12','16'].forEach(function(s){$('#spacescale').insertAdjacentHTML('beforeend','<div style="display:flex;flex-direction:column;align-items:center;gap:0.4rem"><span style="display:block;width:var(--fh-space-'+s+');height:var(--fh-space-'+s+');background:var(--fh-accent-secondary)"></span><span class="mono xs muted">'+s.replace('_','.')+'</span></div>')});
+[['xs','0'],['sm','2px'],['md','3px'],['lg','4px'],['xl','8px'],['pill','999']].forEach(function(r){$('#radii').insertAdjacentHTML('beforeend','<div style="display:flex;flex-direction:column;gap:0.4rem;align-items:center"><span style="width:7.2rem;height:5.6rem;background:var(--fh-bg-elevated);border:var(--fh-border-width-strong) solid var(--fh-text-muted);border-radius:var(--fh-radius-'+r[0]+')"></span><span class="mono xs muted">'+r[0]+' · '+r[1]+'</span></div>')});
+$$('symbol').forEach(function(s){var id=s.id.slice(2);if(id==='person')return;$('#iconset').insertAdjacentHTML('beforeend','<span title="'+id+'" style="display:flex;justify-content:center"><ic n="'+id+'" class="s24"></ic></span>')});
+
+/* ── Character creator ───────────────────────────────────────────────── */
+[['Nasenbreite',62,true],['Nasenhöhe',40],['Nasenlänge',55],['Nasenrücken',30],['Nasenspitze',48],['Krümmung',50]].forEach(function(s){var val=((s[1]-50)/50).toFixed(2);$('#sliders').insertAdjacentHTML('beforeend','<div class="field"><div style="display:flex"><span class="label"'+(s[2]?' style="color:var(--fh-text-primary)"':'')+'>'+s[0]+'</span><span class="num mono xs" style="margin-left:auto;color:var(--fh-text-secondary)">'+(val>0?'+':'')+val+'</span></div><div class="slider'+(s[2]?' is-focus':'')+'" style="--v:'+s[1]+'%"><i></i><b></b></div></div>')});
+['#3B2A1E','#5A3C24','#7A5A36','#4F6B3A','#4C6E8E','#7C8C96','#2E3A44','#8F6F4A'].forEach(function(c,i){$('#eyecols').insertAdjacentHTML('beforeend','<span style="width:3.6rem;height:3.6rem;background:'+c+';border:'+(i===4?'0.3rem solid var(--fh-accent-primary)':'1px solid var(--fh-border)')+'"></span>')});
+
+/* ── Spawn map ───────────────────────────────────────────────────────── */
+(function(){var m=$('#spawnmap');var s='<svg viewBox="0 0 1000 680" preserveAspectRatio="xMidYMid slice" style="position:absolute;inset:0;width:100%;height:100%"><rect width="1000" height="680" fill="#1c2227"/><path d="M0 470 Q300 430 520 470 T1000 440 V680 H0Z" fill="#132838"/><path d="M640 0 Q600 200 700 300 T1000 360 V0Z" fill="#132838"/>';
+var r=rnd(21);for(var i=0;i<46;i++){var x=Math.floor(r()*900),y=Math.floor(r()*400);if(x>600&&y<300)continue;s+='<rect x="'+x+'" y="'+y+'" width="'+(30+Math.floor(r()*60))+'" height="'+(18+Math.floor(r()*30))+'" fill="#262d34"/>'}
+s+='<g stroke="#313a42" stroke-width="10" fill="none"><path d="M0 120H640M0 300H720M180 0V460M420 0V450M560 330 900 380"/></g><g stroke="#3B4045" stroke-width="2" fill="none" stroke-dasharray="6 6"><path d="M0 455 Q300 418 520 455 T1000 425"/></g></svg>';m.innerHTML=s;
+var pts=[[0,'Letzter Ort',55,68],[1,'Wohnung',20,36,true],[2,'Hauptbahnhof',44,14],[3,'Fischmarkt',30,62],[4,'Containerhof Süd',78,74],[5,'Polizeiwache',62,30,false,true]];
+pts.forEach(function(p){var sel=p[4],dis=p[5];m.insertAdjacentHTML('beforeend','<div style="position:absolute;left:'+p[2]+'%;top:'+p[3]+'%;transform:translate(-50%,-100%);display:flex;flex-direction:column;align-items:center"><div class="plate" style="display:flex;align-items:center;gap:0.8rem;padding:0.4rem 1rem 0.4rem 0.4rem;'+(sel?'box-shadow:var(--fh-glow-accent);border-color:var(--fh-accent-primary)':'')+(dis?';opacity:0.6':'')+'"><span class="code code--sm" style="'+(sel?'background:var(--fh-accent-primary);color:var(--fh-text-on-accent)':(dis?'border-color:var(--fh-border);color:var(--fh-text-muted)':'border-color:var(--fh-text-muted);color:var(--fh-text-primary)'))+'">'+p[0]+'</span><span class="disp" style="font-weight:600;text-transform:uppercase;letter-spacing:0.04em;font-size:'+(sel?'var(--fh-text-lg)':'var(--fh-text-sm)')+'">'+p[1]+'</span></div><span style="width:0.3rem;height:2.4rem;background:'+(sel?'var(--fh-accent-primary)':'var(--fh-text-muted)')+'"></span></div>')});
+m.insertAdjacentHTML('beforeend','<div class="plate" style="position:absolute;right:1.6rem;bottom:1.6rem;padding:0.8rem 1.2rem;display:flex;gap:1.2rem" ><span class="xs sec"><span class="key key--ghost key--sm">1</span>–<span class="key key--ghost key--sm">5</span> wählen</span><span class="xs sec"><span class="key key--ghost key--sm">Mausrad</span> Zoom</span></div>');})();
+
+/* ── Radial menu ─────────────────────────────────────────────────────── */
+(function(){var R=$('#radial'),items=[['car','Fahrzeug'],['id','Ausweis zeigen'],['user','Animation'],['phone','Handy'],['doc','Rechnungen'],['wrench','Werkstatt'],['home','Wohnung'],['siren','Notruf']],n=items.length,ro=220,ri=84,g=1.4,s='<svg viewBox="-230 -230 460 460">';
+function pt(r,a){a=(a-90)*Math.PI/180;return [r*Math.cos(a),r*Math.sin(a)]}
+items.forEach(function(it,i){var a0=i*360/n-180/n+g/2,a1=(i+1)*360/n-180/n-g/2,p1=pt(ro,a0),p2=pt(ro,a1),p3=pt(ri,a1),p4=pt(ri,a0);var cls='seg'+(i===0?' is-active':'')+(i===6?' is-disabled':'');s+='<path class="'+cls+'" d="M'+p1+'A'+ro+' '+ro+' 0 0 1 '+p2+'L'+p3+'A'+ri+' '+ri+' 0 0 0 '+p4+'Z"/>';});
+s+='<circle r="'+(ri-8)+'" fill="#1A1D20" stroke="#3B4045" stroke-width="1.5"/><path d="M'+pt(ro+10,-18)+'A'+(ro+10)+' '+(ro+10)+' 0 0 1 '+pt(ro+10,18)+'" stroke="#F2B53A" stroke-width="4" fill="none"/></svg>';R.innerHTML=s;
+items.forEach(function(it,i){var a=(i*360/n-90)*Math.PI/180,x=Math.cos(a)*15.2,y=Math.sin(a)*15.2;R.insertAdjacentHTML('beforeend','<div class="item'+(i===0?' is-active':'')+(i===6?' is-disabled':'')+'" style="left:calc(50% + '+x+'rem);top:calc(50% + '+y+'rem)"><ic n="'+(i===6?'lock':it[0])+'"></ic>'+it[1]+'</div>')});
+R.insertAdjacentHTML('beforeend','<div class="hub"><b>Fahrzeug</b><span>4 Optionen</span><span style="color:var(--fh-text-secondary)">Wohnung: zu weit weg</span></div>');})();
+
+/* ── Scoreboard ──────────────────────────────────────────────────────── */
+(function(){var rows=[[1,'Kat (Admin)','Staff','c-accent',22],[4,'Mira Hansen','Rettungsdienst','c-ems',38],[7,'Kai Brandt','Polizei','c-police',41],[9,'Ole Petersen','Zivil','c-civil',57],[12,'Jonas Krüger','Werkstatt','c-mech',33,true],[13,'Lea Wiese','Polizei','c-police',64],[15,'Tarek Aydin','Zivil','c-civil',112],[16,'Svenja Ruhl','Zivil','c-civil',49],[18,'Piet Lorenzen','Werkstatt','c-mech',71],[21,'Nele Fock','Rettungsdienst','c-ems',44],[22,'Hauke Stein','Zivil','c-civil',39],[23,'Dana Voß','Polizei','c-police',58],[25,'Rico Lenz','Zivil','c-civil',187],[27,'Ina Matthiesen','Zivil','c-civil',46]];
+var h='<div class="row th" style="grid-template-columns:6rem 1fr 20rem 8rem"><span>ID</span><span>Name</span><span>Beruf</span><span style="text-align:right">Ping</span></div>';
+rows.forEach(function(r){var pc=r[4]>150?'var(--fh-danger)':r[4]>90?'var(--fh-warning)':'var(--fh-text-secondary)';h+='<div class="row'+(r[5]?' is-selected':'')+'" style="grid-template-columns:6rem 1fr 20rem 8rem;min-height:4.2rem"><span class="mono sm sec">'+r[0]+'</span><span>'+r[1]+(r[5]?' <span class="xs" style="color:var(--fh-accent-primary)">· du</span>':'')+'</span><span class="chip '+r[3]+'" style="justify-self:start">'+r[2]+'</span><span class="mono sm" style="text-align:right;color:'+pc+'">'+r[4]+'</span></div>'});$('#scoreboard').innerHTML=h;})();
+
+/* ── Inventory ───────────────────────────────────────────────────────── */
+function slot(o){var c='slot'+(o.it?' is-filled':'')+(o.hot?' is-hot':'')+(o.cls?' '+o.cls:'');if(o.lock)return '<div class="slot is-locked"><ic n="lock"></ic></div>';return '<div class="'+c+'"><span class="n">'+o.n+'</span>'+(o.it?'<span class="q">×'+o.q+'</span><ic n="'+o.ic+'"></ic>'+(o.dur!=null?'<span class="dur" style="--c:'+(o.dur<40?'var(--fh-warning)':'var(--fh-success)')+'"><i style="width:'+o.dur+'%"></i></span>':'')+'<span class="nm">'+o.it+'</span>':'')+'</div>'}
+(function(){var items={1:['Pistole','gun',1,34],2:['Funkgerät','radio',1],3:['Handy','phone',1],4:['Werkzeugkasten','wrench',1,60,'is-selected is-dragging'],6:['Fischbrötchen','fish',4],7:['Wasser','drop',3],8:['Verband','cross',5],9:['Wohnungsschlüssel','key',1],10:['Ausweis','id',1],11:['Zigaretten','box',12],12:['Brecheisen','hammer',1,88],13:['Klebeband','box',1],14:['Metallschrott','box',12],16:['Bargeld-Rolle','cash',3]};
+var h='';for(var i=1;i<=25;i++){if(i>23){h+=slot({lock:true});continue}var it=items[i];h+=slot(it?{n:i,it:it[0],ic:it[1],q:it[2],dur:it[3],cls:it[4],hot:i<=5}:{n:i,hot:i<=5})}$('#inv-player').innerHTML=h;
+var t={1:['Ersatzrad','engine',1],2:['Kanister','fuel',2],3:['Abschleppseil','pulse',1],5:['Kiste „Tor 3“','box',4],6:['Werkzeug','wrench',2,92],8:['Warnweste','shirt',2],9:['Taschenlampe','light',1],11:['Wasser','drop',6]};
+h='';for(var j=1;j<=20;j++){var x=t[j];h+=slot(x?{n:j,it:x[0],ic:x[1],q:x[2],dur:x[3]}:{n:j,cls:j===7?'is-drop':''})}$('#inv-trunk').innerHTML=h;
+var body=$('#inv-trunk').parentNode;body.style.position='relative';body.insertAdjacentHTML('beforeend','<div class="slot is-filled is-ghost" style="left:14.5rem;top:13.5rem"><span class="q">×1</span><ic n="wrench"></ic><span class="nm">Werkzeugkasten</span></div>');
+h='';[['1','gun','Pistole'],['2','radio','Funk'],['3','phone','Handy'],['4','wrench','Werkzeug'],['5','']].forEach(function(s,i){h+='<div class="slot '+(s[1]?'is-filled ':'')+'is-hot'+(i===0?' is-selected':'')+'" style="width:7.2rem;height:7.2rem"><span class="n">'+s[0]+'</span>'+(s[1]?'<ic n="'+s[1]+'" style="width:2.8rem;height:2.8rem;margin-bottom:0.8rem"></ic><span class="nm">'+s[2]+'</span>':'')+'</div>'});$('#hotbar').innerHTML=h;})();
+
+/* ── Phone, ATM ──────────────────────────────────────────────────────── */
+['1','2','3','4','5','6','7','8','9','←','0','OK'].forEach(function(k){$('#pinpad').insertAdjacentHTML('beforeend','<button class="btn '+(k==='OK'?'btn--primary':'btn--ghost')+'" style="height:5.6rem;font-size:var(--fh-text-xl)">'+k+'</button>')});
+[['chat','Nachrichten','var(--fh-success)',2],['users','Kontakte'],['bank','Bank','var(--fh-accent-secondary)'],['car','Garage'],['bag','Markt','var(--fh-accent-primary)'],['siren','Dienste','var(--fh-danger)'],['note','Notizen'],['music','Musik'],['map','Karte','var(--fh-info)'],['doc','Rechnungen','var(--fh-warning)',1],['camera','Kamera'],['gear','Einstellungen']].forEach(function(a){$('#apps').insertAdjacentHTML('beforeend','<div class="app"><i style="--c:'+(a[2]||'var(--fh-border)')+'"><ic n="'+a[0]+'"></ic></i>'+a[1]+(a[3]?'<span class="badge">'+a[3]+'</span>':'')+'</div>')});
+[['call','Anrufe'],['chat','SMS'],['camera','Kamera'],['map','Karte']].forEach(function(a){$('#dock').insertAdjacentHTML('beforeend','<div class="app"><i style="width:5rem;height:5rem"><ic n="'+a[0]+'"></ic></i></div>')});
+
+/* ── Shop ────────────────────────────────────────────────────────────── */
+[['fish','Fischbrötchen','3,50 €','24 da',2],['drop','Wasser 0,5 l','1,50 €','40 da',3],['box','Zigaretten','6,00 €','12 da',1],['food','Currywurst','4,80 €','8 da'],['drop','Cola','2,20 €','0 da',0,true],['box','Kaugummi','1,20 €','30 da'],['light','Taschenlampe','14,00 €','5 da'],['box','Klebeband','3,00 €','9 da'],['phone','Prepaid-SIM','25,00 €','6 da'],['radio','Funkgerät','120,00 €','2 da'],['cross','Verband','8,00 €','11 da'],['bag','Tüte','0,20 €','99 da']].forEach(function(s,i){var dis=s[5],hover=i===6;$('#shopgrid').insertAdjacentHTML('beforeend','<div class="card" style="'+(hover?'background:var(--fh-bg-elevated);border-color:var(--fh-text-muted);':'')+(dis?'opacity:0.55;':'')+'"><div class="cb" style="display:flex;flex-direction:column;gap:0.8rem;position:relative"><div style="height:8rem;background:var(--fh-bg-base);display:flex;align-items:center;justify-content:center;color:'+(dis?'var(--fh-text-muted)':'var(--fh-text-primary)')+'"><ic n="'+s[0]+'" style="width:4rem;height:4rem;stroke-width:1.6"></ic></div>'+(s[4]?'<span class="key key--sm" style="position:absolute;right:2.2rem;top:2.2rem">'+s[4]+'</span>':'')+'<div style="font-weight:500">'+s[1]+'</div><div style="display:flex;align-items:center"><span class="money" style="font-size:var(--fh-text-lg)">'+s[2]+'</span><span class="xs '+(dis?'':'muted')+'" style="margin-left:auto;'+(dis?'color:var(--fh-danger)':'')+'">'+(dis?'Ausverkauft':s[3])+'</span></div><button class="btn btn--sm '+(dis?'':'btn--ghost')+'"'+(dis?' disabled':'')+'><ic n="plus" class="s16"></ic>'+(dis?'Nicht da':'In den Korb')+'</button></div></div>')});
+[['Fischbrötchen','2','7,00 €'],['Wasser 0,5 l','3','4,50 €'],['Zigaretten','1','6,00 €']].forEach(function(c){$('#cart').insertAdjacentHTML('beforeend','<div class="row" style="grid-template-columns:1fr auto 8rem"><span>'+c[0]+'</span><div class="stepper" style="height:2.8rem"><button style="width:2.8rem"><ic n="minus" class="s16"></ic></button><span style="min-width:3.6rem">'+c[1]+'</span><button style="width:2.8rem"><ic n="plus" class="s16"></ic></button></div><span class="money" style="text-align:right">'+c[2]+'</span></div>')});
+
+/* ── Garage ──────────────────────────────────────────────────────────── */
+[['car','Kombi „Ostkai“','Stellplatz 3','HH · JK 412','Eingeparkt','c-success'],['car','Transporter','Containerhof Süd','HH · OK 1182','Draußen','c-info'],['car','Limousine „Kiez“','Abschlepphof Süd','HH · JK 77','Abgeschleppt','c-danger',true],['car','Kleinwagen','Stellplatz 7','HH · MW 2210','Eingeparkt','c-success'],['boat','Jolle','Liegeplatz 4 · Boote','HH · B 19','Eingeparkt','c-success'],['car','Pritsche (Job)','Werkstatt Ostkai','HH · WO 3','Im Einsatz','c-warning']].forEach(function(g){$('#garagelist').insertAdjacentHTML('beforeend','<div class="row'+(g[6]?' is-selected':'')+'" style="grid-template-columns:auto 1fr auto auto;padding:1.2rem 1.2rem;min-height:6.4rem"><ic n="'+g[0]+'"></ic><div><div>'+g[1]+'</div><div class="xs muted">'+g[2]+'</div></div><span class="plate-de"><span>'+g[3]+'</span></span><span class="chip chip--status '+g[5]+'" style="min-width:12rem;justify-content:center">'+g[4]+'</span></div>')});
+
+/* ── Clothing ────────────────────────────────────────────────────────── */
+['Oberteil','Unterhemd','Hose','Schuhe','Kopf','Brille','Uhr','Tasche','Maske'].forEach(function(c,i){$('#clothcats').insertAdjacentHTML('beforeend','<div class="row'+(i===0?' is-selected':'')+(i===8?' is-disabled':'')+'" style="grid-template-columns:1fr auto;border:0;min-height:4.4rem;padding:0 1.6rem"><span>'+c+'</span>'+(i===8?'<ic n="lock" class="s16"></ic>':'')+'</div>')});
+['#3A3F44','#4F5E3B','#6D4A2F','#2C4E70','#B0832F','#8C2F25'].forEach(function(c,i){$('#cloth-tex').insertAdjacentHTML('beforeend','<span style="width:4.4rem;height:4.4rem;background:'+c+';border:'+(i===1?'0.3rem solid var(--fh-accent-primary)':'1px solid var(--fh-border)')+';display:flex;align-items:flex-end;justify-content:flex-end;padding:0.2rem 0.4rem" class="xs mono">'+(i+1)+'</span>')});
+
+/* ── Crafting ────────────────────────────────────────────────────────── */
+(function(){var h='<div class="label" style="padding:1.6rem 2rem 0.8rem">Werkzeug</div>';[['lock','Dietrich-Set','0:20','warn',true],['hammer','Brecheisen','0:12','ok'],['wrench','Feile','0:08','ok']].forEach(function(r){h+='<div class="row'+(r[4]?' is-selected':'')+'" style="grid-template-columns:auto 1fr auto auto;padding:0 2rem;min-height:5.2rem"><ic n="'+r[0]+'" class="s16"></ic><span>'+r[1]+'</span><span class="mono xs muted">'+r[2]+'</span><span class="dot" style="--c:'+(r[3]==='ok'?'var(--fh-success)':'var(--fh-warning)')+'"></span></div>'});
+h+='<div class="label" style="padding:1.6rem 2rem 0.8rem">Elektronik</div>';[['radio','Funkscanner','Elektronik 2'],['phone','Wegwerf-Handy','Elektronik 1']].forEach(function(r){h+='<div class="row is-disabled" style="grid-template-columns:auto 1fr auto;padding:0 2rem;min-height:5.2rem"><ic n="lock" class="s16"></ic><span>'+r[1]+'</span><span class="xs">'+r[2]+'</span></div>'});$('#recipes').innerHTML=h;})();
+
+/* ── MDT units, boss staff, admin players ────────────────────────────── */
+[['Hafen 12','Brandt · du','2','Frei','c-success'],['Hafen 14','Yilmaz / Wiese','3','Einsatz','c-warning'],['Hafen 15','Voß','4','Vor Ort','c-danger'],['Kripo 2','Lorenz','2','Frei','c-success'],['Hafen 21','Kühn','6','Außer Dienst','c-civil'],['Wasser 1','Ahrens','1','Funk','c-info']].forEach(function(u){$('#units').insertAdjacentHTML('beforeend','<div class="row" style="grid-template-columns:auto 1fr auto;padding:0;min-height:5rem"><span class="code code--sm" style="border-color:var(--c);color:var(--c)" class="'+u[4]+'">'+u[2]+'</span><div><div class="sm" style="font-weight:600">'+u[0]+'</div><div class="xs muted">'+u[1]+'</div></div><span class="chip chip--status '+u[4]+'">'+u[3]+'</span></div>')});
+$$('#units .code').forEach(function(c,i){c.style.borderColor=['var(--fh-success)','var(--fh-warning)','var(--fh-danger)','var(--fh-success)','var(--fh-job-civil)','var(--fh-info)'][i];c.style.color=c.style.borderColor});
+(function(){var h='<div class="row th" style="grid-template-columns:1fr 14rem 12rem 10rem 15rem"><span>Name</span><span>Rang</span><span>Seit</span><span>Status</span><span style="text-align:right">Aktionen</span></div>';
+[['Mira Hansen','Inhaber 4','03.2025',1,'self'],['Piet Lorenzen','Meister 3','05.2025',1],['Jonas Krüger','Mechaniker 2','07.2025',1,'sel'],['Svenja Ruhl','Mechaniker 2','08.2025',0],['Hauke Stein','Geselle 1','09.2025',0],['Rico Lenz','Azubi 0','10.2025',0],['Ina Matthiesen','Azubi 0','10.2025',0]].forEach(function(s){h+='<div class="row'+(s[4]==='sel'?' is-selected':'')+'" style="grid-template-columns:1fr 14rem 12rem 10rem 15rem;min-height:5.6rem"><span>'+s[0]+(s[4]==='self'?' <span class="xs" style="color:var(--fh-accent-primary)">· du</span>':'')+'</span><span class="sm sec">'+s[1]+'</span><span class="mono xs sec">'+s[2]+'</span><span class="xs" style="display:flex;gap:0.6rem;align-items:center;color:'+(s[3]?'var(--fh-success)':'var(--fh-text-muted)')+'"><span class="dot" style="--c:'+(s[3]?'var(--fh-success)':'var(--fh-border)')+'"></span>'+(s[3]?'Im Dienst':'Frei')+'</span><span style="display:flex;gap:0.6rem;justify-content:flex-end">'+(s[4]==='self'?'<span class="xs muted">—</span>':'<button class="btn btn--ghost btn--sm btn--icon" aria-label="Befördern"><ic n="up" class="s16"></ic></button><button class="btn btn--ghost btn--sm btn--icon" aria-label="Herabstufen"><ic n="down" class="s16"></ic></button><button class="btn btn--danger-ghost btn--sm btn--icon" aria-label="Kündigen"><ic n="trash" class="s16"></ic></button>')+'</span></div>'});$('#staff').innerHTML=h;})();
+(function(){var h='';[[1,'kat','Staff','var(--fh-accent-primary)',22],[4,'mira_hh','RD','var(--fh-job-ems)',38,1],[7,'kbrandt','Polizei','var(--fh-job-police)',41],[9,'ole_p','Zivil','var(--fh-job-civil)',57],[12,'jonas_k','Werkstatt','var(--fh-job-mechanic)',33],[15,'tarek.a','Zivil','var(--fh-job-civil)',112],[23,'mira_hh','RD','var(--fh-job-ems)',38,2],[25,'rico','Zivil','var(--fh-job-civil)',187],[31,'unbekannt_31','Zivil','var(--fh-job-civil)',64]].forEach(function(p){if(p[5]===1)return;h+='<div class="row'+(p[5]===2?' is-selected':'')+'" style="grid-template-columns:5rem 1fr auto 6rem;min-height:5rem"><span class="code code--sm" style="border-color:var(--fh-text-muted);color:var(--fh-text-primary);min-width:3.6rem">'+p[0]+'</span><span>'+p[1]+'</span><span class="xs sec" style="display:flex;gap:0.6rem;align-items:center"><span class="dot" style="--c:'+p[3]+'"></span>'+p[2]+'</span><span class="mono sm" style="text-align:right;color:'+(p[4]>150?'var(--fh-danger)':p[4]>90?'var(--fh-warning)':'var(--fh-text-secondary)')+'">'+p[4]+'</span></div>'});$('#adminplayers').innerHTML=h;})();
+
+icons();
+/* single-frame mode for screenshots: ?f=f07 */
+var f=new URLSearchParams(location.search).get('f');if(f){$$('.frame').forEach(function(x){if(x.id!==f)x.remove()})}
+document.documentElement.setAttribute('data-ready','1');
+})();
+</script>
+</body>
+</html>
